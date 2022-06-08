@@ -111,8 +111,8 @@ ARCHITECTURE archi OF Top IS
 	END COMPONENT;
 	COMPONENT RAM_2PORT IS
 		PORT (
-			address_a		: IN STD_LOGIC_VECTOR (10 DOWNTO 0);
-			address_b		: IN STD_LOGIC_VECTOR (10 DOWNTO 0);
+			address_a		: IN STD_LOGIC_VECTOR (11 DOWNTO 0);
+			address_b		: IN STD_LOGIC_VECTOR (11 DOWNTO 0);
 			clock		: IN STD_LOGIC  := '1';
 			data_a		: IN STD_LOGIC_VECTOR (31 DOWNTO 0);
 			data_b		: IN STD_LOGIC_VECTOR (31 DOWNTO 0);
@@ -142,9 +142,12 @@ ARCHITECTURE archi OF Top IS
 	SIGNAL SIGclock : STD_LOGIC; --either from pll or simulation
 	SIGNAL SIGclockInverted : STD_LOGIC; --either from pll or simulation
 	SIGNAL SIGsimulOn : STD_LOGIC; --either from pll or simulation
-	SIGNAL REGLed, SIGLed, csLed, CSRAM, dataLed : STD_LOGIC; -- TEST LED Output
 	
-	SIGNAL PCTEST : STD_LOGIC_VECTOR (10 DOWNTO 0);
+	
+	
+	SIGNAL REGLed, SIGLed, csLed, CSRAM, dataLed, muxLoadDelay : STD_LOGIC; -- TEST LED Output
+	SIGNAL SRAMq_b, ledstate : std_logic_vector(31 downto 0);
+	SIGNAL PCTEST : STD_LOGIC_VECTOR (11 DOWNTO 0);
 	
 
 BEGIN
@@ -170,26 +173,37 @@ BEGIN
 	SIGoutputDMorREG <= SIGcounter WHEN SIGaddrDM = x"80000000" ELSE
 		SIGoutputDM;
 
+---------------------------------------------
 	csLed <= SIGaddrDM(31);
+	
 	dataLed <= SIGinputDM(0);
 
-	SIGLed <= dataLed WHEN csLed = '1' ELSE
+	muxLoadDelay <= '0' when TOPreset='1' else
+						 SIGaddrDM(31) when rising_edge(TOPclock);
+						 
+	SIGLed <= dataLed WHEN SIGaddrDM(31) = '1' AND SIGstore='1' ELSE
 				 REGLed;
-
+				 
+	ledstate <= x"0000000" & "000" & REGLed;
+				 
+	SIGoutputDM<= ledstate when muxLoadDelay='1' else
+							  SRAMq_b;
+						
+						
 	REGLed <= '0' WHEN TOPreset = '1' ELSE
 				 SIGLed WHEN rising_edge(TOPclock);
 
 	TestLed <= REGLed;
 	
-	CSRAM <= NOT CSled;
-
+	CSRAM <= '1'; --NOT csLed;
+---------------------------------------------
 	-- INSTANCES
 	instPROC : Processor
 	PORT MAP(
 		PROCclock       => SIGclock,
 		PROCreset       => TOPreset,
 		PROCinstruction => SIGinstruction,
-		PROCoutputDM    => SIGoutputDMorREG,
+		PROCoutputDM    => SIGoutputDM,
 		-- OUTPUTS
 		PROCprogcounter => SIGprogcounter,
 		PROCstore       => SIGstore,
@@ -199,13 +213,13 @@ BEGIN
 		PROCinputDM     => SIGinputDM
 	);
 	
-	PCTEST <= SIGprogcounter(12 DOWNTO 2);
+	PCTEST <= SIGprogcounter(13 DOWNTO 2);
 	
 	Memory : RAM_2PORT
 	PORT MAP(
 		address_a => PCTEST, --: IN STD_LOGIC_VECTOR (11 DOWNTO 0); --  Add instruction
 		--address_a => SIGprogcounter(10 DOWNTO 0), --: IN STD_LOGIC_VECTOR (11 DOWNTO 0); --  Add instruction
-		address_b => SIGaddrDM(10 DOWNTO 0), --: IN STD_LOGIC_VECTOR (11 DOWNTO 0); --  Add memory
+		address_b => SIGaddrDM(11 DOWNTO 0), --: IN STD_LOGIC_VECTOR (11 DOWNTO 0); --  Add memory
 		clock     => SIGclock, --: IN STD_LOGIC  := '1';
 		data_a => (OTHERS => '0'), --: IN STD_LOGIC_VECTOR (31 DOWNTO 0); -- Instruction
 		data_b    => SIGinputDM, --: IN STD_LOGIC_VECTOR (31 DOWNTO 0);	-- Data
@@ -213,7 +227,7 @@ BEGIN
 		wren_a    => '0', --: IN STD_LOGIC  := '0';					-- Write Instruction Select
 		wren_b    => SIGstore, --: IN STD_LOGIC  := '0';					-- Write Data Select
 		q_a       => SIGinstruction, --: OUT STD_LOGIC_VECTOR (31 DOWNTO 0);-- DataOut Instruction
-		q_b       => SIGoutputDM --: OUT STD_LOGIC_VECTOR (31 DOWNTO 0) -- DataOut Data
+		q_b       => SRAMq_b --: OUT STD_LOGIC_VECTOR (31 DOWNTO 0) -- DataOut Data
 	);
 	--    instIM  : InstructionMemory
 	--    port map(

@@ -1,5 +1,5 @@
 Analysis & Synthesis report for PROC-ECE_ASYNC
-Tue Jun 07 17:14:26 2022
+Wed Jun 08 17:16:50 2022
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -17,7 +17,7 @@ Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
   9. Analysis & Synthesis IP Cores Summary
  10. General Register Statistics
  11. Multiplexer Restructuring Statistics (Restructuring Performed)
- 12. Source assignments for RAM_2PORT:Memory|altsyncram:altsyncram_component|altsyncram_4jt3:auto_generated
+ 12. Source assignments for RAM_2PORT:Memory|altsyncram:altsyncram_component|altsyncram_gjt3:auto_generated
  13. Parameter Settings for User Entity Instance: RAM_2PORT:Memory|altsyncram:altsyncram_component
  14. Parameter Settings for User Entity Instance: PLL:instPLL|altpll:altpll_component
  15. altsyncram Parameter Settings by Entity Instance
@@ -52,18 +52,18 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Tue Jun 07 17:14:26 2022       ;
+; Analysis & Synthesis Status        ; Successful - Wed Jun 08 17:16:50 2022       ;
 ; Quartus Prime Version              ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                      ; PROC-ECE_ASYNC                              ;
 ; Top-level Entity Name              ; Top                                         ;
 ; Family                             ; MAX 10                                      ;
-; Total logic elements               ; 3,805                                       ;
-;     Total combinational functions  ; 3,677                                       ;
-;     Dedicated logic registers      ; 1,195                                       ;
-; Total registers                    ; 1195                                        ;
+; Total logic elements               ; 3,727                                       ;
+;     Total combinational functions  ; 3,631                                       ;
+;     Dedicated logic registers      ; 1,196                                       ;
+; Total registers                    ; 1196                                        ;
 ; Total pins                         ; 99                                          ;
 ; Total virtual pins                 ; 0                                           ;
-; Total memory bits                  ; 65,536                                      ;
+; Total memory bits                  ; 131,072                                     ;
 ; Embedded Multiplier 9-bit elements ; 0                                           ;
 ; Total PLLs                         ; 0                                           ;
 ; UFM blocks                         ; 0                                           ;
@@ -206,7 +206,7 @@ refer to the applicable agreement for further details.
 ; altrom.inc                        ; yes             ; Megafunction                           ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altrom.inc                                ;         ;
 ; altram.inc                        ; yes             ; Megafunction                           ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altram.inc                                ;         ;
 ; altdpram.inc                      ; yes             ; Megafunction                           ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altdpram.inc                              ;         ;
-; db/altsyncram_4jt3.tdf            ; yes             ; Auto-Generated Megafunction            ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/db/altsyncram_4jt3.tdf            ;         ;
+; db/altsyncram_gjt3.tdf            ; yes             ; Auto-Generated Megafunction            ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/db/altsyncram_gjt3.tdf            ;         ;
 ; imhex.hex                         ; yes             ; Auto-Found Memory Initialization File  ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/imhex.hex                         ;         ;
 ; altpll.tdf                        ; yes             ; Megafunction                           ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altpll.tdf                                ;         ;
 ; stratix_pll.inc                   ; yes             ; Megafunction                           ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/stratix_pll.inc                           ;         ;
@@ -221,31 +221,31 @@ refer to the applicable agreement for further details.
 +---------------------------------------------+----------------+
 ; Resource                                    ; Usage          ;
 +---------------------------------------------+----------------+
-; Estimated Total logic elements              ; 3,805          ;
+; Estimated Total logic elements              ; 3,727          ;
 ;                                             ;                ;
-; Total combinational functions               ; 3677           ;
+; Total combinational functions               ; 3631           ;
 ; Logic element usage by number of LUT inputs ;                ;
-;     -- 4 input functions                    ; 2977           ;
-;     -- 3 input functions                    ; 526            ;
-;     -- <=2 input functions                  ; 174            ;
+;     -- 4 input functions                    ; 2919           ;
+;     -- 3 input functions                    ; 514            ;
+;     -- <=2 input functions                  ; 198            ;
 ;                                             ;                ;
 ; Logic elements by mode                      ;                ;
-;     -- normal mode                          ; 3350           ;
+;     -- normal mode                          ; 3304           ;
 ;     -- arithmetic mode                      ; 327            ;
 ;                                             ;                ;
-; Total registers                             ; 1195           ;
-;     -- Dedicated logic registers            ; 1195           ;
+; Total registers                             ; 1196           ;
+;     -- Dedicated logic registers            ; 1196           ;
 ;     -- I/O registers                        ; 0              ;
 ;                                             ;                ;
 ; I/O pins                                    ; 99             ;
-; Total memory bits                           ; 65536          ;
+; Total memory bits                           ; 131072         ;
 ;                                             ;                ;
 ; Embedded Multiplier 9-bit elements          ; 0              ;
 ;                                             ;                ;
 ; Maximum fan-out node                        ; TOPclock~input ;
-; Maximum fan-out                             ; 1227           ;
-; Total fan-out                               ; 18741          ;
-; Average fan-out                             ; 3.67           ;
+; Maximum fan-out                             ; 1228           ;
+; Total fan-out                               ; 18587          ;
+; Average fan-out                             ; 3.68           ;
 +---------------------------------------------+----------------+
 
 
@@ -254,28 +254,28 @@ refer to the applicable agreement for further details.
 +-------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+--------------------------------------------------------------------------------------+--------------------+--------------+
 ; Compilation Hierarchy Node                ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; UFM Blocks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; ADC blocks ; Full Hierarchy Name                                                                  ; Entity Name        ; Library Name ;
 +-------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+--------------------------------------------------------------------------------------+--------------------+--------------+
-; |Top                                      ; 3677 (14)           ; 1195 (1)                  ; 65536       ; 0          ; 0            ; 0       ; 0         ; 99   ; 0            ; 0          ; |Top                                                                                 ; Top                ; work         ;
-;    |Counter:instCPT|                      ; 33 (33)             ; 32 (32)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Counter:instCPT                                                                 ; Counter            ; work         ;
-;    |Displays:instDISP|                    ; 3 (3)               ; 96 (96)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Displays:instDISP                                                               ; Displays           ; work         ;
-;    |Processor:instPROC|                   ; 3627 (326)          ; 1066 (10)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC                                                              ; Processor          ; work         ;
+; |Top                                      ; 3631 (34)           ; 1196 (2)                  ; 131072      ; 0          ; 0            ; 0       ; 0         ; 99   ; 0            ; 0          ; |Top                                                                                 ; Top                ; work         ;
+;    |Counter:instCPT|                      ; 36 (36)             ; 32 (32)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Counter:instCPT                                                                 ; Counter            ; work         ;
+;    |Displays:instDISP|                    ; 4 (4)               ; 96 (96)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Displays:instDISP                                                               ; Displays           ; work         ;
+;    |Processor:instPROC|                   ; 3557 (254)          ; 1066 (10)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC                                                              ; Processor          ; work         ;
 ;       |Alu:instALU|                       ; 752 (752)           ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC|Alu:instALU                                                  ; Alu                ; work         ;
-;       |InstructionDecoder:instID|         ; 15 (15)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC|InstructionDecoder:instID                                    ; InstructionDecoder ; work         ;
-;       |ProgramCounter:instPC|             ; 148 (148)           ; 64 (64)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC|ProgramCounter:instPC                                        ; ProgramCounter     ; work         ;
-;       |RegisterFile:instRF|               ; 2386 (2386)         ; 992 (992)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC|RegisterFile:instRF                                          ; RegisterFile       ; work         ;
-;    |RAM_2PORT:Memory|                     ; 0 (0)               ; 0 (0)                     ; 65536       ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|RAM_2PORT:Memory                                                                ; RAM_2PORT          ; work         ;
-;       |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 65536       ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|RAM_2PORT:Memory|altsyncram:altsyncram_component                                ; altsyncram         ; work         ;
-;          |altsyncram_4jt3:auto_generated| ; 0 (0)               ; 0 (0)                     ; 65536       ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|RAM_2PORT:Memory|altsyncram:altsyncram_component|altsyncram_4jt3:auto_generated ; altsyncram_4jt3    ; work         ;
+;       |InstructionDecoder:instID|         ; 16 (16)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC|InstructionDecoder:instID                                    ; InstructionDecoder ; work         ;
+;       |ProgramCounter:instPC|             ; 152 (152)           ; 64 (64)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC|ProgramCounter:instPC                                        ; ProgramCounter     ; work         ;
+;       |RegisterFile:instRF|               ; 2383 (2383)         ; 992 (992)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC|RegisterFile:instRF                                          ; RegisterFile       ; work         ;
+;    |RAM_2PORT:Memory|                     ; 0 (0)               ; 0 (0)                     ; 131072      ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|RAM_2PORT:Memory                                                                ; RAM_2PORT          ; work         ;
+;       |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 131072      ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|RAM_2PORT:Memory|altsyncram:altsyncram_component                                ; altsyncram         ; work         ;
+;          |altsyncram_gjt3:auto_generated| ; 0 (0)               ; 0 (0)                     ; 131072      ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|RAM_2PORT:Memory|altsyncram:altsyncram_component|altsyncram_gjt3:auto_generated ; altsyncram_gjt3    ; work         ;
 +-------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+--------------------------------------------------------------------------------------+--------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis RAM Summary                                                                                                                                                                   ;
-+--------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+-------+-----------+
-; Name                                                                                       ; Type ; Mode           ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size  ; MIF       ;
-+--------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+-------+-----------+
-; RAM_2PORT:Memory|altsyncram:altsyncram_component|altsyncram_4jt3:auto_generated|ALTSYNCRAM ; AUTO ; True Dual Port ; 2048         ; 32           ; 2048         ; 32           ; 65536 ; IMhex.hex ;
-+--------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+-------+-----------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                                                    ;
++--------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+--------+-----------+
+; Name                                                                                       ; Type ; Mode           ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size   ; MIF       ;
++--------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+--------+-----------+
+; RAM_2PORT:Memory|altsyncram:altsyncram_component|altsyncram_gjt3:auto_generated|ALTSYNCRAM ; AUTO ; True Dual Port ; 4096         ; 32           ; 4096         ; 32           ; 131072 ; IMhex.hex ;
++--------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+--------+-----------+
 
 
 +---------------------------------------------------------------------------------------------------------------+
@@ -293,47 +293,45 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 1195  ;
+; Total registers                              ; 1196  ;
 ; Number of registers using Synchronous Clear  ; 0     ;
-; Number of registers using Synchronous Load   ; 69    ;
-; Number of registers using Asynchronous Clear ; 1195  ;
+; Number of registers using Synchronous Load   ; 85    ;
+; Number of registers using Asynchronous Clear ; 1196  ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 129   ;
+; Number of registers using Clock Enable       ; 128   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                    ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                          ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------+
-; 4:1                ; 31 bits   ; 62 LEs        ; 62 LEs               ; 0 LEs                  ; Yes        ; |Top|Processor:instPROC|ProgramCounter:instPC|PCprogcounter[8]~reg0 ;
-; 3:1                ; 20 bits   ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGinput2ALU[31]                            ;
-; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGinput2ALU[2]                             ;
-; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGrdRF[2]                                  ;
-; 4:1                ; 11 bits   ; 22 LEs        ; 22 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGoffsetPC[20]                             ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGoffsetPC[12]                             ;
-; 5:1                ; 6 bits    ; 18 LEs        ; 12 LEs               ; 6 LEs                  ; No         ; |Top|Processor:instPROC|SIGoffsetPC[5]                              ;
-; 32:1               ; 32 bits   ; 672 LEs       ; 672 LEs              ; 0 LEs                  ; No         ; |Top|Processor:instPROC|RegisterFile:instRF|RFout1[29]              ;
-; 32:1               ; 32 bits   ; 672 LEs       ; 672 LEs              ; 0 LEs                  ; No         ; |Top|Processor:instPROC|RegisterFile:instRF|RFout2[0]               ;
-; 6:1                ; 5 bits    ; 20 LEs        ; 15 LEs               ; 5 LEs                  ; No         ; |Top|Processor:instPROC|SIGoffsetPC[3]                              ;
-; 9:1                ; 2 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; No         ; |Top|Processor:instPROC|SIGinputRF[0]                               ;
-; 9:1                ; 5 bits    ; 30 LEs        ; 20 LEs               ; 10 LEs                 ; No         ; |Top|Processor:instPROC|SIGinputRF[5]                               ;
-; 10:1               ; 16 bits   ; 96 LEs        ; 80 LEs               ; 16 LEs                 ; No         ; |Top|Processor:instPROC|SIGinputRF[30]                              ;
-; 11:1               ; 4 bits    ; 28 LEs        ; 24 LEs               ; 4 LEs                  ; No         ; |Top|Processor:instPROC|SIGinputRF[10]                              ;
-; 11:1               ; 4 bits    ; 28 LEs        ; 20 LEs               ; 8 LEs                  ; No         ; |Top|Processor:instPROC|SIGinputRF[13]                              ;
-; 119:1              ; 8 bits    ; 632 LEs       ; 56 LEs               ; 576 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[13]                      ;
-; 120:1              ; 7 bits    ; 560 LEs       ; 56 LEs               ; 504 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[17]                      ;
-; 120:1              ; 4 bits    ; 320 LEs       ; 32 LEs               ; 288 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[6]                       ;
-; 121:1              ; 4 bits    ; 320 LEs       ; 32 LEs               ; 288 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[27]                      ;
-; 121:1              ; 2 bits    ; 160 LEs       ; 16 LEs               ; 144 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[2]                       ;
-; 122:1              ; 2 bits    ; 162 LEs       ; 16 LEs               ; 146 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[28]                      ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                     ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------+
+; 4:1                ; 31 bits   ; 62 LEs        ; 62 LEs               ; 0 LEs                  ; Yes        ; |Top|Processor:instPROC|ProgramCounter:instPC|PCprogcounter[31]~reg0 ;
+; 3:1                ; 20 bits   ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGinput2ALU[16]                             ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGinput2ALU[1]                              ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGrdRF[2]                                   ;
+; 4:1                ; 11 bits   ; 22 LEs        ; 22 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGoffsetPC[29]                              ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGoffsetPC[16]                              ;
+; 5:1                ; 6 bits    ; 18 LEs        ; 12 LEs               ; 6 LEs                  ; No         ; |Top|Processor:instPROC|SIGoffsetPC[9]                               ;
+; 32:1               ; 32 bits   ; 672 LEs       ; 672 LEs              ; 0 LEs                  ; No         ; |Top|Processor:instPROC|RegisterFile:instRF|RFout1[1]                ;
+; 32:1               ; 32 bits   ; 672 LEs       ; 672 LEs              ; 0 LEs                  ; No         ; |Top|Processor:instPROC|RegisterFile:instRF|RFout2[11]               ;
+; 6:1                ; 5 bits    ; 20 LEs        ; 15 LEs               ; 5 LEs                  ; No         ; |Top|Processor:instPROC|SIGoffsetPC[3]                               ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |Top|Processor:instPROC|SIGinputRF[1]                                ;
+; 6:1                ; 10 bits   ; 40 LEs        ; 30 LEs               ; 10 LEs                 ; No         ; |Top|Processor:instPROC|SIGinputRF[4]                                ;
+; 6:1                ; 20 bits   ; 80 LEs        ; 60 LEs               ; 20 LEs                 ; No         ; |Top|Processor:instPROC|SIGinputRF[28]                               ;
+; 119:1              ; 8 bits    ; 632 LEs       ; 56 LEs               ; 576 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[10]                       ;
+; 120:1              ; 7 bits    ; 560 LEs       ; 56 LEs               ; 504 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[23]                       ;
+; 120:1              ; 4 bits    ; 320 LEs       ; 32 LEs               ; 288 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[4]                        ;
+; 121:1              ; 4 bits    ; 320 LEs       ; 32 LEs               ; 288 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[26]                       ;
+; 121:1              ; 2 bits    ; 160 LEs       ; 16 LEs               ; 144 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[2]                        ;
+; 122:1              ; 2 bits    ; 162 LEs       ; 16 LEs               ; 146 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[29]                       ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------+
 
 
 +--------------------------------------------------------------------------------------------------------+
-; Source assignments for RAM_2PORT:Memory|altsyncram:altsyncram_component|altsyncram_4jt3:auto_generated ;
+; Source assignments for RAM_2PORT:Memory|altsyncram:altsyncram_component|altsyncram_gjt3:auto_generated ;
 +---------------------------------+--------------------+------+------------------------------------------+
 ; Assignment                      ; Value              ; From ; To                                       ;
 +---------------------------------+--------------------+------+------------------------------------------+
@@ -354,8 +352,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; WIDTH_BYTEENA                      ; 1                      ; Untyped                         ;
 ; OPERATION_MODE                     ; BIDIR_DUAL_PORT        ; Untyped                         ;
 ; WIDTH_A                            ; 32                     ; Signed Integer                  ;
-; WIDTHAD_A                          ; 11                     ; Signed Integer                  ;
-; NUMWORDS_A                         ; 2048                   ; Signed Integer                  ;
+; WIDTHAD_A                          ; 12                     ; Signed Integer                  ;
+; NUMWORDS_A                         ; 4096                   ; Signed Integer                  ;
 ; OUTDATA_REG_A                      ; UNREGISTERED           ; Untyped                         ;
 ; ADDRESS_ACLR_A                     ; NONE                   ; Untyped                         ;
 ; OUTDATA_ACLR_A                     ; NONE                   ; Untyped                         ;
@@ -363,8 +361,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; INDATA_ACLR_A                      ; NONE                   ; Untyped                         ;
 ; BYTEENA_ACLR_A                     ; NONE                   ; Untyped                         ;
 ; WIDTH_B                            ; 32                     ; Signed Integer                  ;
-; WIDTHAD_B                          ; 11                     ; Signed Integer                  ;
-; NUMWORDS_B                         ; 2048                   ; Signed Integer                  ;
+; WIDTHAD_B                          ; 12                     ; Signed Integer                  ;
+; NUMWORDS_B                         ; 4096                   ; Signed Integer                  ;
 ; INDATA_REG_B                       ; CLOCK0                 ; Untyped                         ;
 ; WRCONTROL_WRADDRESS_REG_B          ; CLOCK0                 ; Untyped                         ;
 ; RDCONTROL_REG_B                    ; CLOCK1                 ; Untyped                         ;
@@ -397,7 +395,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                  ; Untyped                         ;
 ; WIDTH_ECCSTATUS                    ; 3                      ; Signed Integer                  ;
 ; DEVICE_FAMILY                      ; MAX 10                 ; Untyped                         ;
-; CBXI_PARAMETER                     ; altsyncram_4jt3        ; Untyped                         ;
+; CBXI_PARAMETER                     ; altsyncram_gjt3        ; Untyped                         ;
 +------------------------------------+------------------------+---------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -785,10 +783,10 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Entity Instance                           ; RAM_2PORT:Memory|altsyncram:altsyncram_component ;
 ;     -- OPERATION_MODE                     ; BIDIR_DUAL_PORT                                  ;
 ;     -- WIDTH_A                            ; 32                                               ;
-;     -- NUMWORDS_A                         ; 2048                                             ;
+;     -- NUMWORDS_A                         ; 4096                                             ;
 ;     -- OUTDATA_REG_A                      ; UNREGISTERED                                     ;
 ;     -- WIDTH_B                            ; 32                                               ;
-;     -- NUMWORDS_B                         ; 2048                                             ;
+;     -- NUMWORDS_B                         ; 4096                                             ;
 ;     -- ADDRESS_REG_B                      ; CLOCK0                                           ;
 ;     -- OUTDATA_REG_B                      ; UNREGISTERED                                     ;
 ;     -- RAM_BLOCK_TYPE                     ; AUTO                                             ;
@@ -830,6 +828,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Port   ; Type  ; Severity ; Details          ;
 +--------+-------+----------+------------------+
 ; data_a ; Input ; Info     ; Stuck at GND     ;
+; enable ; Input ; Info     ; Stuck at VCC     ;
 ; wren_a ; Input ; Info     ; Stuck at GND     ;
 +--------+-------+----------+------------------+
 
@@ -840,24 +839,24 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
 ; boundary_port         ; 1320                        ;
-; cycloneiii_ff         ; 1195                        ;
-;     CLR               ; 997                         ;
-;     CLR SLD           ; 69                          ;
-;     ENA CLR           ; 129                         ;
-; cycloneiii_lcell_comb ; 3677                        ;
+; cycloneiii_ff         ; 1196                        ;
+;     CLR               ; 983                         ;
+;     CLR SLD           ; 85                          ;
+;     ENA CLR           ; 128                         ;
+; cycloneiii_lcell_comb ; 3631                        ;
 ;     arith             ; 327                         ;
 ;         2 data inputs ; 60                          ;
 ;         3 data inputs ; 267                         ;
-;     normal            ; 3350                        ;
+;     normal            ; 3304                        ;
 ;         0 data inputs ; 1                           ;
 ;         1 data inputs ; 3                           ;
-;         2 data inputs ; 110                         ;
-;         3 data inputs ; 259                         ;
-;         4 data inputs ; 2977                        ;
+;         2 data inputs ; 134                         ;
+;         3 data inputs ; 247                         ;
+;         4 data inputs ; 2919                        ;
 ; cycloneiii_ram_block  ; 32                          ;
 ;                       ;                             ;
-; Max LUT depth         ; 25.00                       ;
-; Average LUT depth     ; 20.59                       ;
+; Max LUT depth         ; 22.40                       ;
+; Average LUT depth     ; 17.57                       ;
 +-----------------------+-----------------------------+
 
 
@@ -866,7 +865,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:08     ;
+; Top            ; 00:00:09     ;
 +----------------+--------------+
 
 
@@ -876,7 +875,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
-    Info: Processing started: Tue Jun 07 17:14:04 2022
+    Info: Processing started: Wed Jun 08 17:16:27 2022
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off PROC-ECE_ASYNC -c PROC-ECE_ASYNC
 Info (20032): Parallel compilation is enabled and will use up to 4 processors
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/testbench.vhd
@@ -927,13 +926,15 @@ Info (12021): Found 2 design units, including 1 entities, in source file ram_2po
     Info (12022): Found design unit 1: ram_2port-SYN File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/RAM_2PORT.vhd Line: 59
     Info (12023): Found entity 1: RAM_2PORT File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/RAM_2PORT.vhd Line: 42
 Info (12127): Elaborating entity "Top" for the top level hierarchy
+Warning (10036): Verilog HDL or VHDL warning at Top.vhd(138): object "SIGoutputDMorREG" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 138
 Warning (10036): Verilog HDL or VHDL warning at Top.vhd(143): object "SIGclockInverted" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 143
-Info (12128): Elaborating entity "Processor" for hierarchy "Processor:instPROC" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 187
-Info (12128): Elaborating entity "ProgramCounter" for hierarchy "Processor:instPROC|ProgramCounter:instPC" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Processor.vhd Line: 270
-Info (12128): Elaborating entity "InstructionDecoder" for hierarchy "Processor:instPROC|InstructionDecoder:instID" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Processor.vhd Line: 289
-Info (12128): Elaborating entity "RegisterFile" for hierarchy "Processor:instPROC|RegisterFile:instRF" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Processor.vhd Line: 314
-Info (12128): Elaborating entity "Alu" for hierarchy "Processor:instPROC|Alu:instALU" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Processor.vhd Line: 326
-Info (12128): Elaborating entity "RAM_2PORT" for hierarchy "RAM_2PORT:Memory" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 204
+Warning (10036): Verilog HDL or VHDL warning at Top.vhd(148): object "csLed" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 148
+Info (12128): Elaborating entity "Processor" for hierarchy "Processor:instPROC" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 201
+Info (12128): Elaborating entity "ProgramCounter" for hierarchy "Processor:instPROC|ProgramCounter:instPC" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Processor.vhd Line: 271
+Info (12128): Elaborating entity "InstructionDecoder" for hierarchy "Processor:instPROC|InstructionDecoder:instID" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Processor.vhd Line: 290
+Info (12128): Elaborating entity "RegisterFile" for hierarchy "Processor:instPROC|RegisterFile:instRF" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Processor.vhd Line: 315
+Info (12128): Elaborating entity "Alu" for hierarchy "Processor:instPROC|Alu:instALU" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Processor.vhd Line: 327
+Info (12128): Elaborating entity "RAM_2PORT" for hierarchy "RAM_2PORT:Memory" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 218
 Info (12128): Elaborating entity "altsyncram" for hierarchy "RAM_2PORT:Memory|altsyncram:altsyncram_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/RAM_2PORT.vhd Line: 68
 Info (12130): Elaborated megafunction instantiation "RAM_2PORT:Memory|altsyncram:altsyncram_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/RAM_2PORT.vhd Line: 68
 Info (12133): Instantiated megafunction "RAM_2PORT:Memory|altsyncram:altsyncram_component" with the following parameter: File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/RAM_2PORT.vhd Line: 68
@@ -960,8 +961,8 @@ Info (12133): Instantiated megafunction "RAM_2PORT:Memory|altsyncram:altsyncram_
     Info (12134): Parameter "init_file" = "IMhex.hex"
     Info (12134): Parameter "init_file_layout" = "PORT_A"
     Info (12134): Parameter "maximum_depth" = "0"
-    Info (12134): Parameter "numwords_a" = "2048"
-    Info (12134): Parameter "numwords_b" = "2048"
+    Info (12134): Parameter "numwords_a" = "4096"
+    Info (12134): Parameter "numwords_b" = "4096"
     Info (12134): Parameter "operation_mode" = "BIDIR_DUAL_PORT"
     Info (12134): Parameter "outdata_aclr_a" = "NONE"
     Info (12134): Parameter "outdata_aclr_b" = "NONE"
@@ -980,19 +981,19 @@ Info (12133): Instantiated megafunction "RAM_2PORT:Memory|altsyncram:altsyncram_
     Info (12134): Parameter "width_byteena_a" = "1"
     Info (12134): Parameter "width_byteena_b" = "1"
     Info (12134): Parameter "width_eccstatus" = "3"
-    Info (12134): Parameter "widthad_a" = "11"
-    Info (12134): Parameter "widthad_b" = "11"
+    Info (12134): Parameter "widthad_a" = "12"
+    Info (12134): Parameter "widthad_b" = "12"
     Info (12134): Parameter "wrcontrol_aclr_a" = "UNUSED"
     Info (12134): Parameter "wrcontrol_aclr_b" = "NONE"
     Info (12134): Parameter "wrcontrol_wraddress_reg_b" = "CLOCK0"
     Info (12134): Parameter "lpm_hint" = "UNUSED"
     Info (12134): Parameter "lpm_type" = "altsyncram"
-Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_4jt3.tdf
-    Info (12023): Found entity 1: altsyncram_4jt3 File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/db/altsyncram_4jt3.tdf Line: 27
-Info (12128): Elaborating entity "altsyncram_4jt3" for hierarchy "RAM_2PORT:Memory|altsyncram:altsyncram_component|altsyncram_4jt3:auto_generated" File: c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altsyncram.tdf Line: 791
-Info (12128): Elaborating entity "Counter" for hierarchy "Counter:instCPT" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 237
-Info (12128): Elaborating entity "Displays" for hierarchy "Displays:instDISP" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 247
-Info (12128): Elaborating entity "PLL" for hierarchy "PLL:instPLL" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 261
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_gjt3.tdf
+    Info (12023): Found entity 1: altsyncram_gjt3 File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/db/altsyncram_gjt3.tdf Line: 27
+Info (12128): Elaborating entity "altsyncram_gjt3" for hierarchy "RAM_2PORT:Memory|altsyncram:altsyncram_component|altsyncram_gjt3:auto_generated" File: c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altsyncram.tdf Line: 791
+Info (12128): Elaborating entity "Counter" for hierarchy "Counter:instCPT" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 251
+Info (12128): Elaborating entity "Displays" for hierarchy "Displays:instDISP" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 261
+Info (12128): Elaborating entity "PLL" for hierarchy "PLL:instPLL" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 275
 Info (12128): Elaborating entity "altpll" for hierarchy "PLL:instPLL|altpll:altpll_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/qip_files/PLL/PLL.vhd Line: 149
 Info (12130): Elaborated megafunction instantiation "PLL:instPLL|altpll:altpll_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/qip_files/PLL/PLL.vhd Line: 149
 Info (12133): Instantiated megafunction "PLL:instPLL|altpll:altpll_component" with the following parameter: File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/qip_files/PLL/PLL.vhd Line: 149
@@ -1097,15 +1098,15 @@ Warning (13024): Output pins are stuck at VCC or GND
 Info (286030): Timing-Driven Synthesis is running
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 3947 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 3917 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 2 input pins
     Info (21059): Implemented 97 output pins
-    Info (21061): Implemented 3816 logic cells
+    Info (21061): Implemented 3786 logic cells
     Info (21064): Implemented 32 RAM segments
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 37 warnings
-    Info: Peak virtual memory: 4833 megabytes
-    Info: Processing ended: Tue Jun 07 17:14:26 2022
-    Info: Elapsed time: 00:00:22
-    Info: Total CPU time (on all processors): 00:00:31
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 39 warnings
+    Info: Peak virtual memory: 4828 megabytes
+    Info: Processing ended: Wed Jun 08 17:16:50 2022
+    Info: Elapsed time: 00:00:23
+    Info: Total CPU time (on all processors): 00:00:34
 
 

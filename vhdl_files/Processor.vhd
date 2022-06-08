@@ -195,7 +195,7 @@ begin
 	 WriteReg <= '0' when PROCreset='1' else --- on decale juste sigload de 1 cycle
 					 sigload when rising_edge(PROCclock);
 					 
-    SIGrdRF <=  RegaddrLoad when SIGbranch = '0' AND SIGstore = '0' AND WriteReg='1' else
+    SIGrdRF <=  RegaddrLoad when SIGstore = '0' AND WriteReg='1' else
 					 SIGrdID when (SIGbranch = '0' AND SIGstore = '0') else
                 (others => '0');
     SIGinputRF <= DMout when WriteReg = '1' else --- avant il y a avait sigload (au cas ou ca pmarche plus)
@@ -258,13 +258,14 @@ begin
 						 
 	------------------------------------
 	
-	DMout <= (others=>'0') when Procreset='1' else
-			PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7 downto 0) when WriteReg='1' and function3 = "000" else
-			PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(15 downto 0) when WriteReg='1' and function3 = "001" else
-			PROCoutputDM(31 downto 0) when WriteReg='1' and function3 = "010" else
-			x"000000" & PROCoutputDM(7 downto 0) when  WriteReg='1' and function3 = "100" else
-			x"0000" & PROCoutputDM(15 downto 0) when  WriteReg='1' and function3 = "101" else
-			(others=>'0');
+	DMout <= PROCoutputDM;
+--	(others=>'0') when Procreset='1' else
+--			PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7 downto 0) when WriteReg='1' and function3 = "000" else
+--			PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(15 downto 0) when WriteReg='1' and function3 = "001" else
+--			PROCoutputDM(31 downto 0) when WriteReg='1' and function3 = "010" else
+--			x"000000" & PROCoutputDM(7 downto 0) when  WriteReg='1' and function3 = "100" else
+--			x"0000" & PROCoutputDM(15 downto 0) when  WriteReg='1' and function3 = "101" else
+--			(others=>'0');
 
     -- INSTANCES
     instPC  : ProgramCounter
