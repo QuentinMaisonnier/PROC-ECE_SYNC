@@ -1,0 +1,161 @@
+# -------------------------------------------------------------------------- #
+#
+# Copyright (C) 2020  Intel Corporation. All rights reserved.
+# Your use of Intel Corporation's design tools, logic functions 
+# and other software and tools, and any partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Intel Program License 
+# Subscription Agreement, the Intel Quartus Prime License Agreement,
+# the Intel FPGA IP License Agreement, or other applicable license
+# agreement, including, without limitation, that your use is for
+# the sole purpose of programming logic devices manufactured by
+# Intel and sold by Intel or its authorized distributors.  Please
+# refer to the applicable agreement for further details, at
+# https://fpgasoftware.intel.com/eula.
+#
+# -------------------------------------------------------------------------- #
+#
+# Quartus Prime
+# Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
+# Date created = 15:45:47  February 05, 2022
+#
+# -------------------------------------------------------------------------- #
+#
+# Notes:
+#
+# 1) The default values for assignments are stored in the file:
+#		PROC-ECE_ASYNC_assignment_defaults.qdf
+#    If this file doesn't exist, see file:
+#		assignment_defaults.qdf
+#
+# 2) Altera recommends that you do not modify this file. This
+#    file is updated automatically by the Quartus Prime software
+#    and any changes you make may be lost or overwritten.
+#
+# -------------------------------------------------------------------------- #
+
+
+set_global_assignment -name FAMILY "MAX 10"
+set_global_assignment -name DEVICE 10M50DAF484C7G
+set_global_assignment -name TOP_LEVEL_ENTITY Top
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 20.1.1
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 4
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "15:45:47  FEBRUARY 05, 2022"
+set_global_assignment -name LAST_QUARTUS_VERSION "18.0.0 Lite Edition"
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 256
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+
+set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (VHDL)"
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT VHDL -section_id eda_simulation
+set_global_assignment -name EDA_TIME_SCALE "1 ps" -section_id eda_simulation
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_timing
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_symbol
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_signal_integrity
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_boundary_scan
+set_global_assignment -name EDA_DESIGN_ENTRY_SYNTHESIS_TOOL "Synplify Pro"
+set_global_assignment -name EDA_LMF_FILE synplcty.lmf -section_id eda_design_synthesis
+set_global_assignment -name EDA_INPUT_DATA_FORMAT VQM -section_id eda_design_synthesis
+set_global_assignment -name EDA_TEST_BENCH_ENABLE_STATUS TEST_BENCH_MODE -section_id eda_simulation
+set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH Testbench -section_id eda_simulation
+
+set_location_assignment PIN_C14 -to TOPdisplay1[0]
+set_location_assignment PIN_E15 -to TOPdisplay1[1]
+set_location_assignment PIN_C15 -to TOPdisplay1[2]
+set_location_assignment PIN_C16 -to TOPdisplay1[3]
+set_location_assignment PIN_E16 -to TOPdisplay1[4]
+set_location_assignment PIN_D17 -to TOPdisplay1[5]
+set_location_assignment PIN_C17 -to TOPdisplay1[6]
+set_location_assignment PIN_D15 -to TOPdisplay1[7]
+set_location_assignment PIN_C18 -to TOPdisplay1[8]
+set_location_assignment PIN_D18 -to TOPdisplay1[9]
+set_location_assignment PIN_E18 -to TOPdisplay1[10]
+set_location_assignment PIN_B16 -to TOPdisplay1[11]
+set_location_assignment PIN_A17 -to TOPdisplay1[12]
+set_location_assignment PIN_A18 -to TOPdisplay1[13]
+set_location_assignment PIN_B17 -to TOPdisplay1[14]
+set_location_assignment PIN_A16 -to TOPdisplay1[15]
+set_location_assignment PIN_B20 -to TOPdisplay1[16]
+set_location_assignment PIN_A20 -to TOPdisplay1[17]
+set_location_assignment PIN_B19 -to TOPdisplay1[18]
+set_location_assignment PIN_A21 -to TOPdisplay1[19]
+set_location_assignment PIN_B21 -to TOPdisplay1[20]
+set_location_assignment PIN_C22 -to TOPdisplay1[21]
+set_location_assignment PIN_B22 -to TOPdisplay1[22]
+set_location_assignment PIN_A19 -to TOPdisplay1[23]
+set_location_assignment PIN_F21 -to TOPdisplay1[24]
+set_location_assignment PIN_E22 -to TOPdisplay1[25]
+set_location_assignment PIN_E21 -to TOPdisplay1[26]
+set_location_assignment PIN_C19 -to TOPdisplay1[27]
+set_location_assignment PIN_C20 -to TOPdisplay1[28]
+set_location_assignment PIN_D19 -to TOPdisplay1[29]
+set_location_assignment PIN_E17 -to TOPdisplay1[30]
+set_location_assignment PIN_D22 -to TOPdisplay1[31]
+set_location_assignment PIN_F18 -to TOPdisplay2[0]
+set_location_assignment PIN_E20 -to TOPdisplay2[1]
+set_location_assignment PIN_E19 -to TOPdisplay2[2]
+set_location_assignment PIN_J18 -to TOPdisplay2[3]
+set_location_assignment PIN_H19 -to TOPdisplay2[4]
+set_location_assignment PIN_F19 -to TOPdisplay2[5]
+set_location_assignment PIN_F20 -to TOPdisplay2[6]
+set_location_assignment PIN_F17 -to TOPdisplay2[7]
+set_location_assignment PIN_J20 -to TOPdisplay2[8]
+set_location_assignment PIN_K20 -to TOPdisplay2[9]
+set_location_assignment PIN_L18 -to TOPdisplay2[10]
+set_location_assignment PIN_N18 -to TOPdisplay2[11]
+set_location_assignment PIN_M20 -to TOPdisplay2[12]
+set_location_assignment PIN_N19 -to TOPdisplay2[13]
+set_location_assignment PIN_N20 -to TOPdisplay2[14]
+set_location_assignment PIN_L19 -to TOPdisplay2[15]
+set_location_assignment PIN_P11 -to TOPclock
+set_location_assignment PIN_C10 -to TOPreset
+set_location_assignment PIN_A9 -to TOPleds[1]
+set_location_assignment PIN_A10 -to TOPleds[2]
+set_location_assignment PIN_B10 -to TOPleds[3]
+set_location_assignment PIN_D13 -to TOPleds[4]
+set_location_assignment PIN_C13 -to TOPleds[5]
+set_location_assignment PIN_E14 -to TOPleds[6]
+set_location_assignment PIN_D14 -to TOPleds[7]
+set_location_assignment PIN_A11 -to TOPleds[8]
+set_location_assignment PIN_B11 -to TOPleds[9]
+set_global_assignment -name ENABLE_OCT_DONE OFF
+set_global_assignment -name EXTERNAL_FLASH_FALLBACK_ADDRESS 00000000
+set_global_assignment -name USE_CONFIGURATION_DEVICE OFF
+set_global_assignment -name INTERNAL_FLASH_UPDATE_MODE "SINGLE IMAGE WITH ERAM"
+set_global_assignment -name CRC_ERROR_OPEN_DRAIN OFF
+set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -rise
+set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -fall
+set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -rise
+set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -fall
+set_global_assignment -name SEARCH_PATH "c:\\users\\bernacchia\\desktop\\risc-v\\vhdl\\proc-ece_async\\custom_lib"
+set_global_assignment -name EDA_TEST_BENCH_NAME Testbench -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id Testbench
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME TestBenchTop -section_id Testbench
+set_global_assignment -name EDA_TEST_BENCH_FILE vhdl_files/TestBench.vhd -section_id Testbench
+set_global_assignment -name VHDL_FILE vhdl_files/TestBench.vhd
+set_global_assignment -name VHDL_FILE custom_lib/simul_var_pkg.vhd
+set_global_assignment -name VHDL_FILE vhdl_files/Top.vhd
+set_global_assignment -name VHDL_FILE vhdl_files/RegisterFile.vhd
+set_global_assignment -name VHDL_FILE vhdl_files/ProgramCounter.vhd
+set_global_assignment -name VHDL_FILE vhdl_files/Processor.vhd
+set_global_assignment -name VHDL_FILE vhdl_files/InstructionMemory.vhd
+set_global_assignment -name VHDL_FILE vhdl_files/InstructionDecoder.vhd
+set_global_assignment -name VHDL_FILE vhdl_files/Displays.vhd
+set_global_assignment -name VHDL_FILE vhdl_files/DataMemory.vhd
+set_global_assignment -name VHDL_FILE vhdl_files/Counter.vhd
+set_global_assignment -name VHDL_FILE vhdl_files/Alu.vhd
+set_global_assignment -name QIP_FILE qip_files/IM/IM.qip
+set_global_assignment -name QIP_FILE qip_files/PLL/PLL.qip
+set_global_assignment -name VHDL_FILE vhdl_files/ram.vhd
+set_location_assignment PIN_A8 -to TestLed
+set_global_assignment -name QIP_FILE RAM_2PORT.qip
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

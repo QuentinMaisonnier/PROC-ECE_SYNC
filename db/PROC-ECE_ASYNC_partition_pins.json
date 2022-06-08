@@ -1,0 +1,405 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "TOPdisplay1[0]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[1]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[2]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[3]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[4]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[5]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[6]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[7]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[8]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[9]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[10]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[11]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[12]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[13]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[14]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[15]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[16]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[17]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[18]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[19]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[20]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[21]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[22]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[23]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[24]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[25]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[26]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[27]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[28]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[29]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[30]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay1[31]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[0]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[1]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[2]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[3]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[4]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[5]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[6]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[7]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[8]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[9]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[10]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[11]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[12]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[13]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[14]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[15]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[16]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[17]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[18]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[19]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[20]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[21]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[22]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[23]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[24]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[25]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[26]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[27]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[28]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[29]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[30]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPdisplay2[31]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[0]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[1]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[2]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[3]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[4]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[5]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[6]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[7]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[8]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[9]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[10]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[11]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[12]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[13]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[14]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[15]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[16]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[17]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[18]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[19]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[20]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[21]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[22]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[23]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[24]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[25]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[26]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[27]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[28]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[29]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[30]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[31]",
+					"strict" : false
+				},
+				{
+					"name" : "TestLed",
+					"strict" : false
+				},
+				{
+					"name" : "TOPclock",
+					"strict" : false
+				},
+				{
+					"name" : "TOPreset",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

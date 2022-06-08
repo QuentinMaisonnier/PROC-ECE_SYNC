@@ -1,0 +1,1661 @@
+-- Projet de fin d'études : RISC-V
+-- ECE Paris / SECAPEM
+
+-- LIBRARIES
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use work.simulPkg.all;
+
+-- ENTITY
+entity TestBenchTop is
+end entity;
+
+architecture VHDL of TestBenchTop is
+	component Top is
+    port (
+        -- INPUTS
+        TOPclock       : in std_logic;		--must go through pll
+        TOPreset       : in std_logic; 	--SW0
+        -- DEMO OUTPUTS
+        TOPdisplay1    : out std_logic_vector(31 downto 0);	--0x80000004
+        TOPdisplay2    : out std_logic_vector(31 downto 0);	--0x80000008
+        TOPleds        : out std_logic_vector(31 downto 0)	--0x8000000c
+
+	);
+	end component;
+
+	signal reset, ck : std_logic;
+	signal counter, progcounter, instr: std_logic_vector(31 downto 0);
+    
+	signal dataAddr: std_logic_vector(31 downto 0);
+	signal load, store : std_logic;
+	signal dataLength : std_logic_vector(2 downto 0);
+	signal inputData, outputData: std_logic_vector(31 downto 0);
+    
+	signal reg00, reg01, reg02, reg03, reg04, reg05, reg06, reg07, reg08, reg09, reg0A, reg0B, reg0C, reg0D, reg0E, reg0F, reg10, reg11, reg12, reg13, reg14, reg15, reg16, reg17, reg18, reg19, reg1A, reg1B, reg1C, reg1D, reg1E, reg1F : std_logic_vector(31 downto 0);
+	signal SigTOPdisplay1, SigTOPdisplay2 : std_logic_vector (31 downto 0);
+	
+	BEGIN
+	
+	--instanciation de l'entité PROC
+	iTop : Top port map (
+		TOPclock        => ck,
+		TOPreset        => reset,
+		TOPdisplay1     => SigTOPdisplay1,
+		TOPdisplay2     => SigTOPdisplay2
+	);
+    
+    counter     <= PKG_counter;
+    store       <= PKG_store;      
+    load        <= PKG_load;       
+    dataLength  <= PKG_funct3;     
+    dataAddr    <= PKG_addrDM;     
+    inputData   <= PKG_inputDM;    
+    outputData  <= PKG_outputDM;   
+    progcounter <= PKG_progcounter;
+    instr       <= PKG_instruction;
+    reg00       <= PKG_reg00;
+    reg01       <= PKG_reg01;
+    reg02       <= PKG_reg02;
+    reg03       <= PKG_reg03;
+    reg04       <= PKG_reg04;
+    reg05       <= PKG_reg05;
+    reg06       <= PKG_reg06;
+    reg07       <= PKG_reg07;
+    reg08       <= PKG_reg08;
+    reg09       <= PKG_reg09;
+    reg0A       <= PKG_reg0A;
+    reg0B       <= PKG_reg0B;
+    reg0C       <= PKG_reg0C;
+    reg0D       <= PKG_reg0D;
+    reg0E       <= PKG_reg0E;
+    reg0F       <= PKG_reg0F;
+    reg10       <= PKG_reg10;
+    reg11       <= PKG_reg11;
+    reg12       <= PKG_reg12;
+    reg13       <= PKG_reg13;
+    reg14       <= PKG_reg14;
+    reg15       <= PKG_reg15;
+    reg16       <= PKG_reg16;
+    reg17       <= PKG_reg17;
+    reg18       <= PKG_reg18;
+    reg19       <= PKG_reg19;
+    reg1A       <= PKG_reg1A;
+    reg1B       <= PKG_reg1B;
+    reg1C       <= PKG_reg1C;
+    reg1D       <= PKG_reg1D;
+    reg1E       <= PKG_reg1E;
+    reg1F       <= PKG_reg1F;
+
+	VecteurTest : process
+		begin
+		-- init  simulation
+			ck <= '1';
+			reset <= '1';
+			wait for 2ns;
+			reset <= '0';
+			wait for 8 ns;
+			assert instr = x"00000000" report "wrong instruction at init" severity error;
+			assert false report "Index;Instruction;Description;Status;Note" severity note;
+
+		-- load instruction 0
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"00c0006f" report "instruction error at step 0" severity error;
+			assert false report "0;0x00c0006f;JAL : reg[00] = PC+4 and PC = 0x0 + 12;OK; ;" severity note;
+			assert progcounter = x"00000000" report "progcounter error at step 0" severity error;
+			wait for 5 ns;
+
+		-- execute instruction 0
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 1" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 1" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 1" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 1" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 1" severity error;
+			assert reg05 = x"00000000" report "reg05 error at step 1" severity error;
+			assert reg06 = x"00000000" report "reg06 error at step 1" severity error;
+			assert reg07 = x"00000000" report "reg07 error at step 1" severity error;
+			assert reg08 = x"00000000" report "reg08 error at step 1" severity error;
+			assert reg09 = x"00000000" report "reg09 error at step 1" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 1" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 1" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 1" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 1" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 1" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 1" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 1" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 1" severity error;
+			assert reg12 = x"00000000" report "reg12 error at step 1" severity error;
+			assert reg13 = x"00000000" report "reg13 error at step 1" severity error;
+			assert reg14 = x"00000000" report "reg14 error at step 1" severity error;
+			assert reg15 = x"00000000" report "reg15 error at step 1" severity error;
+			assert reg16 = x"00000000" report "reg16 error at step 1" severity error;
+			assert reg17 = x"00000000" report "reg17 error at step 1" severity error;
+			assert reg18 = x"00000000" report "reg18 error at step 1" severity error;
+			assert reg19 = x"00000000" report "reg19 error at step 1" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 1" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 1" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 1" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 1" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 1" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 1" severity error;
+			assert progcounter = x"0000000c" report "progcounter error at step 1" severity error;
+			wait for 5 ns;
+
+		-- load instruction 1
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"00001937" report "instruction error at step 2" severity error;
+			assert false report "1;0x00001937;LUI : reg[18] = 0x1 << 12;OK; ;" severity note;
+			assert progcounter = x"0000000c" report "progcounter error at step 2" severity error;
+			wait for 5 ns;
+
+		-- execute instruction 1
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 3" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 3" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 3" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 3" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 3" severity error;
+			assert reg05 = x"00000000" report "reg05 error at step 3" severity error;
+			assert reg06 = x"00000000" report "reg06 error at step 3" severity error;
+			assert reg07 = x"00000000" report "reg07 error at step 3" severity error;
+			assert reg08 = x"00000000" report "reg08 error at step 3" severity error;
+			assert reg09 = x"00000000" report "reg09 error at step 3" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 3" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 3" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 3" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 3" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 3" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 3" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 3" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 3" severity error;
+			assert reg12 = x"00001000" report "reg12 error at step 3" severity error;
+			assert reg13 = x"00000000" report "reg13 error at step 3" severity error;
+			assert reg14 = x"00000000" report "reg14 error at step 3" severity error;
+			assert reg15 = x"00000000" report "reg15 error at step 3" severity error;
+			assert reg16 = x"00000000" report "reg16 error at step 3" severity error;
+			assert reg17 = x"00000000" report "reg17 error at step 3" severity error;
+			assert reg18 = x"00000000" report "reg18 error at step 3" severity error;
+			assert reg19 = x"00000000" report "reg19 error at step 3" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 3" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 3" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 3" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 3" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 3" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 3" severity error;
+			assert progcounter = x"00000010" report "progcounter error at step 3" severity error;
+			wait for 5 ns;
+
+		-- load instruction 2
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"ff090913" report "instruction error at step 4" severity error;
+			assert false report "2;0xff090913;ADDI : reg[18] = reg[18] + -16;OK; ;" severity note;
+			assert progcounter = x"00000010" report "progcounter error at step 4" severity error;
+			wait for 5 ns;
+
+		-- execute instruction 2
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 5" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 5" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 5" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 5" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 5" severity error;
+			assert reg05 = x"00000000" report "reg05 error at step 5" severity error;
+			assert reg06 = x"00000000" report "reg06 error at step 5" severity error;
+			assert reg07 = x"00000000" report "reg07 error at step 5" severity error;
+			assert reg08 = x"00000000" report "reg08 error at step 5" severity error;
+			assert reg09 = x"00000000" report "reg09 error at step 5" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 5" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 5" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 5" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 5" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 5" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 5" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 5" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 5" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 5" severity error;
+			assert reg13 = x"00000000" report "reg13 error at step 5" severity error;
+			assert reg14 = x"00000000" report "reg14 error at step 5" severity error;
+			assert reg15 = x"00000000" report "reg15 error at step 5" severity error;
+			assert reg16 = x"00000000" report "reg16 error at step 5" severity error;
+			assert reg17 = x"00000000" report "reg17 error at step 5" severity error;
+			assert reg18 = x"00000000" report "reg18 error at step 5" severity error;
+			assert reg19 = x"00000000" report "reg19 error at step 5" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 5" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 5" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 5" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 5" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 5" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 5" severity error;
+			assert progcounter = x"00000014" report "progcounter error at step 5" severity error;
+			wait for 5 ns;
+
+		-- load instruction 3
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"000019b7" report "instruction error at step 6" severity error;
+			assert false report "3;0x000019b7;LUI : reg[19] = 0x1 << 12;OK; ;" severity note;
+			assert progcounter = x"00000014" report "progcounter error at step 6" severity error;
+			wait for 5 ns;
+
+		-- execute instruction 3
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 7" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 7" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 7" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 7" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 7" severity error;
+			assert reg05 = x"00000000" report "reg05 error at step 7" severity error;
+			assert reg06 = x"00000000" report "reg06 error at step 7" severity error;
+			assert reg07 = x"00000000" report "reg07 error at step 7" severity error;
+			assert reg08 = x"00000000" report "reg08 error at step 7" severity error;
+			assert reg09 = x"00000000" report "reg09 error at step 7" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 7" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 7" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 7" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 7" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 7" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 7" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 7" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 7" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 7" severity error;
+			assert reg13 = x"00001000" report "reg13 error at step 7" severity error;
+			assert reg14 = x"00000000" report "reg14 error at step 7" severity error;
+			assert reg15 = x"00000000" report "reg15 error at step 7" severity error;
+			assert reg16 = x"00000000" report "reg16 error at step 7" severity error;
+			assert reg17 = x"00000000" report "reg17 error at step 7" severity error;
+			assert reg18 = x"00000000" report "reg18 error at step 7" severity error;
+			assert reg19 = x"00000000" report "reg19 error at step 7" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 7" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 7" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 7" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 7" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 7" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 7" severity error;
+			assert progcounter = x"00000018" report "progcounter error at step 7" severity error;
+			wait for 5 ns;
+
+		-- load instruction 4
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"ff498993" report "instruction error at step 8" severity error;
+			assert false report "4;0xff498993;ADDI : reg[19] = reg[19] + -12;OK; ;" severity note;
+			assert progcounter = x"00000018" report "progcounter error at step 8" severity error;
+			wait for 5 ns;
+
+		-- execute instruction 4
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 9" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 9" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 9" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 9" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 9" severity error;
+			assert reg05 = x"00000000" report "reg05 error at step 9" severity error;
+			assert reg06 = x"00000000" report "reg06 error at step 9" severity error;
+			assert reg07 = x"00000000" report "reg07 error at step 9" severity error;
+			assert reg08 = x"00000000" report "reg08 error at step 9" severity error;
+			assert reg09 = x"00000000" report "reg09 error at step 9" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 9" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 9" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 9" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 9" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 9" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 9" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 9" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 9" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 9" severity error;
+			assert reg13 = x"00000ff4" report "reg13 error at step 9" severity error;
+			assert reg14 = x"00000000" report "reg14 error at step 9" severity error;
+			assert reg15 = x"00000000" report "reg15 error at step 9" severity error;
+			assert reg16 = x"00000000" report "reg16 error at step 9" severity error;
+			assert reg17 = x"00000000" report "reg17 error at step 9" severity error;
+			assert reg18 = x"00000000" report "reg18 error at step 9" severity error;
+			assert reg19 = x"00000000" report "reg19 error at step 9" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 9" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 9" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 9" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 9" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 9" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 9" severity error;
+			assert progcounter = x"0000001c" report "progcounter error at step 9" severity error;
+			wait for 5 ns;
+
+		-- load instruction 5
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"11111a37" report "instruction error at step 10" severity error;
+			assert false report "5;0x11111a37;LUI : reg[20] = 0x11111 << 12;OK; ;" severity note;
+			assert progcounter = x"0000001c" report "progcounter error at step 10" severity error;
+			wait for 5 ns;
+
+		-- execute instruction 5
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 11" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 11" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 11" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 11" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 11" severity error;
+			assert reg05 = x"00000000" report "reg05 error at step 11" severity error;
+			assert reg06 = x"00000000" report "reg06 error at step 11" severity error;
+			assert reg07 = x"00000000" report "reg07 error at step 11" severity error;
+			assert reg08 = x"00000000" report "reg08 error at step 11" severity error;
+			assert reg09 = x"00000000" report "reg09 error at step 11" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 11" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 11" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 11" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 11" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 11" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 11" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 11" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 11" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 11" severity error;
+			assert reg13 = x"00000ff4" report "reg13 error at step 11" severity error;
+			assert reg14 = x"11111000" report "reg14 error at step 11" severity error;
+			assert reg15 = x"00000000" report "reg15 error at step 11" severity error;
+			assert reg16 = x"00000000" report "reg16 error at step 11" severity error;
+			assert reg17 = x"00000000" report "reg17 error at step 11" severity error;
+			assert reg18 = x"00000000" report "reg18 error at step 11" severity error;
+			assert reg19 = x"00000000" report "reg19 error at step 11" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 11" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 11" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 11" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 11" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 11" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 11" severity error;
+			assert progcounter = x"00000020" report "progcounter error at step 11" severity error;
+			wait for 5 ns;
+
+		-- load instruction 6
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"111a0a13" report "instruction error at step 12" severity error;
+			assert false report "6;0x111a0a13;ADDI : reg[20] = reg[20] + 273;OK; ;" severity note;
+			assert progcounter = x"00000020" report "progcounter error at step 12" severity error;
+			wait for 5 ns;
+
+		-- execute instruction 6
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 13" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 13" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 13" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 13" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 13" severity error;
+			assert reg05 = x"00000000" report "reg05 error at step 13" severity error;
+			assert reg06 = x"00000000" report "reg06 error at step 13" severity error;
+			assert reg07 = x"00000000" report "reg07 error at step 13" severity error;
+			assert reg08 = x"00000000" report "reg08 error at step 13" severity error;
+			assert reg09 = x"00000000" report "reg09 error at step 13" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 13" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 13" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 13" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 13" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 13" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 13" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 13" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 13" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 13" severity error;
+			assert reg13 = x"00000ff4" report "reg13 error at step 13" severity error;
+			assert reg14 = x"11111111" report "reg14 error at step 13" severity error;
+			assert reg15 = x"00000000" report "reg15 error at step 13" severity error;
+			assert reg16 = x"00000000" report "reg16 error at step 13" severity error;
+			assert reg17 = x"00000000" report "reg17 error at step 13" severity error;
+			assert reg18 = x"00000000" report "reg18 error at step 13" severity error;
+			assert reg19 = x"00000000" report "reg19 error at step 13" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 13" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 13" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 13" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 13" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 13" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 13" severity error;
+			assert progcounter = x"00000024" report "progcounter error at step 13" severity error;
+			wait for 5 ns;
+
+		-- load instruction 7
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"22222ab7" report "instruction error at step 14" severity error;
+			assert false report "7;0x22222ab7;LUI : reg[21] = 0x22222 << 12;OK; ;" severity note;
+			assert progcounter = x"00000024" report "progcounter error at step 14" severity error;
+			wait for 5 ns;
+
+		-- execute instruction 7
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 15" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 15" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 15" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 15" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 15" severity error;
+			assert reg05 = x"00000000" report "reg05 error at step 15" severity error;
+			assert reg06 = x"00000000" report "reg06 error at step 15" severity error;
+			assert reg07 = x"00000000" report "reg07 error at step 15" severity error;
+			assert reg08 = x"00000000" report "reg08 error at step 15" severity error;
+			assert reg09 = x"00000000" report "reg09 error at step 15" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 15" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 15" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 15" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 15" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 15" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 15" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 15" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 15" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 15" severity error;
+			assert reg13 = x"00000ff4" report "reg13 error at step 15" severity error;
+			assert reg14 = x"11111111" report "reg14 error at step 15" severity error;
+			assert reg15 = x"22222000" report "reg15 error at step 15" severity error;
+			assert reg16 = x"00000000" report "reg16 error at step 15" severity error;
+			assert reg17 = x"00000000" report "reg17 error at step 15" severity error;
+			assert reg18 = x"00000000" report "reg18 error at step 15" severity error;
+			assert reg19 = x"00000000" report "reg19 error at step 15" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 15" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 15" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 15" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 15" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 15" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 15" severity error;
+			assert progcounter = x"00000028" report "progcounter error at step 15" severity error;
+			wait for 5 ns;
+
+		-- load instruction 8
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"222a8a93" report "instruction error at step 16" severity error;
+			assert false report "8;0x222a8a93;ADDI : reg[21] = reg[21] + 546;OK; ;" severity note;
+			assert progcounter = x"00000028" report "progcounter error at step 16" severity error;
+			wait for 5 ns;
+
+		-- execute instruction 8
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 17" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 17" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 17" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 17" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 17" severity error;
+			assert reg05 = x"00000000" report "reg05 error at step 17" severity error;
+			assert reg06 = x"00000000" report "reg06 error at step 17" severity error;
+			assert reg07 = x"00000000" report "reg07 error at step 17" severity error;
+			assert reg08 = x"00000000" report "reg08 error at step 17" severity error;
+			assert reg09 = x"00000000" report "reg09 error at step 17" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 17" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 17" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 17" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 17" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 17" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 17" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 17" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 17" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 17" severity error;
+			assert reg13 = x"00000ff4" report "reg13 error at step 17" severity error;
+			assert reg14 = x"11111111" report "reg14 error at step 17" severity error;
+			assert reg15 = x"22222222" report "reg15 error at step 17" severity error;
+			assert reg16 = x"00000000" report "reg16 error at step 17" severity error;
+			assert reg17 = x"00000000" report "reg17 error at step 17" severity error;
+			assert reg18 = x"00000000" report "reg18 error at step 17" severity error;
+			assert reg19 = x"00000000" report "reg19 error at step 17" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 17" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 17" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 17" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 17" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 17" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 17" severity error;
+			assert progcounter = x"0000002c" report "progcounter error at step 17" severity error;
+			wait for 5 ns;
+
+		-- load instruction 9
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"33333b37" report "instruction error at step 18" severity error;
+			assert false report "9;0x33333b37;LUI : reg[22] = 0x33333 << 12;OK; ;" severity note;
+			assert progcounter = x"0000002c" report "progcounter error at step 18" severity error;
+			wait for 5 ns;
+
+		-- execute instruction 9
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 19" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 19" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 19" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 19" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 19" severity error;
+			assert reg05 = x"00000000" report "reg05 error at step 19" severity error;
+			assert reg06 = x"00000000" report "reg06 error at step 19" severity error;
+			assert reg07 = x"00000000" report "reg07 error at step 19" severity error;
+			assert reg08 = x"00000000" report "reg08 error at step 19" severity error;
+			assert reg09 = x"00000000" report "reg09 error at step 19" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 19" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 19" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 19" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 19" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 19" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 19" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 19" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 19" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 19" severity error;
+			assert reg13 = x"00000ff4" report "reg13 error at step 19" severity error;
+			assert reg14 = x"11111111" report "reg14 error at step 19" severity error;
+			assert reg15 = x"22222222" report "reg15 error at step 19" severity error;
+			assert reg16 = x"33333000" report "reg16 error at step 19" severity error;
+			assert reg17 = x"00000000" report "reg17 error at step 19" severity error;
+			assert reg18 = x"00000000" report "reg18 error at step 19" severity error;
+			assert reg19 = x"00000000" report "reg19 error at step 19" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 19" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 19" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 19" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 19" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 19" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 19" severity error;
+			assert progcounter = x"00000030" report "progcounter error at step 19" severity error;
+			wait for 5 ns;
+
+		-- load instruction 10
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"333b0b13" report "instruction error at step 20" severity error;
+			assert false report "10;0x333b0b13;ADDI : reg[22] = reg[22] + 819;OK; ;" severity note;
+			assert progcounter = x"00000030" report "progcounter error at step 20" severity error;
+			wait for 5 ns;
+
+		-- execute instruction 10
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 21" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 21" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 21" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 21" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 21" severity error;
+			assert reg05 = x"00000000" report "reg05 error at step 21" severity error;
+			assert reg06 = x"00000000" report "reg06 error at step 21" severity error;
+			assert reg07 = x"00000000" report "reg07 error at step 21" severity error;
+			assert reg08 = x"00000000" report "reg08 error at step 21" severity error;
+			assert reg09 = x"00000000" report "reg09 error at step 21" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 21" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 21" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 21" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 21" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 21" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 21" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 21" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 21" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 21" severity error;
+			assert reg13 = x"00000ff4" report "reg13 error at step 21" severity error;
+			assert reg14 = x"11111111" report "reg14 error at step 21" severity error;
+			assert reg15 = x"22222222" report "reg15 error at step 21" severity error;
+			assert reg16 = x"33333333" report "reg16 error at step 21" severity error;
+			assert reg17 = x"00000000" report "reg17 error at step 21" severity error;
+			assert reg18 = x"00000000" report "reg18 error at step 21" severity error;
+			assert reg19 = x"00000000" report "reg19 error at step 21" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 21" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 21" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 21" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 21" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 21" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 21" severity error;
+			assert progcounter = x"00000034" report "progcounter error at step 21" severity error;
+			wait for 5 ns;
+
+		-- load instruction 11
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"44444bb7" report "instruction error at step 22" severity error;
+			assert false report "11;0x44444bb7;LUI : reg[23] = 0x44444 << 12;OK; ;" severity note;
+			assert progcounter = x"00000034" report "progcounter error at step 22" severity error;
+			wait for 5 ns;
+
+		-- execute instruction 11
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 23" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 23" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 23" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 23" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 23" severity error;
+			assert reg05 = x"00000000" report "reg05 error at step 23" severity error;
+			assert reg06 = x"00000000" report "reg06 error at step 23" severity error;
+			assert reg07 = x"00000000" report "reg07 error at step 23" severity error;
+			assert reg08 = x"00000000" report "reg08 error at step 23" severity error;
+			assert reg09 = x"00000000" report "reg09 error at step 23" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 23" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 23" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 23" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 23" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 23" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 23" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 23" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 23" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 23" severity error;
+			assert reg13 = x"00000ff4" report "reg13 error at step 23" severity error;
+			assert reg14 = x"11111111" report "reg14 error at step 23" severity error;
+			assert reg15 = x"22222222" report "reg15 error at step 23" severity error;
+			assert reg16 = x"33333333" report "reg16 error at step 23" severity error;
+			assert reg17 = x"44444000" report "reg17 error at step 23" severity error;
+			assert reg18 = x"00000000" report "reg18 error at step 23" severity error;
+			assert reg19 = x"00000000" report "reg19 error at step 23" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 23" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 23" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 23" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 23" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 23" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 23" severity error;
+			assert progcounter = x"00000038" report "progcounter error at step 23" severity error;
+			wait for 5 ns;
+
+		-- load instruction 12
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"444b8b93" report "instruction error at step 24" severity error;
+			assert false report "12;0x444b8b93;ADDI : reg[23] = reg[23] + 1092;OK; ;" severity note;
+			assert progcounter = x"00000038" report "progcounter error at step 24" severity error;
+			wait for 5 ns;
+
+		-- execute instruction 12
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 25" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 25" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 25" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 25" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 25" severity error;
+			assert reg05 = x"00000000" report "reg05 error at step 25" severity error;
+			assert reg06 = x"00000000" report "reg06 error at step 25" severity error;
+			assert reg07 = x"00000000" report "reg07 error at step 25" severity error;
+			assert reg08 = x"00000000" report "reg08 error at step 25" severity error;
+			assert reg09 = x"00000000" report "reg09 error at step 25" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 25" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 25" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 25" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 25" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 25" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 25" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 25" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 25" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 25" severity error;
+			assert reg13 = x"00000ff4" report "reg13 error at step 25" severity error;
+			assert reg14 = x"11111111" report "reg14 error at step 25" severity error;
+			assert reg15 = x"22222222" report "reg15 error at step 25" severity error;
+			assert reg16 = x"33333333" report "reg16 error at step 25" severity error;
+			assert reg17 = x"44444444" report "reg17 error at step 25" severity error;
+			assert reg18 = x"00000000" report "reg18 error at step 25" severity error;
+			assert reg19 = x"00000000" report "reg19 error at step 25" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 25" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 25" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 25" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 25" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 25" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 25" severity error;
+			assert progcounter = x"0000003c" report "progcounter error at step 25" severity error;
+			wait for 5 ns;
+
+		-- load instruction 13
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"55555c37" report "instruction error at step 26" severity error;
+			assert false report "13;0x55555c37;LUI : reg[24] = 0x55555 << 12;OK; ;" severity note;
+			assert progcounter = x"0000003c" report "progcounter error at step 26" severity error;
+			wait for 5 ns;
+
+		-- execute instruction 13
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 27" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 27" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 27" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 27" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 27" severity error;
+			assert reg05 = x"00000000" report "reg05 error at step 27" severity error;
+			assert reg06 = x"00000000" report "reg06 error at step 27" severity error;
+			assert reg07 = x"00000000" report "reg07 error at step 27" severity error;
+			assert reg08 = x"00000000" report "reg08 error at step 27" severity error;
+			assert reg09 = x"00000000" report "reg09 error at step 27" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 27" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 27" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 27" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 27" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 27" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 27" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 27" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 27" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 27" severity error;
+			assert reg13 = x"00000ff4" report "reg13 error at step 27" severity error;
+			assert reg14 = x"11111111" report "reg14 error at step 27" severity error;
+			assert reg15 = x"22222222" report "reg15 error at step 27" severity error;
+			assert reg16 = x"33333333" report "reg16 error at step 27" severity error;
+			assert reg17 = x"44444444" report "reg17 error at step 27" severity error;
+			assert reg18 = x"55555000" report "reg18 error at step 27" severity error;
+			assert reg19 = x"00000000" report "reg19 error at step 27" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 27" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 27" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 27" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 27" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 27" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 27" severity error;
+			assert progcounter = x"00000040" report "progcounter error at step 27" severity error;
+			wait for 5 ns;
+
+		-- load instruction 14
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"555c0c13" report "instruction error at step 28" severity error;
+			assert false report "14;0x555c0c13;ADDI : reg[24] = reg[24] + 1365;OK; ;" severity note;
+			assert progcounter = x"00000040" report "progcounter error at step 28" severity error;
+			wait for 5 ns;
+
+		-- execute instruction 14
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 29" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 29" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 29" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 29" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 29" severity error;
+			assert reg05 = x"00000000" report "reg05 error at step 29" severity error;
+			assert reg06 = x"00000000" report "reg06 error at step 29" severity error;
+			assert reg07 = x"00000000" report "reg07 error at step 29" severity error;
+			assert reg08 = x"00000000" report "reg08 error at step 29" severity error;
+			assert reg09 = x"00000000" report "reg09 error at step 29" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 29" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 29" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 29" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 29" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 29" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 29" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 29" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 29" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 29" severity error;
+			assert reg13 = x"00000ff4" report "reg13 error at step 29" severity error;
+			assert reg14 = x"11111111" report "reg14 error at step 29" severity error;
+			assert reg15 = x"22222222" report "reg15 error at step 29" severity error;
+			assert reg16 = x"33333333" report "reg16 error at step 29" severity error;
+			assert reg17 = x"44444444" report "reg17 error at step 29" severity error;
+			assert reg18 = x"55555555" report "reg18 error at step 29" severity error;
+			assert reg19 = x"00000000" report "reg19 error at step 29" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 29" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 29" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 29" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 29" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 29" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 29" severity error;
+			assert progcounter = x"00000044" report "progcounter error at step 29" severity error;
+			wait for 5 ns;
+
+		-- load instruction 15
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"66666cb7" report "instruction error at step 30" severity error;
+			assert false report "15;0x66666cb7;LUI : reg[25] = 0x66666 << 12;OK; ;" severity note;
+			assert progcounter = x"00000044" report "progcounter error at step 30" severity error;
+			wait for 5 ns;
+
+		-- execute instruction 15
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 31" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 31" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 31" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 31" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 31" severity error;
+			assert reg05 = x"00000000" report "reg05 error at step 31" severity error;
+			assert reg06 = x"00000000" report "reg06 error at step 31" severity error;
+			assert reg07 = x"00000000" report "reg07 error at step 31" severity error;
+			assert reg08 = x"00000000" report "reg08 error at step 31" severity error;
+			assert reg09 = x"00000000" report "reg09 error at step 31" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 31" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 31" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 31" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 31" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 31" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 31" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 31" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 31" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 31" severity error;
+			assert reg13 = x"00000ff4" report "reg13 error at step 31" severity error;
+			assert reg14 = x"11111111" report "reg14 error at step 31" severity error;
+			assert reg15 = x"22222222" report "reg15 error at step 31" severity error;
+			assert reg16 = x"33333333" report "reg16 error at step 31" severity error;
+			assert reg17 = x"44444444" report "reg17 error at step 31" severity error;
+			assert reg18 = x"55555555" report "reg18 error at step 31" severity error;
+			assert reg19 = x"66666000" report "reg19 error at step 31" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 31" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 31" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 31" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 31" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 31" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 31" severity error;
+			assert progcounter = x"00000048" report "progcounter error at step 31" severity error;
+			wait for 5 ns;
+
+		-- load instruction 16
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"666c8c93" report "instruction error at step 32" severity error;
+			assert false report "16;0x666c8c93;ADDI : reg[25] = reg[25] + 1638;OK; ;" severity note;
+			assert progcounter = x"00000048" report "progcounter error at step 32" severity error;
+			wait for 5 ns;
+
+		-- execute instruction 16
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 33" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 33" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 33" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 33" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 33" severity error;
+			assert reg05 = x"00000000" report "reg05 error at step 33" severity error;
+			assert reg06 = x"00000000" report "reg06 error at step 33" severity error;
+			assert reg07 = x"00000000" report "reg07 error at step 33" severity error;
+			assert reg08 = x"00000000" report "reg08 error at step 33" severity error;
+			assert reg09 = x"00000000" report "reg09 error at step 33" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 33" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 33" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 33" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 33" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 33" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 33" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 33" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 33" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 33" severity error;
+			assert reg13 = x"00000ff4" report "reg13 error at step 33" severity error;
+			assert reg14 = x"11111111" report "reg14 error at step 33" severity error;
+			assert reg15 = x"22222222" report "reg15 error at step 33" severity error;
+			assert reg16 = x"33333333" report "reg16 error at step 33" severity error;
+			assert reg17 = x"44444444" report "reg17 error at step 33" severity error;
+			assert reg18 = x"55555555" report "reg18 error at step 33" severity error;
+			assert reg19 = x"66666666" report "reg19 error at step 33" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 33" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 33" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 33" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 33" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 33" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 33" severity error;
+			assert progcounter = x"0000004c" report "progcounter error at step 33" severity error;
+			wait for 5 ns;
+
+		-- load instruction 17
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"01490023" report "instruction error at step 34" severity error;
+			assert false report "17;0x01490023;STRB : dataMem[reg[18] + 0] = reg[20];OK; ;" severity note;
+			assert progcounter = x"0000004c" report "progcounter error at step 34" severity error;
+			assert dataAddr = x"00000ff0"    report "address error at step 34"     severity error;
+			assert inputData = x"11111111"   report "data error at step  34"       severity error;
+			assert dataLength = "000"        report "length error at step 34"      severity error;
+			assert store = '1'               report "store error at step 34"       severity error;
+			wait for 5 ns;
+
+		-- execute instruction 17
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 35" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 35" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 35" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 35" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 35" severity error;
+			assert reg05 = x"00000000" report "reg05 error at step 35" severity error;
+			assert reg06 = x"00000000" report "reg06 error at step 35" severity error;
+			assert reg07 = x"00000000" report "reg07 error at step 35" severity error;
+			assert reg08 = x"00000000" report "reg08 error at step 35" severity error;
+			assert reg09 = x"00000000" report "reg09 error at step 35" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 35" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 35" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 35" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 35" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 35" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 35" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 35" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 35" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 35" severity error;
+			assert reg13 = x"00000ff4" report "reg13 error at step 35" severity error;
+			assert reg14 = x"11111111" report "reg14 error at step 35" severity error;
+			assert reg15 = x"22222222" report "reg15 error at step 35" severity error;
+			assert reg16 = x"33333333" report "reg16 error at step 35" severity error;
+			assert reg17 = x"44444444" report "reg17 error at step 35" severity error;
+			assert reg18 = x"55555555" report "reg18 error at step 35" severity error;
+			assert reg19 = x"66666666" report "reg19 error at step 35" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 35" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 35" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 35" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 35" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 35" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 35" severity error;
+			assert progcounter = x"00000050" report "progcounter error at step 35" severity error;
+			wait for 5 ns;
+
+		-- load instruction 18
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"01598023" report "instruction error at step 36" severity error;
+			assert false report "18;0x01598023;STRB : dataMem[reg[19] + 0] = reg[21];OK; ;" severity note;
+			assert progcounter = x"00000050" report "progcounter error at step 36" severity error;
+			assert dataAddr = x"00000ff4"    report "address error at step 36"     severity error;
+			assert inputData = x"22222222"   report "data error at step  36"       severity error;
+			assert dataLength = "000"        report "length error at step 36"      severity error;
+			assert store = '1'               report "store error at step 36"       severity error;
+			wait for 5 ns;
+
+		-- execute instruction 18
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 37" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 37" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 37" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 37" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 37" severity error;
+			assert reg05 = x"00000000" report "reg05 error at step 37" severity error;
+			assert reg06 = x"00000000" report "reg06 error at step 37" severity error;
+			assert reg07 = x"00000000" report "reg07 error at step 37" severity error;
+			assert reg08 = x"00000000" report "reg08 error at step 37" severity error;
+			assert reg09 = x"00000000" report "reg09 error at step 37" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 37" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 37" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 37" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 37" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 37" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 37" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 37" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 37" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 37" severity error;
+			assert reg13 = x"00000ff4" report "reg13 error at step 37" severity error;
+			assert reg14 = x"11111111" report "reg14 error at step 37" severity error;
+			assert reg15 = x"22222222" report "reg15 error at step 37" severity error;
+			assert reg16 = x"33333333" report "reg16 error at step 37" severity error;
+			assert reg17 = x"44444444" report "reg17 error at step 37" severity error;
+			assert reg18 = x"55555555" report "reg18 error at step 37" severity error;
+			assert reg19 = x"66666666" report "reg19 error at step 37" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 37" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 37" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 37" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 37" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 37" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 37" severity error;
+			assert progcounter = x"00000054" report "progcounter error at step 37" severity error;
+			wait for 5 ns;
+
+		-- load instruction 19
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"ff691e23" report "instruction error at step 38" severity error;
+			assert false report "19;0xff691e23;STRH : dataMem[reg[18] + -4] = reg[22];OK; ;" severity note;
+			assert progcounter = x"00000054" report "progcounter error at step 38" severity error;
+			assert dataAddr = x"00000fec"    report "address error at step 38"     severity error;
+			assert inputData = x"33333333"   report "data error at step  38"       severity error;
+			assert dataLength = "001"        report "length error at step 38"      severity error;
+			assert store = '1'               report "store error at step 38"       severity error;
+			wait for 5 ns;
+
+		-- execute instruction 19
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 39" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 39" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 39" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 39" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 39" severity error;
+			assert reg05 = x"00000000" report "reg05 error at step 39" severity error;
+			assert reg06 = x"00000000" report "reg06 error at step 39" severity error;
+			assert reg07 = x"00000000" report "reg07 error at step 39" severity error;
+			assert reg08 = x"00000000" report "reg08 error at step 39" severity error;
+			assert reg09 = x"00000000" report "reg09 error at step 39" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 39" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 39" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 39" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 39" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 39" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 39" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 39" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 39" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 39" severity error;
+			assert reg13 = x"00000ff4" report "reg13 error at step 39" severity error;
+			assert reg14 = x"11111111" report "reg14 error at step 39" severity error;
+			assert reg15 = x"22222222" report "reg15 error at step 39" severity error;
+			assert reg16 = x"33333333" report "reg16 error at step 39" severity error;
+			assert reg17 = x"44444444" report "reg17 error at step 39" severity error;
+			assert reg18 = x"55555555" report "reg18 error at step 39" severity error;
+			assert reg19 = x"66666666" report "reg19 error at step 39" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 39" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 39" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 39" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 39" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 39" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 39" severity error;
+			assert progcounter = x"00000058" report "progcounter error at step 39" severity error;
+			wait for 5 ns;
+
+		-- load instruction 20
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"01799223" report "instruction error at step 40" severity error;
+			assert false report "20;0x01799223;STRH : dataMem[reg[19] + 4] = reg[23];OK; ;" severity note;
+			assert progcounter = x"00000058" report "progcounter error at step 40" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 40"     severity error;
+			assert inputData = x"44444444"   report "data error at step  40"       severity error;
+			assert dataLength = "001"        report "length error at step 40"      severity error;
+			assert store = '1'               report "store error at step 40"       severity error;
+			wait for 5 ns;
+
+		-- execute instruction 20
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 41" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 41" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 41" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 41" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 41" severity error;
+			assert reg05 = x"00000000" report "reg05 error at step 41" severity error;
+			assert reg06 = x"00000000" report "reg06 error at step 41" severity error;
+			assert reg07 = x"00000000" report "reg07 error at step 41" severity error;
+			assert reg08 = x"00000000" report "reg08 error at step 41" severity error;
+			assert reg09 = x"00000000" report "reg09 error at step 41" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 41" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 41" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 41" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 41" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 41" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 41" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 41" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 41" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 41" severity error;
+			assert reg13 = x"00000ff4" report "reg13 error at step 41" severity error;
+			assert reg14 = x"11111111" report "reg14 error at step 41" severity error;
+			assert reg15 = x"22222222" report "reg15 error at step 41" severity error;
+			assert reg16 = x"33333333" report "reg16 error at step 41" severity error;
+			assert reg17 = x"44444444" report "reg17 error at step 41" severity error;
+			assert reg18 = x"55555555" report "reg18 error at step 41" severity error;
+			assert reg19 = x"66666666" report "reg19 error at step 41" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 41" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 41" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 41" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 41" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 41" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 41" severity error;
+			assert progcounter = x"0000005c" report "progcounter error at step 41" severity error;
+			wait for 5 ns;
+
+		-- load instruction 21
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"ff892c23" report "instruction error at step 42" severity error;
+			assert false report "21;0xff892c23;STRW : dataMem[reg[18] + -8] = reg[24];OK; ;" severity note;
+			assert progcounter = x"0000005c" report "progcounter error at step 42" severity error;
+			assert dataAddr = x"00000fe8"    report "address error at step 42"     severity error;
+			assert inputData = x"55555555"   report "data error at step  42"       severity error;
+			assert dataLength = "010"        report "length error at step 42"      severity error;
+			assert store = '1'               report "store error at step 42"       severity error;
+			wait for 5 ns;
+
+		-- execute instruction 21
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 43" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 43" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 43" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 43" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 43" severity error;
+			assert reg05 = x"00000000" report "reg05 error at step 43" severity error;
+			assert reg06 = x"00000000" report "reg06 error at step 43" severity error;
+			assert reg07 = x"00000000" report "reg07 error at step 43" severity error;
+			assert reg08 = x"00000000" report "reg08 error at step 43" severity error;
+			assert reg09 = x"00000000" report "reg09 error at step 43" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 43" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 43" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 43" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 43" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 43" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 43" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 43" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 43" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 43" severity error;
+			assert reg13 = x"00000ff4" report "reg13 error at step 43" severity error;
+			assert reg14 = x"11111111" report "reg14 error at step 43" severity error;
+			assert reg15 = x"22222222" report "reg15 error at step 43" severity error;
+			assert reg16 = x"33333333" report "reg16 error at step 43" severity error;
+			assert reg17 = x"44444444" report "reg17 error at step 43" severity error;
+			assert reg18 = x"55555555" report "reg18 error at step 43" severity error;
+			assert reg19 = x"66666666" report "reg19 error at step 43" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 43" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 43" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 43" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 43" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 43" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 43" severity error;
+			assert progcounter = x"00000060" report "progcounter error at step 43" severity error;
+			wait for 5 ns;
+
+		-- load instruction 22
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"0199a423" report "instruction error at step 44" severity error;
+			assert false report "22;0x0199a423;STRW : dataMem[reg[19] + 8] = reg[25];OK; ;" severity note;
+			assert progcounter = x"00000060" report "progcounter error at step 44" severity error;
+			assert dataAddr = x"00000ffc"    report "address error at step 44"     severity error;
+			assert inputData = x"66666666"   report "data error at step  44"       severity error;
+			assert dataLength = "010"        report "length error at step 44"      severity error;
+			assert store = '1'               report "store error at step 44"       severity error;
+			wait for 5 ns;
+
+		-- execute instruction 22
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 45" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 45" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 45" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 45" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 45" severity error;
+			assert reg05 = x"00000000" report "reg05 error at step 45" severity error;
+			assert reg06 = x"00000000" report "reg06 error at step 45" severity error;
+			assert reg07 = x"00000000" report "reg07 error at step 45" severity error;
+			assert reg08 = x"00000000" report "reg08 error at step 45" severity error;
+			assert reg09 = x"00000000" report "reg09 error at step 45" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 45" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 45" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 45" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 45" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 45" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 45" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 45" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 45" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 45" severity error;
+			assert reg13 = x"00000ff4" report "reg13 error at step 45" severity error;
+			assert reg14 = x"11111111" report "reg14 error at step 45" severity error;
+			assert reg15 = x"22222222" report "reg15 error at step 45" severity error;
+			assert reg16 = x"33333333" report "reg16 error at step 45" severity error;
+			assert reg17 = x"44444444" report "reg17 error at step 45" severity error;
+			assert reg18 = x"55555555" report "reg18 error at step 45" severity error;
+			assert reg19 = x"66666666" report "reg19 error at step 45" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 45" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 45" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 45" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 45" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 45" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 45" severity error;
+			assert progcounter = x"00000064" report "progcounter error at step 45" severity error;
+			wait for 5 ns;
+
+		-- load instruction 23
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"00000013" report "instruction error at step 46" severity error;
+			assert false report "23;0x00000013;ADDI : reg[00] = reg[00] + 0;OK; ;" severity note;
+			assert progcounter = x"00000064" report "progcounter error at step 46" severity error;
+			wait for 5 ns;
+
+		-- execute instruction 23
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 47" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 47" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 47" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 47" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 47" severity error;
+			assert reg05 = x"00000000" report "reg05 error at step 47" severity error;
+			assert reg06 = x"00000000" report "reg06 error at step 47" severity error;
+			assert reg07 = x"00000000" report "reg07 error at step 47" severity error;
+			assert reg08 = x"00000000" report "reg08 error at step 47" severity error;
+			assert reg09 = x"00000000" report "reg09 error at step 47" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 47" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 47" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 47" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 47" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 47" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 47" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 47" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 47" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 47" severity error;
+			assert reg13 = x"00000ff4" report "reg13 error at step 47" severity error;
+			assert reg14 = x"11111111" report "reg14 error at step 47" severity error;
+			assert reg15 = x"22222222" report "reg15 error at step 47" severity error;
+			assert reg16 = x"33333333" report "reg16 error at step 47" severity error;
+			assert reg17 = x"44444444" report "reg17 error at step 47" severity error;
+			assert reg18 = x"55555555" report "reg18 error at step 47" severity error;
+			assert reg19 = x"66666666" report "reg19 error at step 47" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 47" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 47" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 47" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 47" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 47" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 47" severity error;
+			assert progcounter = x"00000068" report "progcounter error at step 47" severity error;
+			wait for 5 ns;
+
+		-- load instruction 24
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"00000013" report "instruction error at step 48" severity error;
+			assert false report "24;0x00000013;ADDI : reg[00] = reg[00] + 0;OK; ;" severity note;
+			assert progcounter = x"00000068" report "progcounter error at step 48" severity error;
+			wait for 5 ns;
+
+		-- execute instruction 24
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 49" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 49" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 49" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 49" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 49" severity error;
+			assert reg05 = x"00000000" report "reg05 error at step 49" severity error;
+			assert reg06 = x"00000000" report "reg06 error at step 49" severity error;
+			assert reg07 = x"00000000" report "reg07 error at step 49" severity error;
+			assert reg08 = x"00000000" report "reg08 error at step 49" severity error;
+			assert reg09 = x"00000000" report "reg09 error at step 49" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 49" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 49" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 49" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 49" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 49" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 49" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 49" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 49" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 49" severity error;
+			assert reg13 = x"00000ff4" report "reg13 error at step 49" severity error;
+			assert reg14 = x"11111111" report "reg14 error at step 49" severity error;
+			assert reg15 = x"22222222" report "reg15 error at step 49" severity error;
+			assert reg16 = x"33333333" report "reg16 error at step 49" severity error;
+			assert reg17 = x"44444444" report "reg17 error at step 49" severity error;
+			assert reg18 = x"55555555" report "reg18 error at step 49" severity error;
+			assert reg19 = x"66666666" report "reg19 error at step 49" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 49" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 49" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 49" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 49" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 49" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 49" severity error;
+			assert progcounter = x"0000006c" report "progcounter error at step 49" severity error;
+			wait for 5 ns;
+
+		-- load instruction 25
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"00000013" report "instruction error at step 50" severity error;
+			assert false report "25;0x00000013;ADDI : reg[00] = reg[00] + 0;OK; ;" severity note;
+			assert progcounter = x"0000006c" report "progcounter error at step 50" severity error;
+			wait for 5 ns;
+
+		-- execute instruction 25
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 51" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 51" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 51" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 51" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 51" severity error;
+			assert reg05 = x"00000000" report "reg05 error at step 51" severity error;
+			assert reg06 = x"00000000" report "reg06 error at step 51" severity error;
+			assert reg07 = x"00000000" report "reg07 error at step 51" severity error;
+			assert reg08 = x"00000000" report "reg08 error at step 51" severity error;
+			assert reg09 = x"00000000" report "reg09 error at step 51" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 51" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 51" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 51" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 51" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 51" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 51" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 51" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 51" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 51" severity error;
+			assert reg13 = x"00000ff4" report "reg13 error at step 51" severity error;
+			assert reg14 = x"11111111" report "reg14 error at step 51" severity error;
+			assert reg15 = x"22222222" report "reg15 error at step 51" severity error;
+			assert reg16 = x"33333333" report "reg16 error at step 51" severity error;
+			assert reg17 = x"44444444" report "reg17 error at step 51" severity error;
+			assert reg18 = x"55555555" report "reg18 error at step 51" severity error;
+			assert reg19 = x"66666666" report "reg19 error at step 51" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 51" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 51" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 51" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 51" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 51" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 51" severity error;
+			assert progcounter = x"00000070" report "progcounter error at step 51" severity error;
+			wait for 5 ns;
+
+		-- load instruction 26
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"00094283" report "instruction error at step 52" severity error;
+			assert false report "26;0x00094283;LBU : reg[05] = dataMem[reg[18] + 0];OK; ;" severity note;
+			assert progcounter = x"00000070" report "progcounter error at step 52" severity error;
+			assert dataAddr = x"00000ff0"    report "address error at step 52"     severity error;
+			assert dataLength = "100"        report "length error at step 52"      severity error;
+			assert load = '1'                report "load error at step 52"        severity error;
+			wait for 5 ns;
+
+		-- execute instruction 26
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 53" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 53" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 53" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 53" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 53" severity error;
+			assert reg05 = x"00000011" report "reg05 error at step 53" severity error;
+			assert reg06 = x"00000000" report "reg06 error at step 53" severity error;
+			assert reg07 = x"00000000" report "reg07 error at step 53" severity error;
+			assert reg08 = x"00000000" report "reg08 error at step 53" severity error;
+			assert reg09 = x"00000000" report "reg09 error at step 53" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 53" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 53" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 53" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 53" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 53" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 53" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 53" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 53" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 53" severity error;
+			assert reg13 = x"00000ff4" report "reg13 error at step 53" severity error;
+			assert reg14 = x"11111111" report "reg14 error at step 53" severity error;
+			assert reg15 = x"22222222" report "reg15 error at step 53" severity error;
+			assert reg16 = x"33333333" report "reg16 error at step 53" severity error;
+			assert reg17 = x"44444444" report "reg17 error at step 53" severity error;
+			assert reg18 = x"55555555" report "reg18 error at step 53" severity error;
+			assert reg19 = x"66666666" report "reg19 error at step 53" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 53" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 53" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 53" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 53" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 53" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 53" severity error;
+			assert progcounter = x"00000074" report "progcounter error at step 53" severity error;
+			wait for 5 ns;
+
+		-- load instruction 27
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"ffc90303" report "instruction error at step 54" severity error;
+			assert false report "27;0xffc90303;LDB : reg[06] = dataMem[reg[18] + -4];OK; ;" severity note;
+			assert progcounter = x"00000074" report "progcounter error at step 54" severity error;
+			assert dataAddr = x"00000fec"    report "address error at step 54"     severity error;
+			assert dataLength = "000"        report "length error at step 54"      severity error;
+			assert load = '1'                report "load error at step 54"        severity error;
+			wait for 5 ns;
+
+		-- execute instruction 27
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 55" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 55" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 55" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 55" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 55" severity error;
+			assert reg05 = x"00000011" report "reg05 error at step 55" severity error;
+			assert reg06 = x"00000033" report "reg06 error at step 55" severity error;
+			assert reg07 = x"00000000" report "reg07 error at step 55" severity error;
+			assert reg08 = x"00000000" report "reg08 error at step 55" severity error;
+			assert reg09 = x"00000000" report "reg09 error at step 55" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 55" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 55" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 55" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 55" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 55" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 55" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 55" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 55" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 55" severity error;
+			assert reg13 = x"00000ff4" report "reg13 error at step 55" severity error;
+			assert reg14 = x"11111111" report "reg14 error at step 55" severity error;
+			assert reg15 = x"22222222" report "reg15 error at step 55" severity error;
+			assert reg16 = x"33333333" report "reg16 error at step 55" severity error;
+			assert reg17 = x"44444444" report "reg17 error at step 55" severity error;
+			assert reg18 = x"55555555" report "reg18 error at step 55" severity error;
+			assert reg19 = x"66666666" report "reg19 error at step 55" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 55" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 55" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 55" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 55" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 55" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 55" severity error;
+			assert progcounter = x"00000078" report "progcounter error at step 55" severity error;
+			wait for 5 ns;
+
+		-- load instruction 28
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"ff891383" report "instruction error at step 56" severity error;
+			assert false report "28;0xff891383;LDH : reg[07] = dataMem[reg[18] + -8];OK; ;" severity note;
+			assert progcounter = x"00000078" report "progcounter error at step 56" severity error;
+			assert dataAddr = x"00000fe8"    report "address error at step 56"     severity error;
+			assert dataLength = "001"        report "length error at step 56"      severity error;
+			assert load = '1'                report "load error at step 56"        severity error;
+			wait for 5 ns;
+
+		-- execute instruction 28
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 57" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 57" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 57" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 57" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 57" severity error;
+			assert reg05 = x"00000011" report "reg05 error at step 57" severity error;
+			assert reg06 = x"00000033" report "reg06 error at step 57" severity error;
+			assert reg07 = x"00005555" report "reg07 error at step 57" severity error;
+			assert reg08 = x"00000000" report "reg08 error at step 57" severity error;
+			assert reg09 = x"00000000" report "reg09 error at step 57" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 57" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 57" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 57" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 57" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 57" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 57" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 57" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 57" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 57" severity error;
+			assert reg13 = x"00000ff4" report "reg13 error at step 57" severity error;
+			assert reg14 = x"11111111" report "reg14 error at step 57" severity error;
+			assert reg15 = x"22222222" report "reg15 error at step 57" severity error;
+			assert reg16 = x"33333333" report "reg16 error at step 57" severity error;
+			assert reg17 = x"44444444" report "reg17 error at step 57" severity error;
+			assert reg18 = x"55555555" report "reg18 error at step 57" severity error;
+			assert reg19 = x"66666666" report "reg19 error at step 57" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 57" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 57" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 57" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 57" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 57" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 57" severity error;
+			assert progcounter = x"0000007c" report "progcounter error at step 57" severity error;
+			wait for 5 ns;
+
+		-- load instruction 29
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"0049d403" report "instruction error at step 59" severity error;
+			assert false report "29;0x0049d403;LHU : reg[08] = dataMem[reg[19] + 4];OK; ;" severity note;
+			assert progcounter = x"0000007c" report "progcounter error at step 58" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 58"     severity error;
+			assert dataLength = "101"        report "length error at step 58"      severity error;
+			assert load = '1'                report "load error at step 58"        severity error;
+			wait for 5 ns;
+
+		-- execute instruction 29
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 59" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 59" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 59" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 59" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 59" severity error;
+			assert reg05 = x"00000011" report "reg05 error at step 59" severity error;
+			assert reg06 = x"00000033" report "reg06 error at step 59" severity error;
+			assert reg07 = x"00005555" report "reg07 error at step 59" severity error;
+			assert reg08 = x"00004444" report "reg08 error at step 59" severity error;
+			assert reg09 = x"00000000" report "reg09 error at step 59" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 59" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 59" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 59" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 59" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 59" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 59" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 59" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 59" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 59" severity error;
+			assert reg13 = x"00000ff4" report "reg13 error at step 59" severity error;
+			assert reg14 = x"11111111" report "reg14 error at step 59" severity error;
+			assert reg15 = x"22222222" report "reg15 error at step 59" severity error;
+			assert reg16 = x"33333333" report "reg16 error at step 59" severity error;
+			assert reg17 = x"44444444" report "reg17 error at step 59" severity error;
+			assert reg18 = x"55555555" report "reg18 error at step 59" severity error;
+			assert reg19 = x"66666666" report "reg19 error at step 59" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 59" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 59" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 59" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 59" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 59" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 59" severity error;
+			assert progcounter = x"00000080" report "progcounter error at step 59" severity error;
+			wait for 5 ns;
+
+		-- load instruction 30
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"0089a483" report "instruction error at step 60" severity error;
+			assert false report "30;0x0089a483;LDW : reg[09] = dataMem[reg[19] + 8];OK; ;" severity note;
+			assert progcounter = x"00000080" report "progcounter error at step 60" severity error;
+			assert dataAddr = x"00000ffc"    report "address error at step 60"     severity error;
+			assert dataLength = "010"        report "length error at step 60"      severity error;
+			assert load = '1'                report "load error at step 60"        severity error;
+			wait for 5 ns;
+
+		-- execute instruction 30
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 61" severity error;
+			assert reg01 = x"00000000" report "reg01 error at step 61" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 61" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 61" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 61" severity error;
+			assert reg05 = x"00000011" report "reg05 error at step 61" severity error;
+			assert reg06 = x"00000033" report "reg06 error at step 61" severity error;
+			assert reg07 = x"00005555" report "reg07 error at step 61" severity error;
+			assert reg08 = x"00004444" report "reg08 error at step 61" severity error;
+			assert reg09 = x"66666666" report "reg09 error at step 61" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 61" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 61" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 61" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 61" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 61" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 61" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 61" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 61" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 61" severity error;
+			assert reg13 = x"00000ff4" report "reg13 error at step 61" severity error;
+			assert reg14 = x"11111111" report "reg14 error at step 61" severity error;
+			assert reg15 = x"22222222" report "reg15 error at step 61" severity error;
+			assert reg16 = x"33333333" report "reg16 error at step 61" severity error;
+			assert reg17 = x"44444444" report "reg17 error at step 61" severity error;
+			assert reg18 = x"55555555" report "reg18 error at step 61" severity error;
+			assert reg19 = x"66666666" report "reg19 error at step 61" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 61" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 61" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 61" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 61" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 61" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 61" severity error;
+			assert progcounter = x"00000084" report "progcounter error at step 61" severity error;
+			wait for 5 ns;
+
+		-- load instruction 31
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"00800093" report "instruction error at step 62" severity error;
+			assert false report "31;0x00800093;ADDI : reg[01] = reg[00] + 8;OK; ;" severity note;
+			assert progcounter = x"00000084" report "progcounter error at step 62" severity error;
+			wait for 5 ns;
+
+		-- execute instruction 31
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 63" severity error;
+			assert reg01 = x"00000008" report "reg01 error at step 63" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 63" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 63" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 63" severity error;
+			assert reg05 = x"00000011" report "reg05 error at step 63" severity error;
+			assert reg06 = x"00000033" report "reg06 error at step 63" severity error;
+			assert reg07 = x"00005555" report "reg07 error at step 63" severity error;
+			assert reg08 = x"00004444" report "reg08 error at step 63" severity error;
+			assert reg09 = x"66666666" report "reg09 error at step 63" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 63" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 63" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 63" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 63" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 63" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 63" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 63" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 63" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 63" severity error;
+			assert reg13 = x"00000ff4" report "reg13 error at step 63" severity error;
+			assert reg14 = x"11111111" report "reg14 error at step 63" severity error;
+			assert reg15 = x"22222222" report "reg15 error at step 63" severity error;
+			assert reg16 = x"33333333" report "reg16 error at step 63" severity error;
+			assert reg17 = x"44444444" report "reg17 error at step 63" severity error;
+			assert reg18 = x"55555555" report "reg18 error at step 63" severity error;
+			assert reg19 = x"66666666" report "reg19 error at step 63" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 63" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 63" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 63" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 63" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 63" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 63" severity error;
+			assert progcounter = x"00000088" report "progcounter error at step 63" severity error;
+			wait for 5 ns;
+
+		-- load instruction 32
+			ck <= '0';
+			wait for 5 ns;
+			assert instr = x"00008067" report "instruction error at step 64" severity error;
+			assert false report "32;0x00008067;JALR : reg[00] = PC+4 and PC = (reg[01] + 0) & ~1;OK; ;" severity note;
+			assert progcounter = x"00000088" report "progcounter error at step 64" severity error;
+			wait for 5 ns;
+
+		-- execute instruction 32
+			ck <= '1';
+			wait for 5 ns;
+			assert reg00 = x"00000000" report "reg00 error at step 65" severity error;
+			assert reg01 = x"00000008" report "reg01 error at step 65" severity error;
+			assert reg02 = x"00000000" report "reg02 error at step 65" severity error;
+			assert reg03 = x"00000000" report "reg03 error at step 65" severity error;
+			assert reg04 = x"00000000" report "reg04 error at step 65" severity error;
+			assert reg05 = x"00000011" report "reg05 error at step 65" severity error;
+			assert reg06 = x"00000033" report "reg06 error at step 65" severity error;
+			assert reg07 = x"00005555" report "reg07 error at step 65" severity error;
+			assert reg08 = x"00004444" report "reg08 error at step 65" severity error;
+			assert reg09 = x"66666666" report "reg09 error at step 65" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 65" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 65" severity error;
+			assert reg0c = x"00000000" report "reg0c error at step 65" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 65" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 65" severity error;
+			assert reg0f = x"00000000" report "reg0f error at step 65" severity error;
+			assert reg10 = x"00000000" report "reg10 error at step 65" severity error;
+			assert reg11 = x"00000000" report "reg11 error at step 65" severity error;
+			assert reg12 = x"00000ff0" report "reg12 error at step 65" severity error;
+			assert reg13 = x"00000ff4" report "reg13 error at step 65" severity error;
+			assert reg14 = x"11111111" report "reg14 error at step 65" severity error;
+			assert reg15 = x"22222222" report "reg15 error at step 65" severity error;
+			assert reg16 = x"33333333" report "reg16 error at step 65" severity error;
+			assert reg17 = x"44444444" report "reg17 error at step 65" severity error;
+			assert reg18 = x"55555555" report "reg18 error at step 65" severity error;
+			assert reg19 = x"66666666" report "reg19 error at step 65" severity error;
+			assert reg1a = x"00000000" report "reg1a error at step 65" severity error;
+			assert reg1b = x"00000000" report "reg1b error at step 65" severity error;
+			assert reg1c = x"00000000" report "reg1c error at step 65" severity error;
+			assert reg1d = x"00000000" report "reg1d error at step 65" severity error;
+			assert reg1e = x"00000000" report "reg1e error at step 65" severity error;
+			assert reg1f = x"00000000" report "reg1f error at step 65" severity error;
+			assert progcounter = x"00000008" report "progcounter error at step 65" severity error;
+			wait for 5 ns;
+
+			wait;
+		end process;
+END vhdl;
