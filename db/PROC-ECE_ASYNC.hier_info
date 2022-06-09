@@ -1,11 +1,11 @@
 |Top
 TOPclock => clock1M:instPLL.inclk0
-TOPreset => Processor:instPROC.PROCreset
-TOPreset => REGLed.ACLR
-TOPreset => muxLoadDelay.ACLR
-TOPreset => Counter:instCPT.CPTreset
-TOPreset => Displays:instDISP.DISPreset
-TOPreset => clock1M:instPLL.areset
+reset => REGLed.ACLR
+reset => muxLoadDelay.ACLR
+reset => Processor:instPROC.PROCreset
+reset => Counter:instCPT.CPTreset
+reset => Displays:instDISP.DISPreset
+reset => clock1M:instPLL.areset
 TOPdisplay1[0] << Displays:instDISP.DISPdisplay1[0]
 TOPdisplay1[1] << Displays:instDISP.DISPdisplay1[1]
 TOPdisplay1[2] << Displays:instDISP.DISPdisplay1[2]

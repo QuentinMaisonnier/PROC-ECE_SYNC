@@ -13,7 +13,8 @@ ENTITY Top IS
 	PORT (
 		-- INPUTS
 		TOPclock    : IN  STD_LOGIC; --must go through pll
-		TOPreset    : IN  STD_LOGIC; --SW0
+		--TOPreset    : IN  STD_LOGIC; --SW0
+		reset    : IN  STD_LOGIC; --SW0
 		-- DEMO OUTPUTS
 		TOPdisplay1 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0); --0x80000004
 		TOPdisplay2 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0); --0x80000008
@@ -144,6 +145,7 @@ ARCHITECTURE archi OF Top IS
 	SIGNAL SIGclock : STD_LOGIC; --either from pll or simulation
 	--SIGNAL SIGclockInverted : STD_LOGIC; --either from pll or simulation
 	SIGNAL SIGsimulOn : STD_LOGIC; --either from pll or simulation
+	SIGNAL TOPreset : STD_LOGIC;
 	
 	
 	
@@ -153,6 +155,7 @@ ARCHITECTURE archi OF Top IS
 	
 
 BEGIN
+	TOPreset <= NOT reset;
 	-- BEGIN
 	-- ALL
 	-- TEST BENCH ONLY ---
@@ -266,7 +269,7 @@ BEGIN
 		DISPclock    => SIGclock,
 		DISPreset    => TOPreset,
 		DISPaddr     => SIGaddrDM,
-		DISPinput    => SIGoutputDM,
+		DISPinput    => SIGinputDM,
 		DISPWrite    => SIGstore,
 		--OUTPUTS
 		DISPleds     => TOPleds,

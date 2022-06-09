@@ -392,7 +392,7 @@
 					"strict" : false
 				},
 				{
-					"name" : "TOPreset",
+					"name" : "reset",
 					"strict" : false
 				}
 			]

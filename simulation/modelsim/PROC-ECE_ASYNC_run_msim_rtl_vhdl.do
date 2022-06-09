@@ -5,7 +5,7 @@ if {[file exists rtl_work]} {
 vlib rtl_work
 vmap work rtl_work
 
-vlog -vlog01compat -work work +incdir+C:/Users/quent/Desktop/RSICV\ code/VHDL/PROC-ECE_SYNC\ GALOPE\ V3/db {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/db/pll_altpll.v}
+vlog -vlog01compat -work work +incdir+C:/Users/quent/Desktop/RSICV\ code/VHDL/PROC-ECE_SYNC\ GALOPE\ V3/db {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/db/clock1m_altpll.v}
 vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/custom_lib/simul_var_pkg.vhd}
 vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/ProgramCounter.vhd}
 vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Processor.vhd}
@@ -13,8 +13,8 @@ vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE
 vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Displays.vhd}
 vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Counter.vhd}
 vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Alu.vhd}
-vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/qip_files/PLL/PLL.vhd}
 vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/RAM_2PORT.vhd}
+vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/clock1M.vhd}
 vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd}
 vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/RegisterFile.vhd}
 

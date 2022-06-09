@@ -1,5 +1,5 @@
 Analysis & Synthesis report for PROC-ECE_ASYNC
-Thu Jun 09 10:41:20 2022
+Thu Jun 09 17:13:33 2022
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -52,7 +52,7 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Jun 09 10:41:20 2022       ;
+; Analysis & Synthesis Status        ; Successful - Thu Jun 09 17:13:33 2022       ;
 ; Quartus Prime Version              ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                      ; PROC-ECE_ASYNC                              ;
 ; Top-level Entity Name              ; Top                                         ;
@@ -207,7 +207,7 @@ refer to the applicable agreement for further details.
 ; altram.inc                        ; yes             ; Megafunction                           ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altram.inc                                ;         ;
 ; altdpram.inc                      ; yes             ; Megafunction                           ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altdpram.inc                              ;         ;
 ; db/altsyncram_gjt3.tdf            ; yes             ; Auto-Generated Megafunction            ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/db/altsyncram_gjt3.tdf            ;         ;
-; imhex.hex                         ; yes             ; Auto-Found Memory Initialization File  ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/imhex.hex                         ;         ;
+; IMhex.hex                         ; yes             ; Auto-Found Memory Initialization File  ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/IMhex.hex                         ;         ;
 ; altpll.tdf                        ; yes             ; Megafunction                           ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altpll.tdf                                ;         ;
 ; stratix_pll.inc                   ; yes             ; Megafunction                           ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/stratix_pll.inc                           ;         ;
 ; stratixii_pll.inc                 ; yes             ; Megafunction                           ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/stratixii_pll.inc                         ;         ;
@@ -880,7 +880,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
-    Info: Processing started: Thu Jun 09 10:40:59 2022
+    Info: Processing started: Thu Jun 09 17:13:10 2022
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off PROC-ECE_ASYNC -c PROC-ECE_ASYNC
 Info (20032): Parallel compilation is enabled and will use up to 4 processors
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/testbench.vhd
@@ -889,7 +889,7 @@ Info (12021): Found 2 design units, including 1 entities, in source file vhdl_fi
 Info (12021): Found 1 design units, including 0 entities, in source file custom_lib/simul_var_pkg.vhd
     Info (12022): Found design unit 1: simulPkg File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/custom_lib/simul_var_pkg.vhd Line: 5
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/top.vhd
-    Info (12022): Found design unit 1: Top-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 26
+    Info (12022): Found design unit 1: Top-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 27
     Info (12023): Found entity 1: Top File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 12
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/registerfile.vhd
     Info (12022): Found design unit 1: RegisterFile-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/RegisterFile.vhd Line: 28
@@ -934,14 +934,14 @@ Info (12021): Found 2 design units, including 1 entities, in source file clock1m
     Info (12022): Found design unit 1: clock1m-SYN File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/clock1M.vhd Line: 53
     Info (12023): Found entity 1: clock1M File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/clock1M.vhd Line: 42
 Info (12127): Elaborating entity "Top" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at Top.vhd(140): object "SIGoutputDMorREG" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 140
-Warning (10036): Verilog HDL or VHDL warning at Top.vhd(150): object "csLed" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 150
-Info (12128): Elaborating entity "Processor" for hierarchy "Processor:instPROC" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 203
+Warning (10036): Verilog HDL or VHDL warning at Top.vhd(141): object "SIGoutputDMorREG" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 141
+Warning (10036): Verilog HDL or VHDL warning at Top.vhd(152): object "csLed" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 152
+Info (12128): Elaborating entity "Processor" for hierarchy "Processor:instPROC" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 206
 Info (12128): Elaborating entity "ProgramCounter" for hierarchy "Processor:instPROC|ProgramCounter:instPC" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Processor.vhd Line: 277
 Info (12128): Elaborating entity "InstructionDecoder" for hierarchy "Processor:instPROC|InstructionDecoder:instID" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Processor.vhd Line: 297
 Info (12128): Elaborating entity "RegisterFile" for hierarchy "Processor:instPROC|RegisterFile:instRF" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Processor.vhd Line: 322
 Info (12128): Elaborating entity "Alu" for hierarchy "Processor:instPROC|Alu:instALU" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Processor.vhd Line: 334
-Info (12128): Elaborating entity "RAM_2PORT" for hierarchy "RAM_2PORT:Memory" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 220
+Info (12128): Elaborating entity "RAM_2PORT" for hierarchy "RAM_2PORT:Memory" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 223
 Info (12128): Elaborating entity "altsyncram" for hierarchy "RAM_2PORT:Memory|altsyncram:altsyncram_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/RAM_2PORT.vhd Line: 68
 Info (12130): Elaborated megafunction instantiation "RAM_2PORT:Memory|altsyncram:altsyncram_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/RAM_2PORT.vhd Line: 68
 Info (12133): Instantiated megafunction "RAM_2PORT:Memory|altsyncram:altsyncram_component" with the following parameter: File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/RAM_2PORT.vhd Line: 68
@@ -998,9 +998,10 @@ Info (12133): Instantiated megafunction "RAM_2PORT:Memory|altsyncram:altsyncram_
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_gjt3.tdf
     Info (12023): Found entity 1: altsyncram_gjt3 File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/db/altsyncram_gjt3.tdf Line: 27
 Info (12128): Elaborating entity "altsyncram_gjt3" for hierarchy "RAM_2PORT:Memory|altsyncram:altsyncram_component|altsyncram_gjt3:auto_generated" File: c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altsyncram.tdf Line: 791
-Info (12128): Elaborating entity "Counter" for hierarchy "Counter:instCPT" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 253
-Info (12128): Elaborating entity "Displays" for hierarchy "Displays:instDISP" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 263
-Info (12128): Elaborating entity "clock1M" for hierarchy "clock1M:instPLL" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 277
+Critical Warning (127005): Memory depth (4096) in the design file differs from memory depth (1024) in the Memory Initialization File "C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/IMhex.hex" -- setting initial value for remaining addresses to 0 File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/RAM_2PORT.vhd Line: 68
+Info (12128): Elaborating entity "Counter" for hierarchy "Counter:instCPT" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 256
+Info (12128): Elaborating entity "Displays" for hierarchy "Displays:instDISP" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 266
+Info (12128): Elaborating entity "clock1M" for hierarchy "clock1M:instPLL" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 280
 Info (12128): Elaborating entity "altpll" for hierarchy "clock1M:instPLL|altpll:altpll_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/clock1M.vhd Line: 140
 Info (12130): Elaborated megafunction instantiation "clock1M:instPLL|altpll:altpll_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/clock1M.vhd Line: 140
 Info (12133): Instantiated megafunction "clock1M:instPLL|altpll:altpll_component" with the following parameter: File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/clock1M.vhd Line: 140
@@ -1104,10 +1105,10 @@ Info (21057): Implemented 3920 device resources after synthesis - the final reso
     Info (21061): Implemented 3788 logic cells
     Info (21064): Implemented 32 RAM segments
     Info (21065): Implemented 1 PLLs
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 35 warnings
-    Info: Peak virtual memory: 4829 megabytes
-    Info: Processing ended: Thu Jun 09 10:41:20 2022
-    Info: Elapsed time: 00:00:21
-    Info: Total CPU time (on all processors): 00:00:32
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 36 warnings
+    Info: Peak virtual memory: 4837 megabytes
+    Info: Processing ended: Thu Jun 09 17:13:34 2022
+    Info: Elapsed time: 00:00:24
+    Info: Total CPU time (on all processors): 00:00:34
 
 
