@@ -100,15 +100,17 @@ ARCHITECTURE archi OF Top IS
 		);
 	END COMPONENT;
 
-	COMPONENT PLL IS
-		PORT (
-			areset : IN  STD_LOGIC := '0';
-			inclk0 : IN  STD_LOGIC := '0';
-			c0     : OUT STD_LOGIC;
-			c1     : OUT STD_LOGIC;
-			locked : OUT STD_LOGIC
+	
+	COMPONENT clock1M IS
+		PORT
+		(
+			areset		: IN STD_LOGIC  := '0';
+			inclk0		: IN STD_LOGIC  := '0';
+			c0		: OUT STD_LOGIC ;
+			locked		: OUT STD_LOGIC 
 		);
 	END COMPONENT;
+	
 	COMPONENT RAM_2PORT IS
 		PORT (
 			address_a		: IN STD_LOGIC_VECTOR (11 DOWNTO 0);
@@ -140,7 +142,7 @@ ARCHITECTURE archi OF Top IS
 	SIGNAL SIGPLLclock : STD_LOGIC;
 	SIGNAL SIGPLLclockinverted : STD_LOGIC;
 	SIGNAL SIGclock : STD_LOGIC; --either from pll or simulation
-	SIGNAL SIGclockInverted : STD_LOGIC; --either from pll or simulation
+	--SIGNAL SIGclockInverted : STD_LOGIC; --either from pll or simulation
 	SIGNAL SIGsimulOn : STD_LOGIC; --either from pll or simulation
 	
 	
@@ -165,11 +167,11 @@ BEGIN
 	PKG_counter <= SIGcounter;
 	-----------------------
 
-	SIGsimulOn <= '1';
+	SIGsimulOn <= '0';
 	SIGclock <= TOPclock WHEN SIGsimulOn = '1' ELSE
 		SIGPLLclock;
-	SIGclockInverted <= NOT TOPclock WHEN SIGsimulOn = '1' ELSE
-		SIGPLLclockinverted;
+	--SIGclockInverted <= NOT TOPclock ;--WHEN SIGsimulOn = '1' ELSE
+		--SIGPLLclockinverted;
 	SIGoutputDMorREG <= SIGcounter WHEN SIGaddrDM = x"80000000" ELSE
 		SIGoutputDM;
 
@@ -179,7 +181,7 @@ BEGIN
 	dataLed <= SIGinputDM(0);
 
 	muxLoadDelay <= '0' when TOPreset='1' else
-						 SIGaddrDM(31) when rising_edge(TOPclock);
+						 SIGaddrDM(31) when rising_edge(SIGclock);
 						 
 	SIGLed <= dataLed WHEN SIGaddrDM(31) = '1' AND SIGstore='1' ELSE
 				 REGLed;
@@ -191,7 +193,7 @@ BEGIN
 						
 						
 	REGLed <= '0' WHEN TOPreset = '1' ELSE
-				 SIGLed WHEN rising_edge(TOPclock);
+				 SIGLed WHEN rising_edge(SIGclock);
 
 	TestLed <= REGLed;
 	
@@ -272,12 +274,12 @@ BEGIN
 		DISPdisplay2 => TOPdisplay2
 	);
 
-	instPLL : PLL
+	instPLL : clock1M
 	PORT MAP(
 		areset => TOPreset,
 		inclk0 => TOPclock,
-		c0     => SIGPLLclock,
-		c1     => SIGPLLclockinverted
+		c0     => SIGPLLclock
+		--locked     => SIGPLLclockinverted
 	);
 	-- END
 END archi;

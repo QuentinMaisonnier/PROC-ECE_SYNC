@@ -32,23 +32,24 @@ architecture archi of Processor is
     -- program counter
     component ProgramCounter is
         port (
-            -- INPUTS
-            PCclock       : in std_logic;
-            PCreset       : in std_logic;
-            PCoffset      : in std_logic_vector(31 downto 0);
-            PCoffsetsign  : in std_logic;
-            PCjal         : in std_logic;
-            PCjalr        : in std_logic;
-            PCbranch      : in std_logic;
-            PCfunct3      : in std_logic_vector(2 downto 0);
-            PCauipc       : in std_logic;
-            PCalueq       : in std_logic;
-            PCaluinf      : in std_logic;
-            PCalusup      : in std_logic;
-            PCaluinfU     : in std_logic;
-            PCalusupU     : in std_logic;
-            -- OUTPUTS
-            PCprogcounter : inout std_logic_vector(31 downto 0)
+			-- INPUTS
+			PCclock       : IN    STD_LOGIC;
+			PCreset       : IN    STD_LOGIC;
+			PCoffset      : IN    STD_LOGIC_VECTOR(31 DOWNTO 0);
+			PCoffsetsign  : IN    STD_LOGIC;
+			PCjal         : IN    STD_LOGIC;
+			PCjalr        : IN    STD_LOGIC;
+			PCbranch      : IN    STD_LOGIC;
+			PCfunct3      : IN    STD_LOGIC_VECTOR(2 DOWNTO 0);
+			PCauipc       : IN    STD_LOGIC;
+			PCalueq       : IN    STD_LOGIC;
+			PCaluinf      : IN    STD_LOGIC;
+			PCalusup      : IN    STD_LOGIC;
+			PCaluinfU     : IN    STD_LOGIC;
+			PCalusupU     : IN    STD_LOGIC;
+			PCLoad : IN STD_LOGIC;
+			-- OUTPUTS
+			PCprogcounter : INOUT STD_LOGIC_VECTOR(31 DOWNTO 0)
         );
     end component;
 
@@ -169,12 +170,17 @@ architecture archi of Processor is
 	 SIGNAL WriteReg : STD_LOGIC; --enable to write data load in register
 	 SIGNAL funct3Load, function3 : std_logic_vector(2 downto 0);
 	 SIGNAL DMout : std_logic_vector(31 downto 0);
+	 SIGNAL PCLoad : std_logic;
 
 begin
     -- BEGIN
 	
     -- ALL
     -- program counter
+	 PCLoad <= '1' when SIGopcode="0000011" else
+				  '0';
+	 	  
+		
     PROCprogcounter <=  SIGprogcounter;
     SIGoffsetsignPC <=  SIGimm21J(20);
     SIGoffsetPC1    <=  SIGimm32U when SIGauipc = '1' else
@@ -250,7 +256,7 @@ begin
 							 
 	 JumpTestopcode <= SIGopcode;
 	 
-	 MuxJumpTest <= '1' when JumpTestopcode="1101111" OR JumpTestopcode="1100111" else
+	 MuxJumpTest <= '1' when JumpTestopcode="1101111" OR JumpTestopcode="1100111" OR JumpTestopcode="0000011" OR JumpTestopcode="1100011" else -- JUMP/JUMPR/LOAD/BEQ(IF)
 						 '0';
 	 RegJumpTest <= '0' when PROCreset='1' else
 						 MuxJumpTest when rising_edge(PROCclock);	 
@@ -284,6 +290,7 @@ begin
         PCalusup         => SIGsupALU,
         PCaluinfU        => SIGinfUALU,
         PCalusupU        => SIGsupUALU,
+		  PCLoad 			 => PCLoad,
         PCprogcounter    => SIGprogcounter
     );
 

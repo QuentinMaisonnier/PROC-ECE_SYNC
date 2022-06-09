@@ -1,17 +1,11 @@
 |Top
-TOPclock => PLL:instPLL.inclk0
-TOPclock => REGLed.CLK
-TOPclock => muxLoadDelay.CLK
-TOPclock => Processor:instPROC.PROCclock
-TOPclock => RAM_2PORT:Memory.clock
-TOPclock => Counter:instCPT.CPTclock
-TOPclock => Displays:instDISP.DISPclock
+TOPclock => clock1M:instPLL.inclk0
 TOPreset => Processor:instPROC.PROCreset
 TOPreset => REGLed.ACLR
 TOPreset => muxLoadDelay.ACLR
 TOPreset => Counter:instCPT.CPTreset
 TOPreset => Displays:instDISP.DISPreset
-TOPreset => PLL:instPLL.areset
+TOPreset => clock1M:instPLL.areset
 TOPdisplay1[0] << Displays:instDISP.DISPdisplay1[0]
 TOPdisplay1[1] << Displays:instDISP.DISPdisplay1[1]
 TOPdisplay1[2] << Displays:instDISP.DISPdisplay1[2]
@@ -733,6 +727,7 @@ PCjalr => SigOffSum.IN1
 PCjalr => SigMux2Out.IN1
 PCbranch => SigMux1Sel.IN1
 PCbranch => SigMux2Out.IN1
+PCbranch => SigOffSum.IN1
 PCfunct3[0] => Equal0.IN2
 PCfunct3[0] => Equal1.IN0
 PCfunct3[0] => Equal2.IN2
@@ -766,6 +761,7 @@ PCaluinf => SigBranchCond.DATAB
 PCalusup => SigBranchCond.IN1
 PCaluinfU => SigBranchCond.DATAB
 PCalusupU => SigBranchCond.IN1
+PCLoad => SigOffSum.IN1
 PCprogcounter[0] <> PCprogcounter[0]~reg0
 PCprogcounter[1] <> PCprogcounter[1]~reg0
 PCprogcounter[2] <> PCprogcounter[2]~reg0
@@ -8403,21 +8399,20 @@ DISPdisplay2[30] <= regDisplay2[30].DB_MAX_OUTPUT_PORT_TYPE
 DISPdisplay2[31] <= regDisplay2[31].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Top|PLL:instPLL
+|Top|clock1M:instPLL
 areset => altpll:altpll_component.areset
 inclk0 => altpll:altpll_component.inclk[0]
 c0 <= altpll:altpll_component.clk[0]
-c1 <= altpll:altpll_component.clk[1]
 locked <= altpll:altpll_component.locked
 
 
-|Top|PLL:instPLL|altpll:altpll_component
-inclk[0] => PLL_altpll:auto_generated.inclk[0]
-inclk[1] => PLL_altpll:auto_generated.inclk[1]
+|Top|clock1M:instPLL|altpll:altpll_component
+inclk[0] => clock1M_altpll:auto_generated.inclk[0]
+inclk[1] => clock1M_altpll:auto_generated.inclk[1]
 fbin => ~NO_FANOUT~
 pllena => ~NO_FANOUT~
 clkswitch => ~NO_FANOUT~
-areset => PLL_altpll:auto_generated.areset
+areset => clock1M_altpll:auto_generated.areset
 pfdena => ~NO_FANOUT~
 clkena[0] => ~NO_FANOUT~
 clkena[1] => ~NO_FANOUT~
@@ -8458,7 +8453,7 @@ enable1 <= <GND>
 enable0 <= <GND>
 activeclock <= <GND>
 clkloss <= <GND>
-locked <= PLL_altpll:auto_generated.locked
+locked <= clock1M_altpll:auto_generated.locked
 scandataout <= <GND>
 scandone <= <GND>
 sclkout0 <= <GND>
@@ -8471,7 +8466,7 @@ fref <= <GND>
 icdrclk <= <GND>
 
 
-|Top|PLL:instPLL|altpll:altpll_component|PLL_altpll:auto_generated
+|Top|clock1M:instPLL|altpll:altpll_component|clock1M_altpll:auto_generated
 areset => pll_lock_sync.ACLR
 areset => pll1.ARESET
 clk[0] <= pll1.CLK

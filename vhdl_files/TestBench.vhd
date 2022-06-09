@@ -622,6 +622,7 @@ architecture VHDL of TestBenchTop is
 
 		-- load instruction 11
 			ck <= '0';
+			reset <= '1';
 			wait for 5 ns;
 			assert instr = x"fd9ff06f" report "instruction error at step 22" severity error;
 			assert false report "11;0xfd9ff06f;JAL : reg[00] = PC+4 and PC = 0x5c + -40;OK; ;" severity note;
@@ -668,6 +669,7 @@ architecture VHDL of TestBenchTop is
 
 		-- load instruction 12
 			ck <= '0';
+			reset <= '0';
 			wait for 5 ns;
 			assert instr = x"00c12603" report "instruction error at step 24" severity error;
 			assert false report "12;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;

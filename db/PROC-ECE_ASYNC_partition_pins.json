@@ -392,10 +392,6 @@
 					"strict" : false
 				},
 				{
-					"name" : "TOPclock",
-					"strict" : false
-				},
-				{
 					"name" : "TOPreset",
 					"strict" : false
 				}
