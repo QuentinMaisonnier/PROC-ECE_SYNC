@@ -102,7 +102,7 @@ ARCHITECTURE archi OF Top IS
 	END COMPONENT;
 
 	
-	COMPONENT clock1M IS
+	COMPONENT test IS
 		PORT
 		(
 			areset		: IN STD_LOGIC  := '0';
@@ -146,6 +146,7 @@ ARCHITECTURE archi OF Top IS
 	--SIGNAL SIGclockInverted : STD_LOGIC; --either from pll or simulation
 	SIGNAL SIGsimulOn : STD_LOGIC; --either from pll or simulation
 	SIGNAL TOPreset : STD_LOGIC;
+	SIGNAL PLLlock : STD_LOGIC;
 	
 	
 	
@@ -155,7 +156,8 @@ ARCHITECTURE archi OF Top IS
 	
 
 BEGIN
-	TOPreset <= NOT reset;
+	TOPreset <= NOT reset when PLLlock='1' else
+						'1';
 	-- BEGIN
 	-- ALL
 	-- TEST BENCH ONLY ---
@@ -191,8 +193,8 @@ BEGIN
 				 
 	ledstate <= x"0000000" & "000" & REGLed;
 				 
-	SIGoutputDM<= ledstate when muxLoadDelay='1' else
-							  SRAMq_b;
+--	SIGoutputDM<= ledstate when muxLoadDelay='1' else
+--							  SRAMq_b;
 						
 						
 	REGLed <= '0' WHEN TOPreset = '1' ELSE
@@ -232,7 +234,7 @@ BEGIN
 		wren_a    => '0', --: IN STD_LOGIC  := '0';					-- Write Instruction Select
 		wren_b    => SIGstore, --: IN STD_LOGIC  := '0';					-- Write Data Select
 		q_a       => SIGinstruction, --: OUT STD_LOGIC_VECTOR (31 DOWNTO 0);-- DataOut Instruction
-		q_b       => SRAMq_b --: OUT STD_LOGIC_VECTOR (31 DOWNTO 0) -- DataOut Data
+		q_b       => SIGoutputDM --: OUT STD_LOGIC_VECTOR (31 DOWNTO 0) -- DataOut Data
 	);
 	--    instIM  : InstructionMemory
 	--    port map(
@@ -277,12 +279,12 @@ BEGIN
 		DISPdisplay2 => TOPdisplay2
 	);
 
-	instPLL : clock1M
+	instPLL : test
 	PORT MAP(
-		areset => TOPreset,
+		areset => '0',
 		inclk0 => TOPclock,
-		c0     => SIGPLLclock
-		--locked     => SIGPLLclockinverted
+		c0     => SIGPLLclock,
+		locked     => PLLlock
 	);
 	-- END
 END archi;

@@ -1,5 +1,5 @@
 Analysis & Synthesis report for PROC-ECE_ASYNC
-Thu Jun 09 17:13:33 2022
+Mon Jun 13 11:47:38 2022
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -15,18 +15,19 @@ Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
   7. Analysis & Synthesis Resource Utilization by Entity
   8. Analysis & Synthesis RAM Summary
   9. Analysis & Synthesis IP Cores Summary
- 10. General Register Statistics
- 11. Multiplexer Restructuring Statistics (Restructuring Performed)
- 12. Source assignments for RAM_2PORT:Memory|altsyncram:altsyncram_component|altsyncram_gjt3:auto_generated
- 13. Parameter Settings for User Entity Instance: RAM_2PORT:Memory|altsyncram:altsyncram_component
- 14. Parameter Settings for User Entity Instance: clock1M:instPLL|altpll:altpll_component
- 15. altsyncram Parameter Settings by Entity Instance
- 16. altpll Parameter Settings by Entity Instance
- 17. Port Connectivity Checks: "clock1M:instPLL"
- 18. Port Connectivity Checks: "RAM_2PORT:Memory"
- 19. Post-Synthesis Netlist Statistics for Top Partition
- 20. Elapsed Time Per Partition
- 21. Analysis & Synthesis Messages
+ 10. Registers Removed During Synthesis
+ 11. General Register Statistics
+ 12. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 13. Source assignments for RAM_2PORT:Memory|altsyncram:altsyncram_component|altsyncram_gjt3:auto_generated
+ 14. Parameter Settings for User Entity Instance: RAM_2PORT:Memory|altsyncram:altsyncram_component
+ 15. Parameter Settings for User Entity Instance: test:instPLL|altpll:altpll_component
+ 16. altsyncram Parameter Settings by Entity Instance
+ 17. altpll Parameter Settings by Entity Instance
+ 18. Port Connectivity Checks: "test:instPLL"
+ 19. Port Connectivity Checks: "RAM_2PORT:Memory"
+ 20. Post-Synthesis Netlist Statistics for Top Partition
+ 21. Elapsed Time Per Partition
+ 22. Analysis & Synthesis Messages
 
 
 
@@ -52,15 +53,15 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Jun 09 17:13:33 2022       ;
+; Analysis & Synthesis Status        ; Successful - Mon Jun 13 11:47:38 2022       ;
 ; Quartus Prime Version              ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                      ; PROC-ECE_ASYNC                              ;
 ; Top-level Entity Name              ; Top                                         ;
 ; Family                             ; MAX 10                                      ;
-; Total logic elements               ; 3,729                                       ;
-;     Total combinational functions  ; 3,633                                       ;
-;     Dedicated logic registers      ; 1,196                                       ;
-; Total registers                    ; 1196                                        ;
+; Total logic elements               ; 3,698                                       ;
+;     Total combinational functions  ; 3,602                                       ;
+;     Dedicated logic registers      ; 1,195                                       ;
+; Total registers                    ; 1195                                        ;
 ; Total pins                         ; 99                                          ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 131,072                                     ;
@@ -186,17 +187,17 @@ refer to the applicable agreement for further details.
 +-----------------------------------+-----------------+----------------------------------------+--------------------------------------------------------------------------------------------------+---------+
 ; File Name with User-Entered Path  ; Used in Netlist ; File Type                              ; File Name with Absolute Path                                                                     ; Library ;
 +-----------------------------------+-----------------+----------------------------------------+--------------------------------------------------------------------------------------------------+---------+
-; custom_lib/simul_var_pkg.vhd      ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/custom_lib/simul_var_pkg.vhd      ;         ;
-; vhdl_files/Top.vhd                ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd                ;         ;
-; vhdl_files/RegisterFile.vhd       ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/RegisterFile.vhd       ;         ;
-; vhdl_files/ProgramCounter.vhd     ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/ProgramCounter.vhd     ;         ;
-; vhdl_files/Processor.vhd          ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Processor.vhd          ;         ;
-; vhdl_files/InstructionDecoder.vhd ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/InstructionDecoder.vhd ;         ;
-; vhdl_files/Displays.vhd           ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Displays.vhd           ;         ;
-; vhdl_files/Counter.vhd            ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Counter.vhd            ;         ;
-; vhdl_files/Alu.vhd                ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Alu.vhd                ;         ;
-; RAM_2PORT.vhd                     ; yes             ; User Wizard-Generated File             ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/RAM_2PORT.vhd                     ;         ;
-; clock1M.vhd                       ; yes             ; User Wizard-Generated File             ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/clock1M.vhd                       ;         ;
+; custom_lib/simul_var_pkg.vhd      ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/custom_lib/simul_var_pkg.vhd      ;         ;
+; vhdl_files/Top.vhd                ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Top.vhd                ;         ;
+; vhdl_files/RegisterFile.vhd       ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/RegisterFile.vhd       ;         ;
+; vhdl_files/ProgramCounter.vhd     ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/ProgramCounter.vhd     ;         ;
+; vhdl_files/Processor.vhd          ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Processor.vhd          ;         ;
+; vhdl_files/InstructionDecoder.vhd ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/InstructionDecoder.vhd ;         ;
+; vhdl_files/Displays.vhd           ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Displays.vhd           ;         ;
+; vhdl_files/Counter.vhd            ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Counter.vhd            ;         ;
+; vhdl_files/Alu.vhd                ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Alu.vhd                ;         ;
+; RAM_2PORT.vhd                     ; yes             ; User Wizard-Generated File             ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/RAM_2PORT.vhd                     ;         ;
+; test.vhd                          ; yes             ; User Wizard-Generated File             ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/test.vhd                          ;         ;
 ; altsyncram.tdf                    ; yes             ; Megafunction                           ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altsyncram.tdf                            ;         ;
 ; stratix_ram_block.inc             ; yes             ; Megafunction                           ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/stratix_ram_block.inc                     ;         ;
 ; lpm_mux.inc                       ; yes             ; Megafunction                           ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/lpm_mux.inc                               ;         ;
@@ -206,50 +207,50 @@ refer to the applicable agreement for further details.
 ; altrom.inc                        ; yes             ; Megafunction                           ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altrom.inc                                ;         ;
 ; altram.inc                        ; yes             ; Megafunction                           ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altram.inc                                ;         ;
 ; altdpram.inc                      ; yes             ; Megafunction                           ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altdpram.inc                              ;         ;
-; db/altsyncram_gjt3.tdf            ; yes             ; Auto-Generated Megafunction            ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/db/altsyncram_gjt3.tdf            ;         ;
-; IMhex.hex                         ; yes             ; Auto-Found Memory Initialization File  ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/IMhex.hex                         ;         ;
+; db/altsyncram_gjt3.tdf            ; yes             ; Auto-Generated Megafunction            ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/db/altsyncram_gjt3.tdf            ;         ;
+; IMhex.hex                         ; yes             ; Auto-Found Memory Initialization File  ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/IMhex.hex                         ;         ;
 ; altpll.tdf                        ; yes             ; Megafunction                           ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altpll.tdf                                ;         ;
 ; stratix_pll.inc                   ; yes             ; Megafunction                           ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/stratix_pll.inc                           ;         ;
 ; stratixii_pll.inc                 ; yes             ; Megafunction                           ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/stratixii_pll.inc                         ;         ;
 ; cycloneii_pll.inc                 ; yes             ; Megafunction                           ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/cycloneii_pll.inc                         ;         ;
-; db/clock1m_altpll.v               ; yes             ; Auto-Generated Megafunction            ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/db/clock1m_altpll.v               ;         ;
+; db/test_altpll.v                  ; yes             ; Auto-Generated Megafunction            ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/db/test_altpll.v                  ;         ;
 +-----------------------------------+-----------------+----------------------------------------+--------------------------------------------------------------------------------------------------+---------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary                                                                                          ;
-+---------------------------------------------+----------------------------------------------------------------------------------------+
-; Resource                                    ; Usage                                                                                  ;
-+---------------------------------------------+----------------------------------------------------------------------------------------+
-; Estimated Total logic elements              ; 3,729                                                                                  ;
-;                                             ;                                                                                        ;
-; Total combinational functions               ; 3633                                                                                   ;
-; Logic element usage by number of LUT inputs ;                                                                                        ;
-;     -- 4 input functions                    ; 2916                                                                                   ;
-;     -- 3 input functions                    ; 522                                                                                    ;
-;     -- <=2 input functions                  ; 195                                                                                    ;
-;                                             ;                                                                                        ;
-; Logic elements by mode                      ;                                                                                        ;
-;     -- normal mode                          ; 3306                                                                                   ;
-;     -- arithmetic mode                      ; 327                                                                                    ;
-;                                             ;                                                                                        ;
-; Total registers                             ; 1196                                                                                   ;
-;     -- Dedicated logic registers            ; 1196                                                                                   ;
-;     -- I/O registers                        ; 0                                                                                      ;
-;                                             ;                                                                                        ;
-; I/O pins                                    ; 99                                                                                     ;
-; Total memory bits                           ; 131072                                                                                 ;
-;                                             ;                                                                                        ;
-; Embedded Multiplier 9-bit elements          ; 0                                                                                      ;
-;                                             ;                                                                                        ;
-; Total PLLs                                  ; 1                                                                                      ;
-;     -- PLLs                                 ; 1                                                                                      ;
-;                                             ;                                                                                        ;
-; Maximum fan-out node                        ; clock1M:instPLL|altpll:altpll_component|clock1M_altpll:auto_generated|wire_pll1_clk[0] ;
-; Maximum fan-out                             ; 1229                                                                                   ;
-; Total fan-out                               ; 18596                                                                                  ;
-; Average fan-out                             ; 3.68                                                                                   ;
-+---------------------------------------------+----------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                                                                                    ;
++---------------------------------------------+----------------------------------------------------------------------------------+
+; Resource                                    ; Usage                                                                            ;
++---------------------------------------------+----------------------------------------------------------------------------------+
+; Estimated Total logic elements              ; 3,698                                                                            ;
+;                                             ;                                                                                  ;
+; Total combinational functions               ; 3602                                                                             ;
+; Logic element usage by number of LUT inputs ;                                                                                  ;
+;     -- 4 input functions                    ; 2918                                                                             ;
+;     -- 3 input functions                    ; 519                                                                              ;
+;     -- <=2 input functions                  ; 165                                                                              ;
+;                                             ;                                                                                  ;
+; Logic elements by mode                      ;                                                                                  ;
+;     -- normal mode                          ; 3275                                                                             ;
+;     -- arithmetic mode                      ; 327                                                                              ;
+;                                             ;                                                                                  ;
+; Total registers                             ; 1195                                                                             ;
+;     -- Dedicated logic registers            ; 1195                                                                             ;
+;     -- I/O registers                        ; 0                                                                                ;
+;                                             ;                                                                                  ;
+; I/O pins                                    ; 99                                                                               ;
+; Total memory bits                           ; 131072                                                                           ;
+;                                             ;                                                                                  ;
+; Embedded Multiplier 9-bit elements          ; 0                                                                                ;
+;                                             ;                                                                                  ;
+; Total PLLs                                  ; 1                                                                                ;
+;     -- PLLs                                 ; 1                                                                                ;
+;                                             ;                                                                                  ;
+; Maximum fan-out node                        ; test:instPLL|altpll:altpll_component|test_altpll:auto_generated|wire_pll1_clk[0] ;
+; Maximum fan-out                             ; 1229                                                                             ;
+; Total fan-out                               ; 18531                                                                            ;
+; Average fan-out                             ; 3.69                                                                             ;
++---------------------------------------------+----------------------------------------------------------------------------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -257,7 +258,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+--------------------------------------------------------------------------------------+--------------------+--------------+
 ; Compilation Hierarchy Node                ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; UFM Blocks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; ADC blocks ; Full Hierarchy Name                                                                  ; Entity Name        ; Library Name ;
 +-------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+--------------------------------------------------------------------------------------+--------------------+--------------+
-; |Top                                      ; 3633 (34)           ; 1196 (2)                  ; 131072      ; 0          ; 0            ; 0       ; 0         ; 99   ; 0            ; 0          ; |Top                                                                                 ; Top                ; work         ;
+; |Top                                      ; 3602 (3)            ; 1195 (1)                  ; 131072      ; 0          ; 0            ; 0       ; 0         ; 99   ; 0            ; 0          ; |Top                                                                                 ; Top                ; work         ;
 ;    |Counter:instCPT|                      ; 36 (36)             ; 32 (32)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Counter:instCPT                                                                 ; Counter            ; work         ;
 ;    |Displays:instDISP|                    ; 4 (4)               ; 96 (96)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Displays:instDISP                                                               ; Displays           ; work         ;
 ;    |Processor:instPROC|                   ; 3559 (254)          ; 1066 (10)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC                                                              ; Processor          ; work         ;
@@ -268,9 +269,9 @@ refer to the applicable agreement for further details.
 ;    |RAM_2PORT:Memory|                     ; 0 (0)               ; 0 (0)                     ; 131072      ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|RAM_2PORT:Memory                                                                ; RAM_2PORT          ; work         ;
 ;       |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 131072      ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|RAM_2PORT:Memory|altsyncram:altsyncram_component                                ; altsyncram         ; work         ;
 ;          |altsyncram_gjt3:auto_generated| ; 0 (0)               ; 0 (0)                     ; 131072      ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|RAM_2PORT:Memory|altsyncram:altsyncram_component|altsyncram_gjt3:auto_generated ; altsyncram_gjt3    ; work         ;
-;    |clock1M:instPLL|                      ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|clock1M:instPLL                                                                 ; clock1M            ; work         ;
-;       |altpll:altpll_component|           ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|clock1M:instPLL|altpll:altpll_component                                         ; altpll             ; work         ;
-;          |clock1M_altpll:auto_generated|  ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|clock1M:instPLL|altpll:altpll_component|clock1M_altpll:auto_generated           ; clock1M_altpll     ; work         ;
+;    |test:instPLL|                         ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|test:instPLL                                                                    ; test               ; work         ;
+;       |altpll:altpll_component|           ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|test:instPLL|altpll:altpll_component                                            ; altpll             ; work         ;
+;          |test_altpll:auto_generated|     ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|test:instPLL|altpll:altpll_component|test_altpll:auto_generated                 ; test_altpll        ; work         ;
 +-------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+--------------------------------------------------------------------------------------+--------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -289,9 +290,19 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------+--------------+---------+--------------+--------------+-----------------------+-----------------+
 ; Vendor ; IP Core Name ; Version ; Release Date ; License Type ; Entity Instance       ; IP Include File ;
 +--------+--------------+---------+--------------+--------------+-----------------------+-----------------+
-; Altera ; ALTPLL       ; 18.0    ; N/A          ; N/A          ; |Top|clock1M:instPLL  ; clock1M.vhd     ;
+; Altera ; ALTPLL       ; 18.0    ; N/A          ; N/A          ; |Top|test:instPLL     ; test.vhd        ;
 ; Altera ; RAM: 2-PORT  ; 18.0    ; N/A          ; N/A          ; |Top|RAM_2PORT:Memory ; RAM_2PORT.vhd   ;
 +--------+--------------+---------+--------------+--------------+-----------------------+-----------------+
+
+
++------------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                     ;
++-------------------------------------------------------------------------------+----------------------------------------+
+; Register name                                                                 ; Reason for Removal                     ;
++-------------------------------------------------------------------------------+----------------------------------------+
+; test:instPLL|altpll:altpll_component|test_altpll:auto_generated|pll_lock_sync ; Stuck at VCC due to stuck port data_in ;
+; Total Number of Removed Registers = 1                                         ;                                        ;
++-------------------------------------------------------------------------------+----------------------------------------+
 
 
 +------------------------------------------------------+
@@ -299,10 +310,10 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 1196  ;
+; Total registers                              ; 1195  ;
 ; Number of registers using Synchronous Clear  ; 0     ;
 ; Number of registers using Synchronous Load   ; 85    ;
-; Number of registers using Asynchronous Clear ; 1196  ;
+; Number of registers using Asynchronous Clear ; 1195  ;
 ; Number of registers using Asynchronous Load  ; 0     ;
 ; Number of registers using Clock Enable       ; 128   ;
 ; Number of registers using Preset             ; 0     ;
@@ -314,25 +325,25 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                           ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------+
-; 4:1                ; 31 bits   ; 62 LEs        ; 62 LEs               ; 0 LEs                  ; Yes        ; |Top|Processor:instPROC|ProgramCounter:instPC|PCprogcounter[31]~reg0 ;
-; 3:1                ; 20 bits   ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGinput2ALU[16]                             ;
-; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGinput2ALU[1]                              ;
+; 4:1                ; 31 bits   ; 62 LEs        ; 62 LEs               ; 0 LEs                  ; Yes        ; |Top|Processor:instPROC|ProgramCounter:instPC|PCprogcounter[29]~reg0 ;
+; 3:1                ; 20 bits   ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGinput2ALU[26]                             ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGinput2ALU[3]                              ;
 ; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGrdRF[2]                                   ;
-; 4:1                ; 11 bits   ; 22 LEs        ; 22 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGoffsetPC[29]                              ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGoffsetPC[16]                              ;
-; 5:1                ; 6 bits    ; 18 LEs        ; 12 LEs               ; 6 LEs                  ; No         ; |Top|Processor:instPROC|SIGoffsetPC[9]                               ;
-; 32:1               ; 32 bits   ; 672 LEs       ; 672 LEs              ; 0 LEs                  ; No         ; |Top|Processor:instPROC|RegisterFile:instRF|RFout1[1]                ;
-; 32:1               ; 32 bits   ; 672 LEs       ; 672 LEs              ; 0 LEs                  ; No         ; |Top|Processor:instPROC|RegisterFile:instRF|RFout2[11]               ;
+; 4:1                ; 11 bits   ; 22 LEs        ; 22 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGoffsetPC[20]                              ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGoffsetPC[17]                              ;
+; 5:1                ; 6 bits    ; 18 LEs        ; 12 LEs               ; 6 LEs                  ; No         ; |Top|Processor:instPROC|SIGoffsetPC[10]                              ;
+; 32:1               ; 32 bits   ; 672 LEs       ; 672 LEs              ; 0 LEs                  ; No         ; |Top|Processor:instPROC|RegisterFile:instRF|RFout1[31]               ;
+; 32:1               ; 32 bits   ; 672 LEs       ; 672 LEs              ; 0 LEs                  ; No         ; |Top|Processor:instPROC|RegisterFile:instRF|RFout2[12]               ;
 ; 6:1                ; 5 bits    ; 20 LEs        ; 15 LEs               ; 5 LEs                  ; No         ; |Top|Processor:instPROC|SIGoffsetPC[3]                               ;
 ; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |Top|Processor:instPROC|SIGinputRF[1]                                ;
-; 6:1                ; 10 bits   ; 40 LEs        ; 30 LEs               ; 10 LEs                 ; No         ; |Top|Processor:instPROC|SIGinputRF[4]                                ;
-; 6:1                ; 20 bits   ; 80 LEs        ; 60 LEs               ; 20 LEs                 ; No         ; |Top|Processor:instPROC|SIGinputRF[28]                               ;
-; 119:1              ; 8 bits    ; 632 LEs       ; 56 LEs               ; 576 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[10]                       ;
+; 6:1                ; 10 bits   ; 40 LEs        ; 30 LEs               ; 10 LEs                 ; No         ; |Top|Processor:instPROC|SIGinputRF[11]                               ;
+; 6:1                ; 20 bits   ; 80 LEs        ; 60 LEs               ; 20 LEs                 ; No         ; |Top|Processor:instPROC|SIGinputRF[15]                               ;
+; 119:1              ; 8 bits    ; 632 LEs       ; 56 LEs               ; 576 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[13]                       ;
 ; 120:1              ; 7 bits    ; 560 LEs       ; 56 LEs               ; 504 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[23]                       ;
-; 120:1              ; 4 bits    ; 320 LEs       ; 32 LEs               ; 288 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[4]                        ;
-; 121:1              ; 4 bits    ; 320 LEs       ; 32 LEs               ; 288 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[26]                       ;
-; 121:1              ; 2 bits    ; 160 LEs       ; 16 LEs               ; 144 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[2]                        ;
-; 122:1              ; 2 bits    ; 162 LEs       ; 16 LEs               ; 146 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[29]                       ;
+; 120:1              ; 4 bits    ; 320 LEs       ; 32 LEs               ; 288 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[7]                        ;
+; 121:1              ; 4 bits    ; 320 LEs       ; 32 LEs               ; 288 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[24]                       ;
+; 121:1              ; 2 bits    ; 160 LEs       ; 16 LEs               ; 144 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[3]                        ;
+; 122:1              ; 2 bits    ; 162 LEs       ; 16 LEs               ; 146 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[28]                       ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------+
 
 
@@ -406,377 +417,377 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+--------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: clock1M:instPLL|altpll:altpll_component ;
-+-------------------------------+---------------------------+--------------------------+
-; Parameter Name                ; Value                     ; Type                     ;
-+-------------------------------+---------------------------+--------------------------+
-; OPERATION_MODE                ; NORMAL                    ; Untyped                  ;
-; PLL_TYPE                      ; AUTO                      ; Untyped                  ;
-; LPM_HINT                      ; CBX_MODULE_PREFIX=clock1M ; Untyped                  ;
-; QUALIFY_CONF_DONE             ; OFF                       ; Untyped                  ;
-; COMPENSATE_CLOCK              ; CLK0                      ; Untyped                  ;
-; SCAN_CHAIN                    ; LONG                      ; Untyped                  ;
-; PRIMARY_CLOCK                 ; INCLK0                    ; Untyped                  ;
-; INCLK0_INPUT_FREQUENCY        ; 20000                     ; Signed Integer           ;
-; INCLK1_INPUT_FREQUENCY        ; 0                         ; Untyped                  ;
-; GATE_LOCK_SIGNAL              ; NO                        ; Untyped                  ;
-; GATE_LOCK_COUNTER             ; 0                         ; Untyped                  ;
-; LOCK_HIGH                     ; 1                         ; Untyped                  ;
-; LOCK_LOW                      ; 1                         ; Untyped                  ;
-; VALID_LOCK_MULTIPLIER         ; 1                         ; Untyped                  ;
-; INVALID_LOCK_MULTIPLIER       ; 5                         ; Untyped                  ;
-; SWITCH_OVER_ON_LOSSCLK        ; OFF                       ; Untyped                  ;
-; SWITCH_OVER_ON_GATED_LOCK     ; OFF                       ; Untyped                  ;
-; ENABLE_SWITCH_OVER_COUNTER    ; OFF                       ; Untyped                  ;
-; SKIP_VCO                      ; OFF                       ; Untyped                  ;
-; SWITCH_OVER_COUNTER           ; 0                         ; Untyped                  ;
-; SWITCH_OVER_TYPE              ; AUTO                      ; Untyped                  ;
-; FEEDBACK_SOURCE               ; EXTCLK0                   ; Untyped                  ;
-; BANDWIDTH                     ; 0                         ; Untyped                  ;
-; BANDWIDTH_TYPE                ; AUTO                      ; Untyped                  ;
-; SPREAD_FREQUENCY              ; 0                         ; Untyped                  ;
-; DOWN_SPREAD                   ; 0                         ; Untyped                  ;
-; SELF_RESET_ON_GATED_LOSS_LOCK ; OFF                       ; Untyped                  ;
-; SELF_RESET_ON_LOSS_LOCK       ; OFF                       ; Untyped                  ;
-; CLK9_MULTIPLY_BY              ; 0                         ; Untyped                  ;
-; CLK8_MULTIPLY_BY              ; 0                         ; Untyped                  ;
-; CLK7_MULTIPLY_BY              ; 0                         ; Untyped                  ;
-; CLK6_MULTIPLY_BY              ; 0                         ; Untyped                  ;
-; CLK5_MULTIPLY_BY              ; 1                         ; Untyped                  ;
-; CLK4_MULTIPLY_BY              ; 1                         ; Untyped                  ;
-; CLK3_MULTIPLY_BY              ; 1                         ; Untyped                  ;
-; CLK2_MULTIPLY_BY              ; 1                         ; Untyped                  ;
-; CLK1_MULTIPLY_BY              ; 1                         ; Untyped                  ;
-; CLK0_MULTIPLY_BY              ; 1                         ; Signed Integer           ;
-; CLK9_DIVIDE_BY                ; 0                         ; Untyped                  ;
-; CLK8_DIVIDE_BY                ; 0                         ; Untyped                  ;
-; CLK7_DIVIDE_BY                ; 0                         ; Untyped                  ;
-; CLK6_DIVIDE_BY                ; 0                         ; Untyped                  ;
-; CLK5_DIVIDE_BY                ; 1                         ; Untyped                  ;
-; CLK4_DIVIDE_BY                ; 1                         ; Untyped                  ;
-; CLK3_DIVIDE_BY                ; 1                         ; Untyped                  ;
-; CLK2_DIVIDE_BY                ; 1                         ; Untyped                  ;
-; CLK1_DIVIDE_BY                ; 1                         ; Untyped                  ;
-; CLK0_DIVIDE_BY                ; 50                        ; Signed Integer           ;
-; CLK9_PHASE_SHIFT              ; 0                         ; Untyped                  ;
-; CLK8_PHASE_SHIFT              ; 0                         ; Untyped                  ;
-; CLK7_PHASE_SHIFT              ; 0                         ; Untyped                  ;
-; CLK6_PHASE_SHIFT              ; 0                         ; Untyped                  ;
-; CLK5_PHASE_SHIFT              ; 0                         ; Untyped                  ;
-; CLK4_PHASE_SHIFT              ; 0                         ; Untyped                  ;
-; CLK3_PHASE_SHIFT              ; 0                         ; Untyped                  ;
-; CLK2_PHASE_SHIFT              ; 0                         ; Untyped                  ;
-; CLK1_PHASE_SHIFT              ; 0                         ; Untyped                  ;
-; CLK0_PHASE_SHIFT              ; 0                         ; Untyped                  ;
-; CLK5_TIME_DELAY               ; 0                         ; Untyped                  ;
-; CLK4_TIME_DELAY               ; 0                         ; Untyped                  ;
-; CLK3_TIME_DELAY               ; 0                         ; Untyped                  ;
-; CLK2_TIME_DELAY               ; 0                         ; Untyped                  ;
-; CLK1_TIME_DELAY               ; 0                         ; Untyped                  ;
-; CLK0_TIME_DELAY               ; 0                         ; Untyped                  ;
-; CLK9_DUTY_CYCLE               ; 50                        ; Untyped                  ;
-; CLK8_DUTY_CYCLE               ; 50                        ; Untyped                  ;
-; CLK7_DUTY_CYCLE               ; 50                        ; Untyped                  ;
-; CLK6_DUTY_CYCLE               ; 50                        ; Untyped                  ;
-; CLK5_DUTY_CYCLE               ; 50                        ; Untyped                  ;
-; CLK4_DUTY_CYCLE               ; 50                        ; Untyped                  ;
-; CLK3_DUTY_CYCLE               ; 50                        ; Untyped                  ;
-; CLK2_DUTY_CYCLE               ; 50                        ; Untyped                  ;
-; CLK1_DUTY_CYCLE               ; 50                        ; Untyped                  ;
-; CLK0_DUTY_CYCLE               ; 50                        ; Signed Integer           ;
-; CLK9_USE_EVEN_COUNTER_MODE    ; OFF                       ; Untyped                  ;
-; CLK8_USE_EVEN_COUNTER_MODE    ; OFF                       ; Untyped                  ;
-; CLK7_USE_EVEN_COUNTER_MODE    ; OFF                       ; Untyped                  ;
-; CLK6_USE_EVEN_COUNTER_MODE    ; OFF                       ; Untyped                  ;
-; CLK5_USE_EVEN_COUNTER_MODE    ; OFF                       ; Untyped                  ;
-; CLK4_USE_EVEN_COUNTER_MODE    ; OFF                       ; Untyped                  ;
-; CLK3_USE_EVEN_COUNTER_MODE    ; OFF                       ; Untyped                  ;
-; CLK2_USE_EVEN_COUNTER_MODE    ; OFF                       ; Untyped                  ;
-; CLK1_USE_EVEN_COUNTER_MODE    ; OFF                       ; Untyped                  ;
-; CLK0_USE_EVEN_COUNTER_MODE    ; OFF                       ; Untyped                  ;
-; CLK9_USE_EVEN_COUNTER_VALUE   ; OFF                       ; Untyped                  ;
-; CLK8_USE_EVEN_COUNTER_VALUE   ; OFF                       ; Untyped                  ;
-; CLK7_USE_EVEN_COUNTER_VALUE   ; OFF                       ; Untyped                  ;
-; CLK6_USE_EVEN_COUNTER_VALUE   ; OFF                       ; Untyped                  ;
-; CLK5_USE_EVEN_COUNTER_VALUE   ; OFF                       ; Untyped                  ;
-; CLK4_USE_EVEN_COUNTER_VALUE   ; OFF                       ; Untyped                  ;
-; CLK3_USE_EVEN_COUNTER_VALUE   ; OFF                       ; Untyped                  ;
-; CLK2_USE_EVEN_COUNTER_VALUE   ; OFF                       ; Untyped                  ;
-; CLK1_USE_EVEN_COUNTER_VALUE   ; OFF                       ; Untyped                  ;
-; CLK0_USE_EVEN_COUNTER_VALUE   ; OFF                       ; Untyped                  ;
-; LOCK_WINDOW_UI                ;  0.05                     ; Untyped                  ;
-; LOCK_WINDOW_UI_BITS           ; UNUSED                    ; Untyped                  ;
-; VCO_RANGE_DETECTOR_LOW_BITS   ; UNUSED                    ; Untyped                  ;
-; VCO_RANGE_DETECTOR_HIGH_BITS  ; UNUSED                    ; Untyped                  ;
-; DPA_MULTIPLY_BY               ; 0                         ; Untyped                  ;
-; DPA_DIVIDE_BY                 ; 1                         ; Untyped                  ;
-; DPA_DIVIDER                   ; 0                         ; Untyped                  ;
-; EXTCLK3_MULTIPLY_BY           ; 1                         ; Untyped                  ;
-; EXTCLK2_MULTIPLY_BY           ; 1                         ; Untyped                  ;
-; EXTCLK1_MULTIPLY_BY           ; 1                         ; Untyped                  ;
-; EXTCLK0_MULTIPLY_BY           ; 1                         ; Untyped                  ;
-; EXTCLK3_DIVIDE_BY             ; 1                         ; Untyped                  ;
-; EXTCLK2_DIVIDE_BY             ; 1                         ; Untyped                  ;
-; EXTCLK1_DIVIDE_BY             ; 1                         ; Untyped                  ;
-; EXTCLK0_DIVIDE_BY             ; 1                         ; Untyped                  ;
-; EXTCLK3_PHASE_SHIFT           ; 0                         ; Untyped                  ;
-; EXTCLK2_PHASE_SHIFT           ; 0                         ; Untyped                  ;
-; EXTCLK1_PHASE_SHIFT           ; 0                         ; Untyped                  ;
-; EXTCLK0_PHASE_SHIFT           ; 0                         ; Untyped                  ;
-; EXTCLK3_TIME_DELAY            ; 0                         ; Untyped                  ;
-; EXTCLK2_TIME_DELAY            ; 0                         ; Untyped                  ;
-; EXTCLK1_TIME_DELAY            ; 0                         ; Untyped                  ;
-; EXTCLK0_TIME_DELAY            ; 0                         ; Untyped                  ;
-; EXTCLK3_DUTY_CYCLE            ; 50                        ; Untyped                  ;
-; EXTCLK2_DUTY_CYCLE            ; 50                        ; Untyped                  ;
-; EXTCLK1_DUTY_CYCLE            ; 50                        ; Untyped                  ;
-; EXTCLK0_DUTY_CYCLE            ; 50                        ; Untyped                  ;
-; VCO_MULTIPLY_BY               ; 0                         ; Untyped                  ;
-; VCO_DIVIDE_BY                 ; 0                         ; Untyped                  ;
-; SCLKOUT0_PHASE_SHIFT          ; 0                         ; Untyped                  ;
-; SCLKOUT1_PHASE_SHIFT          ; 0                         ; Untyped                  ;
-; VCO_MIN                       ; 0                         ; Untyped                  ;
-; VCO_MAX                       ; 0                         ; Untyped                  ;
-; VCO_CENTER                    ; 0                         ; Untyped                  ;
-; PFD_MIN                       ; 0                         ; Untyped                  ;
-; PFD_MAX                       ; 0                         ; Untyped                  ;
-; M_INITIAL                     ; 0                         ; Untyped                  ;
-; M                             ; 0                         ; Untyped                  ;
-; N                             ; 1                         ; Untyped                  ;
-; M2                            ; 1                         ; Untyped                  ;
-; N2                            ; 1                         ; Untyped                  ;
-; SS                            ; 1                         ; Untyped                  ;
-; C0_HIGH                       ; 0                         ; Untyped                  ;
-; C1_HIGH                       ; 0                         ; Untyped                  ;
-; C2_HIGH                       ; 0                         ; Untyped                  ;
-; C3_HIGH                       ; 0                         ; Untyped                  ;
-; C4_HIGH                       ; 0                         ; Untyped                  ;
-; C5_HIGH                       ; 0                         ; Untyped                  ;
-; C6_HIGH                       ; 0                         ; Untyped                  ;
-; C7_HIGH                       ; 0                         ; Untyped                  ;
-; C8_HIGH                       ; 0                         ; Untyped                  ;
-; C9_HIGH                       ; 0                         ; Untyped                  ;
-; C0_LOW                        ; 0                         ; Untyped                  ;
-; C1_LOW                        ; 0                         ; Untyped                  ;
-; C2_LOW                        ; 0                         ; Untyped                  ;
-; C3_LOW                        ; 0                         ; Untyped                  ;
-; C4_LOW                        ; 0                         ; Untyped                  ;
-; C5_LOW                        ; 0                         ; Untyped                  ;
-; C6_LOW                        ; 0                         ; Untyped                  ;
-; C7_LOW                        ; 0                         ; Untyped                  ;
-; C8_LOW                        ; 0                         ; Untyped                  ;
-; C9_LOW                        ; 0                         ; Untyped                  ;
-; C0_INITIAL                    ; 0                         ; Untyped                  ;
-; C1_INITIAL                    ; 0                         ; Untyped                  ;
-; C2_INITIAL                    ; 0                         ; Untyped                  ;
-; C3_INITIAL                    ; 0                         ; Untyped                  ;
-; C4_INITIAL                    ; 0                         ; Untyped                  ;
-; C5_INITIAL                    ; 0                         ; Untyped                  ;
-; C6_INITIAL                    ; 0                         ; Untyped                  ;
-; C7_INITIAL                    ; 0                         ; Untyped                  ;
-; C8_INITIAL                    ; 0                         ; Untyped                  ;
-; C9_INITIAL                    ; 0                         ; Untyped                  ;
-; C0_MODE                       ; BYPASS                    ; Untyped                  ;
-; C1_MODE                       ; BYPASS                    ; Untyped                  ;
-; C2_MODE                       ; BYPASS                    ; Untyped                  ;
-; C3_MODE                       ; BYPASS                    ; Untyped                  ;
-; C4_MODE                       ; BYPASS                    ; Untyped                  ;
-; C5_MODE                       ; BYPASS                    ; Untyped                  ;
-; C6_MODE                       ; BYPASS                    ; Untyped                  ;
-; C7_MODE                       ; BYPASS                    ; Untyped                  ;
-; C8_MODE                       ; BYPASS                    ; Untyped                  ;
-; C9_MODE                       ; BYPASS                    ; Untyped                  ;
-; C0_PH                         ; 0                         ; Untyped                  ;
-; C1_PH                         ; 0                         ; Untyped                  ;
-; C2_PH                         ; 0                         ; Untyped                  ;
-; C3_PH                         ; 0                         ; Untyped                  ;
-; C4_PH                         ; 0                         ; Untyped                  ;
-; C5_PH                         ; 0                         ; Untyped                  ;
-; C6_PH                         ; 0                         ; Untyped                  ;
-; C7_PH                         ; 0                         ; Untyped                  ;
-; C8_PH                         ; 0                         ; Untyped                  ;
-; C9_PH                         ; 0                         ; Untyped                  ;
-; L0_HIGH                       ; 1                         ; Untyped                  ;
-; L1_HIGH                       ; 1                         ; Untyped                  ;
-; G0_HIGH                       ; 1                         ; Untyped                  ;
-; G1_HIGH                       ; 1                         ; Untyped                  ;
-; G2_HIGH                       ; 1                         ; Untyped                  ;
-; G3_HIGH                       ; 1                         ; Untyped                  ;
-; E0_HIGH                       ; 1                         ; Untyped                  ;
-; E1_HIGH                       ; 1                         ; Untyped                  ;
-; E2_HIGH                       ; 1                         ; Untyped                  ;
-; E3_HIGH                       ; 1                         ; Untyped                  ;
-; L0_LOW                        ; 1                         ; Untyped                  ;
-; L1_LOW                        ; 1                         ; Untyped                  ;
-; G0_LOW                        ; 1                         ; Untyped                  ;
-; G1_LOW                        ; 1                         ; Untyped                  ;
-; G2_LOW                        ; 1                         ; Untyped                  ;
-; G3_LOW                        ; 1                         ; Untyped                  ;
-; E0_LOW                        ; 1                         ; Untyped                  ;
-; E1_LOW                        ; 1                         ; Untyped                  ;
-; E2_LOW                        ; 1                         ; Untyped                  ;
-; E3_LOW                        ; 1                         ; Untyped                  ;
-; L0_INITIAL                    ; 1                         ; Untyped                  ;
-; L1_INITIAL                    ; 1                         ; Untyped                  ;
-; G0_INITIAL                    ; 1                         ; Untyped                  ;
-; G1_INITIAL                    ; 1                         ; Untyped                  ;
-; G2_INITIAL                    ; 1                         ; Untyped                  ;
-; G3_INITIAL                    ; 1                         ; Untyped                  ;
-; E0_INITIAL                    ; 1                         ; Untyped                  ;
-; E1_INITIAL                    ; 1                         ; Untyped                  ;
-; E2_INITIAL                    ; 1                         ; Untyped                  ;
-; E3_INITIAL                    ; 1                         ; Untyped                  ;
-; L0_MODE                       ; BYPASS                    ; Untyped                  ;
-; L1_MODE                       ; BYPASS                    ; Untyped                  ;
-; G0_MODE                       ; BYPASS                    ; Untyped                  ;
-; G1_MODE                       ; BYPASS                    ; Untyped                  ;
-; G2_MODE                       ; BYPASS                    ; Untyped                  ;
-; G3_MODE                       ; BYPASS                    ; Untyped                  ;
-; E0_MODE                       ; BYPASS                    ; Untyped                  ;
-; E1_MODE                       ; BYPASS                    ; Untyped                  ;
-; E2_MODE                       ; BYPASS                    ; Untyped                  ;
-; E3_MODE                       ; BYPASS                    ; Untyped                  ;
-; L0_PH                         ; 0                         ; Untyped                  ;
-; L1_PH                         ; 0                         ; Untyped                  ;
-; G0_PH                         ; 0                         ; Untyped                  ;
-; G1_PH                         ; 0                         ; Untyped                  ;
-; G2_PH                         ; 0                         ; Untyped                  ;
-; G3_PH                         ; 0                         ; Untyped                  ;
-; E0_PH                         ; 0                         ; Untyped                  ;
-; E1_PH                         ; 0                         ; Untyped                  ;
-; E2_PH                         ; 0                         ; Untyped                  ;
-; E3_PH                         ; 0                         ; Untyped                  ;
-; M_PH                          ; 0                         ; Untyped                  ;
-; C1_USE_CASC_IN                ; OFF                       ; Untyped                  ;
-; C2_USE_CASC_IN                ; OFF                       ; Untyped                  ;
-; C3_USE_CASC_IN                ; OFF                       ; Untyped                  ;
-; C4_USE_CASC_IN                ; OFF                       ; Untyped                  ;
-; C5_USE_CASC_IN                ; OFF                       ; Untyped                  ;
-; C6_USE_CASC_IN                ; OFF                       ; Untyped                  ;
-; C7_USE_CASC_IN                ; OFF                       ; Untyped                  ;
-; C8_USE_CASC_IN                ; OFF                       ; Untyped                  ;
-; C9_USE_CASC_IN                ; OFF                       ; Untyped                  ;
-; CLK0_COUNTER                  ; G0                        ; Untyped                  ;
-; CLK1_COUNTER                  ; G0                        ; Untyped                  ;
-; CLK2_COUNTER                  ; G0                        ; Untyped                  ;
-; CLK3_COUNTER                  ; G0                        ; Untyped                  ;
-; CLK4_COUNTER                  ; G0                        ; Untyped                  ;
-; CLK5_COUNTER                  ; G0                        ; Untyped                  ;
-; CLK6_COUNTER                  ; E0                        ; Untyped                  ;
-; CLK7_COUNTER                  ; E1                        ; Untyped                  ;
-; CLK8_COUNTER                  ; E2                        ; Untyped                  ;
-; CLK9_COUNTER                  ; E3                        ; Untyped                  ;
-; L0_TIME_DELAY                 ; 0                         ; Untyped                  ;
-; L1_TIME_DELAY                 ; 0                         ; Untyped                  ;
-; G0_TIME_DELAY                 ; 0                         ; Untyped                  ;
-; G1_TIME_DELAY                 ; 0                         ; Untyped                  ;
-; G2_TIME_DELAY                 ; 0                         ; Untyped                  ;
-; G3_TIME_DELAY                 ; 0                         ; Untyped                  ;
-; E0_TIME_DELAY                 ; 0                         ; Untyped                  ;
-; E1_TIME_DELAY                 ; 0                         ; Untyped                  ;
-; E2_TIME_DELAY                 ; 0                         ; Untyped                  ;
-; E3_TIME_DELAY                 ; 0                         ; Untyped                  ;
-; M_TIME_DELAY                  ; 0                         ; Untyped                  ;
-; N_TIME_DELAY                  ; 0                         ; Untyped                  ;
-; EXTCLK3_COUNTER               ; E3                        ; Untyped                  ;
-; EXTCLK2_COUNTER               ; E2                        ; Untyped                  ;
-; EXTCLK1_COUNTER               ; E1                        ; Untyped                  ;
-; EXTCLK0_COUNTER               ; E0                        ; Untyped                  ;
-; ENABLE0_COUNTER               ; L0                        ; Untyped                  ;
-; ENABLE1_COUNTER               ; L0                        ; Untyped                  ;
-; CHARGE_PUMP_CURRENT           ; 2                         ; Untyped                  ;
-; LOOP_FILTER_R                 ;  1.000000                 ; Untyped                  ;
-; LOOP_FILTER_C                 ; 5                         ; Untyped                  ;
-; CHARGE_PUMP_CURRENT_BITS      ; 9999                      ; Untyped                  ;
-; LOOP_FILTER_R_BITS            ; 9999                      ; Untyped                  ;
-; LOOP_FILTER_C_BITS            ; 9999                      ; Untyped                  ;
-; VCO_POST_SCALE                ; 0                         ; Untyped                  ;
-; CLK2_OUTPUT_FREQUENCY         ; 0                         ; Untyped                  ;
-; CLK1_OUTPUT_FREQUENCY         ; 0                         ; Untyped                  ;
-; CLK0_OUTPUT_FREQUENCY         ; 0                         ; Untyped                  ;
-; INTENDED_DEVICE_FAMILY        ; MAX 10                    ; Untyped                  ;
-; PORT_CLKENA0                  ; PORT_UNUSED               ; Untyped                  ;
-; PORT_CLKENA1                  ; PORT_UNUSED               ; Untyped                  ;
-; PORT_CLKENA2                  ; PORT_UNUSED               ; Untyped                  ;
-; PORT_CLKENA3                  ; PORT_UNUSED               ; Untyped                  ;
-; PORT_CLKENA4                  ; PORT_UNUSED               ; Untyped                  ;
-; PORT_CLKENA5                  ; PORT_UNUSED               ; Untyped                  ;
-; PORT_EXTCLKENA0               ; PORT_CONNECTIVITY         ; Untyped                  ;
-; PORT_EXTCLKENA1               ; PORT_CONNECTIVITY         ; Untyped                  ;
-; PORT_EXTCLKENA2               ; PORT_CONNECTIVITY         ; Untyped                  ;
-; PORT_EXTCLKENA3               ; PORT_CONNECTIVITY         ; Untyped                  ;
-; PORT_EXTCLK0                  ; PORT_UNUSED               ; Untyped                  ;
-; PORT_EXTCLK1                  ; PORT_UNUSED               ; Untyped                  ;
-; PORT_EXTCLK2                  ; PORT_UNUSED               ; Untyped                  ;
-; PORT_EXTCLK3                  ; PORT_UNUSED               ; Untyped                  ;
-; PORT_CLKBAD0                  ; PORT_UNUSED               ; Untyped                  ;
-; PORT_CLKBAD1                  ; PORT_UNUSED               ; Untyped                  ;
-; PORT_CLK0                     ; PORT_USED                 ; Untyped                  ;
-; PORT_CLK1                     ; PORT_UNUSED               ; Untyped                  ;
-; PORT_CLK2                     ; PORT_UNUSED               ; Untyped                  ;
-; PORT_CLK3                     ; PORT_UNUSED               ; Untyped                  ;
-; PORT_CLK4                     ; PORT_UNUSED               ; Untyped                  ;
-; PORT_CLK5                     ; PORT_UNUSED               ; Untyped                  ;
-; PORT_CLK6                     ; PORT_UNUSED               ; Untyped                  ;
-; PORT_CLK7                     ; PORT_UNUSED               ; Untyped                  ;
-; PORT_CLK8                     ; PORT_UNUSED               ; Untyped                  ;
-; PORT_CLK9                     ; PORT_UNUSED               ; Untyped                  ;
-; PORT_SCANDATA                 ; PORT_UNUSED               ; Untyped                  ;
-; PORT_SCANDATAOUT              ; PORT_UNUSED               ; Untyped                  ;
-; PORT_SCANDONE                 ; PORT_UNUSED               ; Untyped                  ;
-; PORT_SCLKOUT1                 ; PORT_CONNECTIVITY         ; Untyped                  ;
-; PORT_SCLKOUT0                 ; PORT_CONNECTIVITY         ; Untyped                  ;
-; PORT_ACTIVECLOCK              ; PORT_UNUSED               ; Untyped                  ;
-; PORT_CLKLOSS                  ; PORT_UNUSED               ; Untyped                  ;
-; PORT_INCLK1                   ; PORT_UNUSED               ; Untyped                  ;
-; PORT_INCLK0                   ; PORT_USED                 ; Untyped                  ;
-; PORT_FBIN                     ; PORT_UNUSED               ; Untyped                  ;
-; PORT_PLLENA                   ; PORT_UNUSED               ; Untyped                  ;
-; PORT_CLKSWITCH                ; PORT_UNUSED               ; Untyped                  ;
-; PORT_ARESET                   ; PORT_USED                 ; Untyped                  ;
-; PORT_PFDENA                   ; PORT_UNUSED               ; Untyped                  ;
-; PORT_SCANCLK                  ; PORT_UNUSED               ; Untyped                  ;
-; PORT_SCANACLR                 ; PORT_UNUSED               ; Untyped                  ;
-; PORT_SCANREAD                 ; PORT_UNUSED               ; Untyped                  ;
-; PORT_SCANWRITE                ; PORT_UNUSED               ; Untyped                  ;
-; PORT_ENABLE0                  ; PORT_CONNECTIVITY         ; Untyped                  ;
-; PORT_ENABLE1                  ; PORT_CONNECTIVITY         ; Untyped                  ;
-; PORT_LOCKED                   ; PORT_USED                 ; Untyped                  ;
-; PORT_CONFIGUPDATE             ; PORT_UNUSED               ; Untyped                  ;
-; PORT_FBOUT                    ; PORT_CONNECTIVITY         ; Untyped                  ;
-; PORT_PHASEDONE                ; PORT_UNUSED               ; Untyped                  ;
-; PORT_PHASESTEP                ; PORT_UNUSED               ; Untyped                  ;
-; PORT_PHASEUPDOWN              ; PORT_UNUSED               ; Untyped                  ;
-; PORT_SCANCLKENA               ; PORT_UNUSED               ; Untyped                  ;
-; PORT_PHASECOUNTERSELECT       ; PORT_UNUSED               ; Untyped                  ;
-; PORT_VCOOVERRANGE             ; PORT_CONNECTIVITY         ; Untyped                  ;
-; PORT_VCOUNDERRANGE            ; PORT_CONNECTIVITY         ; Untyped                  ;
-; M_TEST_SOURCE                 ; 5                         ; Untyped                  ;
-; C0_TEST_SOURCE                ; 5                         ; Untyped                  ;
-; C1_TEST_SOURCE                ; 5                         ; Untyped                  ;
-; C2_TEST_SOURCE                ; 5                         ; Untyped                  ;
-; C3_TEST_SOURCE                ; 5                         ; Untyped                  ;
-; C4_TEST_SOURCE                ; 5                         ; Untyped                  ;
-; C5_TEST_SOURCE                ; 5                         ; Untyped                  ;
-; C6_TEST_SOURCE                ; 5                         ; Untyped                  ;
-; C7_TEST_SOURCE                ; 5                         ; Untyped                  ;
-; C8_TEST_SOURCE                ; 5                         ; Untyped                  ;
-; C9_TEST_SOURCE                ; 5                         ; Untyped                  ;
-; CBXI_PARAMETER                ; clock1M_altpll            ; Untyped                  ;
-; VCO_FREQUENCY_CONTROL         ; AUTO                      ; Untyped                  ;
-; VCO_PHASE_SHIFT_STEP          ; 0                         ; Untyped                  ;
-; WIDTH_CLOCK                   ; 5                         ; Signed Integer           ;
-; WIDTH_PHASECOUNTERSELECT      ; 4                         ; Untyped                  ;
-; USING_FBMIMICBIDIR_PORT       ; OFF                       ; Untyped                  ;
-; DEVICE_FAMILY                 ; MAX 10                    ; Untyped                  ;
-; SCAN_CHAIN_MIF_FILE           ; UNUSED                    ; Untyped                  ;
-; SIM_GATE_LOCK_DEVICE_BEHAVIOR ; OFF                       ; Untyped                  ;
-; AUTO_CARRY_CHAINS             ; ON                        ; AUTO_CARRY               ;
-; IGNORE_CARRY_BUFFERS          ; OFF                       ; IGNORE_CARRY             ;
-; AUTO_CASCADE_CHAINS           ; ON                        ; AUTO_CASCADE             ;
-; IGNORE_CASCADE_BUFFERS        ; OFF                       ; IGNORE_CASCADE           ;
-+-------------------------------+---------------------------+--------------------------+
++-----------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: test:instPLL|altpll:altpll_component ;
++-------------------------------+------------------------+--------------------------+
+; Parameter Name                ; Value                  ; Type                     ;
++-------------------------------+------------------------+--------------------------+
+; OPERATION_MODE                ; NORMAL                 ; Untyped                  ;
+; PLL_TYPE                      ; AUTO                   ; Untyped                  ;
+; LPM_HINT                      ; CBX_MODULE_PREFIX=test ; Untyped                  ;
+; QUALIFY_CONF_DONE             ; OFF                    ; Untyped                  ;
+; COMPENSATE_CLOCK              ; CLK0                   ; Untyped                  ;
+; SCAN_CHAIN                    ; LONG                   ; Untyped                  ;
+; PRIMARY_CLOCK                 ; INCLK0                 ; Untyped                  ;
+; INCLK0_INPUT_FREQUENCY        ; 20000                  ; Signed Integer           ;
+; INCLK1_INPUT_FREQUENCY        ; 0                      ; Untyped                  ;
+; GATE_LOCK_SIGNAL              ; NO                     ; Untyped                  ;
+; GATE_LOCK_COUNTER             ; 0                      ; Untyped                  ;
+; LOCK_HIGH                     ; 1                      ; Untyped                  ;
+; LOCK_LOW                      ; 1                      ; Untyped                  ;
+; VALID_LOCK_MULTIPLIER         ; 1                      ; Untyped                  ;
+; INVALID_LOCK_MULTIPLIER       ; 5                      ; Untyped                  ;
+; SWITCH_OVER_ON_LOSSCLK        ; OFF                    ; Untyped                  ;
+; SWITCH_OVER_ON_GATED_LOCK     ; OFF                    ; Untyped                  ;
+; ENABLE_SWITCH_OVER_COUNTER    ; OFF                    ; Untyped                  ;
+; SKIP_VCO                      ; OFF                    ; Untyped                  ;
+; SWITCH_OVER_COUNTER           ; 0                      ; Untyped                  ;
+; SWITCH_OVER_TYPE              ; AUTO                   ; Untyped                  ;
+; FEEDBACK_SOURCE               ; EXTCLK0                ; Untyped                  ;
+; BANDWIDTH                     ; 0                      ; Untyped                  ;
+; BANDWIDTH_TYPE                ; AUTO                   ; Untyped                  ;
+; SPREAD_FREQUENCY              ; 0                      ; Untyped                  ;
+; DOWN_SPREAD                   ; 0                      ; Untyped                  ;
+; SELF_RESET_ON_GATED_LOSS_LOCK ; OFF                    ; Untyped                  ;
+; SELF_RESET_ON_LOSS_LOCK       ; OFF                    ; Untyped                  ;
+; CLK9_MULTIPLY_BY              ; 0                      ; Untyped                  ;
+; CLK8_MULTIPLY_BY              ; 0                      ; Untyped                  ;
+; CLK7_MULTIPLY_BY              ; 0                      ; Untyped                  ;
+; CLK6_MULTIPLY_BY              ; 0                      ; Untyped                  ;
+; CLK5_MULTIPLY_BY              ; 1                      ; Untyped                  ;
+; CLK4_MULTIPLY_BY              ; 1                      ; Untyped                  ;
+; CLK3_MULTIPLY_BY              ; 1                      ; Untyped                  ;
+; CLK2_MULTIPLY_BY              ; 1                      ; Untyped                  ;
+; CLK1_MULTIPLY_BY              ; 1                      ; Untyped                  ;
+; CLK0_MULTIPLY_BY              ; 1                      ; Signed Integer           ;
+; CLK9_DIVIDE_BY                ; 0                      ; Untyped                  ;
+; CLK8_DIVIDE_BY                ; 0                      ; Untyped                  ;
+; CLK7_DIVIDE_BY                ; 0                      ; Untyped                  ;
+; CLK6_DIVIDE_BY                ; 0                      ; Untyped                  ;
+; CLK5_DIVIDE_BY                ; 1                      ; Untyped                  ;
+; CLK4_DIVIDE_BY                ; 1                      ; Untyped                  ;
+; CLK3_DIVIDE_BY                ; 1                      ; Untyped                  ;
+; CLK2_DIVIDE_BY                ; 1                      ; Untyped                  ;
+; CLK1_DIVIDE_BY                ; 1                      ; Untyped                  ;
+; CLK0_DIVIDE_BY                ; 50                     ; Signed Integer           ;
+; CLK9_PHASE_SHIFT              ; 0                      ; Untyped                  ;
+; CLK8_PHASE_SHIFT              ; 0                      ; Untyped                  ;
+; CLK7_PHASE_SHIFT              ; 0                      ; Untyped                  ;
+; CLK6_PHASE_SHIFT              ; 0                      ; Untyped                  ;
+; CLK5_PHASE_SHIFT              ; 0                      ; Untyped                  ;
+; CLK4_PHASE_SHIFT              ; 0                      ; Untyped                  ;
+; CLK3_PHASE_SHIFT              ; 0                      ; Untyped                  ;
+; CLK2_PHASE_SHIFT              ; 0                      ; Untyped                  ;
+; CLK1_PHASE_SHIFT              ; 0                      ; Untyped                  ;
+; CLK0_PHASE_SHIFT              ; 0                      ; Untyped                  ;
+; CLK5_TIME_DELAY               ; 0                      ; Untyped                  ;
+; CLK4_TIME_DELAY               ; 0                      ; Untyped                  ;
+; CLK3_TIME_DELAY               ; 0                      ; Untyped                  ;
+; CLK2_TIME_DELAY               ; 0                      ; Untyped                  ;
+; CLK1_TIME_DELAY               ; 0                      ; Untyped                  ;
+; CLK0_TIME_DELAY               ; 0                      ; Untyped                  ;
+; CLK9_DUTY_CYCLE               ; 50                     ; Untyped                  ;
+; CLK8_DUTY_CYCLE               ; 50                     ; Untyped                  ;
+; CLK7_DUTY_CYCLE               ; 50                     ; Untyped                  ;
+; CLK6_DUTY_CYCLE               ; 50                     ; Untyped                  ;
+; CLK5_DUTY_CYCLE               ; 50                     ; Untyped                  ;
+; CLK4_DUTY_CYCLE               ; 50                     ; Untyped                  ;
+; CLK3_DUTY_CYCLE               ; 50                     ; Untyped                  ;
+; CLK2_DUTY_CYCLE               ; 50                     ; Untyped                  ;
+; CLK1_DUTY_CYCLE               ; 50                     ; Untyped                  ;
+; CLK0_DUTY_CYCLE               ; 50                     ; Signed Integer           ;
+; CLK9_USE_EVEN_COUNTER_MODE    ; OFF                    ; Untyped                  ;
+; CLK8_USE_EVEN_COUNTER_MODE    ; OFF                    ; Untyped                  ;
+; CLK7_USE_EVEN_COUNTER_MODE    ; OFF                    ; Untyped                  ;
+; CLK6_USE_EVEN_COUNTER_MODE    ; OFF                    ; Untyped                  ;
+; CLK5_USE_EVEN_COUNTER_MODE    ; OFF                    ; Untyped                  ;
+; CLK4_USE_EVEN_COUNTER_MODE    ; OFF                    ; Untyped                  ;
+; CLK3_USE_EVEN_COUNTER_MODE    ; OFF                    ; Untyped                  ;
+; CLK2_USE_EVEN_COUNTER_MODE    ; OFF                    ; Untyped                  ;
+; CLK1_USE_EVEN_COUNTER_MODE    ; OFF                    ; Untyped                  ;
+; CLK0_USE_EVEN_COUNTER_MODE    ; OFF                    ; Untyped                  ;
+; CLK9_USE_EVEN_COUNTER_VALUE   ; OFF                    ; Untyped                  ;
+; CLK8_USE_EVEN_COUNTER_VALUE   ; OFF                    ; Untyped                  ;
+; CLK7_USE_EVEN_COUNTER_VALUE   ; OFF                    ; Untyped                  ;
+; CLK6_USE_EVEN_COUNTER_VALUE   ; OFF                    ; Untyped                  ;
+; CLK5_USE_EVEN_COUNTER_VALUE   ; OFF                    ; Untyped                  ;
+; CLK4_USE_EVEN_COUNTER_VALUE   ; OFF                    ; Untyped                  ;
+; CLK3_USE_EVEN_COUNTER_VALUE   ; OFF                    ; Untyped                  ;
+; CLK2_USE_EVEN_COUNTER_VALUE   ; OFF                    ; Untyped                  ;
+; CLK1_USE_EVEN_COUNTER_VALUE   ; OFF                    ; Untyped                  ;
+; CLK0_USE_EVEN_COUNTER_VALUE   ; OFF                    ; Untyped                  ;
+; LOCK_WINDOW_UI                ;  0.05                  ; Untyped                  ;
+; LOCK_WINDOW_UI_BITS           ; UNUSED                 ; Untyped                  ;
+; VCO_RANGE_DETECTOR_LOW_BITS   ; UNUSED                 ; Untyped                  ;
+; VCO_RANGE_DETECTOR_HIGH_BITS  ; UNUSED                 ; Untyped                  ;
+; DPA_MULTIPLY_BY               ; 0                      ; Untyped                  ;
+; DPA_DIVIDE_BY                 ; 1                      ; Untyped                  ;
+; DPA_DIVIDER                   ; 0                      ; Untyped                  ;
+; EXTCLK3_MULTIPLY_BY           ; 1                      ; Untyped                  ;
+; EXTCLK2_MULTIPLY_BY           ; 1                      ; Untyped                  ;
+; EXTCLK1_MULTIPLY_BY           ; 1                      ; Untyped                  ;
+; EXTCLK0_MULTIPLY_BY           ; 1                      ; Untyped                  ;
+; EXTCLK3_DIVIDE_BY             ; 1                      ; Untyped                  ;
+; EXTCLK2_DIVIDE_BY             ; 1                      ; Untyped                  ;
+; EXTCLK1_DIVIDE_BY             ; 1                      ; Untyped                  ;
+; EXTCLK0_DIVIDE_BY             ; 1                      ; Untyped                  ;
+; EXTCLK3_PHASE_SHIFT           ; 0                      ; Untyped                  ;
+; EXTCLK2_PHASE_SHIFT           ; 0                      ; Untyped                  ;
+; EXTCLK1_PHASE_SHIFT           ; 0                      ; Untyped                  ;
+; EXTCLK0_PHASE_SHIFT           ; 0                      ; Untyped                  ;
+; EXTCLK3_TIME_DELAY            ; 0                      ; Untyped                  ;
+; EXTCLK2_TIME_DELAY            ; 0                      ; Untyped                  ;
+; EXTCLK1_TIME_DELAY            ; 0                      ; Untyped                  ;
+; EXTCLK0_TIME_DELAY            ; 0                      ; Untyped                  ;
+; EXTCLK3_DUTY_CYCLE            ; 50                     ; Untyped                  ;
+; EXTCLK2_DUTY_CYCLE            ; 50                     ; Untyped                  ;
+; EXTCLK1_DUTY_CYCLE            ; 50                     ; Untyped                  ;
+; EXTCLK0_DUTY_CYCLE            ; 50                     ; Untyped                  ;
+; VCO_MULTIPLY_BY               ; 0                      ; Untyped                  ;
+; VCO_DIVIDE_BY                 ; 0                      ; Untyped                  ;
+; SCLKOUT0_PHASE_SHIFT          ; 0                      ; Untyped                  ;
+; SCLKOUT1_PHASE_SHIFT          ; 0                      ; Untyped                  ;
+; VCO_MIN                       ; 0                      ; Untyped                  ;
+; VCO_MAX                       ; 0                      ; Untyped                  ;
+; VCO_CENTER                    ; 0                      ; Untyped                  ;
+; PFD_MIN                       ; 0                      ; Untyped                  ;
+; PFD_MAX                       ; 0                      ; Untyped                  ;
+; M_INITIAL                     ; 0                      ; Untyped                  ;
+; M                             ; 0                      ; Untyped                  ;
+; N                             ; 1                      ; Untyped                  ;
+; M2                            ; 1                      ; Untyped                  ;
+; N2                            ; 1                      ; Untyped                  ;
+; SS                            ; 1                      ; Untyped                  ;
+; C0_HIGH                       ; 0                      ; Untyped                  ;
+; C1_HIGH                       ; 0                      ; Untyped                  ;
+; C2_HIGH                       ; 0                      ; Untyped                  ;
+; C3_HIGH                       ; 0                      ; Untyped                  ;
+; C4_HIGH                       ; 0                      ; Untyped                  ;
+; C5_HIGH                       ; 0                      ; Untyped                  ;
+; C6_HIGH                       ; 0                      ; Untyped                  ;
+; C7_HIGH                       ; 0                      ; Untyped                  ;
+; C8_HIGH                       ; 0                      ; Untyped                  ;
+; C9_HIGH                       ; 0                      ; Untyped                  ;
+; C0_LOW                        ; 0                      ; Untyped                  ;
+; C1_LOW                        ; 0                      ; Untyped                  ;
+; C2_LOW                        ; 0                      ; Untyped                  ;
+; C3_LOW                        ; 0                      ; Untyped                  ;
+; C4_LOW                        ; 0                      ; Untyped                  ;
+; C5_LOW                        ; 0                      ; Untyped                  ;
+; C6_LOW                        ; 0                      ; Untyped                  ;
+; C7_LOW                        ; 0                      ; Untyped                  ;
+; C8_LOW                        ; 0                      ; Untyped                  ;
+; C9_LOW                        ; 0                      ; Untyped                  ;
+; C0_INITIAL                    ; 0                      ; Untyped                  ;
+; C1_INITIAL                    ; 0                      ; Untyped                  ;
+; C2_INITIAL                    ; 0                      ; Untyped                  ;
+; C3_INITIAL                    ; 0                      ; Untyped                  ;
+; C4_INITIAL                    ; 0                      ; Untyped                  ;
+; C5_INITIAL                    ; 0                      ; Untyped                  ;
+; C6_INITIAL                    ; 0                      ; Untyped                  ;
+; C7_INITIAL                    ; 0                      ; Untyped                  ;
+; C8_INITIAL                    ; 0                      ; Untyped                  ;
+; C9_INITIAL                    ; 0                      ; Untyped                  ;
+; C0_MODE                       ; BYPASS                 ; Untyped                  ;
+; C1_MODE                       ; BYPASS                 ; Untyped                  ;
+; C2_MODE                       ; BYPASS                 ; Untyped                  ;
+; C3_MODE                       ; BYPASS                 ; Untyped                  ;
+; C4_MODE                       ; BYPASS                 ; Untyped                  ;
+; C5_MODE                       ; BYPASS                 ; Untyped                  ;
+; C6_MODE                       ; BYPASS                 ; Untyped                  ;
+; C7_MODE                       ; BYPASS                 ; Untyped                  ;
+; C8_MODE                       ; BYPASS                 ; Untyped                  ;
+; C9_MODE                       ; BYPASS                 ; Untyped                  ;
+; C0_PH                         ; 0                      ; Untyped                  ;
+; C1_PH                         ; 0                      ; Untyped                  ;
+; C2_PH                         ; 0                      ; Untyped                  ;
+; C3_PH                         ; 0                      ; Untyped                  ;
+; C4_PH                         ; 0                      ; Untyped                  ;
+; C5_PH                         ; 0                      ; Untyped                  ;
+; C6_PH                         ; 0                      ; Untyped                  ;
+; C7_PH                         ; 0                      ; Untyped                  ;
+; C8_PH                         ; 0                      ; Untyped                  ;
+; C9_PH                         ; 0                      ; Untyped                  ;
+; L0_HIGH                       ; 1                      ; Untyped                  ;
+; L1_HIGH                       ; 1                      ; Untyped                  ;
+; G0_HIGH                       ; 1                      ; Untyped                  ;
+; G1_HIGH                       ; 1                      ; Untyped                  ;
+; G2_HIGH                       ; 1                      ; Untyped                  ;
+; G3_HIGH                       ; 1                      ; Untyped                  ;
+; E0_HIGH                       ; 1                      ; Untyped                  ;
+; E1_HIGH                       ; 1                      ; Untyped                  ;
+; E2_HIGH                       ; 1                      ; Untyped                  ;
+; E3_HIGH                       ; 1                      ; Untyped                  ;
+; L0_LOW                        ; 1                      ; Untyped                  ;
+; L1_LOW                        ; 1                      ; Untyped                  ;
+; G0_LOW                        ; 1                      ; Untyped                  ;
+; G1_LOW                        ; 1                      ; Untyped                  ;
+; G2_LOW                        ; 1                      ; Untyped                  ;
+; G3_LOW                        ; 1                      ; Untyped                  ;
+; E0_LOW                        ; 1                      ; Untyped                  ;
+; E1_LOW                        ; 1                      ; Untyped                  ;
+; E2_LOW                        ; 1                      ; Untyped                  ;
+; E3_LOW                        ; 1                      ; Untyped                  ;
+; L0_INITIAL                    ; 1                      ; Untyped                  ;
+; L1_INITIAL                    ; 1                      ; Untyped                  ;
+; G0_INITIAL                    ; 1                      ; Untyped                  ;
+; G1_INITIAL                    ; 1                      ; Untyped                  ;
+; G2_INITIAL                    ; 1                      ; Untyped                  ;
+; G3_INITIAL                    ; 1                      ; Untyped                  ;
+; E0_INITIAL                    ; 1                      ; Untyped                  ;
+; E1_INITIAL                    ; 1                      ; Untyped                  ;
+; E2_INITIAL                    ; 1                      ; Untyped                  ;
+; E3_INITIAL                    ; 1                      ; Untyped                  ;
+; L0_MODE                       ; BYPASS                 ; Untyped                  ;
+; L1_MODE                       ; BYPASS                 ; Untyped                  ;
+; G0_MODE                       ; BYPASS                 ; Untyped                  ;
+; G1_MODE                       ; BYPASS                 ; Untyped                  ;
+; G2_MODE                       ; BYPASS                 ; Untyped                  ;
+; G3_MODE                       ; BYPASS                 ; Untyped                  ;
+; E0_MODE                       ; BYPASS                 ; Untyped                  ;
+; E1_MODE                       ; BYPASS                 ; Untyped                  ;
+; E2_MODE                       ; BYPASS                 ; Untyped                  ;
+; E3_MODE                       ; BYPASS                 ; Untyped                  ;
+; L0_PH                         ; 0                      ; Untyped                  ;
+; L1_PH                         ; 0                      ; Untyped                  ;
+; G0_PH                         ; 0                      ; Untyped                  ;
+; G1_PH                         ; 0                      ; Untyped                  ;
+; G2_PH                         ; 0                      ; Untyped                  ;
+; G3_PH                         ; 0                      ; Untyped                  ;
+; E0_PH                         ; 0                      ; Untyped                  ;
+; E1_PH                         ; 0                      ; Untyped                  ;
+; E2_PH                         ; 0                      ; Untyped                  ;
+; E3_PH                         ; 0                      ; Untyped                  ;
+; M_PH                          ; 0                      ; Untyped                  ;
+; C1_USE_CASC_IN                ; OFF                    ; Untyped                  ;
+; C2_USE_CASC_IN                ; OFF                    ; Untyped                  ;
+; C3_USE_CASC_IN                ; OFF                    ; Untyped                  ;
+; C4_USE_CASC_IN                ; OFF                    ; Untyped                  ;
+; C5_USE_CASC_IN                ; OFF                    ; Untyped                  ;
+; C6_USE_CASC_IN                ; OFF                    ; Untyped                  ;
+; C7_USE_CASC_IN                ; OFF                    ; Untyped                  ;
+; C8_USE_CASC_IN                ; OFF                    ; Untyped                  ;
+; C9_USE_CASC_IN                ; OFF                    ; Untyped                  ;
+; CLK0_COUNTER                  ; G0                     ; Untyped                  ;
+; CLK1_COUNTER                  ; G0                     ; Untyped                  ;
+; CLK2_COUNTER                  ; G0                     ; Untyped                  ;
+; CLK3_COUNTER                  ; G0                     ; Untyped                  ;
+; CLK4_COUNTER                  ; G0                     ; Untyped                  ;
+; CLK5_COUNTER                  ; G0                     ; Untyped                  ;
+; CLK6_COUNTER                  ; E0                     ; Untyped                  ;
+; CLK7_COUNTER                  ; E1                     ; Untyped                  ;
+; CLK8_COUNTER                  ; E2                     ; Untyped                  ;
+; CLK9_COUNTER                  ; E3                     ; Untyped                  ;
+; L0_TIME_DELAY                 ; 0                      ; Untyped                  ;
+; L1_TIME_DELAY                 ; 0                      ; Untyped                  ;
+; G0_TIME_DELAY                 ; 0                      ; Untyped                  ;
+; G1_TIME_DELAY                 ; 0                      ; Untyped                  ;
+; G2_TIME_DELAY                 ; 0                      ; Untyped                  ;
+; G3_TIME_DELAY                 ; 0                      ; Untyped                  ;
+; E0_TIME_DELAY                 ; 0                      ; Untyped                  ;
+; E1_TIME_DELAY                 ; 0                      ; Untyped                  ;
+; E2_TIME_DELAY                 ; 0                      ; Untyped                  ;
+; E3_TIME_DELAY                 ; 0                      ; Untyped                  ;
+; M_TIME_DELAY                  ; 0                      ; Untyped                  ;
+; N_TIME_DELAY                  ; 0                      ; Untyped                  ;
+; EXTCLK3_COUNTER               ; E3                     ; Untyped                  ;
+; EXTCLK2_COUNTER               ; E2                     ; Untyped                  ;
+; EXTCLK1_COUNTER               ; E1                     ; Untyped                  ;
+; EXTCLK0_COUNTER               ; E0                     ; Untyped                  ;
+; ENABLE0_COUNTER               ; L0                     ; Untyped                  ;
+; ENABLE1_COUNTER               ; L0                     ; Untyped                  ;
+; CHARGE_PUMP_CURRENT           ; 2                      ; Untyped                  ;
+; LOOP_FILTER_R                 ;  1.000000              ; Untyped                  ;
+; LOOP_FILTER_C                 ; 5                      ; Untyped                  ;
+; CHARGE_PUMP_CURRENT_BITS      ; 9999                   ; Untyped                  ;
+; LOOP_FILTER_R_BITS            ; 9999                   ; Untyped                  ;
+; LOOP_FILTER_C_BITS            ; 9999                   ; Untyped                  ;
+; VCO_POST_SCALE                ; 0                      ; Untyped                  ;
+; CLK2_OUTPUT_FREQUENCY         ; 0                      ; Untyped                  ;
+; CLK1_OUTPUT_FREQUENCY         ; 0                      ; Untyped                  ;
+; CLK0_OUTPUT_FREQUENCY         ; 0                      ; Untyped                  ;
+; INTENDED_DEVICE_FAMILY        ; MAX 10                 ; Untyped                  ;
+; PORT_CLKENA0                  ; PORT_UNUSED            ; Untyped                  ;
+; PORT_CLKENA1                  ; PORT_UNUSED            ; Untyped                  ;
+; PORT_CLKENA2                  ; PORT_UNUSED            ; Untyped                  ;
+; PORT_CLKENA3                  ; PORT_UNUSED            ; Untyped                  ;
+; PORT_CLKENA4                  ; PORT_UNUSED            ; Untyped                  ;
+; PORT_CLKENA5                  ; PORT_UNUSED            ; Untyped                  ;
+; PORT_EXTCLKENA0               ; PORT_CONNECTIVITY      ; Untyped                  ;
+; PORT_EXTCLKENA1               ; PORT_CONNECTIVITY      ; Untyped                  ;
+; PORT_EXTCLKENA2               ; PORT_CONNECTIVITY      ; Untyped                  ;
+; PORT_EXTCLKENA3               ; PORT_CONNECTIVITY      ; Untyped                  ;
+; PORT_EXTCLK0                  ; PORT_UNUSED            ; Untyped                  ;
+; PORT_EXTCLK1                  ; PORT_UNUSED            ; Untyped                  ;
+; PORT_EXTCLK2                  ; PORT_UNUSED            ; Untyped                  ;
+; PORT_EXTCLK3                  ; PORT_UNUSED            ; Untyped                  ;
+; PORT_CLKBAD0                  ; PORT_UNUSED            ; Untyped                  ;
+; PORT_CLKBAD1                  ; PORT_UNUSED            ; Untyped                  ;
+; PORT_CLK0                     ; PORT_USED              ; Untyped                  ;
+; PORT_CLK1                     ; PORT_UNUSED            ; Untyped                  ;
+; PORT_CLK2                     ; PORT_UNUSED            ; Untyped                  ;
+; PORT_CLK3                     ; PORT_UNUSED            ; Untyped                  ;
+; PORT_CLK4                     ; PORT_UNUSED            ; Untyped                  ;
+; PORT_CLK5                     ; PORT_UNUSED            ; Untyped                  ;
+; PORT_CLK6                     ; PORT_UNUSED            ; Untyped                  ;
+; PORT_CLK7                     ; PORT_UNUSED            ; Untyped                  ;
+; PORT_CLK8                     ; PORT_UNUSED            ; Untyped                  ;
+; PORT_CLK9                     ; PORT_UNUSED            ; Untyped                  ;
+; PORT_SCANDATA                 ; PORT_UNUSED            ; Untyped                  ;
+; PORT_SCANDATAOUT              ; PORT_UNUSED            ; Untyped                  ;
+; PORT_SCANDONE                 ; PORT_UNUSED            ; Untyped                  ;
+; PORT_SCLKOUT1                 ; PORT_CONNECTIVITY      ; Untyped                  ;
+; PORT_SCLKOUT0                 ; PORT_CONNECTIVITY      ; Untyped                  ;
+; PORT_ACTIVECLOCK              ; PORT_UNUSED            ; Untyped                  ;
+; PORT_CLKLOSS                  ; PORT_UNUSED            ; Untyped                  ;
+; PORT_INCLK1                   ; PORT_UNUSED            ; Untyped                  ;
+; PORT_INCLK0                   ; PORT_USED              ; Untyped                  ;
+; PORT_FBIN                     ; PORT_UNUSED            ; Untyped                  ;
+; PORT_PLLENA                   ; PORT_UNUSED            ; Untyped                  ;
+; PORT_CLKSWITCH                ; PORT_UNUSED            ; Untyped                  ;
+; PORT_ARESET                   ; PORT_USED              ; Untyped                  ;
+; PORT_PFDENA                   ; PORT_UNUSED            ; Untyped                  ;
+; PORT_SCANCLK                  ; PORT_UNUSED            ; Untyped                  ;
+; PORT_SCANACLR                 ; PORT_UNUSED            ; Untyped                  ;
+; PORT_SCANREAD                 ; PORT_UNUSED            ; Untyped                  ;
+; PORT_SCANWRITE                ; PORT_UNUSED            ; Untyped                  ;
+; PORT_ENABLE0                  ; PORT_CONNECTIVITY      ; Untyped                  ;
+; PORT_ENABLE1                  ; PORT_CONNECTIVITY      ; Untyped                  ;
+; PORT_LOCKED                   ; PORT_USED              ; Untyped                  ;
+; PORT_CONFIGUPDATE             ; PORT_UNUSED            ; Untyped                  ;
+; PORT_FBOUT                    ; PORT_CONNECTIVITY      ; Untyped                  ;
+; PORT_PHASEDONE                ; PORT_UNUSED            ; Untyped                  ;
+; PORT_PHASESTEP                ; PORT_UNUSED            ; Untyped                  ;
+; PORT_PHASEUPDOWN              ; PORT_UNUSED            ; Untyped                  ;
+; PORT_SCANCLKENA               ; PORT_UNUSED            ; Untyped                  ;
+; PORT_PHASECOUNTERSELECT       ; PORT_UNUSED            ; Untyped                  ;
+; PORT_VCOOVERRANGE             ; PORT_CONNECTIVITY      ; Untyped                  ;
+; PORT_VCOUNDERRANGE            ; PORT_CONNECTIVITY      ; Untyped                  ;
+; M_TEST_SOURCE                 ; 5                      ; Untyped                  ;
+; C0_TEST_SOURCE                ; 5                      ; Untyped                  ;
+; C1_TEST_SOURCE                ; 5                      ; Untyped                  ;
+; C2_TEST_SOURCE                ; 5                      ; Untyped                  ;
+; C3_TEST_SOURCE                ; 5                      ; Untyped                  ;
+; C4_TEST_SOURCE                ; 5                      ; Untyped                  ;
+; C5_TEST_SOURCE                ; 5                      ; Untyped                  ;
+; C6_TEST_SOURCE                ; 5                      ; Untyped                  ;
+; C7_TEST_SOURCE                ; 5                      ; Untyped                  ;
+; C8_TEST_SOURCE                ; 5                      ; Untyped                  ;
+; C9_TEST_SOURCE                ; 5                      ; Untyped                  ;
+; CBXI_PARAMETER                ; test_altpll            ; Untyped                  ;
+; VCO_FREQUENCY_CONTROL         ; AUTO                   ; Untyped                  ;
+; VCO_PHASE_SHIFT_STEP          ; 0                      ; Untyped                  ;
+; WIDTH_CLOCK                   ; 5                      ; Signed Integer           ;
+; WIDTH_PHASECOUNTERSELECT      ; 4                      ; Untyped                  ;
+; USING_FBMIMICBIDIR_PORT       ; OFF                    ; Untyped                  ;
+; DEVICE_FAMILY                 ; MAX 10                 ; Untyped                  ;
+; SCAN_CHAIN_MIF_FILE           ; UNUSED                 ; Untyped                  ;
+; SIM_GATE_LOCK_DEVICE_BEHAVIOR ; OFF                    ; Untyped                  ;
+; AUTO_CARRY_CHAINS             ; ON                     ; AUTO_CARRY               ;
+; IGNORE_CARRY_BUFFERS          ; OFF                    ; IGNORE_CARRY             ;
+; AUTO_CASCADE_CHAINS           ; ON                     ; AUTO_CASCADE             ;
+; IGNORE_CASCADE_BUFFERS        ; OFF                    ; IGNORE_CASCADE           ;
++-------------------------------+------------------------+--------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -800,30 +811,30 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------------------------------------------+--------------------------------------------------+
 
 
-+-------------------------------------------------------------------------+
-; altpll Parameter Settings by Entity Instance                            ;
-+-------------------------------+-----------------------------------------+
-; Name                          ; Value                                   ;
-+-------------------------------+-----------------------------------------+
-; Number of entity instances    ; 1                                       ;
-; Entity Instance               ; clock1M:instPLL|altpll:altpll_component ;
-;     -- OPERATION_MODE         ; NORMAL                                  ;
-;     -- PLL_TYPE               ; AUTO                                    ;
-;     -- PRIMARY_CLOCK          ; INCLK0                                  ;
-;     -- INCLK0_INPUT_FREQUENCY ; 20000                                   ;
-;     -- INCLK1_INPUT_FREQUENCY ; 0                                       ;
-;     -- VCO_MULTIPLY_BY        ; 0                                       ;
-;     -- VCO_DIVIDE_BY          ; 0                                       ;
-+-------------------------------+-----------------------------------------+
++----------------------------------------------------------------------+
+; altpll Parameter Settings by Entity Instance                         ;
++-------------------------------+--------------------------------------+
+; Name                          ; Value                                ;
++-------------------------------+--------------------------------------+
+; Number of entity instances    ; 1                                    ;
+; Entity Instance               ; test:instPLL|altpll:altpll_component ;
+;     -- OPERATION_MODE         ; NORMAL                               ;
+;     -- PLL_TYPE               ; AUTO                                 ;
+;     -- PRIMARY_CLOCK          ; INCLK0                               ;
+;     -- INCLK0_INPUT_FREQUENCY ; 20000                                ;
+;     -- INCLK1_INPUT_FREQUENCY ; 0                                    ;
+;     -- VCO_MULTIPLY_BY        ; 0                                    ;
+;     -- VCO_DIVIDE_BY          ; 0                                    ;
++-------------------------------+--------------------------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "clock1M:instPLL"                                                                      ;
-+--------+--------+----------+-------------------------------------------------------------------------------------+
-; Port   ; Type   ; Severity ; Details                                                                             ;
-+--------+--------+----------+-------------------------------------------------------------------------------------+
-; locked ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+--------+--------+----------+-------------------------------------------------------------------------------------+
++------------------------------------------+
+; Port Connectivity Checks: "test:instPLL" ;
++--------+-------+----------+--------------+
+; Port   ; Type  ; Severity ; Details      ;
++--------+-------+----------+--------------+
+; areset ; Input ; Info     ; Stuck at GND ;
++--------+-------+----------+--------------+
 
 
 +----------------------------------------------+
@@ -843,25 +854,25 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
 ; boundary_port         ; 1320                        ;
-; cycloneiii_ff         ; 1196                        ;
-;     CLR               ; 983                         ;
+; cycloneiii_ff         ; 1195                        ;
+;     CLR               ; 982                         ;
 ;     CLR SLD           ; 85                          ;
 ;     ENA CLR           ; 128                         ;
-; cycloneiii_lcell_comb ; 3633                        ;
+; cycloneiii_lcell_comb ; 3602                        ;
 ;     arith             ; 327                         ;
 ;         2 data inputs ; 60                          ;
 ;         3 data inputs ; 267                         ;
-;     normal            ; 3306                        ;
+;     normal            ; 3275                        ;
 ;         0 data inputs ; 1                           ;
 ;         1 data inputs ; 3                           ;
-;         2 data inputs ; 131                         ;
-;         3 data inputs ; 255                         ;
-;         4 data inputs ; 2916                        ;
+;         2 data inputs ; 101                         ;
+;         3 data inputs ; 252                         ;
+;         4 data inputs ; 2918                        ;
 ; cycloneiii_pll        ; 1                           ;
 ; cycloneiii_ram_block  ; 32                          ;
 ;                       ;                             ;
 ; Max LUT depth         ; 23.00                       ;
-; Average LUT depth     ; 17.74                       ;
+; Average LUT depth     ; 17.82                       ;
 +-----------------------+-----------------------------+
 
 
@@ -880,71 +891,73 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
-    Info: Processing started: Thu Jun 09 17:13:10 2022
+    Info: Processing started: Mon Jun 13 11:47:15 2022
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off PROC-ECE_ASYNC -c PROC-ECE_ASYNC
 Info (20032): Parallel compilation is enabled and will use up to 4 processors
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/testbench.vhd
-    Info (12022): Found design unit 1: TestBenchTop-VHDL File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/TestBench.vhd Line: 14
-    Info (12023): Found entity 1: TestBenchTop File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/TestBench.vhd Line: 11
+    Info (12022): Found design unit 1: TestBenchTop-VHDL File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/TestBench.vhd Line: 14
+    Info (12023): Found entity 1: TestBenchTop File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/TestBench.vhd Line: 11
 Info (12021): Found 1 design units, including 0 entities, in source file custom_lib/simul_var_pkg.vhd
-    Info (12022): Found design unit 1: simulPkg File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/custom_lib/simul_var_pkg.vhd Line: 5
+    Info (12022): Found design unit 1: simulPkg File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/custom_lib/simul_var_pkg.vhd Line: 5
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/top.vhd
-    Info (12022): Found design unit 1: Top-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 27
-    Info (12023): Found entity 1: Top File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 12
+    Info (12022): Found design unit 1: Top-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Top.vhd Line: 27
+    Info (12023): Found entity 1: Top File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Top.vhd Line: 12
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/registerfile.vhd
-    Info (12022): Found design unit 1: RegisterFile-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/RegisterFile.vhd Line: 28
-    Info (12023): Found entity 1: RegisterFile File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/RegisterFile.vhd Line: 12
+    Info (12022): Found design unit 1: RegisterFile-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/RegisterFile.vhd Line: 28
+    Info (12023): Found entity 1: RegisterFile File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/RegisterFile.vhd Line: 12
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/programcounter.vhd
-    Info (12022): Found design unit 1: ProgramCounter-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/ProgramCounter.vhd Line: 35
-    Info (12023): Found entity 1: ProgramCounter File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/ProgramCounter.vhd Line: 11
+    Info (12022): Found design unit 1: ProgramCounter-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/ProgramCounter.vhd Line: 35
+    Info (12023): Found entity 1: ProgramCounter File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/ProgramCounter.vhd Line: 11
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/processor.vhd
-    Info (12022): Found design unit 1: Processor-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Processor.vhd Line: 29
-    Info (12023): Found entity 1: Processor File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Processor.vhd Line: 11
+    Info (12022): Found design unit 1: Processor-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Processor.vhd Line: 29
+    Info (12023): Found entity 1: Processor File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Processor.vhd Line: 11
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/instructionmemory.vhd
-    Info (12022): Found design unit 1: InstructionMemory-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/InstructionMemory.vhd Line: 22
-    Info (12023): Found entity 1: InstructionMemory File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/InstructionMemory.vhd Line: 11
+    Info (12022): Found design unit 1: InstructionMemory-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/InstructionMemory.vhd Line: 22
+    Info (12023): Found entity 1: InstructionMemory File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/InstructionMemory.vhd Line: 11
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/instructiondecoder.vhd
-    Info (12022): Found design unit 1: InstructionDecoder-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/InstructionDecoder.vhd Line: 40
-    Info (12023): Found entity 1: InstructionDecoder File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/InstructionDecoder.vhd Line: 11
+    Info (12022): Found design unit 1: InstructionDecoder-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/InstructionDecoder.vhd Line: 40
+    Info (12023): Found entity 1: InstructionDecoder File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/InstructionDecoder.vhd Line: 11
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/displays.vhd
-    Info (12022): Found design unit 1: Displays-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Displays.vhd Line: 28
-    Info (12023): Found entity 1: Displays File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Displays.vhd Line: 12
+    Info (12022): Found design unit 1: Displays-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Displays.vhd Line: 28
+    Info (12023): Found entity 1: Displays File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Displays.vhd Line: 12
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/datamemory.vhd
-    Info (12022): Found design unit 1: DataMemory-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/DataMemory.vhd Line: 26
-    Info (12023): Found entity 1: DataMemory File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/DataMemory.vhd Line: 11
+    Info (12022): Found design unit 1: DataMemory-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/DataMemory.vhd Line: 26
+    Info (12023): Found entity 1: DataMemory File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/DataMemory.vhd Line: 11
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/counter.vhd
-    Info (12022): Found design unit 1: Counter-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Counter.vhd Line: 24
-    Info (12023): Found entity 1: Counter File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Counter.vhd Line: 11
+    Info (12022): Found design unit 1: Counter-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Counter.vhd Line: 24
+    Info (12023): Found entity 1: Counter File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Counter.vhd Line: 11
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/alu.vhd
-    Info (12022): Found design unit 1: Alu-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Alu.vhd Line: 29
-    Info (12023): Found entity 1: Alu File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Alu.vhd Line: 11
+    Info (12022): Found design unit 1: Alu-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Alu.vhd Line: 29
+    Info (12023): Found entity 1: Alu File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Alu.vhd Line: 11
 Info (12021): Found 2 design units, including 1 entities, in source file qip_files/im/im.vhd
-    Info (12022): Found design unit 1: im-SYN File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/qip_files/IM/IM.vhd Line: 53
-    Info (12023): Found entity 1: IM File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/qip_files/IM/IM.vhd Line: 43
+    Info (12022): Found design unit 1: im-SYN File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/qip_files/IM/IM.vhd Line: 53
+    Info (12023): Found entity 1: IM File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/qip_files/IM/IM.vhd Line: 43
 Info (12021): Found 2 design units, including 1 entities, in source file qip_files/pll/pll.vhd
-    Info (12022): Found design unit 1: pll-SYN File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/qip_files/PLL/PLL.vhd Line: 55
-    Info (12023): Found entity 1: PLL File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/qip_files/PLL/PLL.vhd Line: 43
-Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/ram.vhd
-    Info (12022): Found design unit 1: ram-rtl File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/ram.vhd Line: 26
-    Info (12023): Found entity 1: ram File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/ram.vhd Line: 7
+    Info (12022): Found design unit 1: pll-SYN File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/qip_files/PLL/PLL.vhd Line: 55
+    Info (12023): Found entity 1: PLL File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/qip_files/PLL/PLL.vhd Line: 43
 Info (12021): Found 2 design units, including 1 entities, in source file ram_2port.vhd
-    Info (12022): Found design unit 1: ram_2port-SYN File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/RAM_2PORT.vhd Line: 59
-    Info (12023): Found entity 1: RAM_2PORT File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/RAM_2PORT.vhd Line: 42
+    Info (12022): Found design unit 1: ram_2port-SYN File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/RAM_2PORT.vhd Line: 59
+    Info (12023): Found entity 1: RAM_2PORT File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/RAM_2PORT.vhd Line: 42
 Info (12021): Found 2 design units, including 1 entities, in source file clock1m.vhd
-    Info (12022): Found design unit 1: clock1m-SYN File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/clock1M.vhd Line: 53
-    Info (12023): Found entity 1: clock1M File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/clock1M.vhd Line: 42
+    Info (12022): Found design unit 1: clock1m-SYN File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/clock1M.vhd Line: 53
+    Info (12023): Found entity 1: clock1M File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/clock1M.vhd Line: 42
+Info (12021): Found 2 design units, including 1 entities, in source file test.vhd
+    Info (12022): Found design unit 1: test-SYN File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/test.vhd Line: 53
+    Info (12023): Found entity 1: test File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/test.vhd Line: 42
 Info (12127): Elaborating entity "Top" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at Top.vhd(141): object "SIGoutputDMorREG" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 141
-Warning (10036): Verilog HDL or VHDL warning at Top.vhd(152): object "csLed" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 152
-Info (12128): Elaborating entity "Processor" for hierarchy "Processor:instPROC" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 206
-Info (12128): Elaborating entity "ProgramCounter" for hierarchy "Processor:instPROC|ProgramCounter:instPC" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Processor.vhd Line: 277
-Info (12128): Elaborating entity "InstructionDecoder" for hierarchy "Processor:instPROC|InstructionDecoder:instID" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Processor.vhd Line: 297
-Info (12128): Elaborating entity "RegisterFile" for hierarchy "Processor:instPROC|RegisterFile:instRF" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Processor.vhd Line: 322
-Info (12128): Elaborating entity "Alu" for hierarchy "Processor:instPROC|Alu:instALU" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Processor.vhd Line: 334
-Info (12128): Elaborating entity "RAM_2PORT" for hierarchy "RAM_2PORT:Memory" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 223
-Info (12128): Elaborating entity "altsyncram" for hierarchy "RAM_2PORT:Memory|altsyncram:altsyncram_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/RAM_2PORT.vhd Line: 68
-Info (12130): Elaborated megafunction instantiation "RAM_2PORT:Memory|altsyncram:altsyncram_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/RAM_2PORT.vhd Line: 68
-Info (12133): Instantiated megafunction "RAM_2PORT:Memory|altsyncram:altsyncram_component" with the following parameter: File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/RAM_2PORT.vhd Line: 68
+Warning (10036): Verilog HDL or VHDL warning at Top.vhd(141): object "SIGoutputDMorREG" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Top.vhd Line: 141
+Warning (10036): Verilog HDL or VHDL warning at Top.vhd(153): object "csLed" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Top.vhd Line: 153
+Warning (10036): Verilog HDL or VHDL warning at Top.vhd(153): object "muxLoadDelay" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Top.vhd Line: 153
+Warning (10036): Verilog HDL or VHDL warning at Top.vhd(154): object "ledstate" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Top.vhd Line: 154
+Info (12128): Elaborating entity "Processor" for hierarchy "Processor:instPROC" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Top.vhd Line: 208
+Info (12128): Elaborating entity "ProgramCounter" for hierarchy "Processor:instPROC|ProgramCounter:instPC" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Processor.vhd Line: 277
+Info (12128): Elaborating entity "InstructionDecoder" for hierarchy "Processor:instPROC|InstructionDecoder:instID" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Processor.vhd Line: 297
+Info (12128): Elaborating entity "RegisterFile" for hierarchy "Processor:instPROC|RegisterFile:instRF" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Processor.vhd Line: 322
+Info (12128): Elaborating entity "Alu" for hierarchy "Processor:instPROC|Alu:instALU" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Processor.vhd Line: 334
+Info (12128): Elaborating entity "RAM_2PORT" for hierarchy "RAM_2PORT:Memory" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Top.vhd Line: 225
+Info (12128): Elaborating entity "altsyncram" for hierarchy "RAM_2PORT:Memory|altsyncram:altsyncram_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/RAM_2PORT.vhd Line: 68
+Info (12130): Elaborated megafunction instantiation "RAM_2PORT:Memory|altsyncram:altsyncram_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/RAM_2PORT.vhd Line: 68
+Info (12133): Instantiated megafunction "RAM_2PORT:Memory|altsyncram:altsyncram_component" with the following parameter: File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/RAM_2PORT.vhd Line: 68
     Info (12134): Parameter "address_aclr_a" = "UNUSED"
     Info (12134): Parameter "address_aclr_b" = "NONE"
     Info (12134): Parameter "address_reg_b" = "CLOCK0"
@@ -996,15 +1009,15 @@ Info (12133): Instantiated megafunction "RAM_2PORT:Memory|altsyncram:altsyncram_
     Info (12134): Parameter "lpm_hint" = "UNUSED"
     Info (12134): Parameter "lpm_type" = "altsyncram"
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_gjt3.tdf
-    Info (12023): Found entity 1: altsyncram_gjt3 File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/db/altsyncram_gjt3.tdf Line: 27
+    Info (12023): Found entity 1: altsyncram_gjt3 File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/db/altsyncram_gjt3.tdf Line: 27
 Info (12128): Elaborating entity "altsyncram_gjt3" for hierarchy "RAM_2PORT:Memory|altsyncram:altsyncram_component|altsyncram_gjt3:auto_generated" File: c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altsyncram.tdf Line: 791
-Critical Warning (127005): Memory depth (4096) in the design file differs from memory depth (1024) in the Memory Initialization File "C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/IMhex.hex" -- setting initial value for remaining addresses to 0 File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/RAM_2PORT.vhd Line: 68
-Info (12128): Elaborating entity "Counter" for hierarchy "Counter:instCPT" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 256
-Info (12128): Elaborating entity "Displays" for hierarchy "Displays:instDISP" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 266
-Info (12128): Elaborating entity "clock1M" for hierarchy "clock1M:instPLL" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/vhdl_files/Top.vhd Line: 280
-Info (12128): Elaborating entity "altpll" for hierarchy "clock1M:instPLL|altpll:altpll_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/clock1M.vhd Line: 140
-Info (12130): Elaborated megafunction instantiation "clock1M:instPLL|altpll:altpll_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/clock1M.vhd Line: 140
-Info (12133): Instantiated megafunction "clock1M:instPLL|altpll:altpll_component" with the following parameter: File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/clock1M.vhd Line: 140
+Critical Warning (127005): Memory depth (4096) in the design file differs from memory depth (1024) in the Memory Initialization File "C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/IMhex.hex" -- setting initial value for remaining addresses to 0 File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/RAM_2PORT.vhd Line: 68
+Info (12128): Elaborating entity "Counter" for hierarchy "Counter:instCPT" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Top.vhd Line: 258
+Info (12128): Elaborating entity "Displays" for hierarchy "Displays:instDISP" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Top.vhd Line: 268
+Info (12128): Elaborating entity "test" for hierarchy "test:instPLL" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Top.vhd Line: 282
+Info (12128): Elaborating entity "altpll" for hierarchy "test:instPLL|altpll:altpll_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/test.vhd Line: 140
+Info (12130): Elaborated megafunction instantiation "test:instPLL|altpll:altpll_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/test.vhd Line: 140
+Info (12133): Instantiated megafunction "test:instPLL|altpll:altpll_component" with the following parameter: File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/test.vhd Line: 140
     Info (12134): Parameter "bandwidth_type" = "AUTO"
     Info (12134): Parameter "clk0_divide_by" = "50"
     Info (12134): Parameter "clk0_duty_cycle" = "50"
@@ -1013,7 +1026,7 @@ Info (12133): Instantiated megafunction "clock1M:instPLL|altpll:altpll_component
     Info (12134): Parameter "compensate_clock" = "CLK0"
     Info (12134): Parameter "inclk0_input_frequency" = "20000"
     Info (12134): Parameter "intended_device_family" = "MAX 10"
-    Info (12134): Parameter "lpm_hint" = "CBX_MODULE_PREFIX=clock1M"
+    Info (12134): Parameter "lpm_hint" = "CBX_MODULE_PREFIX=test"
     Info (12134): Parameter "lpm_type" = "altpll"
     Info (12134): Parameter "operation_mode" = "NORMAL"
     Info (12134): Parameter "pll_type" = "AUTO"
@@ -1060,9 +1073,9 @@ Info (12133): Instantiated megafunction "clock1M:instPLL|altpll:altpll_component
     Info (12134): Parameter "port_extclk3" = "PORT_UNUSED"
     Info (12134): Parameter "self_reset_on_loss_lock" = "OFF"
     Info (12134): Parameter "width_clock" = "5"
-Info (12021): Found 1 design units, including 1 entities, in source file db/clock1m_altpll.v
-    Info (12023): Found entity 1: clock1M_altpll File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC GALOPE V3/db/clock1m_altpll.v Line: 30
-Info (12128): Elaborating entity "clock1M_altpll" for hierarchy "clock1M:instPLL|altpll:altpll_component|clock1M_altpll:auto_generated" File: c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altpll.tdf Line: 897
+Info (12021): Found 1 design units, including 1 entities, in source file db/test_altpll.v
+    Info (12023): Found entity 1: test_altpll File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/db/test_altpll.v Line: 30
+Info (12128): Elaborating entity "test_altpll" for hierarchy "test:instPLL|altpll:altpll_component|test_altpll:auto_generated" File: c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altpll.tdf Line: 897
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "global.bp.work.simulPkg.PKG_reg00_31__gl_output" is stuck at GND
     Warning (13410): Pin "global.bp.work.simulPkg.PKG_reg00_30__gl_output" is stuck at GND
@@ -1099,16 +1112,16 @@ Warning (13024): Output pins are stuck at VCC or GND
 Info (286030): Timing-Driven Synthesis is running
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 1 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 3920 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 3888 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 2 input pins
     Info (21059): Implemented 97 output pins
-    Info (21061): Implemented 3788 logic cells
+    Info (21061): Implemented 3756 logic cells
     Info (21064): Implemented 32 RAM segments
     Info (21065): Implemented 1 PLLs
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 36 warnings
-    Info: Peak virtual memory: 4837 megabytes
-    Info: Processing ended: Thu Jun 09 17:13:34 2022
-    Info: Elapsed time: 00:00:24
-    Info: Total CPU time (on all processors): 00:00:34
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 38 warnings
+    Info: Peak virtual memory: 4834 megabytes
+    Info: Processing ended: Mon Jun 13 11:47:38 2022
+    Info: Elapsed time: 00:00:23
+    Info: Total CPU time (on all processors): 00:00:32
 
 

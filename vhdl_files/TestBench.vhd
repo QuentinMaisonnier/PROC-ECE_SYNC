@@ -148,8 +148,8 @@ architecture VHDL of TestBenchTop is
 		-- load instruction 1
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c000ef" report "instruction error at step 2" severity error;
-			assert false report "1;0x00c000ef;JAL : reg[01] = PC+4 and PC = 0x4 + 12;OK; ;" severity note;
+			assert instr = x"220000ef" report "instruction error at step 2" severity error;
+			assert false report "1;0x220000ef;JAL : reg[01] = PC+4 and PC = 0x4 + 544;OK; ;" severity note;
 			assert progcounter = x"00000004" report "progcounter error at step 2" severity error;
 			wait for 5 ns;
 
@@ -188,7 +188,7 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 3" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 3" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 3" severity error;
-			assert progcounter = x"00000010" report "progcounter error at step 3" severity error;
+			assert progcounter = x"00000224" report "progcounter error at step 3" severity error;
 			wait for 5 ns;
 
 		-- load instruction 2
@@ -196,7 +196,7 @@ architecture VHDL of TestBenchTop is
 			wait for 5 ns;
 			assert instr = x"ff010113" report "instruction error at step 4" severity error;
 			assert false report "2;0xff010113;ADDI : reg[02] = reg[02] + -16;OK; ;" severity note;
-			assert progcounter = x"00000010" report "progcounter error at step 4" severity error;
+			assert progcounter = x"00000224" report "progcounter error at step 4" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 2
@@ -234,16 +234,16 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 5" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 5" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 5" severity error;
-			assert progcounter = x"00000014" report "progcounter error at step 5" severity error;
+			assert progcounter = x"00000228" report "progcounter error at step 5" severity error;
 			wait for 5 ns;
 
 		-- load instruction 3
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00012423" report "instruction error at step 6" severity error;
-			assert false report "3;0x00012423;STRW : dataMem[reg[02] + 8] = reg[00];OK; ;" severity note;
-			assert progcounter = x"00000014" report "progcounter error at step 6" severity error;
-			assert dataAddr = x"00000ff8"    report "address error at step 6"     severity error;
+			assert instr = x"00012223" report "instruction error at step 6" severity error;
+			assert false report "3;0x00012223;STRW : dataMem[reg[02] + 4] = reg[00];OK; ;" severity note;
+			assert progcounter = x"00000228" report "progcounter error at step 6" severity error;
+			assert dataAddr = x"00000ff4"    report "address error at step 6"     severity error;
 			assert inputData = x"00000000"   report "data error at step  6"       severity error;
 			assert dataLength = "010"        report "length error at step 6"      severity error;
 			assert store = '1'               report "store error at step 6"       severity error;
@@ -284,22 +284,19 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 7" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 7" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 7" severity error;
-			assert progcounter = x"00000018" report "progcounter error at step 7" severity error;
+			assert progcounter = x"0000022c" report "progcounter error at step 7" severity error;
 			wait for 5 ns;
 
 		-- load instruction 4
 			ck <= '0';
 			wait for 5 ns;
-			
-			
-			assert instr = x"000316b7" report "instruction error at step 8" severity error;
-			assert false report "4;0x000316b7;LUI : reg[13] = 0x31 << 12;OK; ;" severity note;
-			assert progcounter = x"00000018" report "progcounter error at step 8" severity error;
+			assert instr = x"000057b7" report "instruction error at step 8" severity error;
+			assert false report "4;0x000057b7;LUI : reg[15] = 0x5 << 12;OK; ;" severity note;
+			assert progcounter = x"0000022c" report "progcounter error at step 8" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 4
 			ck <= '1';
-			
 			wait for 5 ns;
 			assert reg00 = x"00000000" report "reg00 error at step 9" severity error;
 			assert reg01 = x"00000008" report "reg01 error at step 9" severity error;
@@ -314,9 +311,9 @@ architecture VHDL of TestBenchTop is
 			assert reg0a = x"00000000" report "reg0a error at step 9" severity error;
 			assert reg0b = x"00000000" report "reg0b error at step 9" severity error;
 			assert reg0c = x"00000000" report "reg0c error at step 9" severity error;
-			assert reg0d = x"00031000" report "reg0d error at step 9" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 9" severity error;
 			assert reg0e = x"00000000" report "reg0e error at step 9" severity error;
-			assert reg0f = x"00000000" report "reg0f error at step 9" severity error;
+			assert reg0f = x"00005000" report "reg0f error at step 9" severity error;
 			assert reg10 = x"00000000" report "reg10 error at step 9" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 9" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 9" severity error;
@@ -333,16 +330,16 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 9" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 9" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 9" severity error;
-			assert progcounter = x"0000001c" report "progcounter error at step 9" severity error;
+			assert progcounter = x"00000230" report "progcounter error at step 9" severity error;
 			wait for 5 ns;
 
 		-- load instruction 5
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00012623" report "instruction error at step 10" severity error;
-			assert false report "5;0x00012623;STRW : dataMem[reg[02] + 12] = reg[00];OK; ;" severity note;
-			assert progcounter = x"0000001c" report "progcounter error at step 10" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 10"     severity error;
+			assert instr = x"00012423" report "instruction error at step 10" severity error;
+			assert false report "5;0x00012423;STRW : dataMem[reg[02] + 8] = reg[00];OK; ;" severity note;
+			assert progcounter = x"00000230" report "progcounter error at step 10" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 10"     severity error;
 			assert inputData = x"00000000"   report "data error at step  10"       severity error;
 			assert dataLength = "010"        report "length error at step 10"      severity error;
 			assert store = '1'               report "store error at step 10"       severity error;
@@ -364,9 +361,9 @@ architecture VHDL of TestBenchTop is
 			assert reg0a = x"00000000" report "reg0a error at step 11" severity error;
 			assert reg0b = x"00000000" report "reg0b error at step 11" severity error;
 			assert reg0c = x"00000000" report "reg0c error at step 11" severity error;
-			assert reg0d = x"00031000" report "reg0d error at step 11" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 11" severity error;
 			assert reg0e = x"00000000" report "reg0e error at step 11" severity error;
-			assert reg0f = x"00000000" report "reg0f error at step 11" severity error;
+			assert reg0f = x"00005000" report "reg0f error at step 11" severity error;
 			assert reg10 = x"00000000" report "reg10 error at step 11" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 11" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 11" severity error;
@@ -383,15 +380,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 11" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 11" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 11" severity error;
-			assert progcounter = x"00000020" report "progcounter error at step 11" severity error;
+			assert progcounter = x"00000234" report "progcounter error at step 11" severity error;
 			wait for 5 ns;
 
 		-- load instruction 6
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"03200713" report "instruction error at step 12" severity error;
-			assert false report "6;0x03200713;ADDI : reg[14] = reg[00] + 50;OK; ;" severity note;
-			assert progcounter = x"00000020" report "progcounter error at step 12" severity error;
+			assert instr = x"e2078793" report "instruction error at step 12" severity error;
+			assert false report "6;0xe2078793;ADDI : reg[15] = reg[15] + -480;OK; ;" severity note;
+			assert progcounter = x"00000234" report "progcounter error at step 12" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 6
@@ -410,9 +407,9 @@ architecture VHDL of TestBenchTop is
 			assert reg0a = x"00000000" report "reg0a error at step 13" severity error;
 			assert reg0b = x"00000000" report "reg0b error at step 13" severity error;
 			assert reg0c = x"00000000" report "reg0c error at step 13" severity error;
-			assert reg0d = x"00031000" report "reg0d error at step 13" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 13" severity error;
-			assert reg0f = x"00000000" report "reg0f error at step 13" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 13" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 13" severity error;
+			assert reg0f = x"00004e20" report "reg0f error at step 13" severity error;
 			assert reg10 = x"00000000" report "reg10 error at step 13" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 13" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 13" severity error;
@@ -429,15 +426,19 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 13" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 13" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 13" severity error;
-			assert progcounter = x"00000024" report "progcounter error at step 13" severity error;
+			assert progcounter = x"00000238" report "progcounter error at step 13" severity error;
 			wait for 5 ns;
 
 		-- load instruction 7
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"d4068693" report "instruction error at step 14" severity error;
-			assert false report "7;0xd4068693;ADDI : reg[13] = reg[13] + -704;OK; ;" severity note;
-			assert progcounter = x"00000024" report "progcounter error at step 14" severity error;
+			assert instr = x"00f12623" report "instruction error at step 14" severity error;
+			assert false report "7;0x00f12623;STRW : dataMem[reg[02] + 12] = reg[15];OK; ;" severity note;
+			assert progcounter = x"00000238" report "progcounter error at step 14" severity error;
+			assert dataAddr = x"00000ffc"    report "address error at step 14"     severity error;
+			assert inputData = x"00004e20"   report "data error at step  14"       severity error;
+			assert dataLength = "010"        report "length error at step 14"      severity error;
+			assert store = '1'               report "store error at step 14"       severity error;
 			wait for 5 ns;
 
 		-- execute instruction 7
@@ -456,9 +457,9 @@ architecture VHDL of TestBenchTop is
 			assert reg0a = x"00000000" report "reg0a error at step 15" severity error;
 			assert reg0b = x"00000000" report "reg0b error at step 15" severity error;
 			assert reg0c = x"00000000" report "reg0c error at step 15" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 15" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 15" severity error;
-			assert reg0f = x"00000000" report "reg0f error at step 15" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 15" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 15" severity error;
+			assert reg0f = x"00004e20" report "reg0f error at step 15" severity error;
 			assert reg10 = x"00000000" report "reg10 error at step 15" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 15" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 15" severity error;
@@ -475,15 +476,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 15" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 15" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 15" severity error;
-			assert progcounter = x"00000028" report "progcounter error at step 15" severity error;
+			assert progcounter = x"0000023c" report "progcounter error at step 15" severity error;
 			wait for 5 ns;
 
 		-- load instruction 8
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"800005b7" report "instruction error at step 16" severity error;
-			assert false report "8;0x800005b7;LUI : reg[11] = 0x80000 << 12;OK; ;" severity note;
-			assert progcounter = x"00000028" report "progcounter error at step 16" severity error;
+			assert instr = x"000107b7" report "instruction error at step 16" severity error;
+			assert false report "8;0x000107b7;LUI : reg[15] = 0x10 << 12;OK; ;" severity note;
+			assert progcounter = x"0000023c" report "progcounter error at step 16" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 8
@@ -500,11 +501,11 @@ architecture VHDL of TestBenchTop is
 			assert reg08 = x"00000000" report "reg08 error at step 17" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 17" severity error;
 			assert reg0a = x"00000000" report "reg0a error at step 17" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 17" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 17" severity error;
 			assert reg0c = x"00000000" report "reg0c error at step 17" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 17" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 17" severity error;
-			assert reg0f = x"00000000" report "reg0f error at step 17" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 17" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 17" severity error;
+			assert reg0f = x"00010000" report "reg0f error at step 17" severity error;
 			assert reg10 = x"00000000" report "reg10 error at step 17" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 17" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 17" severity error;
@@ -521,15 +522,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 17" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 17" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 17" severity error;
-			assert progcounter = x"0000002c" report "progcounter error at step 17" severity error;
+			assert progcounter = x"00000240" report "progcounter error at step 17" severity error;
 			wait for 5 ns;
 
 		-- load instruction 9
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00100513" report "instruction error at step 18" severity error;
-			assert false report "9;0x00100513;ADDI : reg[10] = reg[00] + 1;OK; ;" severity note;
-			assert progcounter = x"0000002c" report "progcounter error at step 18" severity error;
+			assert instr = x"fff78793" report "instruction error at step 18" severity error;
+			assert false report "9;0xfff78793;ADDI : reg[15] = reg[15] + -1;OK; ;" severity note;
+			assert progcounter = x"00000240" report "progcounter error at step 18" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 9
@@ -545,12 +546,12 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 19" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 19" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 19" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 19" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 19" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 19" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 19" severity error;
 			assert reg0c = x"00000000" report "reg0c error at step 19" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 19" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 19" severity error;
-			assert reg0f = x"00000000" report "reg0f error at step 19" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 19" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 19" severity error;
+			assert reg0f = x"0000ffff" report "reg0f error at step 19" severity error;
 			assert reg10 = x"00000000" report "reg10 error at step 19" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 19" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 19" severity error;
@@ -567,25 +568,19 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 19" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 19" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 19" severity error;
-			assert progcounter = x"00000030" report "progcounter error at step 19" severity error;
+			assert progcounter = x"00000244" report "progcounter error at step 19" severity error;
 			wait for 5 ns;
 
 		-- load instruction 10
 			ck <= '0';
-			reset<='1';
 			wait for 5 ns;
-			assert instr = x"00012623" report "instruction error at step 20" severity error;
-			assert false report "10;0x00012623;STRW : dataMem[reg[02] + 12] = reg[00];OK; ;" severity note;
-			assert progcounter = x"00000030" report "progcounter error at step 20" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 20"     severity error;
-			assert inputData = x"00000000"   report "data error at step  20"       severity error;
-			assert dataLength = "010"        report "length error at step 20"      severity error;
-			assert store = '1'               report "store error at step 20"       severity error;
+			assert instr = x"80000737" report "instruction error at step 20" severity error;
+			assert false report "10;0x80000737;LUI : reg[14] = 0x80000 << 12;OK; ;" severity note;
+			assert progcounter = x"00000244" report "progcounter error at step 20" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 10
 			ck <= '1';
-			reset<='0';
 			wait for 5 ns;
 			assert reg00 = x"00000000" report "reg00 error at step 21" severity error;
 			assert reg01 = x"00000008" report "reg01 error at step 21" severity error;
@@ -597,12 +592,12 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 21" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 21" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 21" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 21" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 21" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 21" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 21" severity error;
 			assert reg0c = x"00000000" report "reg0c error at step 21" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 21" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 21" severity error;
-			assert reg0f = x"00000000" report "reg0f error at step 21" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 21" severity error;
+			assert reg0e = x"80000000" report "reg0e error at step 21" severity error;
+			assert reg0f = x"0000ffff" report "reg0f error at step 21" severity error;
 			assert reg10 = x"00000000" report "reg10 error at step 21" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 21" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 21" severity error;
@@ -619,15 +614,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 21" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 21" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 21" severity error;
-			assert progcounter = x"00000034" report "progcounter error at step 21" severity error;
+			assert progcounter = x"00000248" report "progcounter error at step 21" severity error;
 			wait for 5 ns;
 
 		-- load instruction 11
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00000793" report "instruction error at step 22" severity error;
-			assert false report "11;0x00000793;ADDI : reg[15] = reg[00] + 0;OK; ;" severity note;
-			assert progcounter = x"00000034" report "progcounter error at step 22" severity error;
+			assert instr = x"ffc09637" report "instruction error at step 22" severity error;
+			assert false report "11;0xffc09637;LUI : reg[12] = 0xffc09 << 12;OK; ;" severity note;
+			assert progcounter = x"00000248" report "progcounter error at step 22" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 11
@@ -643,12 +638,12 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 23" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 23" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 23" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 23" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 23" severity error;
-			assert reg0c = x"00000000" report "reg0c error at step 23" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 23" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 23" severity error;
-			assert reg0f = x"00000000" report "reg0f error at step 23" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 23" severity error;
+			assert reg0b = x"00000000" report "reg0b error at step 23" severity error;
+			assert reg0c = x"ffc09000" report "reg0c error at step 23" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 23" severity error;
+			assert reg0e = x"80000000" report "reg0e error at step 23" severity error;
+			assert reg0f = x"0000ffff" report "reg0f error at step 23" severity error;
 			assert reg10 = x"00000000" report "reg10 error at step 23" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 23" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 23" severity error;
@@ -665,18 +660,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 23" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 23" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 23" severity error;
-			assert progcounter = x"00000038" report "progcounter error at step 23" severity error;
+			assert progcounter = x"0000024c" report "progcounter error at step 23" severity error;
 			wait for 5 ns;
 
 		-- load instruction 12
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 24" severity error;
-			assert false report "12;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000038" report "progcounter error at step 24" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 24"     severity error;
-			assert dataLength = "010"        report "length error at step 24"      severity error;
-			assert load = '1'                report "load error at step 24"        severity error;
+			assert instr = x"ffffc5b7" report "instruction error at step 24" severity error;
+			assert false report "12;0xffffc5b7;LUI : reg[11] = 0xffffc << 12;OK; ;" severity note;
+			assert progcounter = x"0000024c" report "progcounter error at step 24" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 12
@@ -692,12 +684,12 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 25" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 25" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 25" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 25" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 25" severity error;
-			assert reg0c = x"00000000" report "reg0c error at step 25" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 25" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 25" severity error;
-			assert reg0f = x"00000000" report "reg0f error at step 25" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 25" severity error;
+			assert reg0b = x"ffffc000" report "reg0b error at step 25" severity error;
+			assert reg0c = x"ffc09000" report "reg0c error at step 25" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 25" severity error;
+			assert reg0e = x"80000000" report "reg0e error at step 25" severity error;
+			assert reg0f = x"0000ffff" report "reg0f error at step 25" severity error;
 			assert reg10 = x"00000000" report "reg10 error at step 25" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 25" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 25" severity error;
@@ -714,15 +706,19 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 25" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 25" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 25" severity error;
-			assert progcounter = x"0000003c" report "progcounter error at step 25" severity error;
+			assert progcounter = x"00000250" report "progcounter error at step 25" severity error;
 			wait for 5 ns;
 
 		-- load instruction 13
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00f61863" report "instruction error at step 26" severity error;
-			assert false report "13;0x00f61863;BNE : if ( reg[12] != reg[15] ) PC = PC + 16;OK; ;" severity note;
-			assert progcounter = x"0000003c" report "progcounter error at step 26" severity error;
+			assert instr = x"00f72423" report "instruction error at step 26" severity error;
+			assert false report "13;0x00f72423;STRW : dataMem[reg[14] + 8] = reg[15];OK; ;" severity note;
+			assert progcounter = x"00000250" report "progcounter error at step 26" severity error;
+			assert dataAddr = x"80000008"    report "address error at step 26"     severity error;
+			assert inputData = x"0000ffff"   report "data error at step  26"       severity error;
+			assert dataLength = "010"        report "length error at step 26"      severity error;
+			assert store = '1'               report "store error at step 26"       severity error;
 			wait for 5 ns;
 
 		-- execute instruction 13
@@ -738,12 +734,12 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 27" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 27" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 27" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 27" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 27" severity error;
-			assert reg0c = x"00000000" report "reg0c error at step 27" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 27" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 27" severity error;
-			assert reg0f = x"00000000" report "reg0f error at step 27" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 27" severity error;
+			assert reg0b = x"ffffc000" report "reg0b error at step 27" severity error;
+			assert reg0c = x"ffc09000" report "reg0c error at step 27" severity error;
+			assert reg0d = x"00000000" report "reg0d error at step 27" severity error;
+			assert reg0e = x"80000000" report "reg0e error at step 27" severity error;
+			assert reg0f = x"0000ffff" report "reg0f error at step 27" severity error;
 			assert reg10 = x"00000000" report "reg10 error at step 27" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 27" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 27" severity error;
@@ -760,18 +756,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 27" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 27" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 27" severity error;
-			assert progcounter = x"00000040" report "progcounter error at step 27" severity error;
+			assert progcounter = x"00000254" report "progcounter error at step 27" severity error;
 			wait for 5 ns;
 
 		-- load instruction 14
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 28" severity error;
-			assert false report "14;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000040" report "progcounter error at step 28" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 28"     severity error;
-			assert dataLength = "010"        report "length error at step 28"      severity error;
-			assert load = '1'                report "load error at step 28"        severity error;
+			assert instr = x"06400693" report "instruction error at step 28" severity error;
+			assert false report "14;0x06400693;ADDI : reg[13] = reg[00] + 100;OK; ;" severity note;
+			assert progcounter = x"00000254" report "progcounter error at step 28" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 14
@@ -787,12 +780,12 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 29" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 29" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 29" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 29" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 29" severity error;
-			assert reg0c = x"00000000" report "reg0c error at step 29" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 29" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 29" severity error;
-			assert reg0f = x"00000000" report "reg0f error at step 29" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 29" severity error;
+			assert reg0b = x"ffffc000" report "reg0b error at step 29" severity error;
+			assert reg0c = x"ffc09000" report "reg0c error at step 29" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 29" severity error;
+			assert reg0e = x"80000000" report "reg0e error at step 29" severity error;
+			assert reg0f = x"0000ffff" report "reg0f error at step 29" severity error;
 			assert reg10 = x"00000000" report "reg10 error at step 29" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 29" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 29" severity error;
@@ -809,15 +802,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 29" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 29" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 29" severity error;
-			assert progcounter = x"00000044" report "progcounter error at step 29" severity error;
+			assert progcounter = x"00000258" report "progcounter error at step 29" severity error;
 			wait for 5 ns;
 
 		-- load instruction 15
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00160613" report "instruction error at step 30" severity error;
-			assert false report "15;0x00160613;ADDI : reg[12] = reg[12] + 1;OK; ;" severity note;
-			assert progcounter = x"00000044" report "progcounter error at step 30" severity error;
+			assert instr = x"800007b7" report "instruction error at step 30" severity error;
+			assert false report "15;0x800007b7;LUI : reg[15] = 0x80000 << 12;OK; ;" severity note;
+			assert progcounter = x"00000258" report "progcounter error at step 30" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 15
@@ -833,12 +826,12 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 31" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 31" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 31" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 31" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 31" severity error;
-			assert reg0c = x"00000001" report "reg0c error at step 31" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 31" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 31" severity error;
-			assert reg0f = x"00000000" report "reg0f error at step 31" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 31" severity error;
+			assert reg0b = x"ffffc000" report "reg0b error at step 31" severity error;
+			assert reg0c = x"ffc09000" report "reg0c error at step 31" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 31" severity error;
+			assert reg0e = x"80000000" report "reg0e error at step 31" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 31" severity error;
 			assert reg10 = x"00000000" report "reg10 error at step 31" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 31" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 31" severity error;
@@ -855,19 +848,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 31" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 31" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 31" severity error;
-			assert progcounter = x"00000048" report "progcounter error at step 31" severity error;
+			assert progcounter = x"0000025c" report "progcounter error at step 31" severity error;
 			wait for 5 ns;
 
 		-- load instruction 16
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12623" report "instruction error at step 32" severity error;
-			assert false report "16;0x00c12623;STRW : dataMem[reg[02] + 12] = reg[12];OK; ;" severity note;
-			assert progcounter = x"00000048" report "progcounter error at step 32" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 32"     severity error;
-			assert inputData = x"00000001"   report "data error at step  32"       severity error;
-			assert dataLength = "010"        report "length error at step 32"      severity error;
-			assert store = '1'               report "store error at step 32"       severity error;
+			assert instr = x"e8e60613" report "instruction error at step 32" severity error;
+			assert false report "16;0xe8e60613;ADDI : reg[12] = reg[12] + -370;OK; ;" severity note;
+			assert progcounter = x"0000025c" report "progcounter error at step 32" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 16
@@ -883,12 +872,12 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 33" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 33" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 33" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 33" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 33" severity error;
-			assert reg0c = x"00000001" report "reg0c error at step 33" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 33" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 33" severity error;
-			assert reg0f = x"00000000" report "reg0f error at step 33" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 33" severity error;
+			assert reg0b = x"ffffc000" report "reg0b error at step 33" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 33" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 33" severity error;
+			assert reg0e = x"80000000" report "reg0e error at step 33" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 33" severity error;
 			assert reg10 = x"00000000" report "reg10 error at step 33" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 33" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 33" severity error;
@@ -905,15 +894,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 33" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 33" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 33" severity error;
-			assert progcounter = x"0000004c" report "progcounter error at step 33" severity error;
+			assert progcounter = x"00000260" report "progcounter error at step 33" severity error;
 			wait for 5 ns;
 
 		-- load instruction 17
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00178793" report "instruction error at step 34" severity error;
-			assert false report "17;0x00178793;ADDI : reg[15] = reg[15] + 1;OK; ;" severity note;
-			assert progcounter = x"0000004c" report "progcounter error at step 34" severity error;
+			assert instr = x"0ab58593" report "instruction error at step 34" severity error;
+			assert false report "17;0x0ab58593;ADDI : reg[11] = reg[11] + 171;OK; ;" severity note;
+			assert progcounter = x"00000260" report "progcounter error at step 34" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 17
@@ -929,12 +918,12 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 35" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 35" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 35" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 35" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 35" severity error;
-			assert reg0c = x"00000001" report "reg0c error at step 35" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 35" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 35" severity error;
-			assert reg0f = x"00000001" report "reg0f error at step 35" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 35" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 35" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 35" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 35" severity error;
+			assert reg0e = x"80000000" report "reg0e error at step 35" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 35" severity error;
 			assert reg10 = x"00000000" report "reg10 error at step 35" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 35" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 35" severity error;
@@ -951,15 +940,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 35" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 35" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 35" severity error;
-			assert progcounter = x"00000050" report "progcounter error at step 35" severity error;
+			assert progcounter = x"00000264" report "progcounter error at step 35" severity error;
 			wait for 5 ns;
 
 		-- load instruction 18
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"fed794e3" report "instruction error at step 36" severity error;
-			assert false report "18;0xfed794e3;BNE : if ( reg[15] != reg[13] ) PC = PC + -24;OK; ;" severity note;
-			assert progcounter = x"00000050" report "progcounter error at step 36" severity error;
+			assert instr = x"00100813" report "instruction error at step 36" severity error;
+			assert false report "18;0x00100813;ADDI : reg[16] = reg[00] + 1;OK; ;" severity note;
+			assert progcounter = x"00000264" report "progcounter error at step 36" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 18
@@ -975,13 +964,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 37" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 37" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 37" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 37" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 37" severity error;
-			assert reg0c = x"00000001" report "reg0c error at step 37" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 37" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 37" severity error;
-			assert reg0f = x"00000001" report "reg0f error at step 37" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 37" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 37" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 37" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 37" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 37" severity error;
+			assert reg0e = x"80000000" report "reg0e error at step 37" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 37" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 37" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 37" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 37" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 37" severity error;
@@ -997,18 +986,19 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 37" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 37" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 37" severity error;
-			assert progcounter = x"00000038" report "progcounter error at step 37" severity error;
+			assert progcounter = x"00000268" report "progcounter error at step 37" severity error;
 			wait for 5 ns;
 
 		-- load instruction 19
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 38" severity error;
-			assert false report "19;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000038" report "progcounter error at step 38" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 38"     severity error;
+			assert instr = x"00012423" report "instruction error at step 38" severity error;
+			assert false report "19;0x00012423;STRW : dataMem[reg[02] + 8] = reg[00];OK; ;" severity note;
+			assert progcounter = x"00000268" report "progcounter error at step 38" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 38"     severity error;
+			assert inputData = x"00000000"   report "data error at step  38"       severity error;
 			assert dataLength = "010"        report "length error at step 38"      severity error;
-			assert load = '1'                report "load error at step 38"        severity error;
+			assert store = '1'               report "store error at step 38"       severity error;
 			wait for 5 ns;
 
 		-- execute instruction 19
@@ -1024,13 +1014,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 39" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 39" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 39" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 39" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 39" severity error;
-			assert reg0c = x"00000001" report "reg0c error at step 39" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 39" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 39" severity error;
-			assert reg0f = x"00000001" report "reg0f error at step 39" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 39" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 39" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 39" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 39" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 39" severity error;
+			assert reg0e = x"80000000" report "reg0e error at step 39" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 39" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 39" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 39" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 39" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 39" severity error;
@@ -1046,15 +1036,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 39" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 39" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 39" severity error;
-			assert progcounter = x"0000003c" report "progcounter error at step 39" severity error;
+			assert progcounter = x"0000026c" report "progcounter error at step 39" severity error;
 			wait for 5 ns;
 
 		-- load instruction 20
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00f61863" report "instruction error at step 40" severity error;
-			assert false report "20;0x00f61863;BNE : if ( reg[12] != reg[15] ) PC = PC + 16;OK; ;" severity note;
-			assert progcounter = x"0000003c" report "progcounter error at step 40" severity error;
+			assert instr = x"00000713" report "instruction error at step 40" severity error;
+			assert false report "20;0x00000713;ADDI : reg[14] = reg[00] + 0;OK; ;" severity note;
+			assert progcounter = x"0000026c" report "progcounter error at step 40" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 20
@@ -1070,13 +1060,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 41" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 41" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 41" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 41" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 41" severity error;
-			assert reg0c = x"00000001" report "reg0c error at step 41" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 41" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 41" severity error;
-			assert reg0f = x"00000001" report "reg0f error at step 41" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 41" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 41" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 41" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 41" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 41" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 41" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 41" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 41" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 41" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 41" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 41" severity error;
@@ -1092,15 +1082,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 41" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 41" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 41" severity error;
-			assert progcounter = x"00000040" report "progcounter error at step 41" severity error;
+			assert progcounter = x"00000270" report "progcounter error at step 41" severity error;
 			wait for 5 ns;
 
 		-- load instruction 21
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 42" severity error;
-			assert false report "21;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000040" report "progcounter error at step 42" severity error;
+			assert instr = x"00c12503" report "instruction error at step 42" severity error;
+			assert false report "21;0x00c12503;LDW : reg[10] = dataMem[reg[02] + 12];OK; ;" severity note;
+			assert progcounter = x"00000270" report "progcounter error at step 42" severity error;
 			assert dataAddr = x"00000ffc"    report "address error at step 42"     severity error;
 			assert dataLength = "010"        report "length error at step 42"      severity error;
 			assert load = '1'                report "load error at step 42"        severity error;
@@ -1119,13 +1109,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 43" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 43" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 43" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 43" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 43" severity error;
-			assert reg0c = x"00000001" report "reg0c error at step 43" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 43" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 43" severity error;
-			assert reg0f = x"00000001" report "reg0f error at step 43" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 43" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 43" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 43" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 43" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 43" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 43" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 43" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 43" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 43" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 43" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 43" severity error;
@@ -1141,15 +1131,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 43" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 43" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 43" severity error;
-			assert progcounter = x"00000044" report "progcounter error at step 43" severity error;
+			assert progcounter = x"00000274" report "progcounter error at step 43" severity error;
 			wait for 5 ns;
 
 		-- load instruction 22
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00160613" report "instruction error at step 44" severity error;
-			assert false report "22;0x00160613;ADDI : reg[12] = reg[12] + 1;OK; ;" severity note;
-			assert progcounter = x"00000044" report "progcounter error at step 44" severity error;
+			assert instr = x"02a76263" report "instruction error at step 44" severity error;
+			assert false report "22;0x02a76263;BLTU: if ( reg[14] < reg[10] ) PC = PC + 36;OK; ;" severity note;
+			assert progcounter = x"00000274" report "progcounter error at step 44" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 22
@@ -1165,13 +1155,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 45" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 45" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 45" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 45" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 45" severity error;
-			assert reg0c = x"00000002" report "reg0c error at step 45" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 45" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 45" severity error;
-			assert reg0f = x"00000001" report "reg0f error at step 45" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 45" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 45" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 45" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 45" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 45" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 45" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 45" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 45" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 45" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 45" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 45" severity error;
@@ -1187,19 +1177,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 45" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 45" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 45" severity error;
-			assert progcounter = x"00000048" report "progcounter error at step 45" severity error;
+			assert progcounter = x"00000298" report "progcounter error at step 45" severity error;
 			wait for 5 ns;
 
 		-- load instruction 23
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12623" report "instruction error at step 46" severity error;
-			assert false report "23;0x00c12623;STRW : dataMem[reg[02] + 12] = reg[12];OK; ;" severity note;
-			assert progcounter = x"00000048" report "progcounter error at step 46" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 46"     severity error;
-			assert inputData = x"00000002"   report "data error at step  46"       severity error;
+			assert instr = x"00812503" report "instruction error at step 46" severity error;
+			assert false report "23;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"00000298" report "progcounter error at step 46" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 46"     severity error;
 			assert dataLength = "010"        report "length error at step 46"      severity error;
-			assert store = '1'               report "store error at step 46"       severity error;
+			assert load = '1'                report "load error at step 46"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 23
@@ -1215,13 +1204,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 47" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 47" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 47" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 47" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 47" severity error;
-			assert reg0c = x"00000002" report "reg0c error at step 47" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 47" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 47" severity error;
-			assert reg0f = x"00000001" report "reg0f error at step 47" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 47" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 47" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 47" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 47" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 47" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 47" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 47" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 47" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 47" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 47" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 47" severity error;
@@ -1237,15 +1226,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 47" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 47" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 47" severity error;
-			assert progcounter = x"0000004c" report "progcounter error at step 47" severity error;
+			assert progcounter = x"0000029c" report "progcounter error at step 47" severity error;
 			wait for 5 ns;
 
 		-- load instruction 24
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00178793" report "instruction error at step 48" severity error;
-			assert false report "24;0x00178793;ADDI : reg[15] = reg[15] + 1;OK; ;" severity note;
-			assert progcounter = x"0000004c" report "progcounter error at step 48" severity error;
+			assert instr = x"00e51863" report "instruction error at step 48" severity error;
+			assert false report "24;0x00e51863;BNE : if ( reg[10] != reg[14] ) PC = PC + 16;OK; ;" severity note;
+			assert progcounter = x"0000029c" report "progcounter error at step 48" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 24
@@ -1261,13 +1250,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 49" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 49" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 49" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 49" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 49" severity error;
-			assert reg0c = x"00000002" report "reg0c error at step 49" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 49" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 49" severity error;
-			assert reg0f = x"00000002" report "reg0f error at step 49" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 49" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 49" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 49" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 49" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 49" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 49" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 49" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 49" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 49" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 49" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 49" severity error;
@@ -1283,15 +1272,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 49" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 49" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 49" severity error;
-			assert progcounter = x"00000050" report "progcounter error at step 49" severity error;
+			assert progcounter = x"000002a0" report "progcounter error at step 49" severity error;
 			wait for 5 ns;
 
 		-- load instruction 25
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"fed794e3" report "instruction error at step 50" severity error;
-			assert false report "25;0xfed794e3;BNE : if ( reg[15] != reg[13] ) PC = PC + -24;OK; ;" severity note;
-			assert progcounter = x"00000050" report "progcounter error at step 50" severity error;
+			assert instr = x"00812503" report "instruction error at step 50" severity error;
+			assert false report "25;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"000002a0" report "progcounter error at step 50" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 50"     severity error;
+			assert dataLength = "010"        report "length error at step 50"      severity error;
+			assert load = '1'                report "load error at step 50"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 25
@@ -1307,13 +1299,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 51" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 51" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 51" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 51" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 51" severity error;
-			assert reg0c = x"00000002" report "reg0c error at step 51" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 51" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 51" severity error;
-			assert reg0f = x"00000002" report "reg0f error at step 51" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 51" severity error;
+			assert reg0a = x"00000000" report "reg0a error at step 51" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 51" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 51" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 51" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 51" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 51" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 51" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 51" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 51" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 51" severity error;
@@ -1329,18 +1321,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 51" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 51" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 51" severity error;
-			assert progcounter = x"00000038" report "progcounter error at step 51" severity error;
+			assert progcounter = x"000002a4" report "progcounter error at step 51" severity error;
 			wait for 5 ns;
 
 		-- load instruction 26
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 52" severity error;
-			assert false report "26;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000038" report "progcounter error at step 52" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 52"     severity error;
-			assert dataLength = "010"        report "length error at step 52"      severity error;
-			assert load = '1'                report "load error at step 52"        severity error;
+			assert instr = x"00150513" report "instruction error at step 52" severity error;
+			assert false report "26;0x00150513;ADDI : reg[10] = reg[10] + 1;OK; ;" severity note;
+			assert progcounter = x"000002a4" report "progcounter error at step 52" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 26
@@ -1357,12 +1346,12 @@ architecture VHDL of TestBenchTop is
 			assert reg08 = x"00000000" report "reg08 error at step 53" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 53" severity error;
 			assert reg0a = x"00000001" report "reg0a error at step 53" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 53" severity error;
-			assert reg0c = x"00000002" report "reg0c error at step 53" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 53" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 53" severity error;
-			assert reg0f = x"00000002" report "reg0f error at step 53" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 53" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 53" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 53" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 53" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 53" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 53" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 53" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 53" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 53" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 53" severity error;
@@ -1378,15 +1367,19 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 53" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 53" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 53" severity error;
-			assert progcounter = x"0000003c" report "progcounter error at step 53" severity error;
+			assert progcounter = x"000002a8" report "progcounter error at step 53" severity error;
 			wait for 5 ns;
 
 		-- load instruction 27
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00f61863" report "instruction error at step 54" severity error;
-			assert false report "27;0x00f61863;BNE : if ( reg[12] != reg[15] ) PC = PC + 16;OK; ;" severity note;
-			assert progcounter = x"0000003c" report "progcounter error at step 54" severity error;
+			assert instr = x"00a12423" report "instruction error at step 54" severity error;
+			assert false report "27;0x00a12423;STRW : dataMem[reg[02] + 8] = reg[10];OK; ;" severity note;
+			assert progcounter = x"000002a8" report "progcounter error at step 54" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 54"     severity error;
+			assert inputData = x"00000001"   report "data error at step  54"       severity error;
+			assert dataLength = "010"        report "length error at step 54"      severity error;
+			assert store = '1'               report "store error at step 54"       severity error;
 			wait for 5 ns;
 
 		-- execute instruction 27
@@ -1403,12 +1396,12 @@ architecture VHDL of TestBenchTop is
 			assert reg08 = x"00000000" report "reg08 error at step 55" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 55" severity error;
 			assert reg0a = x"00000001" report "reg0a error at step 55" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 55" severity error;
-			assert reg0c = x"00000002" report "reg0c error at step 55" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 55" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 55" severity error;
-			assert reg0f = x"00000002" report "reg0f error at step 55" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 55" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 55" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 55" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 55" severity error;
+			assert reg0e = x"00000000" report "reg0e error at step 55" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 55" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 55" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 55" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 55" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 55" severity error;
@@ -1424,18 +1417,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 55" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 55" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 55" severity error;
-			assert progcounter = x"00000040" report "progcounter error at step 55" severity error;
+			assert progcounter = x"000002ac" report "progcounter error at step 55" severity error;
 			wait for 5 ns;
 
 		-- load instruction 28
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 56" severity error;
-			assert false report "28;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000040" report "progcounter error at step 56" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 56"     severity error;
-			assert dataLength = "010"        report "length error at step 56"      severity error;
-			assert load = '1'                report "load error at step 56"        severity error;
+			assert instr = x"00170713" report "instruction error at step 56" severity error;
+			assert false report "28;0x00170713;ADDI : reg[14] = reg[14] + 1;OK; ;" severity note;
+			assert progcounter = x"000002ac" report "progcounter error at step 56" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 28
@@ -1452,12 +1442,12 @@ architecture VHDL of TestBenchTop is
 			assert reg08 = x"00000000" report "reg08 error at step 57" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 57" severity error;
 			assert reg0a = x"00000001" report "reg0a error at step 57" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 57" severity error;
-			assert reg0c = x"00000002" report "reg0c error at step 57" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 57" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 57" severity error;
-			assert reg0f = x"00000002" report "reg0f error at step 57" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 57" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 57" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 57" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 57" severity error;
+			assert reg0e = x"00000001" report "reg0e error at step 57" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 57" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 57" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 57" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 57" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 57" severity error;
@@ -1473,15 +1463,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 57" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 57" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 57" severity error;
-			assert progcounter = x"00000044" report "progcounter error at step 57" severity error;
+			assert progcounter = x"000002b0" report "progcounter error at step 57" severity error;
 			wait for 5 ns;
 
 		-- load instruction 29
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00160613" report "instruction error at step 58" severity error;
-			assert false report "29;0x00160613;ADDI : reg[12] = reg[12] + 1;OK; ;" severity note;
-			assert progcounter = x"00000044" report "progcounter error at step 58" severity error;
+			assert instr = x"fc1ff06f" report "instruction error at step 58" severity error;
+			assert false report "29;0xfc1ff06f;JAL : reg[00] = PC+4 and PC = 0x2b0 + -64;OK; ;" severity note;
+			assert progcounter = x"000002b0" report "progcounter error at step 58" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 29
@@ -1498,12 +1488,12 @@ architecture VHDL of TestBenchTop is
 			assert reg08 = x"00000000" report "reg08 error at step 59" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 59" severity error;
 			assert reg0a = x"00000001" report "reg0a error at step 59" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 59" severity error;
-			assert reg0c = x"00000003" report "reg0c error at step 59" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 59" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 59" severity error;
-			assert reg0f = x"00000002" report "reg0f error at step 59" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 59" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 59" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 59" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 59" severity error;
+			assert reg0e = x"00000001" report "reg0e error at step 59" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 59" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 59" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 59" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 59" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 59" severity error;
@@ -1519,19 +1509,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 59" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 59" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 59" severity error;
-			assert progcounter = x"00000048" report "progcounter error at step 59" severity error;
+			assert progcounter = x"00000270" report "progcounter error at step 59" severity error;
 			wait for 5 ns;
 
 		-- load instruction 30
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12623" report "instruction error at step 60" severity error;
-			assert false report "30;0x00c12623;STRW : dataMem[reg[02] + 12] = reg[12];OK; ;" severity note;
-			assert progcounter = x"00000048" report "progcounter error at step 60" severity error;
+			assert instr = x"00c12503" report "instruction error at step 60" severity error;
+			assert false report "30;0x00c12503;LDW : reg[10] = dataMem[reg[02] + 12];OK; ;" severity note;
+			assert progcounter = x"00000270" report "progcounter error at step 60" severity error;
 			assert dataAddr = x"00000ffc"    report "address error at step 60"     severity error;
-			assert inputData = x"00000003"   report "data error at step  60"       severity error;
 			assert dataLength = "010"        report "length error at step 60"      severity error;
-			assert store = '1'               report "store error at step 60"       severity error;
+			assert load = '1'                report "load error at step 60"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 30
@@ -1547,13 +1536,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 61" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 61" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 61" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 61" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 61" severity error;
-			assert reg0c = x"00000003" report "reg0c error at step 61" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 61" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 61" severity error;
-			assert reg0f = x"00000002" report "reg0f error at step 61" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 61" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 61" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 61" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 61" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 61" severity error;
+			assert reg0e = x"00000001" report "reg0e error at step 61" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 61" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 61" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 61" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 61" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 61" severity error;
@@ -1569,15 +1558,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 61" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 61" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 61" severity error;
-			assert progcounter = x"0000004c" report "progcounter error at step 61" severity error;
+			assert progcounter = x"00000274" report "progcounter error at step 61" severity error;
 			wait for 5 ns;
 
 		-- load instruction 31
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00178793" report "instruction error at step 62" severity error;
-			assert false report "31;0x00178793;ADDI : reg[15] = reg[15] + 1;OK; ;" severity note;
-			assert progcounter = x"0000004c" report "progcounter error at step 62" severity error;
+			assert instr = x"02a76263" report "instruction error at step 62" severity error;
+			assert false report "31;0x02a76263;BLTU: if ( reg[14] < reg[10] ) PC = PC + 36;OK; ;" severity note;
+			assert progcounter = x"00000274" report "progcounter error at step 62" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 31
@@ -1593,13 +1582,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 63" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 63" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 63" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 63" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 63" severity error;
-			assert reg0c = x"00000003" report "reg0c error at step 63" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 63" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 63" severity error;
-			assert reg0f = x"00000003" report "reg0f error at step 63" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 63" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 63" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 63" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 63" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 63" severity error;
+			assert reg0e = x"00000001" report "reg0e error at step 63" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 63" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 63" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 63" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 63" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 63" severity error;
@@ -1615,15 +1604,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 63" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 63" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 63" severity error;
-			assert progcounter = x"00000050" report "progcounter error at step 63" severity error;
+			assert progcounter = x"00000298" report "progcounter error at step 63" severity error;
 			wait for 5 ns;
 
 		-- load instruction 32
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"fed794e3" report "instruction error at step 64" severity error;
-			assert false report "32;0xfed794e3;BNE : if ( reg[15] != reg[13] ) PC = PC + -24;OK; ;" severity note;
-			assert progcounter = x"00000050" report "progcounter error at step 64" severity error;
+			assert instr = x"00812503" report "instruction error at step 64" severity error;
+			assert false report "32;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"00000298" report "progcounter error at step 64" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 64"     severity error;
+			assert dataLength = "010"        report "length error at step 64"      severity error;
+			assert load = '1'                report "load error at step 64"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 32
@@ -1640,12 +1632,12 @@ architecture VHDL of TestBenchTop is
 			assert reg08 = x"00000000" report "reg08 error at step 65" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 65" severity error;
 			assert reg0a = x"00000001" report "reg0a error at step 65" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 65" severity error;
-			assert reg0c = x"00000003" report "reg0c error at step 65" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 65" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 65" severity error;
-			assert reg0f = x"00000003" report "reg0f error at step 65" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 65" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 65" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 65" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 65" severity error;
+			assert reg0e = x"00000001" report "reg0e error at step 65" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 65" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 65" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 65" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 65" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 65" severity error;
@@ -1661,18 +1653,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 65" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 65" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 65" severity error;
-			assert progcounter = x"00000038" report "progcounter error at step 65" severity error;
+			assert progcounter = x"0000029c" report "progcounter error at step 65" severity error;
 			wait for 5 ns;
 
 		-- load instruction 33
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 66" severity error;
-			assert false report "33;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000038" report "progcounter error at step 66" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 66"     severity error;
-			assert dataLength = "010"        report "length error at step 66"      severity error;
-			assert load = '1'                report "load error at step 66"        severity error;
+			assert instr = x"00e51863" report "instruction error at step 66" severity error;
+			assert false report "33;0x00e51863;BNE : if ( reg[10] != reg[14] ) PC = PC + 16;OK; ;" severity note;
+			assert progcounter = x"0000029c" report "progcounter error at step 66" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 33
@@ -1689,12 +1678,12 @@ architecture VHDL of TestBenchTop is
 			assert reg08 = x"00000000" report "reg08 error at step 67" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 67" severity error;
 			assert reg0a = x"00000001" report "reg0a error at step 67" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 67" severity error;
-			assert reg0c = x"00000003" report "reg0c error at step 67" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 67" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 67" severity error;
-			assert reg0f = x"00000003" report "reg0f error at step 67" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 67" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 67" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 67" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 67" severity error;
+			assert reg0e = x"00000001" report "reg0e error at step 67" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 67" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 67" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 67" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 67" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 67" severity error;
@@ -1710,15 +1699,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 67" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 67" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 67" severity error;
-			assert progcounter = x"0000003c" report "progcounter error at step 67" severity error;
+			assert progcounter = x"000002a0" report "progcounter error at step 67" severity error;
 			wait for 5 ns;
 
 		-- load instruction 34
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00f61863" report "instruction error at step 68" severity error;
-			assert false report "34;0x00f61863;BNE : if ( reg[12] != reg[15] ) PC = PC + 16;OK; ;" severity note;
-			assert progcounter = x"0000003c" report "progcounter error at step 68" severity error;
+			assert instr = x"00812503" report "instruction error at step 68" severity error;
+			assert false report "34;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"000002a0" report "progcounter error at step 68" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 68"     severity error;
+			assert dataLength = "010"        report "length error at step 68"      severity error;
+			assert load = '1'                report "load error at step 68"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 34
@@ -1735,12 +1727,12 @@ architecture VHDL of TestBenchTop is
 			assert reg08 = x"00000000" report "reg08 error at step 69" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 69" severity error;
 			assert reg0a = x"00000001" report "reg0a error at step 69" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 69" severity error;
-			assert reg0c = x"00000003" report "reg0c error at step 69" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 69" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 69" severity error;
-			assert reg0f = x"00000003" report "reg0f error at step 69" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 69" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 69" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 69" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 69" severity error;
+			assert reg0e = x"00000001" report "reg0e error at step 69" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 69" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 69" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 69" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 69" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 69" severity error;
@@ -1756,18 +1748,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 69" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 69" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 69" severity error;
-			assert progcounter = x"00000040" report "progcounter error at step 69" severity error;
+			assert progcounter = x"000002a4" report "progcounter error at step 69" severity error;
 			wait for 5 ns;
 
 		-- load instruction 35
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 70" severity error;
-			assert false report "35;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000040" report "progcounter error at step 70" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 70"     severity error;
-			assert dataLength = "010"        report "length error at step 70"      severity error;
-			assert load = '1'                report "load error at step 70"        severity error;
+			assert instr = x"00150513" report "instruction error at step 70" severity error;
+			assert false report "35;0x00150513;ADDI : reg[10] = reg[10] + 1;OK; ;" severity note;
+			assert progcounter = x"000002a4" report "progcounter error at step 70" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 35
@@ -1783,13 +1772,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 71" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 71" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 71" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 71" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 71" severity error;
-			assert reg0c = x"00000003" report "reg0c error at step 71" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 71" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 71" severity error;
-			assert reg0f = x"00000003" report "reg0f error at step 71" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 71" severity error;
+			assert reg0a = x"00000002" report "reg0a error at step 71" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 71" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 71" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 71" severity error;
+			assert reg0e = x"00000001" report "reg0e error at step 71" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 71" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 71" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 71" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 71" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 71" severity error;
@@ -1805,15 +1794,19 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 71" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 71" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 71" severity error;
-			assert progcounter = x"00000044" report "progcounter error at step 71" severity error;
+			assert progcounter = x"000002a8" report "progcounter error at step 71" severity error;
 			wait for 5 ns;
 
 		-- load instruction 36
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00160613" report "instruction error at step 72" severity error;
-			assert false report "36;0x00160613;ADDI : reg[12] = reg[12] + 1;OK; ;" severity note;
-			assert progcounter = x"00000044" report "progcounter error at step 72" severity error;
+			assert instr = x"00a12423" report "instruction error at step 72" severity error;
+			assert false report "36;0x00a12423;STRW : dataMem[reg[02] + 8] = reg[10];OK; ;" severity note;
+			assert progcounter = x"000002a8" report "progcounter error at step 72" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 72"     severity error;
+			assert inputData = x"00000002"   report "data error at step  72"       severity error;
+			assert dataLength = "010"        report "length error at step 72"      severity error;
+			assert store = '1'               report "store error at step 72"       severity error;
 			wait for 5 ns;
 
 		-- execute instruction 36
@@ -1829,13 +1822,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 73" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 73" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 73" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 73" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 73" severity error;
-			assert reg0c = x"00000004" report "reg0c error at step 73" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 73" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 73" severity error;
-			assert reg0f = x"00000003" report "reg0f error at step 73" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 73" severity error;
+			assert reg0a = x"00000002" report "reg0a error at step 73" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 73" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 73" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 73" severity error;
+			assert reg0e = x"00000001" report "reg0e error at step 73" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 73" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 73" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 73" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 73" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 73" severity error;
@@ -1851,19 +1844,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 73" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 73" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 73" severity error;
-			assert progcounter = x"00000048" report "progcounter error at step 73" severity error;
+			assert progcounter = x"000002ac" report "progcounter error at step 73" severity error;
 			wait for 5 ns;
 
 		-- load instruction 37
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12623" report "instruction error at step 74" severity error;
-			assert false report "37;0x00c12623;STRW : dataMem[reg[02] + 12] = reg[12];OK; ;" severity note;
-			assert progcounter = x"00000048" report "progcounter error at step 74" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 74"     severity error;
-			assert inputData = x"00000004"   report "data error at step  74"       severity error;
-			assert dataLength = "010"        report "length error at step 74"      severity error;
-			assert store = '1'               report "store error at step 74"       severity error;
+			assert instr = x"00170713" report "instruction error at step 74" severity error;
+			assert false report "37;0x00170713;ADDI : reg[14] = reg[14] + 1;OK; ;" severity note;
+			assert progcounter = x"000002ac" report "progcounter error at step 74" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 37
@@ -1879,13 +1868,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 75" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 75" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 75" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 75" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 75" severity error;
-			assert reg0c = x"00000004" report "reg0c error at step 75" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 75" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 75" severity error;
-			assert reg0f = x"00000003" report "reg0f error at step 75" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 75" severity error;
+			assert reg0a = x"00000002" report "reg0a error at step 75" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 75" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 75" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 75" severity error;
+			assert reg0e = x"00000002" report "reg0e error at step 75" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 75" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 75" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 75" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 75" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 75" severity error;
@@ -1901,15 +1890,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 75" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 75" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 75" severity error;
-			assert progcounter = x"0000004c" report "progcounter error at step 75" severity error;
+			assert progcounter = x"000002b0" report "progcounter error at step 75" severity error;
 			wait for 5 ns;
 
 		-- load instruction 38
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00178793" report "instruction error at step 76" severity error;
-			assert false report "38;0x00178793;ADDI : reg[15] = reg[15] + 1;OK; ;" severity note;
-			assert progcounter = x"0000004c" report "progcounter error at step 76" severity error;
+			assert instr = x"fc1ff06f" report "instruction error at step 76" severity error;
+			assert false report "38;0xfc1ff06f;JAL : reg[00] = PC+4 and PC = 0x2b0 + -64;OK; ;" severity note;
+			assert progcounter = x"000002b0" report "progcounter error at step 76" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 38
@@ -1925,13 +1914,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 77" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 77" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 77" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 77" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 77" severity error;
-			assert reg0c = x"00000004" report "reg0c error at step 77" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 77" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 77" severity error;
-			assert reg0f = x"00000004" report "reg0f error at step 77" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 77" severity error;
+			assert reg0a = x"00000002" report "reg0a error at step 77" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 77" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 77" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 77" severity error;
+			assert reg0e = x"00000002" report "reg0e error at step 77" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 77" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 77" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 77" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 77" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 77" severity error;
@@ -1947,15 +1936,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 77" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 77" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 77" severity error;
-			assert progcounter = x"00000050" report "progcounter error at step 77" severity error;
+			assert progcounter = x"00000270" report "progcounter error at step 77" severity error;
 			wait for 5 ns;
 
 		-- load instruction 39
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"fed794e3" report "instruction error at step 78" severity error;
-			assert false report "39;0xfed794e3;BNE : if ( reg[15] != reg[13] ) PC = PC + -24;OK; ;" severity note;
-			assert progcounter = x"00000050" report "progcounter error at step 78" severity error;
+			assert instr = x"00c12503" report "instruction error at step 78" severity error;
+			assert false report "39;0x00c12503;LDW : reg[10] = dataMem[reg[02] + 12];OK; ;" severity note;
+			assert progcounter = x"00000270" report "progcounter error at step 78" severity error;
+			assert dataAddr = x"00000ffc"    report "address error at step 78"     severity error;
+			assert dataLength = "010"        report "length error at step 78"      severity error;
+			assert load = '1'                report "load error at step 78"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 39
@@ -1971,13 +1963,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 79" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 79" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 79" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 79" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 79" severity error;
-			assert reg0c = x"00000004" report "reg0c error at step 79" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 79" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 79" severity error;
-			assert reg0f = x"00000004" report "reg0f error at step 79" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 79" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 79" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 79" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 79" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 79" severity error;
+			assert reg0e = x"00000002" report "reg0e error at step 79" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 79" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 79" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 79" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 79" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 79" severity error;
@@ -1993,18 +1985,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 79" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 79" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 79" severity error;
-			assert progcounter = x"00000038" report "progcounter error at step 79" severity error;
+			assert progcounter = x"00000274" report "progcounter error at step 79" severity error;
 			wait for 5 ns;
 
 		-- load instruction 40
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 80" severity error;
-			assert false report "40;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000038" report "progcounter error at step 80" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 80"     severity error;
-			assert dataLength = "010"        report "length error at step 80"      severity error;
-			assert load = '1'                report "load error at step 80"        severity error;
+			assert instr = x"02a76263" report "instruction error at step 80" severity error;
+			assert false report "40;0x02a76263;BLTU: if ( reg[14] < reg[10] ) PC = PC + 36;OK; ;" severity note;
+			assert progcounter = x"00000274" report "progcounter error at step 80" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 40
@@ -2020,13 +2009,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 81" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 81" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 81" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 81" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 81" severity error;
-			assert reg0c = x"00000004" report "reg0c error at step 81" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 81" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 81" severity error;
-			assert reg0f = x"00000004" report "reg0f error at step 81" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 81" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 81" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 81" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 81" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 81" severity error;
+			assert reg0e = x"00000002" report "reg0e error at step 81" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 81" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 81" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 81" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 81" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 81" severity error;
@@ -2042,15 +2031,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 81" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 81" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 81" severity error;
-			assert progcounter = x"0000003c" report "progcounter error at step 81" severity error;
+			assert progcounter = x"00000298" report "progcounter error at step 81" severity error;
 			wait for 5 ns;
 
 		-- load instruction 41
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00f61863" report "instruction error at step 82" severity error;
-			assert false report "41;0x00f61863;BNE : if ( reg[12] != reg[15] ) PC = PC + 16;OK; ;" severity note;
-			assert progcounter = x"0000003c" report "progcounter error at step 82" severity error;
+			assert instr = x"00812503" report "instruction error at step 82" severity error;
+			assert false report "41;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"00000298" report "progcounter error at step 82" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 82"     severity error;
+			assert dataLength = "010"        report "length error at step 82"      severity error;
+			assert load = '1'                report "load error at step 82"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 41
@@ -2066,13 +2058,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 83" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 83" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 83" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 83" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 83" severity error;
-			assert reg0c = x"00000004" report "reg0c error at step 83" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 83" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 83" severity error;
-			assert reg0f = x"00000004" report "reg0f error at step 83" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 83" severity error;
+			assert reg0a = x"00000002" report "reg0a error at step 83" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 83" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 83" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 83" severity error;
+			assert reg0e = x"00000002" report "reg0e error at step 83" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 83" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 83" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 83" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 83" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 83" severity error;
@@ -2088,18 +2080,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 83" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 83" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 83" severity error;
-			assert progcounter = x"00000040" report "progcounter error at step 83" severity error;
+			assert progcounter = x"0000029c" report "progcounter error at step 83" severity error;
 			wait for 5 ns;
 
 		-- load instruction 42
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 84" severity error;
-			assert false report "42;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000040" report "progcounter error at step 84" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 84"     severity error;
-			assert dataLength = "010"        report "length error at step 84"      severity error;
-			assert load = '1'                report "load error at step 84"        severity error;
+			assert instr = x"00e51863" report "instruction error at step 84" severity error;
+			assert false report "42;0x00e51863;BNE : if ( reg[10] != reg[14] ) PC = PC + 16;OK; ;" severity note;
+			assert progcounter = x"0000029c" report "progcounter error at step 84" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 42
@@ -2115,13 +2104,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 85" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 85" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 85" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 85" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 85" severity error;
-			assert reg0c = x"00000004" report "reg0c error at step 85" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 85" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 85" severity error;
-			assert reg0f = x"00000004" report "reg0f error at step 85" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 85" severity error;
+			assert reg0a = x"00000002" report "reg0a error at step 85" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 85" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 85" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 85" severity error;
+			assert reg0e = x"00000002" report "reg0e error at step 85" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 85" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 85" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 85" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 85" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 85" severity error;
@@ -2137,15 +2126,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 85" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 85" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 85" severity error;
-			assert progcounter = x"00000044" report "progcounter error at step 85" severity error;
+			assert progcounter = x"000002a0" report "progcounter error at step 85" severity error;
 			wait for 5 ns;
 
 		-- load instruction 43
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00160613" report "instruction error at step 86" severity error;
-			assert false report "43;0x00160613;ADDI : reg[12] = reg[12] + 1;OK; ;" severity note;
-			assert progcounter = x"00000044" report "progcounter error at step 86" severity error;
+			assert instr = x"00812503" report "instruction error at step 86" severity error;
+			assert false report "43;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"000002a0" report "progcounter error at step 86" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 86"     severity error;
+			assert dataLength = "010"        report "length error at step 86"      severity error;
+			assert load = '1'                report "load error at step 86"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 43
@@ -2161,13 +2153,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 87" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 87" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 87" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 87" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 87" severity error;
-			assert reg0c = x"00000005" report "reg0c error at step 87" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 87" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 87" severity error;
-			assert reg0f = x"00000004" report "reg0f error at step 87" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 87" severity error;
+			assert reg0a = x"00000002" report "reg0a error at step 87" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 87" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 87" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 87" severity error;
+			assert reg0e = x"00000002" report "reg0e error at step 87" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 87" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 87" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 87" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 87" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 87" severity error;
@@ -2183,19 +2175,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 87" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 87" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 87" severity error;
-			assert progcounter = x"00000048" report "progcounter error at step 87" severity error;
+			assert progcounter = x"000002a4" report "progcounter error at step 87" severity error;
 			wait for 5 ns;
 
 		-- load instruction 44
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12623" report "instruction error at step 88" severity error;
-			assert false report "44;0x00c12623;STRW : dataMem[reg[02] + 12] = reg[12];OK; ;" severity note;
-			assert progcounter = x"00000048" report "progcounter error at step 88" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 88"     severity error;
-			assert inputData = x"00000005"   report "data error at step  88"       severity error;
-			assert dataLength = "010"        report "length error at step 88"      severity error;
-			assert store = '1'               report "store error at step 88"       severity error;
+			assert instr = x"00150513" report "instruction error at step 88" severity error;
+			assert false report "44;0x00150513;ADDI : reg[10] = reg[10] + 1;OK; ;" severity note;
+			assert progcounter = x"000002a4" report "progcounter error at step 88" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 44
@@ -2211,13 +2199,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 89" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 89" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 89" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 89" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 89" severity error;
-			assert reg0c = x"00000005" report "reg0c error at step 89" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 89" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 89" severity error;
-			assert reg0f = x"00000004" report "reg0f error at step 89" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 89" severity error;
+			assert reg0a = x"00000003" report "reg0a error at step 89" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 89" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 89" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 89" severity error;
+			assert reg0e = x"00000002" report "reg0e error at step 89" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 89" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 89" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 89" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 89" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 89" severity error;
@@ -2233,15 +2221,19 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 89" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 89" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 89" severity error;
-			assert progcounter = x"0000004c" report "progcounter error at step 89" severity error;
+			assert progcounter = x"000002a8" report "progcounter error at step 89" severity error;
 			wait for 5 ns;
 
 		-- load instruction 45
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00178793" report "instruction error at step 90" severity error;
-			assert false report "45;0x00178793;ADDI : reg[15] = reg[15] + 1;OK; ;" severity note;
-			assert progcounter = x"0000004c" report "progcounter error at step 90" severity error;
+			assert instr = x"00a12423" report "instruction error at step 90" severity error;
+			assert false report "45;0x00a12423;STRW : dataMem[reg[02] + 8] = reg[10];OK; ;" severity note;
+			assert progcounter = x"000002a8" report "progcounter error at step 90" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 90"     severity error;
+			assert inputData = x"00000003"   report "data error at step  90"       severity error;
+			assert dataLength = "010"        report "length error at step 90"      severity error;
+			assert store = '1'               report "store error at step 90"       severity error;
 			wait for 5 ns;
 
 		-- execute instruction 45
@@ -2257,13 +2249,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 91" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 91" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 91" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 91" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 91" severity error;
-			assert reg0c = x"00000005" report "reg0c error at step 91" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 91" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 91" severity error;
-			assert reg0f = x"00000005" report "reg0f error at step 91" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 91" severity error;
+			assert reg0a = x"00000003" report "reg0a error at step 91" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 91" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 91" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 91" severity error;
+			assert reg0e = x"00000002" report "reg0e error at step 91" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 91" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 91" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 91" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 91" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 91" severity error;
@@ -2279,15 +2271,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 91" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 91" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 91" severity error;
-			assert progcounter = x"00000050" report "progcounter error at step 91" severity error;
+			assert progcounter = x"000002ac" report "progcounter error at step 91" severity error;
 			wait for 5 ns;
 
 		-- load instruction 46
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"fed794e3" report "instruction error at step 92" severity error;
-			assert false report "46;0xfed794e3;BNE : if ( reg[15] != reg[13] ) PC = PC + -24;OK; ;" severity note;
-			assert progcounter = x"00000050" report "progcounter error at step 92" severity error;
+			assert instr = x"00170713" report "instruction error at step 92" severity error;
+			assert false report "46;0x00170713;ADDI : reg[14] = reg[14] + 1;OK; ;" severity note;
+			assert progcounter = x"000002ac" report "progcounter error at step 92" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 46
@@ -2303,13 +2295,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 93" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 93" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 93" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 93" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 93" severity error;
-			assert reg0c = x"00000005" report "reg0c error at step 93" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 93" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 93" severity error;
-			assert reg0f = x"00000005" report "reg0f error at step 93" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 93" severity error;
+			assert reg0a = x"00000003" report "reg0a error at step 93" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 93" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 93" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 93" severity error;
+			assert reg0e = x"00000003" report "reg0e error at step 93" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 93" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 93" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 93" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 93" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 93" severity error;
@@ -2325,18 +2317,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 93" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 93" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 93" severity error;
-			assert progcounter = x"00000038" report "progcounter error at step 93" severity error;
+			assert progcounter = x"000002b0" report "progcounter error at step 93" severity error;
 			wait for 5 ns;
 
 		-- load instruction 47
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 94" severity error;
-			assert false report "47;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000038" report "progcounter error at step 94" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 94"     severity error;
-			assert dataLength = "010"        report "length error at step 94"      severity error;
-			assert load = '1'                report "load error at step 94"        severity error;
+			assert instr = x"fc1ff06f" report "instruction error at step 94" severity error;
+			assert false report "47;0xfc1ff06f;JAL : reg[00] = PC+4 and PC = 0x2b0 + -64;OK; ;" severity note;
+			assert progcounter = x"000002b0" report "progcounter error at step 94" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 47
@@ -2352,13 +2341,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 95" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 95" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 95" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 95" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 95" severity error;
-			assert reg0c = x"00000005" report "reg0c error at step 95" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 95" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 95" severity error;
-			assert reg0f = x"00000005" report "reg0f error at step 95" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 95" severity error;
+			assert reg0a = x"00000003" report "reg0a error at step 95" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 95" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 95" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 95" severity error;
+			assert reg0e = x"00000003" report "reg0e error at step 95" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 95" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 95" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 95" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 95" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 95" severity error;
@@ -2374,15 +2363,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 95" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 95" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 95" severity error;
-			assert progcounter = x"0000003c" report "progcounter error at step 95" severity error;
+			assert progcounter = x"00000270" report "progcounter error at step 95" severity error;
 			wait for 5 ns;
 
 		-- load instruction 48
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00f61863" report "instruction error at step 96" severity error;
-			assert false report "48;0x00f61863;BNE : if ( reg[12] != reg[15] ) PC = PC + 16;OK; ;" severity note;
-			assert progcounter = x"0000003c" report "progcounter error at step 96" severity error;
+			assert instr = x"00c12503" report "instruction error at step 96" severity error;
+			assert false report "48;0x00c12503;LDW : reg[10] = dataMem[reg[02] + 12];OK; ;" severity note;
+			assert progcounter = x"00000270" report "progcounter error at step 96" severity error;
+			assert dataAddr = x"00000ffc"    report "address error at step 96"     severity error;
+			assert dataLength = "010"        report "length error at step 96"      severity error;
+			assert load = '1'                report "load error at step 96"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 48
@@ -2398,13 +2390,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 97" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 97" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 97" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 97" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 97" severity error;
-			assert reg0c = x"00000005" report "reg0c error at step 97" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 97" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 97" severity error;
-			assert reg0f = x"00000005" report "reg0f error at step 97" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 97" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 97" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 97" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 97" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 97" severity error;
+			assert reg0e = x"00000003" report "reg0e error at step 97" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 97" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 97" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 97" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 97" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 97" severity error;
@@ -2420,18 +2412,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 97" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 97" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 97" severity error;
-			assert progcounter = x"00000040" report "progcounter error at step 97" severity error;
+			assert progcounter = x"00000274" report "progcounter error at step 97" severity error;
 			wait for 5 ns;
 
 		-- load instruction 49
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 98" severity error;
-			assert false report "49;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000040" report "progcounter error at step 98" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 98"     severity error;
-			assert dataLength = "010"        report "length error at step 98"      severity error;
-			assert load = '1'                report "load error at step 98"        severity error;
+			assert instr = x"02a76263" report "instruction error at step 98" severity error;
+			assert false report "49;0x02a76263;BLTU: if ( reg[14] < reg[10] ) PC = PC + 36;OK; ;" severity note;
+			assert progcounter = x"00000274" report "progcounter error at step 98" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 49
@@ -2447,13 +2436,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 99" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 99" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 99" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 99" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 99" severity error;
-			assert reg0c = x"00000005" report "reg0c error at step 99" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 99" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 99" severity error;
-			assert reg0f = x"00000005" report "reg0f error at step 99" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 99" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 99" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 99" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 99" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 99" severity error;
+			assert reg0e = x"00000003" report "reg0e error at step 99" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 99" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 99" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 99" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 99" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 99" severity error;
@@ -2469,15 +2458,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 99" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 99" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 99" severity error;
-			assert progcounter = x"00000044" report "progcounter error at step 99" severity error;
+			assert progcounter = x"00000298" report "progcounter error at step 99" severity error;
 			wait for 5 ns;
 
 		-- load instruction 50
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00160613" report "instruction error at step 100" severity error;
-			assert false report "50;0x00160613;ADDI : reg[12] = reg[12] + 1;OK; ;" severity note;
-			assert progcounter = x"00000044" report "progcounter error at step 100" severity error;
+			assert instr = x"00812503" report "instruction error at step 100" severity error;
+			assert false report "50;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"00000298" report "progcounter error at step 100" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 100"     severity error;
+			assert dataLength = "010"        report "length error at step 100"      severity error;
+			assert load = '1'                report "load error at step 100"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 50
@@ -2493,13 +2485,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 101" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 101" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 101" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 101" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 101" severity error;
-			assert reg0c = x"00000006" report "reg0c error at step 101" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 101" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 101" severity error;
-			assert reg0f = x"00000005" report "reg0f error at step 101" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 101" severity error;
+			assert reg0a = x"00000003" report "reg0a error at step 101" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 101" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 101" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 101" severity error;
+			assert reg0e = x"00000003" report "reg0e error at step 101" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 101" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 101" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 101" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 101" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 101" severity error;
@@ -2515,19 +2507,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 101" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 101" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 101" severity error;
-			assert progcounter = x"00000048" report "progcounter error at step 101" severity error;
+			assert progcounter = x"0000029c" report "progcounter error at step 101" severity error;
 			wait for 5 ns;
 
 		-- load instruction 51
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12623" report "instruction error at step 102" severity error;
-			assert false report "51;0x00c12623;STRW : dataMem[reg[02] + 12] = reg[12];OK; ;" severity note;
-			assert progcounter = x"00000048" report "progcounter error at step 102" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 102"     severity error;
-			assert inputData = x"00000006"   report "data error at step  102"       severity error;
-			assert dataLength = "010"        report "length error at step 102"      severity error;
-			assert store = '1'               report "store error at step 102"       severity error;
+			assert instr = x"00e51863" report "instruction error at step 102" severity error;
+			assert false report "51;0x00e51863;BNE : if ( reg[10] != reg[14] ) PC = PC + 16;OK; ;" severity note;
+			assert progcounter = x"0000029c" report "progcounter error at step 102" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 51
@@ -2543,13 +2531,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 103" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 103" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 103" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 103" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 103" severity error;
-			assert reg0c = x"00000006" report "reg0c error at step 103" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 103" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 103" severity error;
-			assert reg0f = x"00000005" report "reg0f error at step 103" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 103" severity error;
+			assert reg0a = x"00000003" report "reg0a error at step 103" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 103" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 103" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 103" severity error;
+			assert reg0e = x"00000003" report "reg0e error at step 103" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 103" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 103" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 103" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 103" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 103" severity error;
@@ -2565,15 +2553,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 103" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 103" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 103" severity error;
-			assert progcounter = x"0000004c" report "progcounter error at step 103" severity error;
+			assert progcounter = x"000002a0" report "progcounter error at step 103" severity error;
 			wait for 5 ns;
 
 		-- load instruction 52
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00178793" report "instruction error at step 104" severity error;
-			assert false report "52;0x00178793;ADDI : reg[15] = reg[15] + 1;OK; ;" severity note;
-			assert progcounter = x"0000004c" report "progcounter error at step 104" severity error;
+			assert instr = x"00812503" report "instruction error at step 104" severity error;
+			assert false report "52;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"000002a0" report "progcounter error at step 104" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 104"     severity error;
+			assert dataLength = "010"        report "length error at step 104"      severity error;
+			assert load = '1'                report "load error at step 104"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 52
@@ -2589,13 +2580,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 105" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 105" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 105" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 105" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 105" severity error;
-			assert reg0c = x"00000006" report "reg0c error at step 105" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 105" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 105" severity error;
-			assert reg0f = x"00000006" report "reg0f error at step 105" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 105" severity error;
+			assert reg0a = x"00000003" report "reg0a error at step 105" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 105" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 105" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 105" severity error;
+			assert reg0e = x"00000003" report "reg0e error at step 105" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 105" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 105" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 105" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 105" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 105" severity error;
@@ -2611,15 +2602,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 105" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 105" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 105" severity error;
-			assert progcounter = x"00000050" report "progcounter error at step 105" severity error;
+			assert progcounter = x"000002a4" report "progcounter error at step 105" severity error;
 			wait for 5 ns;
 
 		-- load instruction 53
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"fed794e3" report "instruction error at step 106" severity error;
-			assert false report "53;0xfed794e3;BNE : if ( reg[15] != reg[13] ) PC = PC + -24;OK; ;" severity note;
-			assert progcounter = x"00000050" report "progcounter error at step 106" severity error;
+			assert instr = x"00150513" report "instruction error at step 106" severity error;
+			assert false report "53;0x00150513;ADDI : reg[10] = reg[10] + 1;OK; ;" severity note;
+			assert progcounter = x"000002a4" report "progcounter error at step 106" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 53
@@ -2635,13 +2626,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 107" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 107" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 107" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 107" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 107" severity error;
-			assert reg0c = x"00000006" report "reg0c error at step 107" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 107" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 107" severity error;
-			assert reg0f = x"00000006" report "reg0f error at step 107" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 107" severity error;
+			assert reg0a = x"00000004" report "reg0a error at step 107" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 107" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 107" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 107" severity error;
+			assert reg0e = x"00000003" report "reg0e error at step 107" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 107" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 107" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 107" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 107" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 107" severity error;
@@ -2657,18 +2648,19 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 107" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 107" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 107" severity error;
-			assert progcounter = x"00000038" report "progcounter error at step 107" severity error;
+			assert progcounter = x"000002a8" report "progcounter error at step 107" severity error;
 			wait for 5 ns;
 
 		-- load instruction 54
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 108" severity error;
-			assert false report "54;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000038" report "progcounter error at step 108" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 108"     severity error;
+			assert instr = x"00a12423" report "instruction error at step 108" severity error;
+			assert false report "54;0x00a12423;STRW : dataMem[reg[02] + 8] = reg[10];OK; ;" severity note;
+			assert progcounter = x"000002a8" report "progcounter error at step 108" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 108"     severity error;
+			assert inputData = x"00000004"   report "data error at step  108"       severity error;
 			assert dataLength = "010"        report "length error at step 108"      severity error;
-			assert load = '1'                report "load error at step 108"        severity error;
+			assert store = '1'               report "store error at step 108"       severity error;
 			wait for 5 ns;
 
 		-- execute instruction 54
@@ -2684,13 +2676,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 109" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 109" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 109" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 109" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 109" severity error;
-			assert reg0c = x"00000006" report "reg0c error at step 109" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 109" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 109" severity error;
-			assert reg0f = x"00000006" report "reg0f error at step 109" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 109" severity error;
+			assert reg0a = x"00000004" report "reg0a error at step 109" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 109" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 109" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 109" severity error;
+			assert reg0e = x"00000003" report "reg0e error at step 109" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 109" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 109" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 109" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 109" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 109" severity error;
@@ -2706,15 +2698,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 109" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 109" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 109" severity error;
-			assert progcounter = x"0000003c" report "progcounter error at step 109" severity error;
+			assert progcounter = x"000002ac" report "progcounter error at step 109" severity error;
 			wait for 5 ns;
 
 		-- load instruction 55
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00f61863" report "instruction error at step 110" severity error;
-			assert false report "55;0x00f61863;BNE : if ( reg[12] != reg[15] ) PC = PC + 16;OK; ;" severity note;
-			assert progcounter = x"0000003c" report "progcounter error at step 110" severity error;
+			assert instr = x"00170713" report "instruction error at step 110" severity error;
+			assert false report "55;0x00170713;ADDI : reg[14] = reg[14] + 1;OK; ;" severity note;
+			assert progcounter = x"000002ac" report "progcounter error at step 110" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 55
@@ -2730,13 +2722,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 111" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 111" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 111" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 111" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 111" severity error;
-			assert reg0c = x"00000006" report "reg0c error at step 111" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 111" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 111" severity error;
-			assert reg0f = x"00000006" report "reg0f error at step 111" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 111" severity error;
+			assert reg0a = x"00000004" report "reg0a error at step 111" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 111" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 111" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 111" severity error;
+			assert reg0e = x"00000004" report "reg0e error at step 111" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 111" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 111" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 111" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 111" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 111" severity error;
@@ -2752,18 +2744,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 111" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 111" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 111" severity error;
-			assert progcounter = x"00000040" report "progcounter error at step 111" severity error;
+			assert progcounter = x"000002b0" report "progcounter error at step 111" severity error;
 			wait for 5 ns;
 
 		-- load instruction 56
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 112" severity error;
-			assert false report "56;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000040" report "progcounter error at step 112" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 112"     severity error;
-			assert dataLength = "010"        report "length error at step 112"      severity error;
-			assert load = '1'                report "load error at step 112"        severity error;
+			assert instr = x"fc1ff06f" report "instruction error at step 112" severity error;
+			assert false report "56;0xfc1ff06f;JAL : reg[00] = PC+4 and PC = 0x2b0 + -64;OK; ;" severity note;
+			assert progcounter = x"000002b0" report "progcounter error at step 112" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 56
@@ -2779,13 +2768,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 113" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 113" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 113" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 113" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 113" severity error;
-			assert reg0c = x"00000006" report "reg0c error at step 113" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 113" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 113" severity error;
-			assert reg0f = x"00000006" report "reg0f error at step 113" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 113" severity error;
+			assert reg0a = x"00000004" report "reg0a error at step 113" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 113" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 113" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 113" severity error;
+			assert reg0e = x"00000004" report "reg0e error at step 113" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 113" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 113" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 113" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 113" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 113" severity error;
@@ -2801,15 +2790,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 113" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 113" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 113" severity error;
-			assert progcounter = x"00000044" report "progcounter error at step 113" severity error;
+			assert progcounter = x"00000270" report "progcounter error at step 113" severity error;
 			wait for 5 ns;
 
 		-- load instruction 57
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00160613" report "instruction error at step 114" severity error;
-			assert false report "57;0x00160613;ADDI : reg[12] = reg[12] + 1;OK; ;" severity note;
-			assert progcounter = x"00000044" report "progcounter error at step 114" severity error;
+			assert instr = x"00c12503" report "instruction error at step 114" severity error;
+			assert false report "57;0x00c12503;LDW : reg[10] = dataMem[reg[02] + 12];OK; ;" severity note;
+			assert progcounter = x"00000270" report "progcounter error at step 114" severity error;
+			assert dataAddr = x"00000ffc"    report "address error at step 114"     severity error;
+			assert dataLength = "010"        report "length error at step 114"      severity error;
+			assert load = '1'                report "load error at step 114"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 57
@@ -2825,13 +2817,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 115" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 115" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 115" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 115" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 115" severity error;
-			assert reg0c = x"00000007" report "reg0c error at step 115" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 115" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 115" severity error;
-			assert reg0f = x"00000006" report "reg0f error at step 115" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 115" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 115" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 115" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 115" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 115" severity error;
+			assert reg0e = x"00000004" report "reg0e error at step 115" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 115" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 115" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 115" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 115" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 115" severity error;
@@ -2847,19 +2839,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 115" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 115" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 115" severity error;
-			assert progcounter = x"00000048" report "progcounter error at step 115" severity error;
+			assert progcounter = x"00000274" report "progcounter error at step 115" severity error;
 			wait for 5 ns;
 
 		-- load instruction 58
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12623" report "instruction error at step 116" severity error;
-			assert false report "58;0x00c12623;STRW : dataMem[reg[02] + 12] = reg[12];OK; ;" severity note;
-			assert progcounter = x"00000048" report "progcounter error at step 116" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 116"     severity error;
-			assert inputData = x"00000007"   report "data error at step  116"       severity error;
-			assert dataLength = "010"        report "length error at step 116"      severity error;
-			assert store = '1'               report "store error at step 116"       severity error;
+			assert instr = x"02a76263" report "instruction error at step 116" severity error;
+			assert false report "58;0x02a76263;BLTU: if ( reg[14] < reg[10] ) PC = PC + 36;OK; ;" severity note;
+			assert progcounter = x"00000274" report "progcounter error at step 116" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 58
@@ -2875,13 +2863,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 117" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 117" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 117" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 117" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 117" severity error;
-			assert reg0c = x"00000007" report "reg0c error at step 117" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 117" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 117" severity error;
-			assert reg0f = x"00000006" report "reg0f error at step 117" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 117" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 117" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 117" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 117" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 117" severity error;
+			assert reg0e = x"00000004" report "reg0e error at step 117" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 117" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 117" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 117" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 117" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 117" severity error;
@@ -2897,15 +2885,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 117" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 117" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 117" severity error;
-			assert progcounter = x"0000004c" report "progcounter error at step 117" severity error;
+			assert progcounter = x"00000298" report "progcounter error at step 117" severity error;
 			wait for 5 ns;
 
 		-- load instruction 59
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00178793" report "instruction error at step 118" severity error;
-			assert false report "59;0x00178793;ADDI : reg[15] = reg[15] + 1;OK; ;" severity note;
-			assert progcounter = x"0000004c" report "progcounter error at step 118" severity error;
+			assert instr = x"00812503" report "instruction error at step 118" severity error;
+			assert false report "59;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"00000298" report "progcounter error at step 118" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 118"     severity error;
+			assert dataLength = "010"        report "length error at step 118"      severity error;
+			assert load = '1'                report "load error at step 118"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 59
@@ -2921,13 +2912,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 119" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 119" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 119" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 119" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 119" severity error;
-			assert reg0c = x"00000007" report "reg0c error at step 119" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 119" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 119" severity error;
-			assert reg0f = x"00000007" report "reg0f error at step 119" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 119" severity error;
+			assert reg0a = x"00000004" report "reg0a error at step 119" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 119" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 119" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 119" severity error;
+			assert reg0e = x"00000004" report "reg0e error at step 119" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 119" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 119" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 119" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 119" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 119" severity error;
@@ -2943,15 +2934,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 119" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 119" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 119" severity error;
-			assert progcounter = x"00000050" report "progcounter error at step 119" severity error;
+			assert progcounter = x"0000029c" report "progcounter error at step 119" severity error;
 			wait for 5 ns;
 
 		-- load instruction 60
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"fed794e3" report "instruction error at step 120" severity error;
-			assert false report "60;0xfed794e3;BNE : if ( reg[15] != reg[13] ) PC = PC + -24;OK; ;" severity note;
-			assert progcounter = x"00000050" report "progcounter error at step 120" severity error;
+			assert instr = x"00e51863" report "instruction error at step 120" severity error;
+			assert false report "60;0x00e51863;BNE : if ( reg[10] != reg[14] ) PC = PC + 16;OK; ;" severity note;
+			assert progcounter = x"0000029c" report "progcounter error at step 120" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 60
@@ -2967,13 +2958,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 121" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 121" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 121" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 121" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 121" severity error;
-			assert reg0c = x"00000007" report "reg0c error at step 121" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 121" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 121" severity error;
-			assert reg0f = x"00000007" report "reg0f error at step 121" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 121" severity error;
+			assert reg0a = x"00000004" report "reg0a error at step 121" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 121" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 121" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 121" severity error;
+			assert reg0e = x"00000004" report "reg0e error at step 121" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 121" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 121" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 121" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 121" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 121" severity error;
@@ -2989,16 +2980,16 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 121" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 121" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 121" severity error;
-			assert progcounter = x"00000038" report "progcounter error at step 121" severity error;
+			assert progcounter = x"000002a0" report "progcounter error at step 121" severity error;
 			wait for 5 ns;
 
 		-- load instruction 61
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 122" severity error;
-			assert false report "61;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000038" report "progcounter error at step 122" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 122"     severity error;
+			assert instr = x"00812503" report "instruction error at step 122" severity error;
+			assert false report "61;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"000002a0" report "progcounter error at step 122" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 122"     severity error;
 			assert dataLength = "010"        report "length error at step 122"      severity error;
 			assert load = '1'                report "load error at step 122"        severity error;
 			wait for 5 ns;
@@ -3016,13 +3007,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 123" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 123" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 123" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 123" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 123" severity error;
-			assert reg0c = x"00000007" report "reg0c error at step 123" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 123" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 123" severity error;
-			assert reg0f = x"00000007" report "reg0f error at step 123" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 123" severity error;
+			assert reg0a = x"00000004" report "reg0a error at step 123" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 123" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 123" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 123" severity error;
+			assert reg0e = x"00000004" report "reg0e error at step 123" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 123" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 123" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 123" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 123" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 123" severity error;
@@ -3038,15 +3029,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 123" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 123" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 123" severity error;
-			assert progcounter = x"0000003c" report "progcounter error at step 123" severity error;
+			assert progcounter = x"000002a4" report "progcounter error at step 123" severity error;
 			wait for 5 ns;
 
 		-- load instruction 62
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00f61863" report "instruction error at step 124" severity error;
-			assert false report "62;0x00f61863;BNE : if ( reg[12] != reg[15] ) PC = PC + 16;OK; ;" severity note;
-			assert progcounter = x"0000003c" report "progcounter error at step 124" severity error;
+			assert instr = x"00150513" report "instruction error at step 124" severity error;
+			assert false report "62;0x00150513;ADDI : reg[10] = reg[10] + 1;OK; ;" severity note;
+			assert progcounter = x"000002a4" report "progcounter error at step 124" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 62
@@ -3062,13 +3053,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 125" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 125" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 125" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 125" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 125" severity error;
-			assert reg0c = x"00000007" report "reg0c error at step 125" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 125" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 125" severity error;
-			assert reg0f = x"00000007" report "reg0f error at step 125" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 125" severity error;
+			assert reg0a = x"00000005" report "reg0a error at step 125" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 125" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 125" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 125" severity error;
+			assert reg0e = x"00000004" report "reg0e error at step 125" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 125" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 125" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 125" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 125" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 125" severity error;
@@ -3084,18 +3075,19 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 125" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 125" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 125" severity error;
-			assert progcounter = x"00000040" report "progcounter error at step 125" severity error;
+			assert progcounter = x"000002a8" report "progcounter error at step 125" severity error;
 			wait for 5 ns;
 
 		-- load instruction 63
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 126" severity error;
-			assert false report "63;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000040" report "progcounter error at step 126" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 126"     severity error;
+			assert instr = x"00a12423" report "instruction error at step 126" severity error;
+			assert false report "63;0x00a12423;STRW : dataMem[reg[02] + 8] = reg[10];OK; ;" severity note;
+			assert progcounter = x"000002a8" report "progcounter error at step 126" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 126"     severity error;
+			assert inputData = x"00000005"   report "data error at step  126"       severity error;
 			assert dataLength = "010"        report "length error at step 126"      severity error;
-			assert load = '1'                report "load error at step 126"        severity error;
+			assert store = '1'               report "store error at step 126"       severity error;
 			wait for 5 ns;
 
 		-- execute instruction 63
@@ -3111,13 +3103,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 127" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 127" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 127" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 127" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 127" severity error;
-			assert reg0c = x"00000007" report "reg0c error at step 127" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 127" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 127" severity error;
-			assert reg0f = x"00000007" report "reg0f error at step 127" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 127" severity error;
+			assert reg0a = x"00000005" report "reg0a error at step 127" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 127" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 127" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 127" severity error;
+			assert reg0e = x"00000004" report "reg0e error at step 127" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 127" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 127" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 127" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 127" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 127" severity error;
@@ -3133,15 +3125,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 127" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 127" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 127" severity error;
-			assert progcounter = x"00000044" report "progcounter error at step 127" severity error;
+			assert progcounter = x"000002ac" report "progcounter error at step 127" severity error;
 			wait for 5 ns;
 
 		-- load instruction 64
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00160613" report "instruction error at step 128" severity error;
-			assert false report "64;0x00160613;ADDI : reg[12] = reg[12] + 1;OK; ;" severity note;
-			assert progcounter = x"00000044" report "progcounter error at step 128" severity error;
+			assert instr = x"00170713" report "instruction error at step 128" severity error;
+			assert false report "64;0x00170713;ADDI : reg[14] = reg[14] + 1;OK; ;" severity note;
+			assert progcounter = x"000002ac" report "progcounter error at step 128" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 64
@@ -3157,13 +3149,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 129" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 129" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 129" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 129" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 129" severity error;
-			assert reg0c = x"00000008" report "reg0c error at step 129" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 129" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 129" severity error;
-			assert reg0f = x"00000007" report "reg0f error at step 129" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 129" severity error;
+			assert reg0a = x"00000005" report "reg0a error at step 129" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 129" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 129" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 129" severity error;
+			assert reg0e = x"00000005" report "reg0e error at step 129" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 129" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 129" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 129" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 129" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 129" severity error;
@@ -3179,19 +3171,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 129" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 129" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 129" severity error;
-			assert progcounter = x"00000048" report "progcounter error at step 129" severity error;
+			assert progcounter = x"000002b0" report "progcounter error at step 129" severity error;
 			wait for 5 ns;
 
 		-- load instruction 65
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12623" report "instruction error at step 130" severity error;
-			assert false report "65;0x00c12623;STRW : dataMem[reg[02] + 12] = reg[12];OK; ;" severity note;
-			assert progcounter = x"00000048" report "progcounter error at step 130" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 130"     severity error;
-			assert inputData = x"00000008"   report "data error at step  130"       severity error;
-			assert dataLength = "010"        report "length error at step 130"      severity error;
-			assert store = '1'               report "store error at step 130"       severity error;
+			assert instr = x"fc1ff06f" report "instruction error at step 130" severity error;
+			assert false report "65;0xfc1ff06f;JAL : reg[00] = PC+4 and PC = 0x2b0 + -64;OK; ;" severity note;
+			assert progcounter = x"000002b0" report "progcounter error at step 130" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 65
@@ -3207,13 +3195,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 131" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 131" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 131" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 131" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 131" severity error;
-			assert reg0c = x"00000008" report "reg0c error at step 131" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 131" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 131" severity error;
-			assert reg0f = x"00000007" report "reg0f error at step 131" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 131" severity error;
+			assert reg0a = x"00000005" report "reg0a error at step 131" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 131" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 131" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 131" severity error;
+			assert reg0e = x"00000005" report "reg0e error at step 131" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 131" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 131" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 131" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 131" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 131" severity error;
@@ -3229,15 +3217,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 131" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 131" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 131" severity error;
-			assert progcounter = x"0000004c" report "progcounter error at step 131" severity error;
+			assert progcounter = x"00000270" report "progcounter error at step 131" severity error;
 			wait for 5 ns;
 
 		-- load instruction 66
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00178793" report "instruction error at step 132" severity error;
-			assert false report "66;0x00178793;ADDI : reg[15] = reg[15] + 1;OK; ;" severity note;
-			assert progcounter = x"0000004c" report "progcounter error at step 132" severity error;
+			assert instr = x"00c12503" report "instruction error at step 132" severity error;
+			assert false report "66;0x00c12503;LDW : reg[10] = dataMem[reg[02] + 12];OK; ;" severity note;
+			assert progcounter = x"00000270" report "progcounter error at step 132" severity error;
+			assert dataAddr = x"00000ffc"    report "address error at step 132"     severity error;
+			assert dataLength = "010"        report "length error at step 132"      severity error;
+			assert load = '1'                report "load error at step 132"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 66
@@ -3253,13 +3244,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 133" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 133" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 133" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 133" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 133" severity error;
-			assert reg0c = x"00000008" report "reg0c error at step 133" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 133" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 133" severity error;
-			assert reg0f = x"00000008" report "reg0f error at step 133" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 133" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 133" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 133" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 133" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 133" severity error;
+			assert reg0e = x"00000005" report "reg0e error at step 133" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 133" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 133" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 133" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 133" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 133" severity error;
@@ -3275,15 +3266,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 133" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 133" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 133" severity error;
-			assert progcounter = x"00000050" report "progcounter error at step 133" severity error;
+			assert progcounter = x"00000274" report "progcounter error at step 133" severity error;
 			wait for 5 ns;
 
 		-- load instruction 67
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"fed794e3" report "instruction error at step 134" severity error;
-			assert false report "67;0xfed794e3;BNE : if ( reg[15] != reg[13] ) PC = PC + -24;OK; ;" severity note;
-			assert progcounter = x"00000050" report "progcounter error at step 134" severity error;
+			assert instr = x"02a76263" report "instruction error at step 134" severity error;
+			assert false report "67;0x02a76263;BLTU: if ( reg[14] < reg[10] ) PC = PC + 36;OK; ;" severity note;
+			assert progcounter = x"00000274" report "progcounter error at step 134" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 67
@@ -3299,13 +3290,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 135" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 135" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 135" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 135" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 135" severity error;
-			assert reg0c = x"00000008" report "reg0c error at step 135" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 135" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 135" severity error;
-			assert reg0f = x"00000008" report "reg0f error at step 135" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 135" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 135" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 135" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 135" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 135" severity error;
+			assert reg0e = x"00000005" report "reg0e error at step 135" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 135" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 135" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 135" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 135" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 135" severity error;
@@ -3321,16 +3312,16 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 135" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 135" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 135" severity error;
-			assert progcounter = x"00000038" report "progcounter error at step 135" severity error;
+			assert progcounter = x"00000298" report "progcounter error at step 135" severity error;
 			wait for 5 ns;
 
 		-- load instruction 68
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 136" severity error;
-			assert false report "68;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000038" report "progcounter error at step 136" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 136"     severity error;
+			assert instr = x"00812503" report "instruction error at step 136" severity error;
+			assert false report "68;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"00000298" report "progcounter error at step 136" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 136"     severity error;
 			assert dataLength = "010"        report "length error at step 136"      severity error;
 			assert load = '1'                report "load error at step 136"        severity error;
 			wait for 5 ns;
@@ -3348,13 +3339,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 137" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 137" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 137" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 137" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 137" severity error;
-			assert reg0c = x"00000008" report "reg0c error at step 137" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 137" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 137" severity error;
-			assert reg0f = x"00000008" report "reg0f error at step 137" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 137" severity error;
+			assert reg0a = x"00000005" report "reg0a error at step 137" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 137" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 137" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 137" severity error;
+			assert reg0e = x"00000005" report "reg0e error at step 137" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 137" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 137" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 137" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 137" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 137" severity error;
@@ -3370,15 +3361,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 137" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 137" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 137" severity error;
-			assert progcounter = x"0000003c" report "progcounter error at step 137" severity error;
+			assert progcounter = x"0000029c" report "progcounter error at step 137" severity error;
 			wait for 5 ns;
 
 		-- load instruction 69
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00f61863" report "instruction error at step 138" severity error;
-			assert false report "69;0x00f61863;BNE : if ( reg[12] != reg[15] ) PC = PC + 16;OK; ;" severity note;
-			assert progcounter = x"0000003c" report "progcounter error at step 138" severity error;
+			assert instr = x"00e51863" report "instruction error at step 138" severity error;
+			assert false report "69;0x00e51863;BNE : if ( reg[10] != reg[14] ) PC = PC + 16;OK; ;" severity note;
+			assert progcounter = x"0000029c" report "progcounter error at step 138" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 69
@@ -3394,13 +3385,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 139" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 139" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 139" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 139" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 139" severity error;
-			assert reg0c = x"00000008" report "reg0c error at step 139" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 139" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 139" severity error;
-			assert reg0f = x"00000008" report "reg0f error at step 139" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 139" severity error;
+			assert reg0a = x"00000005" report "reg0a error at step 139" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 139" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 139" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 139" severity error;
+			assert reg0e = x"00000005" report "reg0e error at step 139" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 139" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 139" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 139" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 139" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 139" severity error;
@@ -3416,16 +3407,16 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 139" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 139" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 139" severity error;
-			assert progcounter = x"00000040" report "progcounter error at step 139" severity error;
+			assert progcounter = x"000002a0" report "progcounter error at step 139" severity error;
 			wait for 5 ns;
 
 		-- load instruction 70
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 140" severity error;
-			assert false report "70;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000040" report "progcounter error at step 140" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 140"     severity error;
+			assert instr = x"00812503" report "instruction error at step 140" severity error;
+			assert false report "70;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"000002a0" report "progcounter error at step 140" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 140"     severity error;
 			assert dataLength = "010"        report "length error at step 140"      severity error;
 			assert load = '1'                report "load error at step 140"        severity error;
 			wait for 5 ns;
@@ -3443,13 +3434,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 141" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 141" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 141" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 141" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 141" severity error;
-			assert reg0c = x"00000008" report "reg0c error at step 141" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 141" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 141" severity error;
-			assert reg0f = x"00000008" report "reg0f error at step 141" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 141" severity error;
+			assert reg0a = x"00000005" report "reg0a error at step 141" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 141" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 141" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 141" severity error;
+			assert reg0e = x"00000005" report "reg0e error at step 141" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 141" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 141" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 141" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 141" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 141" severity error;
@@ -3465,15 +3456,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 141" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 141" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 141" severity error;
-			assert progcounter = x"00000044" report "progcounter error at step 141" severity error;
+			assert progcounter = x"000002a4" report "progcounter error at step 141" severity error;
 			wait for 5 ns;
 
 		-- load instruction 71
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00160613" report "instruction error at step 142" severity error;
-			assert false report "71;0x00160613;ADDI : reg[12] = reg[12] + 1;OK; ;" severity note;
-			assert progcounter = x"00000044" report "progcounter error at step 142" severity error;
+			assert instr = x"00150513" report "instruction error at step 142" severity error;
+			assert false report "71;0x00150513;ADDI : reg[10] = reg[10] + 1;OK; ;" severity note;
+			assert progcounter = x"000002a4" report "progcounter error at step 142" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 71
@@ -3489,13 +3480,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 143" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 143" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 143" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 143" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 143" severity error;
-			assert reg0c = x"00000009" report "reg0c error at step 143" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 143" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 143" severity error;
-			assert reg0f = x"00000008" report "reg0f error at step 143" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 143" severity error;
+			assert reg0a = x"00000006" report "reg0a error at step 143" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 143" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 143" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 143" severity error;
+			assert reg0e = x"00000005" report "reg0e error at step 143" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 143" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 143" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 143" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 143" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 143" severity error;
@@ -3511,17 +3502,17 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 143" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 143" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 143" severity error;
-			assert progcounter = x"00000048" report "progcounter error at step 143" severity error;
+			assert progcounter = x"000002a8" report "progcounter error at step 143" severity error;
 			wait for 5 ns;
 
 		-- load instruction 72
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12623" report "instruction error at step 144" severity error;
-			assert false report "72;0x00c12623;STRW : dataMem[reg[02] + 12] = reg[12];OK; ;" severity note;
-			assert progcounter = x"00000048" report "progcounter error at step 144" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 144"     severity error;
-			assert inputData = x"00000009"   report "data error at step  144"       severity error;
+			assert instr = x"00a12423" report "instruction error at step 144" severity error;
+			assert false report "72;0x00a12423;STRW : dataMem[reg[02] + 8] = reg[10];OK; ;" severity note;
+			assert progcounter = x"000002a8" report "progcounter error at step 144" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 144"     severity error;
+			assert inputData = x"00000006"   report "data error at step  144"       severity error;
 			assert dataLength = "010"        report "length error at step 144"      severity error;
 			assert store = '1'               report "store error at step 144"       severity error;
 			wait for 5 ns;
@@ -3539,13 +3530,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 145" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 145" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 145" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 145" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 145" severity error;
-			assert reg0c = x"00000009" report "reg0c error at step 145" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 145" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 145" severity error;
-			assert reg0f = x"00000008" report "reg0f error at step 145" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 145" severity error;
+			assert reg0a = x"00000006" report "reg0a error at step 145" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 145" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 145" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 145" severity error;
+			assert reg0e = x"00000005" report "reg0e error at step 145" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 145" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 145" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 145" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 145" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 145" severity error;
@@ -3561,15 +3552,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 145" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 145" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 145" severity error;
-			assert progcounter = x"0000004c" report "progcounter error at step 145" severity error;
+			assert progcounter = x"000002ac" report "progcounter error at step 145" severity error;
 			wait for 5 ns;
 
 		-- load instruction 73
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00178793" report "instruction error at step 146" severity error;
-			assert false report "73;0x00178793;ADDI : reg[15] = reg[15] + 1;OK; ;" severity note;
-			assert progcounter = x"0000004c" report "progcounter error at step 146" severity error;
+			assert instr = x"00170713" report "instruction error at step 146" severity error;
+			assert false report "73;0x00170713;ADDI : reg[14] = reg[14] + 1;OK; ;" severity note;
+			assert progcounter = x"000002ac" report "progcounter error at step 146" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 73
@@ -3585,13 +3576,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 147" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 147" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 147" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 147" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 147" severity error;
-			assert reg0c = x"00000009" report "reg0c error at step 147" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 147" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 147" severity error;
-			assert reg0f = x"00000009" report "reg0f error at step 147" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 147" severity error;
+			assert reg0a = x"00000006" report "reg0a error at step 147" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 147" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 147" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 147" severity error;
+			assert reg0e = x"00000006" report "reg0e error at step 147" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 147" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 147" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 147" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 147" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 147" severity error;
@@ -3607,15 +3598,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 147" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 147" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 147" severity error;
-			assert progcounter = x"00000050" report "progcounter error at step 147" severity error;
+			assert progcounter = x"000002b0" report "progcounter error at step 147" severity error;
 			wait for 5 ns;
 
 		-- load instruction 74
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"fed794e3" report "instruction error at step 148" severity error;
-			assert false report "74;0xfed794e3;BNE : if ( reg[15] != reg[13] ) PC = PC + -24;OK; ;" severity note;
-			assert progcounter = x"00000050" report "progcounter error at step 148" severity error;
+			assert instr = x"fc1ff06f" report "instruction error at step 148" severity error;
+			assert false report "74;0xfc1ff06f;JAL : reg[00] = PC+4 and PC = 0x2b0 + -64;OK; ;" severity note;
+			assert progcounter = x"000002b0" report "progcounter error at step 148" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 74
@@ -3631,13 +3622,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 149" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 149" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 149" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 149" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 149" severity error;
-			assert reg0c = x"00000009" report "reg0c error at step 149" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 149" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 149" severity error;
-			assert reg0f = x"00000009" report "reg0f error at step 149" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 149" severity error;
+			assert reg0a = x"00000006" report "reg0a error at step 149" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 149" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 149" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 149" severity error;
+			assert reg0e = x"00000006" report "reg0e error at step 149" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 149" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 149" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 149" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 149" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 149" severity error;
@@ -3653,15 +3644,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 149" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 149" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 149" severity error;
-			assert progcounter = x"00000038" report "progcounter error at step 149" severity error;
+			assert progcounter = x"00000270" report "progcounter error at step 149" severity error;
 			wait for 5 ns;
 
 		-- load instruction 75
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 150" severity error;
-			assert false report "75;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000038" report "progcounter error at step 150" severity error;
+			assert instr = x"00c12503" report "instruction error at step 150" severity error;
+			assert false report "75;0x00c12503;LDW : reg[10] = dataMem[reg[02] + 12];OK; ;" severity note;
+			assert progcounter = x"00000270" report "progcounter error at step 150" severity error;
 			assert dataAddr = x"00000ffc"    report "address error at step 150"     severity error;
 			assert dataLength = "010"        report "length error at step 150"      severity error;
 			assert load = '1'                report "load error at step 150"        severity error;
@@ -3680,13 +3671,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 151" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 151" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 151" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 151" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 151" severity error;
-			assert reg0c = x"00000009" report "reg0c error at step 151" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 151" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 151" severity error;
-			assert reg0f = x"00000009" report "reg0f error at step 151" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 151" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 151" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 151" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 151" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 151" severity error;
+			assert reg0e = x"00000006" report "reg0e error at step 151" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 151" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 151" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 151" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 151" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 151" severity error;
@@ -3702,15 +3693,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 151" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 151" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 151" severity error;
-			assert progcounter = x"0000003c" report "progcounter error at step 151" severity error;
+			assert progcounter = x"00000274" report "progcounter error at step 151" severity error;
 			wait for 5 ns;
 
 		-- load instruction 76
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00f61863" report "instruction error at step 152" severity error;
-			assert false report "76;0x00f61863;BNE : if ( reg[12] != reg[15] ) PC = PC + 16;OK; ;" severity note;
-			assert progcounter = x"0000003c" report "progcounter error at step 152" severity error;
+			assert instr = x"02a76263" report "instruction error at step 152" severity error;
+			assert false report "76;0x02a76263;BLTU: if ( reg[14] < reg[10] ) PC = PC + 36;OK; ;" severity note;
+			assert progcounter = x"00000274" report "progcounter error at step 152" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 76
@@ -3726,13 +3717,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 153" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 153" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 153" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 153" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 153" severity error;
-			assert reg0c = x"00000009" report "reg0c error at step 153" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 153" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 153" severity error;
-			assert reg0f = x"00000009" report "reg0f error at step 153" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 153" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 153" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 153" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 153" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 153" severity error;
+			assert reg0e = x"00000006" report "reg0e error at step 153" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 153" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 153" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 153" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 153" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 153" severity error;
@@ -3748,16 +3739,16 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 153" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 153" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 153" severity error;
-			assert progcounter = x"00000040" report "progcounter error at step 153" severity error;
+			assert progcounter = x"00000298" report "progcounter error at step 153" severity error;
 			wait for 5 ns;
 
 		-- load instruction 77
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 154" severity error;
-			assert false report "77;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000040" report "progcounter error at step 154" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 154"     severity error;
+			assert instr = x"00812503" report "instruction error at step 154" severity error;
+			assert false report "77;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"00000298" report "progcounter error at step 154" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 154"     severity error;
 			assert dataLength = "010"        report "length error at step 154"      severity error;
 			assert load = '1'                report "load error at step 154"        severity error;
 			wait for 5 ns;
@@ -3775,13 +3766,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 155" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 155" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 155" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 155" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 155" severity error;
-			assert reg0c = x"00000009" report "reg0c error at step 155" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 155" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 155" severity error;
-			assert reg0f = x"00000009" report "reg0f error at step 155" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 155" severity error;
+			assert reg0a = x"00000006" report "reg0a error at step 155" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 155" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 155" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 155" severity error;
+			assert reg0e = x"00000006" report "reg0e error at step 155" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 155" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 155" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 155" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 155" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 155" severity error;
@@ -3797,15 +3788,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 155" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 155" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 155" severity error;
-			assert progcounter = x"00000044" report "progcounter error at step 155" severity error;
+			assert progcounter = x"0000029c" report "progcounter error at step 155" severity error;
 			wait for 5 ns;
 
 		-- load instruction 78
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00160613" report "instruction error at step 156" severity error;
-			assert false report "78;0x00160613;ADDI : reg[12] = reg[12] + 1;OK; ;" severity note;
-			assert progcounter = x"00000044" report "progcounter error at step 156" severity error;
+			assert instr = x"00e51863" report "instruction error at step 156" severity error;
+			assert false report "78;0x00e51863;BNE : if ( reg[10] != reg[14] ) PC = PC + 16;OK; ;" severity note;
+			assert progcounter = x"0000029c" report "progcounter error at step 156" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 78
@@ -3821,13 +3812,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 157" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 157" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 157" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 157" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 157" severity error;
-			assert reg0c = x"0000000a" report "reg0c error at step 157" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 157" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 157" severity error;
-			assert reg0f = x"00000009" report "reg0f error at step 157" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 157" severity error;
+			assert reg0a = x"00000006" report "reg0a error at step 157" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 157" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 157" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 157" severity error;
+			assert reg0e = x"00000006" report "reg0e error at step 157" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 157" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 157" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 157" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 157" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 157" severity error;
@@ -3843,19 +3834,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 157" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 157" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 157" severity error;
-			assert progcounter = x"00000048" report "progcounter error at step 157" severity error;
+			assert progcounter = x"000002a0" report "progcounter error at step 157" severity error;
 			wait for 5 ns;
 
 		-- load instruction 79
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12623" report "instruction error at step 158" severity error;
-			assert false report "79;0x00c12623;STRW : dataMem[reg[02] + 12] = reg[12];OK; ;" severity note;
-			assert progcounter = x"00000048" report "progcounter error at step 158" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 158"     severity error;
-			assert inputData = x"0000000a"   report "data error at step  158"       severity error;
+			assert instr = x"00812503" report "instruction error at step 158" severity error;
+			assert false report "79;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"000002a0" report "progcounter error at step 158" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 158"     severity error;
 			assert dataLength = "010"        report "length error at step 158"      severity error;
-			assert store = '1'               report "store error at step 158"       severity error;
+			assert load = '1'                report "load error at step 158"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 79
@@ -3871,13 +3861,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 159" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 159" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 159" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 159" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 159" severity error;
-			assert reg0c = x"0000000a" report "reg0c error at step 159" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 159" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 159" severity error;
-			assert reg0f = x"00000009" report "reg0f error at step 159" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 159" severity error;
+			assert reg0a = x"00000006" report "reg0a error at step 159" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 159" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 159" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 159" severity error;
+			assert reg0e = x"00000006" report "reg0e error at step 159" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 159" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 159" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 159" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 159" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 159" severity error;
@@ -3893,15 +3883,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 159" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 159" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 159" severity error;
-			assert progcounter = x"0000004c" report "progcounter error at step 159" severity error;
+			assert progcounter = x"000002a4" report "progcounter error at step 159" severity error;
 			wait for 5 ns;
 
 		-- load instruction 80
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00178793" report "instruction error at step 160" severity error;
-			assert false report "80;0x00178793;ADDI : reg[15] = reg[15] + 1;OK; ;" severity note;
-			assert progcounter = x"0000004c" report "progcounter error at step 160" severity error;
+			assert instr = x"00150513" report "instruction error at step 160" severity error;
+			assert false report "80;0x00150513;ADDI : reg[10] = reg[10] + 1;OK; ;" severity note;
+			assert progcounter = x"000002a4" report "progcounter error at step 160" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 80
@@ -3917,13 +3907,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 161" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 161" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 161" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 161" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 161" severity error;
-			assert reg0c = x"0000000a" report "reg0c error at step 161" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 161" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 161" severity error;
-			assert reg0f = x"0000000a" report "reg0f error at step 161" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 161" severity error;
+			assert reg0a = x"00000007" report "reg0a error at step 161" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 161" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 161" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 161" severity error;
+			assert reg0e = x"00000006" report "reg0e error at step 161" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 161" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 161" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 161" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 161" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 161" severity error;
@@ -3939,15 +3929,19 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 161" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 161" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 161" severity error;
-			assert progcounter = x"00000050" report "progcounter error at step 161" severity error;
+			assert progcounter = x"000002a8" report "progcounter error at step 161" severity error;
 			wait for 5 ns;
 
 		-- load instruction 81
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"fed794e3" report "instruction error at step 162" severity error;
-			assert false report "81;0xfed794e3;BNE : if ( reg[15] != reg[13] ) PC = PC + -24;OK; ;" severity note;
-			assert progcounter = x"00000050" report "progcounter error at step 162" severity error;
+			assert instr = x"00a12423" report "instruction error at step 162" severity error;
+			assert false report "81;0x00a12423;STRW : dataMem[reg[02] + 8] = reg[10];OK; ;" severity note;
+			assert progcounter = x"000002a8" report "progcounter error at step 162" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 162"     severity error;
+			assert inputData = x"00000007"   report "data error at step  162"       severity error;
+			assert dataLength = "010"        report "length error at step 162"      severity error;
+			assert store = '1'               report "store error at step 162"       severity error;
 			wait for 5 ns;
 
 		-- execute instruction 81
@@ -3963,13 +3957,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 163" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 163" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 163" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 163" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 163" severity error;
-			assert reg0c = x"0000000a" report "reg0c error at step 163" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 163" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 163" severity error;
-			assert reg0f = x"0000000a" report "reg0f error at step 163" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 163" severity error;
+			assert reg0a = x"00000007" report "reg0a error at step 163" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 163" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 163" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 163" severity error;
+			assert reg0e = x"00000006" report "reg0e error at step 163" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 163" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 163" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 163" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 163" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 163" severity error;
@@ -3985,18 +3979,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 163" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 163" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 163" severity error;
-			assert progcounter = x"00000038" report "progcounter error at step 163" severity error;
+			assert progcounter = x"000002ac" report "progcounter error at step 163" severity error;
 			wait for 5 ns;
 
 		-- load instruction 82
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 164" severity error;
-			assert false report "82;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000038" report "progcounter error at step 164" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 164"     severity error;
-			assert dataLength = "010"        report "length error at step 164"      severity error;
-			assert load = '1'                report "load error at step 164"        severity error;
+			assert instr = x"00170713" report "instruction error at step 164" severity error;
+			assert false report "82;0x00170713;ADDI : reg[14] = reg[14] + 1;OK; ;" severity note;
+			assert progcounter = x"000002ac" report "progcounter error at step 164" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 82
@@ -4012,13 +4003,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 165" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 165" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 165" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 165" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 165" severity error;
-			assert reg0c = x"0000000a" report "reg0c error at step 165" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 165" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 165" severity error;
-			assert reg0f = x"0000000a" report "reg0f error at step 165" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 165" severity error;
+			assert reg0a = x"00000007" report "reg0a error at step 165" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 165" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 165" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 165" severity error;
+			assert reg0e = x"00000007" report "reg0e error at step 165" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 165" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 165" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 165" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 165" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 165" severity error;
@@ -4034,15 +4025,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 165" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 165" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 165" severity error;
-			assert progcounter = x"0000003c" report "progcounter error at step 165" severity error;
+			assert progcounter = x"000002b0" report "progcounter error at step 165" severity error;
 			wait for 5 ns;
 
 		-- load instruction 83
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00f61863" report "instruction error at step 166" severity error;
-			assert false report "83;0x00f61863;BNE : if ( reg[12] != reg[15] ) PC = PC + 16;OK; ;" severity note;
-			assert progcounter = x"0000003c" report "progcounter error at step 166" severity error;
+			assert instr = x"fc1ff06f" report "instruction error at step 166" severity error;
+			assert false report "83;0xfc1ff06f;JAL : reg[00] = PC+4 and PC = 0x2b0 + -64;OK; ;" severity note;
+			assert progcounter = x"000002b0" report "progcounter error at step 166" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 83
@@ -4058,13 +4049,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 167" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 167" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 167" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 167" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 167" severity error;
-			assert reg0c = x"0000000a" report "reg0c error at step 167" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 167" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 167" severity error;
-			assert reg0f = x"0000000a" report "reg0f error at step 167" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 167" severity error;
+			assert reg0a = x"00000007" report "reg0a error at step 167" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 167" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 167" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 167" severity error;
+			assert reg0e = x"00000007" report "reg0e error at step 167" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 167" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 167" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 167" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 167" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 167" severity error;
@@ -4080,15 +4071,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 167" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 167" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 167" severity error;
-			assert progcounter = x"00000040" report "progcounter error at step 167" severity error;
+			assert progcounter = x"00000270" report "progcounter error at step 167" severity error;
 			wait for 5 ns;
 
 		-- load instruction 84
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 168" severity error;
-			assert false report "84;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000040" report "progcounter error at step 168" severity error;
+			assert instr = x"00c12503" report "instruction error at step 168" severity error;
+			assert false report "84;0x00c12503;LDW : reg[10] = dataMem[reg[02] + 12];OK; ;" severity note;
+			assert progcounter = x"00000270" report "progcounter error at step 168" severity error;
 			assert dataAddr = x"00000ffc"    report "address error at step 168"     severity error;
 			assert dataLength = "010"        report "length error at step 168"      severity error;
 			assert load = '1'                report "load error at step 168"        severity error;
@@ -4107,13 +4098,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 169" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 169" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 169" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 169" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 169" severity error;
-			assert reg0c = x"0000000a" report "reg0c error at step 169" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 169" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 169" severity error;
-			assert reg0f = x"0000000a" report "reg0f error at step 169" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 169" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 169" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 169" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 169" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 169" severity error;
+			assert reg0e = x"00000007" report "reg0e error at step 169" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 169" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 169" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 169" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 169" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 169" severity error;
@@ -4129,15 +4120,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 169" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 169" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 169" severity error;
-			assert progcounter = x"00000044" report "progcounter error at step 169" severity error;
+			assert progcounter = x"00000274" report "progcounter error at step 169" severity error;
 			wait for 5 ns;
 
 		-- load instruction 85
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00160613" report "instruction error at step 170" severity error;
-			assert false report "85;0x00160613;ADDI : reg[12] = reg[12] + 1;OK; ;" severity note;
-			assert progcounter = x"00000044" report "progcounter error at step 170" severity error;
+			assert instr = x"02a76263" report "instruction error at step 170" severity error;
+			assert false report "85;0x02a76263;BLTU: if ( reg[14] < reg[10] ) PC = PC + 36;OK; ;" severity note;
+			assert progcounter = x"00000274" report "progcounter error at step 170" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 85
@@ -4153,13 +4144,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 171" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 171" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 171" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 171" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 171" severity error;
-			assert reg0c = x"0000000b" report "reg0c error at step 171" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 171" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 171" severity error;
-			assert reg0f = x"0000000a" report "reg0f error at step 171" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 171" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 171" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 171" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 171" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 171" severity error;
+			assert reg0e = x"00000007" report "reg0e error at step 171" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 171" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 171" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 171" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 171" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 171" severity error;
@@ -4175,19 +4166,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 171" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 171" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 171" severity error;
-			assert progcounter = x"00000048" report "progcounter error at step 171" severity error;
+			assert progcounter = x"00000298" report "progcounter error at step 171" severity error;
 			wait for 5 ns;
 
 		-- load instruction 86
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12623" report "instruction error at step 172" severity error;
-			assert false report "86;0x00c12623;STRW : dataMem[reg[02] + 12] = reg[12];OK; ;" severity note;
-			assert progcounter = x"00000048" report "progcounter error at step 172" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 172"     severity error;
-			assert inputData = x"0000000b"   report "data error at step  172"       severity error;
+			assert instr = x"00812503" report "instruction error at step 172" severity error;
+			assert false report "86;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"00000298" report "progcounter error at step 172" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 172"     severity error;
 			assert dataLength = "010"        report "length error at step 172"      severity error;
-			assert store = '1'               report "store error at step 172"       severity error;
+			assert load = '1'                report "load error at step 172"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 86
@@ -4203,13 +4193,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 173" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 173" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 173" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 173" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 173" severity error;
-			assert reg0c = x"0000000b" report "reg0c error at step 173" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 173" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 173" severity error;
-			assert reg0f = x"0000000a" report "reg0f error at step 173" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 173" severity error;
+			assert reg0a = x"00000007" report "reg0a error at step 173" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 173" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 173" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 173" severity error;
+			assert reg0e = x"00000007" report "reg0e error at step 173" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 173" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 173" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 173" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 173" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 173" severity error;
@@ -4225,15 +4215,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 173" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 173" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 173" severity error;
-			assert progcounter = x"0000004c" report "progcounter error at step 173" severity error;
+			assert progcounter = x"0000029c" report "progcounter error at step 173" severity error;
 			wait for 5 ns;
 
 		-- load instruction 87
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00178793" report "instruction error at step 174" severity error;
-			assert false report "87;0x00178793;ADDI : reg[15] = reg[15] + 1;OK; ;" severity note;
-			assert progcounter = x"0000004c" report "progcounter error at step 174" severity error;
+			assert instr = x"00e51863" report "instruction error at step 174" severity error;
+			assert false report "87;0x00e51863;BNE : if ( reg[10] != reg[14] ) PC = PC + 16;OK; ;" severity note;
+			assert progcounter = x"0000029c" report "progcounter error at step 174" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 87
@@ -4249,13 +4239,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 175" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 175" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 175" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 175" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 175" severity error;
-			assert reg0c = x"0000000b" report "reg0c error at step 175" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 175" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 175" severity error;
-			assert reg0f = x"0000000b" report "reg0f error at step 175" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 175" severity error;
+			assert reg0a = x"00000007" report "reg0a error at step 175" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 175" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 175" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 175" severity error;
+			assert reg0e = x"00000007" report "reg0e error at step 175" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 175" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 175" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 175" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 175" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 175" severity error;
@@ -4271,15 +4261,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 175" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 175" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 175" severity error;
-			assert progcounter = x"00000050" report "progcounter error at step 175" severity error;
+			assert progcounter = x"000002a0" report "progcounter error at step 175" severity error;
 			wait for 5 ns;
 
 		-- load instruction 88
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"fed794e3" report "instruction error at step 176" severity error;
-			assert false report "88;0xfed794e3;BNE : if ( reg[15] != reg[13] ) PC = PC + -24;OK; ;" severity note;
-			assert progcounter = x"00000050" report "progcounter error at step 176" severity error;
+			assert instr = x"00812503" report "instruction error at step 176" severity error;
+			assert false report "88;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"000002a0" report "progcounter error at step 176" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 176"     severity error;
+			assert dataLength = "010"        report "length error at step 176"      severity error;
+			assert load = '1'                report "load error at step 176"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 88
@@ -4295,13 +4288,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 177" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 177" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 177" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 177" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 177" severity error;
-			assert reg0c = x"0000000b" report "reg0c error at step 177" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 177" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 177" severity error;
-			assert reg0f = x"0000000b" report "reg0f error at step 177" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 177" severity error;
+			assert reg0a = x"00000007" report "reg0a error at step 177" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 177" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 177" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 177" severity error;
+			assert reg0e = x"00000007" report "reg0e error at step 177" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 177" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 177" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 177" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 177" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 177" severity error;
@@ -4317,18 +4310,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 177" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 177" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 177" severity error;
-			assert progcounter = x"00000038" report "progcounter error at step 177" severity error;
+			assert progcounter = x"000002a4" report "progcounter error at step 177" severity error;
 			wait for 5 ns;
 
 		-- load instruction 89
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 178" severity error;
-			assert false report "89;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000038" report "progcounter error at step 178" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 178"     severity error;
-			assert dataLength = "010"        report "length error at step 178"      severity error;
-			assert load = '1'                report "load error at step 178"        severity error;
+			assert instr = x"00150513" report "instruction error at step 178" severity error;
+			assert false report "89;0x00150513;ADDI : reg[10] = reg[10] + 1;OK; ;" severity note;
+			assert progcounter = x"000002a4" report "progcounter error at step 178" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 89
@@ -4344,13 +4334,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 179" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 179" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 179" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 179" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 179" severity error;
-			assert reg0c = x"0000000b" report "reg0c error at step 179" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 179" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 179" severity error;
-			assert reg0f = x"0000000b" report "reg0f error at step 179" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 179" severity error;
+			assert reg0a = x"00000008" report "reg0a error at step 179" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 179" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 179" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 179" severity error;
+			assert reg0e = x"00000007" report "reg0e error at step 179" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 179" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 179" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 179" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 179" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 179" severity error;
@@ -4366,15 +4356,19 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 179" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 179" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 179" severity error;
-			assert progcounter = x"0000003c" report "progcounter error at step 179" severity error;
+			assert progcounter = x"000002a8" report "progcounter error at step 179" severity error;
 			wait for 5 ns;
 
 		-- load instruction 90
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00f61863" report "instruction error at step 180" severity error;
-			assert false report "90;0x00f61863;BNE : if ( reg[12] != reg[15] ) PC = PC + 16;OK; ;" severity note;
-			assert progcounter = x"0000003c" report "progcounter error at step 180" severity error;
+			assert instr = x"00a12423" report "instruction error at step 180" severity error;
+			assert false report "90;0x00a12423;STRW : dataMem[reg[02] + 8] = reg[10];OK; ;" severity note;
+			assert progcounter = x"000002a8" report "progcounter error at step 180" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 180"     severity error;
+			assert inputData = x"00000008"   report "data error at step  180"       severity error;
+			assert dataLength = "010"        report "length error at step 180"      severity error;
+			assert store = '1'               report "store error at step 180"       severity error;
 			wait for 5 ns;
 
 		-- execute instruction 90
@@ -4390,13 +4384,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 181" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 181" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 181" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 181" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 181" severity error;
-			assert reg0c = x"0000000b" report "reg0c error at step 181" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 181" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 181" severity error;
-			assert reg0f = x"0000000b" report "reg0f error at step 181" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 181" severity error;
+			assert reg0a = x"00000008" report "reg0a error at step 181" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 181" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 181" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 181" severity error;
+			assert reg0e = x"00000007" report "reg0e error at step 181" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 181" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 181" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 181" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 181" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 181" severity error;
@@ -4412,18 +4406,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 181" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 181" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 181" severity error;
-			assert progcounter = x"00000040" report "progcounter error at step 181" severity error;
+			assert progcounter = x"000002ac" report "progcounter error at step 181" severity error;
 			wait for 5 ns;
 
 		-- load instruction 91
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 182" severity error;
-			assert false report "91;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000040" report "progcounter error at step 182" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 182"     severity error;
-			assert dataLength = "010"        report "length error at step 182"      severity error;
-			assert load = '1'                report "load error at step 182"        severity error;
+			assert instr = x"00170713" report "instruction error at step 182" severity error;
+			assert false report "91;0x00170713;ADDI : reg[14] = reg[14] + 1;OK; ;" severity note;
+			assert progcounter = x"000002ac" report "progcounter error at step 182" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 91
@@ -4439,13 +4430,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 183" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 183" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 183" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 183" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 183" severity error;
-			assert reg0c = x"0000000b" report "reg0c error at step 183" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 183" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 183" severity error;
-			assert reg0f = x"0000000b" report "reg0f error at step 183" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 183" severity error;
+			assert reg0a = x"00000008" report "reg0a error at step 183" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 183" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 183" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 183" severity error;
+			assert reg0e = x"00000008" report "reg0e error at step 183" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 183" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 183" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 183" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 183" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 183" severity error;
@@ -4461,15 +4452,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 183" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 183" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 183" severity error;
-			assert progcounter = x"00000044" report "progcounter error at step 183" severity error;
+			assert progcounter = x"000002b0" report "progcounter error at step 183" severity error;
 			wait for 5 ns;
 
 		-- load instruction 92
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00160613" report "instruction error at step 184" severity error;
-			assert false report "92;0x00160613;ADDI : reg[12] = reg[12] + 1;OK; ;" severity note;
-			assert progcounter = x"00000044" report "progcounter error at step 184" severity error;
+			assert instr = x"fc1ff06f" report "instruction error at step 184" severity error;
+			assert false report "92;0xfc1ff06f;JAL : reg[00] = PC+4 and PC = 0x2b0 + -64;OK; ;" severity note;
+			assert progcounter = x"000002b0" report "progcounter error at step 184" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 92
@@ -4485,13 +4476,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 185" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 185" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 185" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 185" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 185" severity error;
-			assert reg0c = x"0000000c" report "reg0c error at step 185" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 185" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 185" severity error;
-			assert reg0f = x"0000000b" report "reg0f error at step 185" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 185" severity error;
+			assert reg0a = x"00000008" report "reg0a error at step 185" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 185" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 185" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 185" severity error;
+			assert reg0e = x"00000008" report "reg0e error at step 185" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 185" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 185" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 185" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 185" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 185" severity error;
@@ -4507,19 +4498,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 185" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 185" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 185" severity error;
-			assert progcounter = x"00000048" report "progcounter error at step 185" severity error;
+			assert progcounter = x"00000270" report "progcounter error at step 185" severity error;
 			wait for 5 ns;
 
 		-- load instruction 93
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12623" report "instruction error at step 186" severity error;
-			assert false report "93;0x00c12623;STRW : dataMem[reg[02] + 12] = reg[12];OK; ;" severity note;
-			assert progcounter = x"00000048" report "progcounter error at step 186" severity error;
+			assert instr = x"00c12503" report "instruction error at step 186" severity error;
+			assert false report "93;0x00c12503;LDW : reg[10] = dataMem[reg[02] + 12];OK; ;" severity note;
+			assert progcounter = x"00000270" report "progcounter error at step 186" severity error;
 			assert dataAddr = x"00000ffc"    report "address error at step 186"     severity error;
-			assert inputData = x"0000000c"   report "data error at step  186"       severity error;
 			assert dataLength = "010"        report "length error at step 186"      severity error;
-			assert store = '1'               report "store error at step 186"       severity error;
+			assert load = '1'                report "load error at step 186"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 93
@@ -4535,13 +4525,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 187" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 187" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 187" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 187" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 187" severity error;
-			assert reg0c = x"0000000c" report "reg0c error at step 187" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 187" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 187" severity error;
-			assert reg0f = x"0000000b" report "reg0f error at step 187" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 187" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 187" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 187" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 187" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 187" severity error;
+			assert reg0e = x"00000008" report "reg0e error at step 187" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 187" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 187" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 187" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 187" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 187" severity error;
@@ -4557,15 +4547,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 187" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 187" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 187" severity error;
-			assert progcounter = x"0000004c" report "progcounter error at step 187" severity error;
+			assert progcounter = x"00000274" report "progcounter error at step 187" severity error;
 			wait for 5 ns;
 
 		-- load instruction 94
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00178793" report "instruction error at step 188" severity error;
-			assert false report "94;0x00178793;ADDI : reg[15] = reg[15] + 1;OK; ;" severity note;
-			assert progcounter = x"0000004c" report "progcounter error at step 188" severity error;
+			assert instr = x"02a76263" report "instruction error at step 188" severity error;
+			assert false report "94;0x02a76263;BLTU: if ( reg[14] < reg[10] ) PC = PC + 36;OK; ;" severity note;
+			assert progcounter = x"00000274" report "progcounter error at step 188" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 94
@@ -4581,13 +4571,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 189" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 189" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 189" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 189" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 189" severity error;
-			assert reg0c = x"0000000c" report "reg0c error at step 189" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 189" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 189" severity error;
-			assert reg0f = x"0000000c" report "reg0f error at step 189" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 189" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 189" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 189" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 189" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 189" severity error;
+			assert reg0e = x"00000008" report "reg0e error at step 189" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 189" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 189" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 189" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 189" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 189" severity error;
@@ -4603,15 +4593,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 189" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 189" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 189" severity error;
-			assert progcounter = x"00000050" report "progcounter error at step 189" severity error;
+			assert progcounter = x"00000298" report "progcounter error at step 189" severity error;
 			wait for 5 ns;
 
 		-- load instruction 95
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"fed794e3" report "instruction error at step 190" severity error;
-			assert false report "95;0xfed794e3;BNE : if ( reg[15] != reg[13] ) PC = PC + -24;OK; ;" severity note;
-			assert progcounter = x"00000050" report "progcounter error at step 190" severity error;
+			assert instr = x"00812503" report "instruction error at step 190" severity error;
+			assert false report "95;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"00000298" report "progcounter error at step 190" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 190"     severity error;
+			assert dataLength = "010"        report "length error at step 190"      severity error;
+			assert load = '1'                report "load error at step 190"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 95
@@ -4627,13 +4620,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 191" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 191" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 191" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 191" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 191" severity error;
-			assert reg0c = x"0000000c" report "reg0c error at step 191" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 191" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 191" severity error;
-			assert reg0f = x"0000000c" report "reg0f error at step 191" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 191" severity error;
+			assert reg0a = x"00000008" report "reg0a error at step 191" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 191" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 191" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 191" severity error;
+			assert reg0e = x"00000008" report "reg0e error at step 191" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 191" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 191" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 191" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 191" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 191" severity error;
@@ -4649,18 +4642,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 191" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 191" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 191" severity error;
-			assert progcounter = x"00000038" report "progcounter error at step 191" severity error;
+			assert progcounter = x"0000029c" report "progcounter error at step 191" severity error;
 			wait for 5 ns;
 
 		-- load instruction 96
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 192" severity error;
-			assert false report "96;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000038" report "progcounter error at step 192" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 192"     severity error;
-			assert dataLength = "010"        report "length error at step 192"      severity error;
-			assert load = '1'                report "load error at step 192"        severity error;
+			assert instr = x"00e51863" report "instruction error at step 192" severity error;
+			assert false report "96;0x00e51863;BNE : if ( reg[10] != reg[14] ) PC = PC + 16;OK; ;" severity note;
+			assert progcounter = x"0000029c" report "progcounter error at step 192" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 96
@@ -4676,13 +4666,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 193" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 193" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 193" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 193" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 193" severity error;
-			assert reg0c = x"0000000c" report "reg0c error at step 193" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 193" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 193" severity error;
-			assert reg0f = x"0000000c" report "reg0f error at step 193" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 193" severity error;
+			assert reg0a = x"00000008" report "reg0a error at step 193" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 193" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 193" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 193" severity error;
+			assert reg0e = x"00000008" report "reg0e error at step 193" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 193" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 193" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 193" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 193" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 193" severity error;
@@ -4698,15 +4688,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 193" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 193" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 193" severity error;
-			assert progcounter = x"0000003c" report "progcounter error at step 193" severity error;
+			assert progcounter = x"000002a0" report "progcounter error at step 193" severity error;
 			wait for 5 ns;
 
 		-- load instruction 97
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00f61863" report "instruction error at step 194" severity error;
-			assert false report "97;0x00f61863;BNE : if ( reg[12] != reg[15] ) PC = PC + 16;OK; ;" severity note;
-			assert progcounter = x"0000003c" report "progcounter error at step 194" severity error;
+			assert instr = x"00812503" report "instruction error at step 194" severity error;
+			assert false report "97;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"000002a0" report "progcounter error at step 194" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 194"     severity error;
+			assert dataLength = "010"        report "length error at step 194"      severity error;
+			assert load = '1'                report "load error at step 194"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 97
@@ -4722,13 +4715,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 195" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 195" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 195" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 195" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 195" severity error;
-			assert reg0c = x"0000000c" report "reg0c error at step 195" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 195" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 195" severity error;
-			assert reg0f = x"0000000c" report "reg0f error at step 195" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 195" severity error;
+			assert reg0a = x"00000008" report "reg0a error at step 195" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 195" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 195" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 195" severity error;
+			assert reg0e = x"00000008" report "reg0e error at step 195" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 195" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 195" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 195" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 195" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 195" severity error;
@@ -4744,18 +4737,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 195" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 195" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 195" severity error;
-			assert progcounter = x"00000040" report "progcounter error at step 195" severity error;
+			assert progcounter = x"000002a4" report "progcounter error at step 195" severity error;
 			wait for 5 ns;
 
 		-- load instruction 98
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 196" severity error;
-			assert false report "98;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000040" report "progcounter error at step 196" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 196"     severity error;
-			assert dataLength = "010"        report "length error at step 196"      severity error;
-			assert load = '1'                report "load error at step 196"        severity error;
+			assert instr = x"00150513" report "instruction error at step 196" severity error;
+			assert false report "98;0x00150513;ADDI : reg[10] = reg[10] + 1;OK; ;" severity note;
+			assert progcounter = x"000002a4" report "progcounter error at step 196" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 98
@@ -4771,13 +4761,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 197" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 197" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 197" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 197" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 197" severity error;
-			assert reg0c = x"0000000c" report "reg0c error at step 197" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 197" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 197" severity error;
-			assert reg0f = x"0000000c" report "reg0f error at step 197" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 197" severity error;
+			assert reg0a = x"00000009" report "reg0a error at step 197" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 197" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 197" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 197" severity error;
+			assert reg0e = x"00000008" report "reg0e error at step 197" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 197" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 197" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 197" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 197" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 197" severity error;
@@ -4793,15 +4783,19 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 197" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 197" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 197" severity error;
-			assert progcounter = x"00000044" report "progcounter error at step 197" severity error;
+			assert progcounter = x"000002a8" report "progcounter error at step 197" severity error;
 			wait for 5 ns;
 
 		-- load instruction 99
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00160613" report "instruction error at step 198" severity error;
-			assert false report "99;0x00160613;ADDI : reg[12] = reg[12] + 1;OK; ;" severity note;
-			assert progcounter = x"00000044" report "progcounter error at step 198" severity error;
+			assert instr = x"00a12423" report "instruction error at step 198" severity error;
+			assert false report "99;0x00a12423;STRW : dataMem[reg[02] + 8] = reg[10];OK; ;" severity note;
+			assert progcounter = x"000002a8" report "progcounter error at step 198" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 198"     severity error;
+			assert inputData = x"00000009"   report "data error at step  198"       severity error;
+			assert dataLength = "010"        report "length error at step 198"      severity error;
+			assert store = '1'               report "store error at step 198"       severity error;
 			wait for 5 ns;
 
 		-- execute instruction 99
@@ -4817,13 +4811,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 199" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 199" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 199" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 199" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 199" severity error;
-			assert reg0c = x"0000000d" report "reg0c error at step 199" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 199" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 199" severity error;
-			assert reg0f = x"0000000c" report "reg0f error at step 199" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 199" severity error;
+			assert reg0a = x"00000009" report "reg0a error at step 199" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 199" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 199" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 199" severity error;
+			assert reg0e = x"00000008" report "reg0e error at step 199" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 199" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 199" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 199" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 199" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 199" severity error;
@@ -4839,19 +4833,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 199" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 199" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 199" severity error;
-			assert progcounter = x"00000048" report "progcounter error at step 199" severity error;
+			assert progcounter = x"000002ac" report "progcounter error at step 199" severity error;
 			wait for 5 ns;
 
 		-- load instruction 100
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12623" report "instruction error at step 200" severity error;
-			assert false report "100;0x00c12623;STRW : dataMem[reg[02] + 12] = reg[12];OK; ;" severity note;
-			assert progcounter = x"00000048" report "progcounter error at step 200" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 200"     severity error;
-			assert inputData = x"0000000d"   report "data error at step  200"       severity error;
-			assert dataLength = "010"        report "length error at step 200"      severity error;
-			assert store = '1'               report "store error at step 200"       severity error;
+			assert instr = x"00170713" report "instruction error at step 200" severity error;
+			assert false report "100;0x00170713;ADDI : reg[14] = reg[14] + 1;OK; ;" severity note;
+			assert progcounter = x"000002ac" report "progcounter error at step 200" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 100
@@ -4867,13 +4857,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 201" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 201" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 201" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 201" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 201" severity error;
-			assert reg0c = x"0000000d" report "reg0c error at step 201" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 201" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 201" severity error;
-			assert reg0f = x"0000000c" report "reg0f error at step 201" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 201" severity error;
+			assert reg0a = x"00000009" report "reg0a error at step 201" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 201" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 201" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 201" severity error;
+			assert reg0e = x"00000009" report "reg0e error at step 201" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 201" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 201" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 201" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 201" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 201" severity error;
@@ -4889,15 +4879,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 201" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 201" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 201" severity error;
-			assert progcounter = x"0000004c" report "progcounter error at step 201" severity error;
+			assert progcounter = x"000002b0" report "progcounter error at step 201" severity error;
 			wait for 5 ns;
 
 		-- load instruction 101
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00178793" report "instruction error at step 202" severity error;
-			assert false report "101;0x00178793;ADDI : reg[15] = reg[15] + 1;OK; ;" severity note;
-			assert progcounter = x"0000004c" report "progcounter error at step 202" severity error;
+			assert instr = x"fc1ff06f" report "instruction error at step 202" severity error;
+			assert false report "101;0xfc1ff06f;JAL : reg[00] = PC+4 and PC = 0x2b0 + -64;OK; ;" severity note;
+			assert progcounter = x"000002b0" report "progcounter error at step 202" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 101
@@ -4913,13 +4903,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 203" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 203" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 203" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 203" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 203" severity error;
-			assert reg0c = x"0000000d" report "reg0c error at step 203" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 203" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 203" severity error;
-			assert reg0f = x"0000000d" report "reg0f error at step 203" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 203" severity error;
+			assert reg0a = x"00000009" report "reg0a error at step 203" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 203" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 203" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 203" severity error;
+			assert reg0e = x"00000009" report "reg0e error at step 203" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 203" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 203" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 203" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 203" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 203" severity error;
@@ -4935,15 +4925,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 203" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 203" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 203" severity error;
-			assert progcounter = x"00000050" report "progcounter error at step 203" severity error;
+			assert progcounter = x"00000270" report "progcounter error at step 203" severity error;
 			wait for 5 ns;
 
 		-- load instruction 102
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"fed794e3" report "instruction error at step 204" severity error;
-			assert false report "102;0xfed794e3;BNE : if ( reg[15] != reg[13] ) PC = PC + -24;OK; ;" severity note;
-			assert progcounter = x"00000050" report "progcounter error at step 204" severity error;
+			assert instr = x"00c12503" report "instruction error at step 204" severity error;
+			assert false report "102;0x00c12503;LDW : reg[10] = dataMem[reg[02] + 12];OK; ;" severity note;
+			assert progcounter = x"00000270" report "progcounter error at step 204" severity error;
+			assert dataAddr = x"00000ffc"    report "address error at step 204"     severity error;
+			assert dataLength = "010"        report "length error at step 204"      severity error;
+			assert load = '1'                report "load error at step 204"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 102
@@ -4959,13 +4952,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 205" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 205" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 205" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 205" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 205" severity error;
-			assert reg0c = x"0000000d" report "reg0c error at step 205" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 205" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 205" severity error;
-			assert reg0f = x"0000000d" report "reg0f error at step 205" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 205" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 205" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 205" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 205" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 205" severity error;
+			assert reg0e = x"00000009" report "reg0e error at step 205" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 205" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 205" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 205" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 205" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 205" severity error;
@@ -4981,18 +4974,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 205" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 205" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 205" severity error;
-			assert progcounter = x"00000038" report "progcounter error at step 205" severity error;
+			assert progcounter = x"00000274" report "progcounter error at step 205" severity error;
 			wait for 5 ns;
 
 		-- load instruction 103
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 206" severity error;
-			assert false report "103;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000038" report "progcounter error at step 206" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 206"     severity error;
-			assert dataLength = "010"        report "length error at step 206"      severity error;
-			assert load = '1'                report "load error at step 206"        severity error;
+			assert instr = x"02a76263" report "instruction error at step 206" severity error;
+			assert false report "103;0x02a76263;BLTU: if ( reg[14] < reg[10] ) PC = PC + 36;OK; ;" severity note;
+			assert progcounter = x"00000274" report "progcounter error at step 206" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 103
@@ -5008,13 +4998,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 207" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 207" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 207" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 207" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 207" severity error;
-			assert reg0c = x"0000000d" report "reg0c error at step 207" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 207" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 207" severity error;
-			assert reg0f = x"0000000d" report "reg0f error at step 207" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 207" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 207" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 207" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 207" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 207" severity error;
+			assert reg0e = x"00000009" report "reg0e error at step 207" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 207" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 207" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 207" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 207" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 207" severity error;
@@ -5030,15 +5020,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 207" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 207" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 207" severity error;
-			assert progcounter = x"0000003c" report "progcounter error at step 207" severity error;
+			assert progcounter = x"00000298" report "progcounter error at step 207" severity error;
 			wait for 5 ns;
 
 		-- load instruction 104
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00f61863" report "instruction error at step 208" severity error;
-			assert false report "104;0x00f61863;BNE : if ( reg[12] != reg[15] ) PC = PC + 16;OK; ;" severity note;
-			assert progcounter = x"0000003c" report "progcounter error at step 208" severity error;
+			assert instr = x"00812503" report "instruction error at step 208" severity error;
+			assert false report "104;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"00000298" report "progcounter error at step 208" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 208"     severity error;
+			assert dataLength = "010"        report "length error at step 208"      severity error;
+			assert load = '1'                report "load error at step 208"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 104
@@ -5054,13 +5047,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 209" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 209" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 209" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 209" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 209" severity error;
-			assert reg0c = x"0000000d" report "reg0c error at step 209" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 209" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 209" severity error;
-			assert reg0f = x"0000000d" report "reg0f error at step 209" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 209" severity error;
+			assert reg0a = x"00000009" report "reg0a error at step 209" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 209" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 209" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 209" severity error;
+			assert reg0e = x"00000009" report "reg0e error at step 209" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 209" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 209" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 209" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 209" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 209" severity error;
@@ -5076,18 +5069,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 209" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 209" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 209" severity error;
-			assert progcounter = x"00000040" report "progcounter error at step 209" severity error;
+			assert progcounter = x"0000029c" report "progcounter error at step 209" severity error;
 			wait for 5 ns;
 
 		-- load instruction 105
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 210" severity error;
-			assert false report "105;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000040" report "progcounter error at step 210" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 210"     severity error;
-			assert dataLength = "010"        report "length error at step 210"      severity error;
-			assert load = '1'                report "load error at step 210"        severity error;
+			assert instr = x"00e51863" report "instruction error at step 210" severity error;
+			assert false report "105;0x00e51863;BNE : if ( reg[10] != reg[14] ) PC = PC + 16;OK; ;" severity note;
+			assert progcounter = x"0000029c" report "progcounter error at step 210" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 105
@@ -5103,13 +5093,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 211" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 211" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 211" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 211" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 211" severity error;
-			assert reg0c = x"0000000d" report "reg0c error at step 211" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 211" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 211" severity error;
-			assert reg0f = x"0000000d" report "reg0f error at step 211" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 211" severity error;
+			assert reg0a = x"00000009" report "reg0a error at step 211" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 211" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 211" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 211" severity error;
+			assert reg0e = x"00000009" report "reg0e error at step 211" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 211" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 211" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 211" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 211" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 211" severity error;
@@ -5125,15 +5115,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 211" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 211" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 211" severity error;
-			assert progcounter = x"00000044" report "progcounter error at step 211" severity error;
+			assert progcounter = x"000002a0" report "progcounter error at step 211" severity error;
 			wait for 5 ns;
 
 		-- load instruction 106
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00160613" report "instruction error at step 212" severity error;
-			assert false report "106;0x00160613;ADDI : reg[12] = reg[12] + 1;OK; ;" severity note;
-			assert progcounter = x"00000044" report "progcounter error at step 212" severity error;
+			assert instr = x"00812503" report "instruction error at step 212" severity error;
+			assert false report "106;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"000002a0" report "progcounter error at step 212" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 212"     severity error;
+			assert dataLength = "010"        report "length error at step 212"      severity error;
+			assert load = '1'                report "load error at step 212"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 106
@@ -5149,13 +5142,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 213" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 213" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 213" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 213" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 213" severity error;
-			assert reg0c = x"0000000e" report "reg0c error at step 213" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 213" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 213" severity error;
-			assert reg0f = x"0000000d" report "reg0f error at step 213" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 213" severity error;
+			assert reg0a = x"00000009" report "reg0a error at step 213" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 213" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 213" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 213" severity error;
+			assert reg0e = x"00000009" report "reg0e error at step 213" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 213" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 213" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 213" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 213" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 213" severity error;
@@ -5171,19 +5164,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 213" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 213" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 213" severity error;
-			assert progcounter = x"00000048" report "progcounter error at step 213" severity error;
+			assert progcounter = x"000002a4" report "progcounter error at step 213" severity error;
 			wait for 5 ns;
 
 		-- load instruction 107
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12623" report "instruction error at step 214" severity error;
-			assert false report "107;0x00c12623;STRW : dataMem[reg[02] + 12] = reg[12];OK; ;" severity note;
-			assert progcounter = x"00000048" report "progcounter error at step 214" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 214"     severity error;
-			assert inputData = x"0000000e"   report "data error at step  214"       severity error;
-			assert dataLength = "010"        report "length error at step 214"      severity error;
-			assert store = '1'               report "store error at step 214"       severity error;
+			assert instr = x"00150513" report "instruction error at step 214" severity error;
+			assert false report "107;0x00150513;ADDI : reg[10] = reg[10] + 1;OK; ;" severity note;
+			assert progcounter = x"000002a4" report "progcounter error at step 214" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 107
@@ -5199,13 +5188,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 215" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 215" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 215" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 215" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 215" severity error;
-			assert reg0c = x"0000000e" report "reg0c error at step 215" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 215" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 215" severity error;
-			assert reg0f = x"0000000d" report "reg0f error at step 215" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 215" severity error;
+			assert reg0a = x"0000000a" report "reg0a error at step 215" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 215" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 215" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 215" severity error;
+			assert reg0e = x"00000009" report "reg0e error at step 215" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 215" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 215" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 215" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 215" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 215" severity error;
@@ -5221,15 +5210,19 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 215" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 215" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 215" severity error;
-			assert progcounter = x"0000004c" report "progcounter error at step 215" severity error;
+			assert progcounter = x"000002a8" report "progcounter error at step 215" severity error;
 			wait for 5 ns;
 
 		-- load instruction 108
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00178793" report "instruction error at step 216" severity error;
-			assert false report "108;0x00178793;ADDI : reg[15] = reg[15] + 1;OK; ;" severity note;
-			assert progcounter = x"0000004c" report "progcounter error at step 216" severity error;
+			assert instr = x"00a12423" report "instruction error at step 216" severity error;
+			assert false report "108;0x00a12423;STRW : dataMem[reg[02] + 8] = reg[10];OK; ;" severity note;
+			assert progcounter = x"000002a8" report "progcounter error at step 216" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 216"     severity error;
+			assert inputData = x"0000000a"   report "data error at step  216"       severity error;
+			assert dataLength = "010"        report "length error at step 216"      severity error;
+			assert store = '1'               report "store error at step 216"       severity error;
 			wait for 5 ns;
 
 		-- execute instruction 108
@@ -5245,13 +5238,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 217" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 217" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 217" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 217" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 217" severity error;
-			assert reg0c = x"0000000e" report "reg0c error at step 217" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 217" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 217" severity error;
-			assert reg0f = x"0000000e" report "reg0f error at step 217" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 217" severity error;
+			assert reg0a = x"0000000a" report "reg0a error at step 217" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 217" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 217" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 217" severity error;
+			assert reg0e = x"00000009" report "reg0e error at step 217" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 217" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 217" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 217" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 217" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 217" severity error;
@@ -5267,15 +5260,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 217" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 217" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 217" severity error;
-			assert progcounter = x"00000050" report "progcounter error at step 217" severity error;
+			assert progcounter = x"000002ac" report "progcounter error at step 217" severity error;
 			wait for 5 ns;
 
 		-- load instruction 109
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"fed794e3" report "instruction error at step 218" severity error;
-			assert false report "109;0xfed794e3;BNE : if ( reg[15] != reg[13] ) PC = PC + -24;OK; ;" severity note;
-			assert progcounter = x"00000050" report "progcounter error at step 218" severity error;
+			assert instr = x"00170713" report "instruction error at step 218" severity error;
+			assert false report "109;0x00170713;ADDI : reg[14] = reg[14] + 1;OK; ;" severity note;
+			assert progcounter = x"000002ac" report "progcounter error at step 218" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 109
@@ -5291,13 +5284,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 219" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 219" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 219" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 219" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 219" severity error;
-			assert reg0c = x"0000000e" report "reg0c error at step 219" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 219" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 219" severity error;
-			assert reg0f = x"0000000e" report "reg0f error at step 219" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 219" severity error;
+			assert reg0a = x"0000000a" report "reg0a error at step 219" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 219" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 219" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 219" severity error;
+			assert reg0e = x"0000000a" report "reg0e error at step 219" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 219" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 219" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 219" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 219" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 219" severity error;
@@ -5313,18 +5306,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 219" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 219" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 219" severity error;
-			assert progcounter = x"00000038" report "progcounter error at step 219" severity error;
+			assert progcounter = x"000002b0" report "progcounter error at step 219" severity error;
 			wait for 5 ns;
 
 		-- load instruction 110
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 220" severity error;
-			assert false report "110;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000038" report "progcounter error at step 220" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 220"     severity error;
-			assert dataLength = "010"        report "length error at step 220"      severity error;
-			assert load = '1'                report "load error at step 220"        severity error;
+			assert instr = x"fc1ff06f" report "instruction error at step 220" severity error;
+			assert false report "110;0xfc1ff06f;JAL : reg[00] = PC+4 and PC = 0x2b0 + -64;OK; ;" severity note;
+			assert progcounter = x"000002b0" report "progcounter error at step 220" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 110
@@ -5340,13 +5330,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 221" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 221" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 221" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 221" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 221" severity error;
-			assert reg0c = x"0000000e" report "reg0c error at step 221" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 221" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 221" severity error;
-			assert reg0f = x"0000000e" report "reg0f error at step 221" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 221" severity error;
+			assert reg0a = x"0000000a" report "reg0a error at step 221" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 221" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 221" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 221" severity error;
+			assert reg0e = x"0000000a" report "reg0e error at step 221" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 221" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 221" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 221" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 221" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 221" severity error;
@@ -5362,15 +5352,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 221" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 221" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 221" severity error;
-			assert progcounter = x"0000003c" report "progcounter error at step 221" severity error;
+			assert progcounter = x"00000270" report "progcounter error at step 221" severity error;
 			wait for 5 ns;
 
 		-- load instruction 111
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00f61863" report "instruction error at step 222" severity error;
-			assert false report "111;0x00f61863;BNE : if ( reg[12] != reg[15] ) PC = PC + 16;OK; ;" severity note;
-			assert progcounter = x"0000003c" report "progcounter error at step 222" severity error;
+			assert instr = x"00c12503" report "instruction error at step 222" severity error;
+			assert false report "111;0x00c12503;LDW : reg[10] = dataMem[reg[02] + 12];OK; ;" severity note;
+			assert progcounter = x"00000270" report "progcounter error at step 222" severity error;
+			assert dataAddr = x"00000ffc"    report "address error at step 222"     severity error;
+			assert dataLength = "010"        report "length error at step 222"      severity error;
+			assert load = '1'                report "load error at step 222"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 111
@@ -5386,13 +5379,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 223" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 223" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 223" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 223" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 223" severity error;
-			assert reg0c = x"0000000e" report "reg0c error at step 223" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 223" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 223" severity error;
-			assert reg0f = x"0000000e" report "reg0f error at step 223" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 223" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 223" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 223" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 223" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 223" severity error;
+			assert reg0e = x"0000000a" report "reg0e error at step 223" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 223" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 223" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 223" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 223" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 223" severity error;
@@ -5408,18 +5401,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 223" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 223" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 223" severity error;
-			assert progcounter = x"00000040" report "progcounter error at step 223" severity error;
+			assert progcounter = x"00000274" report "progcounter error at step 223" severity error;
 			wait for 5 ns;
 
 		-- load instruction 112
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 224" severity error;
-			assert false report "112;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000040" report "progcounter error at step 224" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 224"     severity error;
-			assert dataLength = "010"        report "length error at step 224"      severity error;
-			assert load = '1'                report "load error at step 224"        severity error;
+			assert instr = x"02a76263" report "instruction error at step 224" severity error;
+			assert false report "112;0x02a76263;BLTU: if ( reg[14] < reg[10] ) PC = PC + 36;OK; ;" severity note;
+			assert progcounter = x"00000274" report "progcounter error at step 224" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 112
@@ -5435,13 +5425,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 225" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 225" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 225" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 225" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 225" severity error;
-			assert reg0c = x"0000000e" report "reg0c error at step 225" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 225" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 225" severity error;
-			assert reg0f = x"0000000e" report "reg0f error at step 225" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 225" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 225" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 225" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 225" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 225" severity error;
+			assert reg0e = x"0000000a" report "reg0e error at step 225" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 225" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 225" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 225" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 225" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 225" severity error;
@@ -5457,15 +5447,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 225" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 225" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 225" severity error;
-			assert progcounter = x"00000044" report "progcounter error at step 225" severity error;
+			assert progcounter = x"00000298" report "progcounter error at step 225" severity error;
 			wait for 5 ns;
 
 		-- load instruction 113
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00160613" report "instruction error at step 226" severity error;
-			assert false report "113;0x00160613;ADDI : reg[12] = reg[12] + 1;OK; ;" severity note;
-			assert progcounter = x"00000044" report "progcounter error at step 226" severity error;
+			assert instr = x"00812503" report "instruction error at step 226" severity error;
+			assert false report "113;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"00000298" report "progcounter error at step 226" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 226"     severity error;
+			assert dataLength = "010"        report "length error at step 226"      severity error;
+			assert load = '1'                report "load error at step 226"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 113
@@ -5481,13 +5474,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 227" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 227" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 227" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 227" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 227" severity error;
-			assert reg0c = x"0000000f" report "reg0c error at step 227" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 227" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 227" severity error;
-			assert reg0f = x"0000000e" report "reg0f error at step 227" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 227" severity error;
+			assert reg0a = x"0000000a" report "reg0a error at step 227" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 227" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 227" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 227" severity error;
+			assert reg0e = x"0000000a" report "reg0e error at step 227" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 227" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 227" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 227" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 227" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 227" severity error;
@@ -5503,19 +5496,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 227" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 227" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 227" severity error;
-			assert progcounter = x"00000048" report "progcounter error at step 227" severity error;
+			assert progcounter = x"0000029c" report "progcounter error at step 227" severity error;
 			wait for 5 ns;
 
 		-- load instruction 114
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12623" report "instruction error at step 228" severity error;
-			assert false report "114;0x00c12623;STRW : dataMem[reg[02] + 12] = reg[12];OK; ;" severity note;
-			assert progcounter = x"00000048" report "progcounter error at step 228" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 228"     severity error;
-			assert inputData = x"0000000f"   report "data error at step  228"       severity error;
-			assert dataLength = "010"        report "length error at step 228"      severity error;
-			assert store = '1'               report "store error at step 228"       severity error;
+			assert instr = x"00e51863" report "instruction error at step 228" severity error;
+			assert false report "114;0x00e51863;BNE : if ( reg[10] != reg[14] ) PC = PC + 16;OK; ;" severity note;
+			assert progcounter = x"0000029c" report "progcounter error at step 228" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 114
@@ -5531,13 +5520,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 229" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 229" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 229" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 229" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 229" severity error;
-			assert reg0c = x"0000000f" report "reg0c error at step 229" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 229" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 229" severity error;
-			assert reg0f = x"0000000e" report "reg0f error at step 229" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 229" severity error;
+			assert reg0a = x"0000000a" report "reg0a error at step 229" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 229" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 229" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 229" severity error;
+			assert reg0e = x"0000000a" report "reg0e error at step 229" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 229" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 229" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 229" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 229" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 229" severity error;
@@ -5553,15 +5542,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 229" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 229" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 229" severity error;
-			assert progcounter = x"0000004c" report "progcounter error at step 229" severity error;
+			assert progcounter = x"000002a0" report "progcounter error at step 229" severity error;
 			wait for 5 ns;
 
 		-- load instruction 115
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00178793" report "instruction error at step 230" severity error;
-			assert false report "115;0x00178793;ADDI : reg[15] = reg[15] + 1;OK; ;" severity note;
-			assert progcounter = x"0000004c" report "progcounter error at step 230" severity error;
+			assert instr = x"00812503" report "instruction error at step 230" severity error;
+			assert false report "115;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"000002a0" report "progcounter error at step 230" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 230"     severity error;
+			assert dataLength = "010"        report "length error at step 230"      severity error;
+			assert load = '1'                report "load error at step 230"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 115
@@ -5577,13 +5569,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 231" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 231" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 231" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 231" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 231" severity error;
-			assert reg0c = x"0000000f" report "reg0c error at step 231" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 231" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 231" severity error;
-			assert reg0f = x"0000000f" report "reg0f error at step 231" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 231" severity error;
+			assert reg0a = x"0000000a" report "reg0a error at step 231" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 231" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 231" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 231" severity error;
+			assert reg0e = x"0000000a" report "reg0e error at step 231" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 231" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 231" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 231" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 231" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 231" severity error;
@@ -5599,15 +5591,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 231" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 231" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 231" severity error;
-			assert progcounter = x"00000050" report "progcounter error at step 231" severity error;
+			assert progcounter = x"000002a4" report "progcounter error at step 231" severity error;
 			wait for 5 ns;
 
 		-- load instruction 116
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"fed794e3" report "instruction error at step 232" severity error;
-			assert false report "116;0xfed794e3;BNE : if ( reg[15] != reg[13] ) PC = PC + -24;OK; ;" severity note;
-			assert progcounter = x"00000050" report "progcounter error at step 232" severity error;
+			assert instr = x"00150513" report "instruction error at step 232" severity error;
+			assert false report "116;0x00150513;ADDI : reg[10] = reg[10] + 1;OK; ;" severity note;
+			assert progcounter = x"000002a4" report "progcounter error at step 232" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 116
@@ -5623,13 +5615,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 233" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 233" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 233" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 233" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 233" severity error;
-			assert reg0c = x"0000000f" report "reg0c error at step 233" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 233" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 233" severity error;
-			assert reg0f = x"0000000f" report "reg0f error at step 233" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 233" severity error;
+			assert reg0a = x"0000000b" report "reg0a error at step 233" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 233" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 233" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 233" severity error;
+			assert reg0e = x"0000000a" report "reg0e error at step 233" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 233" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 233" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 233" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 233" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 233" severity error;
@@ -5645,18 +5637,19 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 233" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 233" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 233" severity error;
-			assert progcounter = x"00000038" report "progcounter error at step 233" severity error;
+			assert progcounter = x"000002a8" report "progcounter error at step 233" severity error;
 			wait for 5 ns;
 
 		-- load instruction 117
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 234" severity error;
-			assert false report "117;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000038" report "progcounter error at step 234" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 234"     severity error;
+			assert instr = x"00a12423" report "instruction error at step 234" severity error;
+			assert false report "117;0x00a12423;STRW : dataMem[reg[02] + 8] = reg[10];OK; ;" severity note;
+			assert progcounter = x"000002a8" report "progcounter error at step 234" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 234"     severity error;
+			assert inputData = x"0000000b"   report "data error at step  234"       severity error;
 			assert dataLength = "010"        report "length error at step 234"      severity error;
-			assert load = '1'                report "load error at step 234"        severity error;
+			assert store = '1'               report "store error at step 234"       severity error;
 			wait for 5 ns;
 
 		-- execute instruction 117
@@ -5672,13 +5665,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 235" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 235" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 235" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 235" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 235" severity error;
-			assert reg0c = x"0000000f" report "reg0c error at step 235" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 235" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 235" severity error;
-			assert reg0f = x"0000000f" report "reg0f error at step 235" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 235" severity error;
+			assert reg0a = x"0000000b" report "reg0a error at step 235" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 235" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 235" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 235" severity error;
+			assert reg0e = x"0000000a" report "reg0e error at step 235" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 235" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 235" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 235" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 235" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 235" severity error;
@@ -5694,15 +5687,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 235" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 235" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 235" severity error;
-			assert progcounter = x"0000003c" report "progcounter error at step 235" severity error;
+			assert progcounter = x"000002ac" report "progcounter error at step 235" severity error;
 			wait for 5 ns;
 
 		-- load instruction 118
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00f61863" report "instruction error at step 236" severity error;
-			assert false report "118;0x00f61863;BNE : if ( reg[12] != reg[15] ) PC = PC + 16;OK; ;" severity note;
-			assert progcounter = x"0000003c" report "progcounter error at step 236" severity error;
+			assert instr = x"00170713" report "instruction error at step 236" severity error;
+			assert false report "118;0x00170713;ADDI : reg[14] = reg[14] + 1;OK; ;" severity note;
+			assert progcounter = x"000002ac" report "progcounter error at step 236" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 118
@@ -5718,13 +5711,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 237" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 237" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 237" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 237" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 237" severity error;
-			assert reg0c = x"0000000f" report "reg0c error at step 237" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 237" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 237" severity error;
-			assert reg0f = x"0000000f" report "reg0f error at step 237" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 237" severity error;
+			assert reg0a = x"0000000b" report "reg0a error at step 237" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 237" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 237" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 237" severity error;
+			assert reg0e = x"0000000b" report "reg0e error at step 237" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 237" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 237" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 237" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 237" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 237" severity error;
@@ -5740,18 +5733,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 237" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 237" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 237" severity error;
-			assert progcounter = x"00000040" report "progcounter error at step 237" severity error;
+			assert progcounter = x"000002b0" report "progcounter error at step 237" severity error;
 			wait for 5 ns;
 
 		-- load instruction 119
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 238" severity error;
-			assert false report "119;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000040" report "progcounter error at step 238" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 238"     severity error;
-			assert dataLength = "010"        report "length error at step 238"      severity error;
-			assert load = '1'                report "load error at step 238"        severity error;
+			assert instr = x"fc1ff06f" report "instruction error at step 238" severity error;
+			assert false report "119;0xfc1ff06f;JAL : reg[00] = PC+4 and PC = 0x2b0 + -64;OK; ;" severity note;
+			assert progcounter = x"000002b0" report "progcounter error at step 238" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 119
@@ -5767,13 +5757,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 239" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 239" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 239" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 239" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 239" severity error;
-			assert reg0c = x"0000000f" report "reg0c error at step 239" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 239" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 239" severity error;
-			assert reg0f = x"0000000f" report "reg0f error at step 239" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 239" severity error;
+			assert reg0a = x"0000000b" report "reg0a error at step 239" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 239" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 239" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 239" severity error;
+			assert reg0e = x"0000000b" report "reg0e error at step 239" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 239" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 239" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 239" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 239" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 239" severity error;
@@ -5789,15 +5779,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 239" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 239" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 239" severity error;
-			assert progcounter = x"00000044" report "progcounter error at step 239" severity error;
+			assert progcounter = x"00000270" report "progcounter error at step 239" severity error;
 			wait for 5 ns;
 
 		-- load instruction 120
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00160613" report "instruction error at step 240" severity error;
-			assert false report "120;0x00160613;ADDI : reg[12] = reg[12] + 1;OK; ;" severity note;
-			assert progcounter = x"00000044" report "progcounter error at step 240" severity error;
+			assert instr = x"00c12503" report "instruction error at step 240" severity error;
+			assert false report "120;0x00c12503;LDW : reg[10] = dataMem[reg[02] + 12];OK; ;" severity note;
+			assert progcounter = x"00000270" report "progcounter error at step 240" severity error;
+			assert dataAddr = x"00000ffc"    report "address error at step 240"     severity error;
+			assert dataLength = "010"        report "length error at step 240"      severity error;
+			assert load = '1'                report "load error at step 240"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 120
@@ -5813,13 +5806,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 241" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 241" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 241" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 241" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 241" severity error;
-			assert reg0c = x"00000010" report "reg0c error at step 241" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 241" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 241" severity error;
-			assert reg0f = x"0000000f" report "reg0f error at step 241" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 241" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 241" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 241" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 241" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 241" severity error;
+			assert reg0e = x"0000000b" report "reg0e error at step 241" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 241" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 241" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 241" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 241" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 241" severity error;
@@ -5835,19 +5828,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 241" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 241" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 241" severity error;
-			assert progcounter = x"00000048" report "progcounter error at step 241" severity error;
+			assert progcounter = x"00000274" report "progcounter error at step 241" severity error;
 			wait for 5 ns;
 
 		-- load instruction 121
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12623" report "instruction error at step 242" severity error;
-			assert false report "121;0x00c12623;STRW : dataMem[reg[02] + 12] = reg[12];OK; ;" severity note;
-			assert progcounter = x"00000048" report "progcounter error at step 242" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 242"     severity error;
-			assert inputData = x"00000010"   report "data error at step  242"       severity error;
-			assert dataLength = "010"        report "length error at step 242"      severity error;
-			assert store = '1'               report "store error at step 242"       severity error;
+			assert instr = x"02a76263" report "instruction error at step 242" severity error;
+			assert false report "121;0x02a76263;BLTU: if ( reg[14] < reg[10] ) PC = PC + 36;OK; ;" severity note;
+			assert progcounter = x"00000274" report "progcounter error at step 242" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 121
@@ -5863,13 +5852,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 243" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 243" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 243" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 243" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 243" severity error;
-			assert reg0c = x"00000010" report "reg0c error at step 243" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 243" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 243" severity error;
-			assert reg0f = x"0000000f" report "reg0f error at step 243" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 243" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 243" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 243" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 243" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 243" severity error;
+			assert reg0e = x"0000000b" report "reg0e error at step 243" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 243" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 243" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 243" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 243" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 243" severity error;
@@ -5885,15 +5874,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 243" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 243" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 243" severity error;
-			assert progcounter = x"0000004c" report "progcounter error at step 243" severity error;
+			assert progcounter = x"00000298" report "progcounter error at step 243" severity error;
 			wait for 5 ns;
 
 		-- load instruction 122
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00178793" report "instruction error at step 244" severity error;
-			assert false report "122;0x00178793;ADDI : reg[15] = reg[15] + 1;OK; ;" severity note;
-			assert progcounter = x"0000004c" report "progcounter error at step 244" severity error;
+			assert instr = x"00812503" report "instruction error at step 244" severity error;
+			assert false report "122;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"00000298" report "progcounter error at step 244" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 244"     severity error;
+			assert dataLength = "010"        report "length error at step 244"      severity error;
+			assert load = '1'                report "load error at step 244"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 122
@@ -5909,13 +5901,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 245" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 245" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 245" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 245" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 245" severity error;
-			assert reg0c = x"00000010" report "reg0c error at step 245" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 245" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 245" severity error;
-			assert reg0f = x"00000010" report "reg0f error at step 245" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 245" severity error;
+			assert reg0a = x"0000000b" report "reg0a error at step 245" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 245" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 245" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 245" severity error;
+			assert reg0e = x"0000000b" report "reg0e error at step 245" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 245" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 245" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 245" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 245" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 245" severity error;
@@ -5931,15 +5923,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 245" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 245" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 245" severity error;
-			assert progcounter = x"00000050" report "progcounter error at step 245" severity error;
+			assert progcounter = x"0000029c" report "progcounter error at step 245" severity error;
 			wait for 5 ns;
 
 		-- load instruction 123
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"fed794e3" report "instruction error at step 246" severity error;
-			assert false report "123;0xfed794e3;BNE : if ( reg[15] != reg[13] ) PC = PC + -24;OK; ;" severity note;
-			assert progcounter = x"00000050" report "progcounter error at step 246" severity error;
+			assert instr = x"00e51863" report "instruction error at step 246" severity error;
+			assert false report "123;0x00e51863;BNE : if ( reg[10] != reg[14] ) PC = PC + 16;OK; ;" severity note;
+			assert progcounter = x"0000029c" report "progcounter error at step 246" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 123
@@ -5955,13 +5947,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 247" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 247" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 247" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 247" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 247" severity error;
-			assert reg0c = x"00000010" report "reg0c error at step 247" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 247" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 247" severity error;
-			assert reg0f = x"00000010" report "reg0f error at step 247" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 247" severity error;
+			assert reg0a = x"0000000b" report "reg0a error at step 247" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 247" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 247" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 247" severity error;
+			assert reg0e = x"0000000b" report "reg0e error at step 247" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 247" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 247" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 247" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 247" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 247" severity error;
@@ -5977,16 +5969,16 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 247" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 247" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 247" severity error;
-			assert progcounter = x"00000038" report "progcounter error at step 247" severity error;
+			assert progcounter = x"000002a0" report "progcounter error at step 247" severity error;
 			wait for 5 ns;
 
 		-- load instruction 124
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 248" severity error;
-			assert false report "124;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000038" report "progcounter error at step 248" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 248"     severity error;
+			assert instr = x"00812503" report "instruction error at step 248" severity error;
+			assert false report "124;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"000002a0" report "progcounter error at step 248" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 248"     severity error;
 			assert dataLength = "010"        report "length error at step 248"      severity error;
 			assert load = '1'                report "load error at step 248"        severity error;
 			wait for 5 ns;
@@ -6004,13 +5996,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 249" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 249" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 249" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 249" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 249" severity error;
-			assert reg0c = x"00000010" report "reg0c error at step 249" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 249" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 249" severity error;
-			assert reg0f = x"00000010" report "reg0f error at step 249" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 249" severity error;
+			assert reg0a = x"0000000b" report "reg0a error at step 249" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 249" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 249" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 249" severity error;
+			assert reg0e = x"0000000b" report "reg0e error at step 249" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 249" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 249" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 249" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 249" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 249" severity error;
@@ -6026,15 +6018,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 249" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 249" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 249" severity error;
-			assert progcounter = x"0000003c" report "progcounter error at step 249" severity error;
+			assert progcounter = x"000002a4" report "progcounter error at step 249" severity error;
 			wait for 5 ns;
 
 		-- load instruction 125
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00f61863" report "instruction error at step 250" severity error;
-			assert false report "125;0x00f61863;BNE : if ( reg[12] != reg[15] ) PC = PC + 16;OK; ;" severity note;
-			assert progcounter = x"0000003c" report "progcounter error at step 250" severity error;
+			assert instr = x"00150513" report "instruction error at step 250" severity error;
+			assert false report "125;0x00150513;ADDI : reg[10] = reg[10] + 1;OK; ;" severity note;
+			assert progcounter = x"000002a4" report "progcounter error at step 250" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 125
@@ -6050,13 +6042,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 251" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 251" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 251" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 251" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 251" severity error;
-			assert reg0c = x"00000010" report "reg0c error at step 251" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 251" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 251" severity error;
-			assert reg0f = x"00000010" report "reg0f error at step 251" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 251" severity error;
+			assert reg0a = x"0000000c" report "reg0a error at step 251" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 251" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 251" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 251" severity error;
+			assert reg0e = x"0000000b" report "reg0e error at step 251" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 251" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 251" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 251" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 251" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 251" severity error;
@@ -6072,18 +6064,19 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 251" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 251" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 251" severity error;
-			assert progcounter = x"00000040" report "progcounter error at step 251" severity error;
+			assert progcounter = x"000002a8" report "progcounter error at step 251" severity error;
 			wait for 5 ns;
 
 		-- load instruction 126
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 252" severity error;
-			assert false report "126;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000040" report "progcounter error at step 252" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 252"     severity error;
+			assert instr = x"00a12423" report "instruction error at step 252" severity error;
+			assert false report "126;0x00a12423;STRW : dataMem[reg[02] + 8] = reg[10];OK; ;" severity note;
+			assert progcounter = x"000002a8" report "progcounter error at step 252" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 252"     severity error;
+			assert inputData = x"0000000c"   report "data error at step  252"       severity error;
 			assert dataLength = "010"        report "length error at step 252"      severity error;
-			assert load = '1'                report "load error at step 252"        severity error;
+			assert store = '1'               report "store error at step 252"       severity error;
 			wait for 5 ns;
 
 		-- execute instruction 126
@@ -6099,13 +6092,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 253" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 253" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 253" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 253" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 253" severity error;
-			assert reg0c = x"00000010" report "reg0c error at step 253" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 253" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 253" severity error;
-			assert reg0f = x"00000010" report "reg0f error at step 253" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 253" severity error;
+			assert reg0a = x"0000000c" report "reg0a error at step 253" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 253" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 253" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 253" severity error;
+			assert reg0e = x"0000000b" report "reg0e error at step 253" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 253" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 253" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 253" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 253" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 253" severity error;
@@ -6121,15 +6114,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 253" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 253" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 253" severity error;
-			assert progcounter = x"00000044" report "progcounter error at step 253" severity error;
+			assert progcounter = x"000002ac" report "progcounter error at step 253" severity error;
 			wait for 5 ns;
 
 		-- load instruction 127
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00160613" report "instruction error at step 254" severity error;
-			assert false report "127;0x00160613;ADDI : reg[12] = reg[12] + 1;OK; ;" severity note;
-			assert progcounter = x"00000044" report "progcounter error at step 254" severity error;
+			assert instr = x"00170713" report "instruction error at step 254" severity error;
+			assert false report "127;0x00170713;ADDI : reg[14] = reg[14] + 1;OK; ;" severity note;
+			assert progcounter = x"000002ac" report "progcounter error at step 254" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 127
@@ -6145,13 +6138,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 255" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 255" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 255" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 255" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 255" severity error;
-			assert reg0c = x"00000011" report "reg0c error at step 255" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 255" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 255" severity error;
-			assert reg0f = x"00000010" report "reg0f error at step 255" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 255" severity error;
+			assert reg0a = x"0000000c" report "reg0a error at step 255" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 255" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 255" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 255" severity error;
+			assert reg0e = x"0000000c" report "reg0e error at step 255" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 255" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 255" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 255" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 255" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 255" severity error;
@@ -6167,19 +6160,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 255" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 255" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 255" severity error;
-			assert progcounter = x"00000048" report "progcounter error at step 255" severity error;
+			assert progcounter = x"000002b0" report "progcounter error at step 255" severity error;
 			wait for 5 ns;
 
 		-- load instruction 128
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12623" report "instruction error at step 256" severity error;
-			assert false report "128;0x00c12623;STRW : dataMem[reg[02] + 12] = reg[12];OK; ;" severity note;
-			assert progcounter = x"00000048" report "progcounter error at step 256" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 256"     severity error;
-			assert inputData = x"00000011"   report "data error at step  256"       severity error;
-			assert dataLength = "010"        report "length error at step 256"      severity error;
-			assert store = '1'               report "store error at step 256"       severity error;
+			assert instr = x"fc1ff06f" report "instruction error at step 256" severity error;
+			assert false report "128;0xfc1ff06f;JAL : reg[00] = PC+4 and PC = 0x2b0 + -64;OK; ;" severity note;
+			assert progcounter = x"000002b0" report "progcounter error at step 256" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 128
@@ -6195,13 +6184,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 257" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 257" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 257" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 257" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 257" severity error;
-			assert reg0c = x"00000011" report "reg0c error at step 257" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 257" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 257" severity error;
-			assert reg0f = x"00000010" report "reg0f error at step 257" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 257" severity error;
+			assert reg0a = x"0000000c" report "reg0a error at step 257" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 257" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 257" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 257" severity error;
+			assert reg0e = x"0000000c" report "reg0e error at step 257" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 257" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 257" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 257" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 257" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 257" severity error;
@@ -6217,15 +6206,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 257" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 257" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 257" severity error;
-			assert progcounter = x"0000004c" report "progcounter error at step 257" severity error;
+			assert progcounter = x"00000270" report "progcounter error at step 257" severity error;
 			wait for 5 ns;
 
 		-- load instruction 129
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00178793" report "instruction error at step 258" severity error;
-			assert false report "129;0x00178793;ADDI : reg[15] = reg[15] + 1;OK; ;" severity note;
-			assert progcounter = x"0000004c" report "progcounter error at step 258" severity error;
+			assert instr = x"00c12503" report "instruction error at step 258" severity error;
+			assert false report "129;0x00c12503;LDW : reg[10] = dataMem[reg[02] + 12];OK; ;" severity note;
+			assert progcounter = x"00000270" report "progcounter error at step 258" severity error;
+			assert dataAddr = x"00000ffc"    report "address error at step 258"     severity error;
+			assert dataLength = "010"        report "length error at step 258"      severity error;
+			assert load = '1'                report "load error at step 258"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 129
@@ -6241,13 +6233,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 259" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 259" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 259" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 259" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 259" severity error;
-			assert reg0c = x"00000011" report "reg0c error at step 259" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 259" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 259" severity error;
-			assert reg0f = x"00000011" report "reg0f error at step 259" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 259" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 259" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 259" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 259" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 259" severity error;
+			assert reg0e = x"0000000c" report "reg0e error at step 259" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 259" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 259" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 259" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 259" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 259" severity error;
@@ -6263,15 +6255,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 259" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 259" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 259" severity error;
-			assert progcounter = x"00000050" report "progcounter error at step 259" severity error;
+			assert progcounter = x"00000274" report "progcounter error at step 259" severity error;
 			wait for 5 ns;
 
 		-- load instruction 130
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"fed794e3" report "instruction error at step 260" severity error;
-			assert false report "130;0xfed794e3;BNE : if ( reg[15] != reg[13] ) PC = PC + -24;OK; ;" severity note;
-			assert progcounter = x"00000050" report "progcounter error at step 260" severity error;
+			assert instr = x"02a76263" report "instruction error at step 260" severity error;
+			assert false report "130;0x02a76263;BLTU: if ( reg[14] < reg[10] ) PC = PC + 36;OK; ;" severity note;
+			assert progcounter = x"00000274" report "progcounter error at step 260" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 130
@@ -6287,13 +6279,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 261" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 261" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 261" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 261" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 261" severity error;
-			assert reg0c = x"00000011" report "reg0c error at step 261" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 261" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 261" severity error;
-			assert reg0f = x"00000011" report "reg0f error at step 261" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 261" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 261" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 261" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 261" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 261" severity error;
+			assert reg0e = x"0000000c" report "reg0e error at step 261" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 261" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 261" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 261" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 261" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 261" severity error;
@@ -6309,16 +6301,16 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 261" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 261" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 261" severity error;
-			assert progcounter = x"00000038" report "progcounter error at step 261" severity error;
+			assert progcounter = x"00000298" report "progcounter error at step 261" severity error;
 			wait for 5 ns;
 
 		-- load instruction 131
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 262" severity error;
-			assert false report "131;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000038" report "progcounter error at step 262" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 262"     severity error;
+			assert instr = x"00812503" report "instruction error at step 262" severity error;
+			assert false report "131;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"00000298" report "progcounter error at step 262" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 262"     severity error;
 			assert dataLength = "010"        report "length error at step 262"      severity error;
 			assert load = '1'                report "load error at step 262"        severity error;
 			wait for 5 ns;
@@ -6336,13 +6328,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 263" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 263" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 263" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 263" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 263" severity error;
-			assert reg0c = x"00000011" report "reg0c error at step 263" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 263" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 263" severity error;
-			assert reg0f = x"00000011" report "reg0f error at step 263" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 263" severity error;
+			assert reg0a = x"0000000c" report "reg0a error at step 263" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 263" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 263" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 263" severity error;
+			assert reg0e = x"0000000c" report "reg0e error at step 263" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 263" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 263" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 263" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 263" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 263" severity error;
@@ -6358,15 +6350,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 263" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 263" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 263" severity error;
-			assert progcounter = x"0000003c" report "progcounter error at step 263" severity error;
+			assert progcounter = x"0000029c" report "progcounter error at step 263" severity error;
 			wait for 5 ns;
 
 		-- load instruction 132
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00f61863" report "instruction error at step 264" severity error;
-			assert false report "132;0x00f61863;BNE : if ( reg[12] != reg[15] ) PC = PC + 16;OK; ;" severity note;
-			assert progcounter = x"0000003c" report "progcounter error at step 264" severity error;
+			assert instr = x"00e51863" report "instruction error at step 264" severity error;
+			assert false report "132;0x00e51863;BNE : if ( reg[10] != reg[14] ) PC = PC + 16;OK; ;" severity note;
+			assert progcounter = x"0000029c" report "progcounter error at step 264" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 132
@@ -6382,13 +6374,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 265" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 265" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 265" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 265" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 265" severity error;
-			assert reg0c = x"00000011" report "reg0c error at step 265" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 265" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 265" severity error;
-			assert reg0f = x"00000011" report "reg0f error at step 265" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 265" severity error;
+			assert reg0a = x"0000000c" report "reg0a error at step 265" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 265" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 265" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 265" severity error;
+			assert reg0e = x"0000000c" report "reg0e error at step 265" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 265" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 265" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 265" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 265" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 265" severity error;
@@ -6404,16 +6396,16 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 265" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 265" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 265" severity error;
-			assert progcounter = x"00000040" report "progcounter error at step 265" severity error;
+			assert progcounter = x"000002a0" report "progcounter error at step 265" severity error;
 			wait for 5 ns;
 
 		-- load instruction 133
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 266" severity error;
-			assert false report "133;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000040" report "progcounter error at step 266" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 266"     severity error;
+			assert instr = x"00812503" report "instruction error at step 266" severity error;
+			assert false report "133;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"000002a0" report "progcounter error at step 266" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 266"     severity error;
 			assert dataLength = "010"        report "length error at step 266"      severity error;
 			assert load = '1'                report "load error at step 266"        severity error;
 			wait for 5 ns;
@@ -6431,13 +6423,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 267" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 267" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 267" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 267" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 267" severity error;
-			assert reg0c = x"00000011" report "reg0c error at step 267" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 267" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 267" severity error;
-			assert reg0f = x"00000011" report "reg0f error at step 267" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 267" severity error;
+			assert reg0a = x"0000000c" report "reg0a error at step 267" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 267" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 267" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 267" severity error;
+			assert reg0e = x"0000000c" report "reg0e error at step 267" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 267" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 267" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 267" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 267" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 267" severity error;
@@ -6453,15 +6445,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 267" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 267" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 267" severity error;
-			assert progcounter = x"00000044" report "progcounter error at step 267" severity error;
+			assert progcounter = x"000002a4" report "progcounter error at step 267" severity error;
 			wait for 5 ns;
 
 		-- load instruction 134
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00160613" report "instruction error at step 268" severity error;
-			assert false report "134;0x00160613;ADDI : reg[12] = reg[12] + 1;OK; ;" severity note;
-			assert progcounter = x"00000044" report "progcounter error at step 268" severity error;
+			assert instr = x"00150513" report "instruction error at step 268" severity error;
+			assert false report "134;0x00150513;ADDI : reg[10] = reg[10] + 1;OK; ;" severity note;
+			assert progcounter = x"000002a4" report "progcounter error at step 268" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 134
@@ -6477,13 +6469,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 269" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 269" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 269" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 269" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 269" severity error;
-			assert reg0c = x"00000012" report "reg0c error at step 269" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 269" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 269" severity error;
-			assert reg0f = x"00000011" report "reg0f error at step 269" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 269" severity error;
+			assert reg0a = x"0000000d" report "reg0a error at step 269" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 269" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 269" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 269" severity error;
+			assert reg0e = x"0000000c" report "reg0e error at step 269" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 269" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 269" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 269" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 269" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 269" severity error;
@@ -6499,17 +6491,17 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 269" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 269" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 269" severity error;
-			assert progcounter = x"00000048" report "progcounter error at step 269" severity error;
+			assert progcounter = x"000002a8" report "progcounter error at step 269" severity error;
 			wait for 5 ns;
 
 		-- load instruction 135
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12623" report "instruction error at step 270" severity error;
-			assert false report "135;0x00c12623;STRW : dataMem[reg[02] + 12] = reg[12];OK; ;" severity note;
-			assert progcounter = x"00000048" report "progcounter error at step 270" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 270"     severity error;
-			assert inputData = x"00000012"   report "data error at step  270"       severity error;
+			assert instr = x"00a12423" report "instruction error at step 270" severity error;
+			assert false report "135;0x00a12423;STRW : dataMem[reg[02] + 8] = reg[10];OK; ;" severity note;
+			assert progcounter = x"000002a8" report "progcounter error at step 270" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 270"     severity error;
+			assert inputData = x"0000000d"   report "data error at step  270"       severity error;
 			assert dataLength = "010"        report "length error at step 270"      severity error;
 			assert store = '1'               report "store error at step 270"       severity error;
 			wait for 5 ns;
@@ -6527,13 +6519,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 271" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 271" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 271" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 271" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 271" severity error;
-			assert reg0c = x"00000012" report "reg0c error at step 271" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 271" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 271" severity error;
-			assert reg0f = x"00000011" report "reg0f error at step 271" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 271" severity error;
+			assert reg0a = x"0000000d" report "reg0a error at step 271" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 271" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 271" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 271" severity error;
+			assert reg0e = x"0000000c" report "reg0e error at step 271" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 271" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 271" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 271" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 271" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 271" severity error;
@@ -6549,15 +6541,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 271" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 271" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 271" severity error;
-			assert progcounter = x"0000004c" report "progcounter error at step 271" severity error;
+			assert progcounter = x"000002ac" report "progcounter error at step 271" severity error;
 			wait for 5 ns;
 
 		-- load instruction 136
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00178793" report "instruction error at step 272" severity error;
-			assert false report "136;0x00178793;ADDI : reg[15] = reg[15] + 1;OK; ;" severity note;
-			assert progcounter = x"0000004c" report "progcounter error at step 272" severity error;
+			assert instr = x"00170713" report "instruction error at step 272" severity error;
+			assert false report "136;0x00170713;ADDI : reg[14] = reg[14] + 1;OK; ;" severity note;
+			assert progcounter = x"000002ac" report "progcounter error at step 272" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 136
@@ -6573,13 +6565,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 273" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 273" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 273" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 273" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 273" severity error;
-			assert reg0c = x"00000012" report "reg0c error at step 273" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 273" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 273" severity error;
-			assert reg0f = x"00000012" report "reg0f error at step 273" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 273" severity error;
+			assert reg0a = x"0000000d" report "reg0a error at step 273" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 273" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 273" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 273" severity error;
+			assert reg0e = x"0000000d" report "reg0e error at step 273" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 273" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 273" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 273" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 273" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 273" severity error;
@@ -6595,15 +6587,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 273" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 273" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 273" severity error;
-			assert progcounter = x"00000050" report "progcounter error at step 273" severity error;
+			assert progcounter = x"000002b0" report "progcounter error at step 273" severity error;
 			wait for 5 ns;
 
 		-- load instruction 137
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"fed794e3" report "instruction error at step 274" severity error;
-			assert false report "137;0xfed794e3;BNE : if ( reg[15] != reg[13] ) PC = PC + -24;OK; ;" severity note;
-			assert progcounter = x"00000050" report "progcounter error at step 274" severity error;
+			assert instr = x"fc1ff06f" report "instruction error at step 274" severity error;
+			assert false report "137;0xfc1ff06f;JAL : reg[00] = PC+4 and PC = 0x2b0 + -64;OK; ;" severity note;
+			assert progcounter = x"000002b0" report "progcounter error at step 274" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 137
@@ -6619,13 +6611,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 275" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 275" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 275" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 275" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 275" severity error;
-			assert reg0c = x"00000012" report "reg0c error at step 275" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 275" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 275" severity error;
-			assert reg0f = x"00000012" report "reg0f error at step 275" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 275" severity error;
+			assert reg0a = x"0000000d" report "reg0a error at step 275" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 275" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 275" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 275" severity error;
+			assert reg0e = x"0000000d" report "reg0e error at step 275" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 275" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 275" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 275" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 275" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 275" severity error;
@@ -6641,15 +6633,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 275" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 275" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 275" severity error;
-			assert progcounter = x"00000038" report "progcounter error at step 275" severity error;
+			assert progcounter = x"00000270" report "progcounter error at step 275" severity error;
 			wait for 5 ns;
 
 		-- load instruction 138
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 276" severity error;
-			assert false report "138;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000038" report "progcounter error at step 276" severity error;
+			assert instr = x"00c12503" report "instruction error at step 276" severity error;
+			assert false report "138;0x00c12503;LDW : reg[10] = dataMem[reg[02] + 12];OK; ;" severity note;
+			assert progcounter = x"00000270" report "progcounter error at step 276" severity error;
 			assert dataAddr = x"00000ffc"    report "address error at step 276"     severity error;
 			assert dataLength = "010"        report "length error at step 276"      severity error;
 			assert load = '1'                report "load error at step 276"        severity error;
@@ -6668,13 +6660,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 277" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 277" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 277" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 277" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 277" severity error;
-			assert reg0c = x"00000012" report "reg0c error at step 277" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 277" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 277" severity error;
-			assert reg0f = x"00000012" report "reg0f error at step 277" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 277" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 277" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 277" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 277" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 277" severity error;
+			assert reg0e = x"0000000d" report "reg0e error at step 277" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 277" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 277" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 277" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 277" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 277" severity error;
@@ -6690,15 +6682,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 277" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 277" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 277" severity error;
-			assert progcounter = x"0000003c" report "progcounter error at step 277" severity error;
+			assert progcounter = x"00000274" report "progcounter error at step 277" severity error;
 			wait for 5 ns;
 
 		-- load instruction 139
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00f61863" report "instruction error at step 278" severity error;
-			assert false report "139;0x00f61863;BNE : if ( reg[12] != reg[15] ) PC = PC + 16;OK; ;" severity note;
-			assert progcounter = x"0000003c" report "progcounter error at step 278" severity error;
+			assert instr = x"02a76263" report "instruction error at step 278" severity error;
+			assert false report "139;0x02a76263;BLTU: if ( reg[14] < reg[10] ) PC = PC + 36;OK; ;" severity note;
+			assert progcounter = x"00000274" report "progcounter error at step 278" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 139
@@ -6714,13 +6706,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 279" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 279" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 279" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 279" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 279" severity error;
-			assert reg0c = x"00000012" report "reg0c error at step 279" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 279" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 279" severity error;
-			assert reg0f = x"00000012" report "reg0f error at step 279" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 279" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 279" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 279" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 279" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 279" severity error;
+			assert reg0e = x"0000000d" report "reg0e error at step 279" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 279" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 279" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 279" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 279" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 279" severity error;
@@ -6736,16 +6728,16 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 279" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 279" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 279" severity error;
-			assert progcounter = x"00000040" report "progcounter error at step 279" severity error;
+			assert progcounter = x"00000298" report "progcounter error at step 279" severity error;
 			wait for 5 ns;
 
 		-- load instruction 140
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 280" severity error;
-			assert false report "140;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000040" report "progcounter error at step 280" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 280"     severity error;
+			assert instr = x"00812503" report "instruction error at step 280" severity error;
+			assert false report "140;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"00000298" report "progcounter error at step 280" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 280"     severity error;
 			assert dataLength = "010"        report "length error at step 280"      severity error;
 			assert load = '1'                report "load error at step 280"        severity error;
 			wait for 5 ns;
@@ -6763,13 +6755,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 281" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 281" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 281" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 281" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 281" severity error;
-			assert reg0c = x"00000012" report "reg0c error at step 281" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 281" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 281" severity error;
-			assert reg0f = x"00000012" report "reg0f error at step 281" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 281" severity error;
+			assert reg0a = x"0000000d" report "reg0a error at step 281" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 281" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 281" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 281" severity error;
+			assert reg0e = x"0000000d" report "reg0e error at step 281" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 281" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 281" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 281" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 281" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 281" severity error;
@@ -6785,15 +6777,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 281" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 281" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 281" severity error;
-			assert progcounter = x"00000044" report "progcounter error at step 281" severity error;
+			assert progcounter = x"0000029c" report "progcounter error at step 281" severity error;
 			wait for 5 ns;
 
 		-- load instruction 141
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00160613" report "instruction error at step 282" severity error;
-			assert false report "141;0x00160613;ADDI : reg[12] = reg[12] + 1;OK; ;" severity note;
-			assert progcounter = x"00000044" report "progcounter error at step 282" severity error;
+			assert instr = x"00e51863" report "instruction error at step 282" severity error;
+			assert false report "141;0x00e51863;BNE : if ( reg[10] != reg[14] ) PC = PC + 16;OK; ;" severity note;
+			assert progcounter = x"0000029c" report "progcounter error at step 282" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 141
@@ -6809,13 +6801,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 283" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 283" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 283" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 283" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 283" severity error;
-			assert reg0c = x"00000013" report "reg0c error at step 283" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 283" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 283" severity error;
-			assert reg0f = x"00000012" report "reg0f error at step 283" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 283" severity error;
+			assert reg0a = x"0000000d" report "reg0a error at step 283" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 283" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 283" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 283" severity error;
+			assert reg0e = x"0000000d" report "reg0e error at step 283" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 283" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 283" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 283" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 283" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 283" severity error;
@@ -6831,19 +6823,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 283" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 283" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 283" severity error;
-			assert progcounter = x"00000048" report "progcounter error at step 283" severity error;
+			assert progcounter = x"000002a0" report "progcounter error at step 283" severity error;
 			wait for 5 ns;
 
 		-- load instruction 142
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12623" report "instruction error at step 284" severity error;
-			assert false report "142;0x00c12623;STRW : dataMem[reg[02] + 12] = reg[12];OK; ;" severity note;
-			assert progcounter = x"00000048" report "progcounter error at step 284" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 284"     severity error;
-			assert inputData = x"00000013"   report "data error at step  284"       severity error;
+			assert instr = x"00812503" report "instruction error at step 284" severity error;
+			assert false report "142;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"000002a0" report "progcounter error at step 284" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 284"     severity error;
 			assert dataLength = "010"        report "length error at step 284"      severity error;
-			assert store = '1'               report "store error at step 284"       severity error;
+			assert load = '1'                report "load error at step 284"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 142
@@ -6859,13 +6850,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 285" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 285" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 285" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 285" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 285" severity error;
-			assert reg0c = x"00000013" report "reg0c error at step 285" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 285" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 285" severity error;
-			assert reg0f = x"00000012" report "reg0f error at step 285" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 285" severity error;
+			assert reg0a = x"0000000d" report "reg0a error at step 285" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 285" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 285" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 285" severity error;
+			assert reg0e = x"0000000d" report "reg0e error at step 285" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 285" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 285" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 285" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 285" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 285" severity error;
@@ -6881,15 +6872,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 285" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 285" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 285" severity error;
-			assert progcounter = x"0000004c" report "progcounter error at step 285" severity error;
+			assert progcounter = x"000002a4" report "progcounter error at step 285" severity error;
 			wait for 5 ns;
 
 		-- load instruction 143
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00178793" report "instruction error at step 286" severity error;
-			assert false report "143;0x00178793;ADDI : reg[15] = reg[15] + 1;OK; ;" severity note;
-			assert progcounter = x"0000004c" report "progcounter error at step 286" severity error;
+			assert instr = x"00150513" report "instruction error at step 286" severity error;
+			assert false report "143;0x00150513;ADDI : reg[10] = reg[10] + 1;OK; ;" severity note;
+			assert progcounter = x"000002a4" report "progcounter error at step 286" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 143
@@ -6905,13 +6896,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 287" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 287" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 287" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 287" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 287" severity error;
-			assert reg0c = x"00000013" report "reg0c error at step 287" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 287" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 287" severity error;
-			assert reg0f = x"00000013" report "reg0f error at step 287" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 287" severity error;
+			assert reg0a = x"0000000e" report "reg0a error at step 287" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 287" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 287" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 287" severity error;
+			assert reg0e = x"0000000d" report "reg0e error at step 287" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 287" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 287" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 287" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 287" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 287" severity error;
@@ -6927,15 +6918,19 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 287" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 287" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 287" severity error;
-			assert progcounter = x"00000050" report "progcounter error at step 287" severity error;
+			assert progcounter = x"000002a8" report "progcounter error at step 287" severity error;
 			wait for 5 ns;
 
 		-- load instruction 144
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"fed794e3" report "instruction error at step 288" severity error;
-			assert false report "144;0xfed794e3;BNE : if ( reg[15] != reg[13] ) PC = PC + -24;OK; ;" severity note;
-			assert progcounter = x"00000050" report "progcounter error at step 288" severity error;
+			assert instr = x"00a12423" report "instruction error at step 288" severity error;
+			assert false report "144;0x00a12423;STRW : dataMem[reg[02] + 8] = reg[10];OK; ;" severity note;
+			assert progcounter = x"000002a8" report "progcounter error at step 288" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 288"     severity error;
+			assert inputData = x"0000000e"   report "data error at step  288"       severity error;
+			assert dataLength = "010"        report "length error at step 288"      severity error;
+			assert store = '1'               report "store error at step 288"       severity error;
 			wait for 5 ns;
 
 		-- execute instruction 144
@@ -6951,13 +6946,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 289" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 289" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 289" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 289" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 289" severity error;
-			assert reg0c = x"00000013" report "reg0c error at step 289" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 289" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 289" severity error;
-			assert reg0f = x"00000013" report "reg0f error at step 289" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 289" severity error;
+			assert reg0a = x"0000000e" report "reg0a error at step 289" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 289" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 289" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 289" severity error;
+			assert reg0e = x"0000000d" report "reg0e error at step 289" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 289" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 289" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 289" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 289" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 289" severity error;
@@ -6973,18 +6968,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 289" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 289" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 289" severity error;
-			assert progcounter = x"00000038" report "progcounter error at step 289" severity error;
+			assert progcounter = x"000002ac" report "progcounter error at step 289" severity error;
 			wait for 5 ns;
 
 		-- load instruction 145
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 290" severity error;
-			assert false report "145;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000038" report "progcounter error at step 290" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 290"     severity error;
-			assert dataLength = "010"        report "length error at step 290"      severity error;
-			assert load = '1'                report "load error at step 290"        severity error;
+			assert instr = x"00170713" report "instruction error at step 290" severity error;
+			assert false report "145;0x00170713;ADDI : reg[14] = reg[14] + 1;OK; ;" severity note;
+			assert progcounter = x"000002ac" report "progcounter error at step 290" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 145
@@ -7000,13 +6992,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 291" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 291" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 291" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 291" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 291" severity error;
-			assert reg0c = x"00000013" report "reg0c error at step 291" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 291" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 291" severity error;
-			assert reg0f = x"00000013" report "reg0f error at step 291" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 291" severity error;
+			assert reg0a = x"0000000e" report "reg0a error at step 291" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 291" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 291" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 291" severity error;
+			assert reg0e = x"0000000e" report "reg0e error at step 291" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 291" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 291" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 291" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 291" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 291" severity error;
@@ -7022,15 +7014,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 291" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 291" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 291" severity error;
-			assert progcounter = x"0000003c" report "progcounter error at step 291" severity error;
+			assert progcounter = x"000002b0" report "progcounter error at step 291" severity error;
 			wait for 5 ns;
 
 		-- load instruction 146
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00f61863" report "instruction error at step 292" severity error;
-			assert false report "146;0x00f61863;BNE : if ( reg[12] != reg[15] ) PC = PC + 16;OK; ;" severity note;
-			assert progcounter = x"0000003c" report "progcounter error at step 292" severity error;
+			assert instr = x"fc1ff06f" report "instruction error at step 292" severity error;
+			assert false report "146;0xfc1ff06f;JAL : reg[00] = PC+4 and PC = 0x2b0 + -64;OK; ;" severity note;
+			assert progcounter = x"000002b0" report "progcounter error at step 292" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 146
@@ -7046,13 +7038,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 293" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 293" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 293" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 293" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 293" severity error;
-			assert reg0c = x"00000013" report "reg0c error at step 293" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 293" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 293" severity error;
-			assert reg0f = x"00000013" report "reg0f error at step 293" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 293" severity error;
+			assert reg0a = x"0000000e" report "reg0a error at step 293" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 293" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 293" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 293" severity error;
+			assert reg0e = x"0000000e" report "reg0e error at step 293" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 293" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 293" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 293" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 293" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 293" severity error;
@@ -7068,15 +7060,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 293" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 293" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 293" severity error;
-			assert progcounter = x"00000040" report "progcounter error at step 293" severity error;
+			assert progcounter = x"00000270" report "progcounter error at step 293" severity error;
 			wait for 5 ns;
 
 		-- load instruction 147
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 294" severity error;
-			assert false report "147;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000040" report "progcounter error at step 294" severity error;
+			assert instr = x"00c12503" report "instruction error at step 294" severity error;
+			assert false report "147;0x00c12503;LDW : reg[10] = dataMem[reg[02] + 12];OK; ;" severity note;
+			assert progcounter = x"00000270" report "progcounter error at step 294" severity error;
 			assert dataAddr = x"00000ffc"    report "address error at step 294"     severity error;
 			assert dataLength = "010"        report "length error at step 294"      severity error;
 			assert load = '1'                report "load error at step 294"        severity error;
@@ -7095,13 +7087,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 295" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 295" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 295" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 295" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 295" severity error;
-			assert reg0c = x"00000013" report "reg0c error at step 295" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 295" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 295" severity error;
-			assert reg0f = x"00000013" report "reg0f error at step 295" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 295" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 295" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 295" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 295" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 295" severity error;
+			assert reg0e = x"0000000e" report "reg0e error at step 295" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 295" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 295" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 295" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 295" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 295" severity error;
@@ -7117,15 +7109,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 295" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 295" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 295" severity error;
-			assert progcounter = x"00000044" report "progcounter error at step 295" severity error;
+			assert progcounter = x"00000274" report "progcounter error at step 295" severity error;
 			wait for 5 ns;
 
 		-- load instruction 148
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00160613" report "instruction error at step 296" severity error;
-			assert false report "148;0x00160613;ADDI : reg[12] = reg[12] + 1;OK; ;" severity note;
-			assert progcounter = x"00000044" report "progcounter error at step 296" severity error;
+			assert instr = x"02a76263" report "instruction error at step 296" severity error;
+			assert false report "148;0x02a76263;BLTU: if ( reg[14] < reg[10] ) PC = PC + 36;OK; ;" severity note;
+			assert progcounter = x"00000274" report "progcounter error at step 296" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 148
@@ -7141,13 +7133,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 297" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 297" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 297" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 297" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 297" severity error;
-			assert reg0c = x"00000014" report "reg0c error at step 297" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 297" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 297" severity error;
-			assert reg0f = x"00000013" report "reg0f error at step 297" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 297" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 297" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 297" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 297" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 297" severity error;
+			assert reg0e = x"0000000e" report "reg0e error at step 297" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 297" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 297" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 297" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 297" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 297" severity error;
@@ -7163,19 +7155,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 297" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 297" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 297" severity error;
-			assert progcounter = x"00000048" report "progcounter error at step 297" severity error;
+			assert progcounter = x"00000298" report "progcounter error at step 297" severity error;
 			wait for 5 ns;
 
 		-- load instruction 149
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12623" report "instruction error at step 298" severity error;
-			assert false report "149;0x00c12623;STRW : dataMem[reg[02] + 12] = reg[12];OK; ;" severity note;
-			assert progcounter = x"00000048" report "progcounter error at step 298" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 298"     severity error;
-			assert inputData = x"00000014"   report "data error at step  298"       severity error;
+			assert instr = x"00812503" report "instruction error at step 298" severity error;
+			assert false report "149;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"00000298" report "progcounter error at step 298" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 298"     severity error;
 			assert dataLength = "010"        report "length error at step 298"      severity error;
-			assert store = '1'               report "store error at step 298"       severity error;
+			assert load = '1'                report "load error at step 298"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 149
@@ -7191,13 +7182,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 299" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 299" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 299" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 299" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 299" severity error;
-			assert reg0c = x"00000014" report "reg0c error at step 299" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 299" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 299" severity error;
-			assert reg0f = x"00000013" report "reg0f error at step 299" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 299" severity error;
+			assert reg0a = x"0000000e" report "reg0a error at step 299" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 299" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 299" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 299" severity error;
+			assert reg0e = x"0000000e" report "reg0e error at step 299" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 299" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 299" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 299" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 299" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 299" severity error;
@@ -7213,15 +7204,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 299" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 299" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 299" severity error;
-			assert progcounter = x"0000004c" report "progcounter error at step 299" severity error;
+			assert progcounter = x"0000029c" report "progcounter error at step 299" severity error;
 			wait for 5 ns;
 
 		-- load instruction 150
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00178793" report "instruction error at step 300" severity error;
-			assert false report "150;0x00178793;ADDI : reg[15] = reg[15] + 1;OK; ;" severity note;
-			assert progcounter = x"0000004c" report "progcounter error at step 300" severity error;
+			assert instr = x"00e51863" report "instruction error at step 300" severity error;
+			assert false report "150;0x00e51863;BNE : if ( reg[10] != reg[14] ) PC = PC + 16;OK; ;" severity note;
+			assert progcounter = x"0000029c" report "progcounter error at step 300" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 150
@@ -7237,13 +7228,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 301" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 301" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 301" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 301" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 301" severity error;
-			assert reg0c = x"00000014" report "reg0c error at step 301" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 301" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 301" severity error;
-			assert reg0f = x"00000014" report "reg0f error at step 301" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 301" severity error;
+			assert reg0a = x"0000000e" report "reg0a error at step 301" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 301" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 301" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 301" severity error;
+			assert reg0e = x"0000000e" report "reg0e error at step 301" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 301" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 301" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 301" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 301" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 301" severity error;
@@ -7259,15 +7250,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 301" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 301" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 301" severity error;
-			assert progcounter = x"00000050" report "progcounter error at step 301" severity error;
+			assert progcounter = x"000002a0" report "progcounter error at step 301" severity error;
 			wait for 5 ns;
 
 		-- load instruction 151
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"fed794e3" report "instruction error at step 302" severity error;
-			assert false report "151;0xfed794e3;BNE : if ( reg[15] != reg[13] ) PC = PC + -24;OK; ;" severity note;
-			assert progcounter = x"00000050" report "progcounter error at step 302" severity error;
+			assert instr = x"00812503" report "instruction error at step 302" severity error;
+			assert false report "151;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"000002a0" report "progcounter error at step 302" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 302"     severity error;
+			assert dataLength = "010"        report "length error at step 302"      severity error;
+			assert load = '1'                report "load error at step 302"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 151
@@ -7283,13 +7277,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 303" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 303" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 303" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 303" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 303" severity error;
-			assert reg0c = x"00000014" report "reg0c error at step 303" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 303" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 303" severity error;
-			assert reg0f = x"00000014" report "reg0f error at step 303" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 303" severity error;
+			assert reg0a = x"0000000e" report "reg0a error at step 303" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 303" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 303" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 303" severity error;
+			assert reg0e = x"0000000e" report "reg0e error at step 303" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 303" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 303" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 303" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 303" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 303" severity error;
@@ -7305,18 +7299,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 303" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 303" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 303" severity error;
-			assert progcounter = x"00000038" report "progcounter error at step 303" severity error;
+			assert progcounter = x"000002a4" report "progcounter error at step 303" severity error;
 			wait for 5 ns;
 
 		-- load instruction 152
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 304" severity error;
-			assert false report "152;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000038" report "progcounter error at step 304" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 304"     severity error;
-			assert dataLength = "010"        report "length error at step 304"      severity error;
-			assert load = '1'                report "load error at step 304"        severity error;
+			assert instr = x"00150513" report "instruction error at step 304" severity error;
+			assert false report "152;0x00150513;ADDI : reg[10] = reg[10] + 1;OK; ;" severity note;
+			assert progcounter = x"000002a4" report "progcounter error at step 304" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 152
@@ -7332,13 +7323,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 305" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 305" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 305" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 305" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 305" severity error;
-			assert reg0c = x"00000014" report "reg0c error at step 305" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 305" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 305" severity error;
-			assert reg0f = x"00000014" report "reg0f error at step 305" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 305" severity error;
+			assert reg0a = x"0000000f" report "reg0a error at step 305" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 305" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 305" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 305" severity error;
+			assert reg0e = x"0000000e" report "reg0e error at step 305" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 305" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 305" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 305" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 305" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 305" severity error;
@@ -7354,15 +7345,19 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 305" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 305" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 305" severity error;
-			assert progcounter = x"0000003c" report "progcounter error at step 305" severity error;
+			assert progcounter = x"000002a8" report "progcounter error at step 305" severity error;
 			wait for 5 ns;
 
 		-- load instruction 153
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00f61863" report "instruction error at step 306" severity error;
-			assert false report "153;0x00f61863;BNE : if ( reg[12] != reg[15] ) PC = PC + 16;OK; ;" severity note;
-			assert progcounter = x"0000003c" report "progcounter error at step 306" severity error;
+			assert instr = x"00a12423" report "instruction error at step 306" severity error;
+			assert false report "153;0x00a12423;STRW : dataMem[reg[02] + 8] = reg[10];OK; ;" severity note;
+			assert progcounter = x"000002a8" report "progcounter error at step 306" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 306"     severity error;
+			assert inputData = x"0000000f"   report "data error at step  306"       severity error;
+			assert dataLength = "010"        report "length error at step 306"      severity error;
+			assert store = '1'               report "store error at step 306"       severity error;
 			wait for 5 ns;
 
 		-- execute instruction 153
@@ -7378,13 +7373,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 307" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 307" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 307" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 307" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 307" severity error;
-			assert reg0c = x"00000014" report "reg0c error at step 307" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 307" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 307" severity error;
-			assert reg0f = x"00000014" report "reg0f error at step 307" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 307" severity error;
+			assert reg0a = x"0000000f" report "reg0a error at step 307" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 307" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 307" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 307" severity error;
+			assert reg0e = x"0000000e" report "reg0e error at step 307" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 307" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 307" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 307" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 307" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 307" severity error;
@@ -7400,18 +7395,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 307" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 307" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 307" severity error;
-			assert progcounter = x"00000040" report "progcounter error at step 307" severity error;
+			assert progcounter = x"000002ac" report "progcounter error at step 307" severity error;
 			wait for 5 ns;
 
 		-- load instruction 154
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 308" severity error;
-			assert false report "154;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000040" report "progcounter error at step 308" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 308"     severity error;
-			assert dataLength = "010"        report "length error at step 308"      severity error;
-			assert load = '1'                report "load error at step 308"        severity error;
+			assert instr = x"00170713" report "instruction error at step 308" severity error;
+			assert false report "154;0x00170713;ADDI : reg[14] = reg[14] + 1;OK; ;" severity note;
+			assert progcounter = x"000002ac" report "progcounter error at step 308" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 154
@@ -7427,13 +7419,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 309" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 309" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 309" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 309" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 309" severity error;
-			assert reg0c = x"00000014" report "reg0c error at step 309" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 309" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 309" severity error;
-			assert reg0f = x"00000014" report "reg0f error at step 309" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 309" severity error;
+			assert reg0a = x"0000000f" report "reg0a error at step 309" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 309" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 309" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 309" severity error;
+			assert reg0e = x"0000000f" report "reg0e error at step 309" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 309" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 309" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 309" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 309" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 309" severity error;
@@ -7449,15 +7441,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 309" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 309" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 309" severity error;
-			assert progcounter = x"00000044" report "progcounter error at step 309" severity error;
+			assert progcounter = x"000002b0" report "progcounter error at step 309" severity error;
 			wait for 5 ns;
 
 		-- load instruction 155
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00160613" report "instruction error at step 310" severity error;
-			assert false report "155;0x00160613;ADDI : reg[12] = reg[12] + 1;OK; ;" severity note;
-			assert progcounter = x"00000044" report "progcounter error at step 310" severity error;
+			assert instr = x"fc1ff06f" report "instruction error at step 310" severity error;
+			assert false report "155;0xfc1ff06f;JAL : reg[00] = PC+4 and PC = 0x2b0 + -64;OK; ;" severity note;
+			assert progcounter = x"000002b0" report "progcounter error at step 310" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 155
@@ -7473,13 +7465,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 311" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 311" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 311" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 311" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 311" severity error;
-			assert reg0c = x"00000015" report "reg0c error at step 311" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 311" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 311" severity error;
-			assert reg0f = x"00000014" report "reg0f error at step 311" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 311" severity error;
+			assert reg0a = x"0000000f" report "reg0a error at step 311" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 311" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 311" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 311" severity error;
+			assert reg0e = x"0000000f" report "reg0e error at step 311" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 311" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 311" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 311" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 311" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 311" severity error;
@@ -7495,19 +7487,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 311" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 311" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 311" severity error;
-			assert progcounter = x"00000048" report "progcounter error at step 311" severity error;
+			assert progcounter = x"00000270" report "progcounter error at step 311" severity error;
 			wait for 5 ns;
 
 		-- load instruction 156
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12623" report "instruction error at step 312" severity error;
-			assert false report "156;0x00c12623;STRW : dataMem[reg[02] + 12] = reg[12];OK; ;" severity note;
-			assert progcounter = x"00000048" report "progcounter error at step 312" severity error;
+			assert instr = x"00c12503" report "instruction error at step 312" severity error;
+			assert false report "156;0x00c12503;LDW : reg[10] = dataMem[reg[02] + 12];OK; ;" severity note;
+			assert progcounter = x"00000270" report "progcounter error at step 312" severity error;
 			assert dataAddr = x"00000ffc"    report "address error at step 312"     severity error;
-			assert inputData = x"00000015"   report "data error at step  312"       severity error;
 			assert dataLength = "010"        report "length error at step 312"      severity error;
-			assert store = '1'               report "store error at step 312"       severity error;
+			assert load = '1'                report "load error at step 312"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 156
@@ -7523,13 +7514,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 313" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 313" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 313" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 313" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 313" severity error;
-			assert reg0c = x"00000015" report "reg0c error at step 313" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 313" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 313" severity error;
-			assert reg0f = x"00000014" report "reg0f error at step 313" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 313" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 313" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 313" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 313" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 313" severity error;
+			assert reg0e = x"0000000f" report "reg0e error at step 313" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 313" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 313" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 313" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 313" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 313" severity error;
@@ -7545,15 +7536,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 313" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 313" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 313" severity error;
-			assert progcounter = x"0000004c" report "progcounter error at step 313" severity error;
+			assert progcounter = x"00000274" report "progcounter error at step 313" severity error;
 			wait for 5 ns;
 
 		-- load instruction 157
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00178793" report "instruction error at step 314" severity error;
-			assert false report "157;0x00178793;ADDI : reg[15] = reg[15] + 1;OK; ;" severity note;
-			assert progcounter = x"0000004c" report "progcounter error at step 314" severity error;
+			assert instr = x"02a76263" report "instruction error at step 314" severity error;
+			assert false report "157;0x02a76263;BLTU: if ( reg[14] < reg[10] ) PC = PC + 36;OK; ;" severity note;
+			assert progcounter = x"00000274" report "progcounter error at step 314" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 157
@@ -7569,13 +7560,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 315" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 315" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 315" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 315" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 315" severity error;
-			assert reg0c = x"00000015" report "reg0c error at step 315" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 315" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 315" severity error;
-			assert reg0f = x"00000015" report "reg0f error at step 315" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 315" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 315" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 315" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 315" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 315" severity error;
+			assert reg0e = x"0000000f" report "reg0e error at step 315" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 315" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 315" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 315" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 315" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 315" severity error;
@@ -7591,15 +7582,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 315" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 315" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 315" severity error;
-			assert progcounter = x"00000050" report "progcounter error at step 315" severity error;
+			assert progcounter = x"00000298" report "progcounter error at step 315" severity error;
 			wait for 5 ns;
 
 		-- load instruction 158
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"fed794e3" report "instruction error at step 316" severity error;
-			assert false report "158;0xfed794e3;BNE : if ( reg[15] != reg[13] ) PC = PC + -24;OK; ;" severity note;
-			assert progcounter = x"00000050" report "progcounter error at step 316" severity error;
+			assert instr = x"00812503" report "instruction error at step 316" severity error;
+			assert false report "158;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"00000298" report "progcounter error at step 316" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 316"     severity error;
+			assert dataLength = "010"        report "length error at step 316"      severity error;
+			assert load = '1'                report "load error at step 316"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 158
@@ -7615,13 +7609,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 317" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 317" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 317" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 317" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 317" severity error;
-			assert reg0c = x"00000015" report "reg0c error at step 317" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 317" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 317" severity error;
-			assert reg0f = x"00000015" report "reg0f error at step 317" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 317" severity error;
+			assert reg0a = x"0000000f" report "reg0a error at step 317" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 317" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 317" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 317" severity error;
+			assert reg0e = x"0000000f" report "reg0e error at step 317" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 317" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 317" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 317" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 317" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 317" severity error;
@@ -7637,18 +7631,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 317" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 317" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 317" severity error;
-			assert progcounter = x"00000038" report "progcounter error at step 317" severity error;
+			assert progcounter = x"0000029c" report "progcounter error at step 317" severity error;
 			wait for 5 ns;
 
 		-- load instruction 159
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 318" severity error;
-			assert false report "159;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000038" report "progcounter error at step 318" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 318"     severity error;
-			assert dataLength = "010"        report "length error at step 318"      severity error;
-			assert load = '1'                report "load error at step 318"        severity error;
+			assert instr = x"00e51863" report "instruction error at step 318" severity error;
+			assert false report "159;0x00e51863;BNE : if ( reg[10] != reg[14] ) PC = PC + 16;OK; ;" severity note;
+			assert progcounter = x"0000029c" report "progcounter error at step 318" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 159
@@ -7664,13 +7655,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 319" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 319" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 319" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 319" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 319" severity error;
-			assert reg0c = x"00000015" report "reg0c error at step 319" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 319" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 319" severity error;
-			assert reg0f = x"00000015" report "reg0f error at step 319" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 319" severity error;
+			assert reg0a = x"0000000f" report "reg0a error at step 319" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 319" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 319" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 319" severity error;
+			assert reg0e = x"0000000f" report "reg0e error at step 319" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 319" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 319" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 319" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 319" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 319" severity error;
@@ -7686,15 +7677,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 319" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 319" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 319" severity error;
-			assert progcounter = x"0000003c" report "progcounter error at step 319" severity error;
+			assert progcounter = x"000002a0" report "progcounter error at step 319" severity error;
 			wait for 5 ns;
 
 		-- load instruction 160
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00f61863" report "instruction error at step 320" severity error;
-			assert false report "160;0x00f61863;BNE : if ( reg[12] != reg[15] ) PC = PC + 16;OK; ;" severity note;
-			assert progcounter = x"0000003c" report "progcounter error at step 320" severity error;
+			assert instr = x"00812503" report "instruction error at step 320" severity error;
+			assert false report "160;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"000002a0" report "progcounter error at step 320" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 320"     severity error;
+			assert dataLength = "010"        report "length error at step 320"      severity error;
+			assert load = '1'                report "load error at step 320"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 160
@@ -7710,13 +7704,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 321" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 321" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 321" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 321" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 321" severity error;
-			assert reg0c = x"00000015" report "reg0c error at step 321" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 321" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 321" severity error;
-			assert reg0f = x"00000015" report "reg0f error at step 321" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 321" severity error;
+			assert reg0a = x"0000000f" report "reg0a error at step 321" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 321" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 321" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 321" severity error;
+			assert reg0e = x"0000000f" report "reg0e error at step 321" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 321" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 321" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 321" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 321" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 321" severity error;
@@ -7732,18 +7726,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 321" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 321" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 321" severity error;
-			assert progcounter = x"00000040" report "progcounter error at step 321" severity error;
+			assert progcounter = x"000002a4" report "progcounter error at step 321" severity error;
 			wait for 5 ns;
 
 		-- load instruction 161
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 322" severity error;
-			assert false report "161;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000040" report "progcounter error at step 322" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 322"     severity error;
-			assert dataLength = "010"        report "length error at step 322"      severity error;
-			assert load = '1'                report "load error at step 322"        severity error;
+			assert instr = x"00150513" report "instruction error at step 322" severity error;
+			assert false report "161;0x00150513;ADDI : reg[10] = reg[10] + 1;OK; ;" severity note;
+			assert progcounter = x"000002a4" report "progcounter error at step 322" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 161
@@ -7759,13 +7750,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 323" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 323" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 323" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 323" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 323" severity error;
-			assert reg0c = x"00000015" report "reg0c error at step 323" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 323" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 323" severity error;
-			assert reg0f = x"00000015" report "reg0f error at step 323" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 323" severity error;
+			assert reg0a = x"00000010" report "reg0a error at step 323" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 323" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 323" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 323" severity error;
+			assert reg0e = x"0000000f" report "reg0e error at step 323" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 323" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 323" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 323" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 323" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 323" severity error;
@@ -7781,15 +7772,19 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 323" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 323" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 323" severity error;
-			assert progcounter = x"00000044" report "progcounter error at step 323" severity error;
+			assert progcounter = x"000002a8" report "progcounter error at step 323" severity error;
 			wait for 5 ns;
 
 		-- load instruction 162
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00160613" report "instruction error at step 324" severity error;
-			assert false report "162;0x00160613;ADDI : reg[12] = reg[12] + 1;OK; ;" severity note;
-			assert progcounter = x"00000044" report "progcounter error at step 324" severity error;
+			assert instr = x"00a12423" report "instruction error at step 324" severity error;
+			assert false report "162;0x00a12423;STRW : dataMem[reg[02] + 8] = reg[10];OK; ;" severity note;
+			assert progcounter = x"000002a8" report "progcounter error at step 324" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 324"     severity error;
+			assert inputData = x"00000010"   report "data error at step  324"       severity error;
+			assert dataLength = "010"        report "length error at step 324"      severity error;
+			assert store = '1'               report "store error at step 324"       severity error;
 			wait for 5 ns;
 
 		-- execute instruction 162
@@ -7805,13 +7800,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 325" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 325" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 325" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 325" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 325" severity error;
-			assert reg0c = x"00000016" report "reg0c error at step 325" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 325" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 325" severity error;
-			assert reg0f = x"00000015" report "reg0f error at step 325" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 325" severity error;
+			assert reg0a = x"00000010" report "reg0a error at step 325" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 325" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 325" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 325" severity error;
+			assert reg0e = x"0000000f" report "reg0e error at step 325" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 325" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 325" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 325" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 325" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 325" severity error;
@@ -7827,19 +7822,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 325" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 325" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 325" severity error;
-			assert progcounter = x"00000048" report "progcounter error at step 325" severity error;
+			assert progcounter = x"000002ac" report "progcounter error at step 325" severity error;
 			wait for 5 ns;
 
 		-- load instruction 163
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12623" report "instruction error at step 326" severity error;
-			assert false report "163;0x00c12623;STRW : dataMem[reg[02] + 12] = reg[12];OK; ;" severity note;
-			assert progcounter = x"00000048" report "progcounter error at step 326" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 326"     severity error;
-			assert inputData = x"00000016"   report "data error at step  326"       severity error;
-			assert dataLength = "010"        report "length error at step 326"      severity error;
-			assert store = '1'               report "store error at step 326"       severity error;
+			assert instr = x"00170713" report "instruction error at step 326" severity error;
+			assert false report "163;0x00170713;ADDI : reg[14] = reg[14] + 1;OK; ;" severity note;
+			assert progcounter = x"000002ac" report "progcounter error at step 326" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 163
@@ -7855,13 +7846,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 327" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 327" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 327" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 327" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 327" severity error;
-			assert reg0c = x"00000016" report "reg0c error at step 327" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 327" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 327" severity error;
-			assert reg0f = x"00000015" report "reg0f error at step 327" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 327" severity error;
+			assert reg0a = x"00000010" report "reg0a error at step 327" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 327" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 327" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 327" severity error;
+			assert reg0e = x"00000010" report "reg0e error at step 327" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 327" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 327" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 327" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 327" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 327" severity error;
@@ -7877,15 +7868,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 327" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 327" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 327" severity error;
-			assert progcounter = x"0000004c" report "progcounter error at step 327" severity error;
+			assert progcounter = x"000002b0" report "progcounter error at step 327" severity error;
 			wait for 5 ns;
 
 		-- load instruction 164
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00178793" report "instruction error at step 328" severity error;
-			assert false report "164;0x00178793;ADDI : reg[15] = reg[15] + 1;OK; ;" severity note;
-			assert progcounter = x"0000004c" report "progcounter error at step 328" severity error;
+			assert instr = x"fc1ff06f" report "instruction error at step 328" severity error;
+			assert false report "164;0xfc1ff06f;JAL : reg[00] = PC+4 and PC = 0x2b0 + -64;OK; ;" severity note;
+			assert progcounter = x"000002b0" report "progcounter error at step 328" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 164
@@ -7901,13 +7892,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 329" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 329" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 329" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 329" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 329" severity error;
-			assert reg0c = x"00000016" report "reg0c error at step 329" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 329" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 329" severity error;
-			assert reg0f = x"00000016" report "reg0f error at step 329" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 329" severity error;
+			assert reg0a = x"00000010" report "reg0a error at step 329" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 329" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 329" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 329" severity error;
+			assert reg0e = x"00000010" report "reg0e error at step 329" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 329" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 329" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 329" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 329" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 329" severity error;
@@ -7923,15 +7914,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 329" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 329" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 329" severity error;
-			assert progcounter = x"00000050" report "progcounter error at step 329" severity error;
+			assert progcounter = x"00000270" report "progcounter error at step 329" severity error;
 			wait for 5 ns;
 
 		-- load instruction 165
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"fed794e3" report "instruction error at step 330" severity error;
-			assert false report "165;0xfed794e3;BNE : if ( reg[15] != reg[13] ) PC = PC + -24;OK; ;" severity note;
-			assert progcounter = x"00000050" report "progcounter error at step 330" severity error;
+			assert instr = x"00c12503" report "instruction error at step 330" severity error;
+			assert false report "165;0x00c12503;LDW : reg[10] = dataMem[reg[02] + 12];OK; ;" severity note;
+			assert progcounter = x"00000270" report "progcounter error at step 330" severity error;
+			assert dataAddr = x"00000ffc"    report "address error at step 330"     severity error;
+			assert dataLength = "010"        report "length error at step 330"      severity error;
+			assert load = '1'                report "load error at step 330"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 165
@@ -7947,13 +7941,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 331" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 331" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 331" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 331" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 331" severity error;
-			assert reg0c = x"00000016" report "reg0c error at step 331" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 331" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 331" severity error;
-			assert reg0f = x"00000016" report "reg0f error at step 331" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 331" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 331" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 331" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 331" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 331" severity error;
+			assert reg0e = x"00000010" report "reg0e error at step 331" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 331" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 331" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 331" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 331" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 331" severity error;
@@ -7969,18 +7963,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 331" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 331" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 331" severity error;
-			assert progcounter = x"00000038" report "progcounter error at step 331" severity error;
+			assert progcounter = x"00000274" report "progcounter error at step 331" severity error;
 			wait for 5 ns;
 
 		-- load instruction 166
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 332" severity error;
-			assert false report "166;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000038" report "progcounter error at step 332" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 332"     severity error;
-			assert dataLength = "010"        report "length error at step 332"      severity error;
-			assert load = '1'                report "load error at step 332"        severity error;
+			assert instr = x"02a76263" report "instruction error at step 332" severity error;
+			assert false report "166;0x02a76263;BLTU: if ( reg[14] < reg[10] ) PC = PC + 36;OK; ;" severity note;
+			assert progcounter = x"00000274" report "progcounter error at step 332" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 166
@@ -7996,13 +7987,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 333" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 333" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 333" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 333" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 333" severity error;
-			assert reg0c = x"00000016" report "reg0c error at step 333" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 333" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 333" severity error;
-			assert reg0f = x"00000016" report "reg0f error at step 333" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 333" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 333" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 333" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 333" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 333" severity error;
+			assert reg0e = x"00000010" report "reg0e error at step 333" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 333" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 333" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 333" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 333" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 333" severity error;
@@ -8018,15 +8009,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 333" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 333" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 333" severity error;
-			assert progcounter = x"0000003c" report "progcounter error at step 333" severity error;
+			assert progcounter = x"00000298" report "progcounter error at step 333" severity error;
 			wait for 5 ns;
 
 		-- load instruction 167
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00f61863" report "instruction error at step 334" severity error;
-			assert false report "167;0x00f61863;BNE : if ( reg[12] != reg[15] ) PC = PC + 16;OK; ;" severity note;
-			assert progcounter = x"0000003c" report "progcounter error at step 334" severity error;
+			assert instr = x"00812503" report "instruction error at step 334" severity error;
+			assert false report "167;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"00000298" report "progcounter error at step 334" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 334"     severity error;
+			assert dataLength = "010"        report "length error at step 334"      severity error;
+			assert load = '1'                report "load error at step 334"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 167
@@ -8042,13 +8036,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 335" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 335" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 335" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 335" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 335" severity error;
-			assert reg0c = x"00000016" report "reg0c error at step 335" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 335" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 335" severity error;
-			assert reg0f = x"00000016" report "reg0f error at step 335" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 335" severity error;
+			assert reg0a = x"00000010" report "reg0a error at step 335" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 335" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 335" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 335" severity error;
+			assert reg0e = x"00000010" report "reg0e error at step 335" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 335" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 335" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 335" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 335" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 335" severity error;
@@ -8064,18 +8058,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 335" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 335" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 335" severity error;
-			assert progcounter = x"00000040" report "progcounter error at step 335" severity error;
+			assert progcounter = x"0000029c" report "progcounter error at step 335" severity error;
 			wait for 5 ns;
 
 		-- load instruction 168
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 336" severity error;
-			assert false report "168;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000040" report "progcounter error at step 336" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 336"     severity error;
-			assert dataLength = "010"        report "length error at step 336"      severity error;
-			assert load = '1'                report "load error at step 336"        severity error;
+			assert instr = x"00e51863" report "instruction error at step 336" severity error;
+			assert false report "168;0x00e51863;BNE : if ( reg[10] != reg[14] ) PC = PC + 16;OK; ;" severity note;
+			assert progcounter = x"0000029c" report "progcounter error at step 336" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 168
@@ -8091,13 +8082,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 337" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 337" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 337" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 337" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 337" severity error;
-			assert reg0c = x"00000016" report "reg0c error at step 337" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 337" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 337" severity error;
-			assert reg0f = x"00000016" report "reg0f error at step 337" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 337" severity error;
+			assert reg0a = x"00000010" report "reg0a error at step 337" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 337" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 337" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 337" severity error;
+			assert reg0e = x"00000010" report "reg0e error at step 337" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 337" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 337" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 337" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 337" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 337" severity error;
@@ -8113,15 +8104,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 337" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 337" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 337" severity error;
-			assert progcounter = x"00000044" report "progcounter error at step 337" severity error;
+			assert progcounter = x"000002a0" report "progcounter error at step 337" severity error;
 			wait for 5 ns;
 
 		-- load instruction 169
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00160613" report "instruction error at step 338" severity error;
-			assert false report "169;0x00160613;ADDI : reg[12] = reg[12] + 1;OK; ;" severity note;
-			assert progcounter = x"00000044" report "progcounter error at step 338" severity error;
+			assert instr = x"00812503" report "instruction error at step 338" severity error;
+			assert false report "169;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"000002a0" report "progcounter error at step 338" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 338"     severity error;
+			assert dataLength = "010"        report "length error at step 338"      severity error;
+			assert load = '1'                report "load error at step 338"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 169
@@ -8137,13 +8131,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 339" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 339" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 339" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 339" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 339" severity error;
-			assert reg0c = x"00000017" report "reg0c error at step 339" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 339" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 339" severity error;
-			assert reg0f = x"00000016" report "reg0f error at step 339" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 339" severity error;
+			assert reg0a = x"00000010" report "reg0a error at step 339" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 339" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 339" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 339" severity error;
+			assert reg0e = x"00000010" report "reg0e error at step 339" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 339" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 339" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 339" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 339" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 339" severity error;
@@ -8159,19 +8153,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 339" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 339" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 339" severity error;
-			assert progcounter = x"00000048" report "progcounter error at step 339" severity error;
+			assert progcounter = x"000002a4" report "progcounter error at step 339" severity error;
 			wait for 5 ns;
 
 		-- load instruction 170
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12623" report "instruction error at step 340" severity error;
-			assert false report "170;0x00c12623;STRW : dataMem[reg[02] + 12] = reg[12];OK; ;" severity note;
-			assert progcounter = x"00000048" report "progcounter error at step 340" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 340"     severity error;
-			assert inputData = x"00000017"   report "data error at step  340"       severity error;
-			assert dataLength = "010"        report "length error at step 340"      severity error;
-			assert store = '1'               report "store error at step 340"       severity error;
+			assert instr = x"00150513" report "instruction error at step 340" severity error;
+			assert false report "170;0x00150513;ADDI : reg[10] = reg[10] + 1;OK; ;" severity note;
+			assert progcounter = x"000002a4" report "progcounter error at step 340" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 170
@@ -8187,13 +8177,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 341" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 341" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 341" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 341" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 341" severity error;
-			assert reg0c = x"00000017" report "reg0c error at step 341" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 341" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 341" severity error;
-			assert reg0f = x"00000016" report "reg0f error at step 341" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 341" severity error;
+			assert reg0a = x"00000011" report "reg0a error at step 341" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 341" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 341" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 341" severity error;
+			assert reg0e = x"00000010" report "reg0e error at step 341" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 341" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 341" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 341" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 341" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 341" severity error;
@@ -8209,15 +8199,19 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 341" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 341" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 341" severity error;
-			assert progcounter = x"0000004c" report "progcounter error at step 341" severity error;
+			assert progcounter = x"000002a8" report "progcounter error at step 341" severity error;
 			wait for 5 ns;
 
 		-- load instruction 171
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00178793" report "instruction error at step 342" severity error;
-			assert false report "171;0x00178793;ADDI : reg[15] = reg[15] + 1;OK; ;" severity note;
-			assert progcounter = x"0000004c" report "progcounter error at step 342" severity error;
+			assert instr = x"00a12423" report "instruction error at step 342" severity error;
+			assert false report "171;0x00a12423;STRW : dataMem[reg[02] + 8] = reg[10];OK; ;" severity note;
+			assert progcounter = x"000002a8" report "progcounter error at step 342" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 342"     severity error;
+			assert inputData = x"00000011"   report "data error at step  342"       severity error;
+			assert dataLength = "010"        report "length error at step 342"      severity error;
+			assert store = '1'               report "store error at step 342"       severity error;
 			wait for 5 ns;
 
 		-- execute instruction 171
@@ -8233,13 +8227,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 343" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 343" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 343" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 343" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 343" severity error;
-			assert reg0c = x"00000017" report "reg0c error at step 343" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 343" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 343" severity error;
-			assert reg0f = x"00000017" report "reg0f error at step 343" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 343" severity error;
+			assert reg0a = x"00000011" report "reg0a error at step 343" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 343" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 343" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 343" severity error;
+			assert reg0e = x"00000010" report "reg0e error at step 343" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 343" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 343" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 343" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 343" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 343" severity error;
@@ -8255,15 +8249,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 343" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 343" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 343" severity error;
-			assert progcounter = x"00000050" report "progcounter error at step 343" severity error;
+			assert progcounter = x"000002ac" report "progcounter error at step 343" severity error;
 			wait for 5 ns;
 
 		-- load instruction 172
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"fed794e3" report "instruction error at step 344" severity error;
-			assert false report "172;0xfed794e3;BNE : if ( reg[15] != reg[13] ) PC = PC + -24;OK; ;" severity note;
-			assert progcounter = x"00000050" report "progcounter error at step 344" severity error;
+			assert instr = x"00170713" report "instruction error at step 344" severity error;
+			assert false report "172;0x00170713;ADDI : reg[14] = reg[14] + 1;OK; ;" severity note;
+			assert progcounter = x"000002ac" report "progcounter error at step 344" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 172
@@ -8279,13 +8273,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 345" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 345" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 345" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 345" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 345" severity error;
-			assert reg0c = x"00000017" report "reg0c error at step 345" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 345" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 345" severity error;
-			assert reg0f = x"00000017" report "reg0f error at step 345" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 345" severity error;
+			assert reg0a = x"00000011" report "reg0a error at step 345" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 345" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 345" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 345" severity error;
+			assert reg0e = x"00000011" report "reg0e error at step 345" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 345" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 345" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 345" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 345" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 345" severity error;
@@ -8301,18 +8295,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 345" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 345" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 345" severity error;
-			assert progcounter = x"00000038" report "progcounter error at step 345" severity error;
+			assert progcounter = x"000002b0" report "progcounter error at step 345" severity error;
 			wait for 5 ns;
 
 		-- load instruction 173
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 346" severity error;
-			assert false report "173;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000038" report "progcounter error at step 346" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 346"     severity error;
-			assert dataLength = "010"        report "length error at step 346"      severity error;
-			assert load = '1'                report "load error at step 346"        severity error;
+			assert instr = x"fc1ff06f" report "instruction error at step 346" severity error;
+			assert false report "173;0xfc1ff06f;JAL : reg[00] = PC+4 and PC = 0x2b0 + -64;OK; ;" severity note;
+			assert progcounter = x"000002b0" report "progcounter error at step 346" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 173
@@ -8328,13 +8319,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 347" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 347" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 347" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 347" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 347" severity error;
-			assert reg0c = x"00000017" report "reg0c error at step 347" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 347" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 347" severity error;
-			assert reg0f = x"00000017" report "reg0f error at step 347" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 347" severity error;
+			assert reg0a = x"00000011" report "reg0a error at step 347" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 347" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 347" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 347" severity error;
+			assert reg0e = x"00000011" report "reg0e error at step 347" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 347" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 347" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 347" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 347" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 347" severity error;
@@ -8350,15 +8341,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 347" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 347" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 347" severity error;
-			assert progcounter = x"0000003c" report "progcounter error at step 347" severity error;
+			assert progcounter = x"00000270" report "progcounter error at step 347" severity error;
 			wait for 5 ns;
 
 		-- load instruction 174
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00f61863" report "instruction error at step 348" severity error;
-			assert false report "174;0x00f61863;BNE : if ( reg[12] != reg[15] ) PC = PC + 16;OK; ;" severity note;
-			assert progcounter = x"0000003c" report "progcounter error at step 348" severity error;
+			assert instr = x"00c12503" report "instruction error at step 348" severity error;
+			assert false report "174;0x00c12503;LDW : reg[10] = dataMem[reg[02] + 12];OK; ;" severity note;
+			assert progcounter = x"00000270" report "progcounter error at step 348" severity error;
+			assert dataAddr = x"00000ffc"    report "address error at step 348"     severity error;
+			assert dataLength = "010"        report "length error at step 348"      severity error;
+			assert load = '1'                report "load error at step 348"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 174
@@ -8374,13 +8368,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 349" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 349" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 349" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 349" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 349" severity error;
-			assert reg0c = x"00000017" report "reg0c error at step 349" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 349" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 349" severity error;
-			assert reg0f = x"00000017" report "reg0f error at step 349" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 349" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 349" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 349" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 349" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 349" severity error;
+			assert reg0e = x"00000011" report "reg0e error at step 349" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 349" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 349" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 349" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 349" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 349" severity error;
@@ -8396,18 +8390,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 349" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 349" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 349" severity error;
-			assert progcounter = x"00000040" report "progcounter error at step 349" severity error;
+			assert progcounter = x"00000274" report "progcounter error at step 349" severity error;
 			wait for 5 ns;
 
 		-- load instruction 175
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 350" severity error;
-			assert false report "175;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000040" report "progcounter error at step 350" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 350"     severity error;
-			assert dataLength = "010"        report "length error at step 350"      severity error;
-			assert load = '1'                report "load error at step 350"        severity error;
+			assert instr = x"02a76263" report "instruction error at step 350" severity error;
+			assert false report "175;0x02a76263;BLTU: if ( reg[14] < reg[10] ) PC = PC + 36;OK; ;" severity note;
+			assert progcounter = x"00000274" report "progcounter error at step 350" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 175
@@ -8423,13 +8414,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 351" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 351" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 351" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 351" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 351" severity error;
-			assert reg0c = x"00000017" report "reg0c error at step 351" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 351" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 351" severity error;
-			assert reg0f = x"00000017" report "reg0f error at step 351" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 351" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 351" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 351" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 351" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 351" severity error;
+			assert reg0e = x"00000011" report "reg0e error at step 351" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 351" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 351" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 351" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 351" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 351" severity error;
@@ -8445,15 +8436,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 351" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 351" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 351" severity error;
-			assert progcounter = x"00000044" report "progcounter error at step 351" severity error;
+			assert progcounter = x"00000298" report "progcounter error at step 351" severity error;
 			wait for 5 ns;
 
 		-- load instruction 176
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00160613" report "instruction error at step 352" severity error;
-			assert false report "176;0x00160613;ADDI : reg[12] = reg[12] + 1;OK; ;" severity note;
-			assert progcounter = x"00000044" report "progcounter error at step 352" severity error;
+			assert instr = x"00812503" report "instruction error at step 352" severity error;
+			assert false report "176;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"00000298" report "progcounter error at step 352" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 352"     severity error;
+			assert dataLength = "010"        report "length error at step 352"      severity error;
+			assert load = '1'                report "load error at step 352"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 176
@@ -8469,13 +8463,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 353" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 353" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 353" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 353" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 353" severity error;
-			assert reg0c = x"00000018" report "reg0c error at step 353" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 353" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 353" severity error;
-			assert reg0f = x"00000017" report "reg0f error at step 353" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 353" severity error;
+			assert reg0a = x"00000011" report "reg0a error at step 353" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 353" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 353" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 353" severity error;
+			assert reg0e = x"00000011" report "reg0e error at step 353" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 353" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 353" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 353" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 353" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 353" severity error;
@@ -8491,19 +8485,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 353" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 353" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 353" severity error;
-			assert progcounter = x"00000048" report "progcounter error at step 353" severity error;
+			assert progcounter = x"0000029c" report "progcounter error at step 353" severity error;
 			wait for 5 ns;
 
 		-- load instruction 177
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12623" report "instruction error at step 354" severity error;
-			assert false report "177;0x00c12623;STRW : dataMem[reg[02] + 12] = reg[12];OK; ;" severity note;
-			assert progcounter = x"00000048" report "progcounter error at step 354" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 354"     severity error;
-			assert inputData = x"00000018"   report "data error at step  354"       severity error;
-			assert dataLength = "010"        report "length error at step 354"      severity error;
-			assert store = '1'               report "store error at step 354"       severity error;
+			assert instr = x"00e51863" report "instruction error at step 354" severity error;
+			assert false report "177;0x00e51863;BNE : if ( reg[10] != reg[14] ) PC = PC + 16;OK; ;" severity note;
+			assert progcounter = x"0000029c" report "progcounter error at step 354" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 177
@@ -8519,13 +8509,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 355" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 355" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 355" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 355" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 355" severity error;
-			assert reg0c = x"00000018" report "reg0c error at step 355" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 355" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 355" severity error;
-			assert reg0f = x"00000017" report "reg0f error at step 355" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 355" severity error;
+			assert reg0a = x"00000011" report "reg0a error at step 355" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 355" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 355" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 355" severity error;
+			assert reg0e = x"00000011" report "reg0e error at step 355" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 355" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 355" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 355" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 355" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 355" severity error;
@@ -8541,15 +8531,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 355" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 355" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 355" severity error;
-			assert progcounter = x"0000004c" report "progcounter error at step 355" severity error;
+			assert progcounter = x"000002a0" report "progcounter error at step 355" severity error;
 			wait for 5 ns;
 
 		-- load instruction 178
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00178793" report "instruction error at step 356" severity error;
-			assert false report "178;0x00178793;ADDI : reg[15] = reg[15] + 1;OK; ;" severity note;
-			assert progcounter = x"0000004c" report "progcounter error at step 356" severity error;
+			assert instr = x"00812503" report "instruction error at step 356" severity error;
+			assert false report "178;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"000002a0" report "progcounter error at step 356" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 356"     severity error;
+			assert dataLength = "010"        report "length error at step 356"      severity error;
+			assert load = '1'                report "load error at step 356"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 178
@@ -8565,13 +8558,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 357" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 357" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 357" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 357" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 357" severity error;
-			assert reg0c = x"00000018" report "reg0c error at step 357" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 357" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 357" severity error;
-			assert reg0f = x"00000018" report "reg0f error at step 357" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 357" severity error;
+			assert reg0a = x"00000011" report "reg0a error at step 357" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 357" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 357" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 357" severity error;
+			assert reg0e = x"00000011" report "reg0e error at step 357" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 357" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 357" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 357" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 357" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 357" severity error;
@@ -8587,15 +8580,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 357" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 357" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 357" severity error;
-			assert progcounter = x"00000050" report "progcounter error at step 357" severity error;
+			assert progcounter = x"000002a4" report "progcounter error at step 357" severity error;
 			wait for 5 ns;
 
 		-- load instruction 179
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"fed794e3" report "instruction error at step 358" severity error;
-			assert false report "179;0xfed794e3;BNE : if ( reg[15] != reg[13] ) PC = PC + -24;OK; ;" severity note;
-			assert progcounter = x"00000050" report "progcounter error at step 358" severity error;
+			assert instr = x"00150513" report "instruction error at step 358" severity error;
+			assert false report "179;0x00150513;ADDI : reg[10] = reg[10] + 1;OK; ;" severity note;
+			assert progcounter = x"000002a4" report "progcounter error at step 358" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 179
@@ -8611,13 +8604,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 359" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 359" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 359" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 359" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 359" severity error;
-			assert reg0c = x"00000018" report "reg0c error at step 359" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 359" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 359" severity error;
-			assert reg0f = x"00000018" report "reg0f error at step 359" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 359" severity error;
+			assert reg0a = x"00000012" report "reg0a error at step 359" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 359" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 359" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 359" severity error;
+			assert reg0e = x"00000011" report "reg0e error at step 359" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 359" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 359" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 359" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 359" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 359" severity error;
@@ -8633,18 +8626,19 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 359" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 359" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 359" severity error;
-			assert progcounter = x"00000038" report "progcounter error at step 359" severity error;
+			assert progcounter = x"000002a8" report "progcounter error at step 359" severity error;
 			wait for 5 ns;
 
 		-- load instruction 180
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 360" severity error;
-			assert false report "180;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000038" report "progcounter error at step 360" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 360"     severity error;
+			assert instr = x"00a12423" report "instruction error at step 360" severity error;
+			assert false report "180;0x00a12423;STRW : dataMem[reg[02] + 8] = reg[10];OK; ;" severity note;
+			assert progcounter = x"000002a8" report "progcounter error at step 360" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 360"     severity error;
+			assert inputData = x"00000012"   report "data error at step  360"       severity error;
 			assert dataLength = "010"        report "length error at step 360"      severity error;
-			assert load = '1'                report "load error at step 360"        severity error;
+			assert store = '1'               report "store error at step 360"       severity error;
 			wait for 5 ns;
 
 		-- execute instruction 180
@@ -8660,13 +8654,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 361" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 361" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 361" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 361" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 361" severity error;
-			assert reg0c = x"00000018" report "reg0c error at step 361" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 361" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 361" severity error;
-			assert reg0f = x"00000018" report "reg0f error at step 361" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 361" severity error;
+			assert reg0a = x"00000012" report "reg0a error at step 361" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 361" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 361" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 361" severity error;
+			assert reg0e = x"00000011" report "reg0e error at step 361" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 361" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 361" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 361" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 361" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 361" severity error;
@@ -8682,15 +8676,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 361" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 361" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 361" severity error;
-			assert progcounter = x"0000003c" report "progcounter error at step 361" severity error;
+			assert progcounter = x"000002ac" report "progcounter error at step 361" severity error;
 			wait for 5 ns;
 
 		-- load instruction 181
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00f61863" report "instruction error at step 362" severity error;
-			assert false report "181;0x00f61863;BNE : if ( reg[12] != reg[15] ) PC = PC + 16;OK; ;" severity note;
-			assert progcounter = x"0000003c" report "progcounter error at step 362" severity error;
+			assert instr = x"00170713" report "instruction error at step 362" severity error;
+			assert false report "181;0x00170713;ADDI : reg[14] = reg[14] + 1;OK; ;" severity note;
+			assert progcounter = x"000002ac" report "progcounter error at step 362" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 181
@@ -8706,13 +8700,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 363" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 363" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 363" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 363" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 363" severity error;
-			assert reg0c = x"00000018" report "reg0c error at step 363" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 363" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 363" severity error;
-			assert reg0f = x"00000018" report "reg0f error at step 363" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 363" severity error;
+			assert reg0a = x"00000012" report "reg0a error at step 363" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 363" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 363" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 363" severity error;
+			assert reg0e = x"00000012" report "reg0e error at step 363" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 363" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 363" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 363" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 363" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 363" severity error;
@@ -8728,18 +8722,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 363" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 363" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 363" severity error;
-			assert progcounter = x"00000040" report "progcounter error at step 363" severity error;
+			assert progcounter = x"000002b0" report "progcounter error at step 363" severity error;
 			wait for 5 ns;
 
 		-- load instruction 182
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 364" severity error;
-			assert false report "182;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000040" report "progcounter error at step 364" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 364"     severity error;
-			assert dataLength = "010"        report "length error at step 364"      severity error;
-			assert load = '1'                report "load error at step 364"        severity error;
+			assert instr = x"fc1ff06f" report "instruction error at step 364" severity error;
+			assert false report "182;0xfc1ff06f;JAL : reg[00] = PC+4 and PC = 0x2b0 + -64;OK; ;" severity note;
+			assert progcounter = x"000002b0" report "progcounter error at step 364" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 182
@@ -8755,13 +8746,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 365" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 365" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 365" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 365" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 365" severity error;
-			assert reg0c = x"00000018" report "reg0c error at step 365" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 365" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 365" severity error;
-			assert reg0f = x"00000018" report "reg0f error at step 365" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 365" severity error;
+			assert reg0a = x"00000012" report "reg0a error at step 365" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 365" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 365" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 365" severity error;
+			assert reg0e = x"00000012" report "reg0e error at step 365" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 365" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 365" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 365" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 365" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 365" severity error;
@@ -8777,15 +8768,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 365" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 365" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 365" severity error;
-			assert progcounter = x"00000044" report "progcounter error at step 365" severity error;
+			assert progcounter = x"00000270" report "progcounter error at step 365" severity error;
 			wait for 5 ns;
 
 		-- load instruction 183
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00160613" report "instruction error at step 366" severity error;
-			assert false report "183;0x00160613;ADDI : reg[12] = reg[12] + 1;OK; ;" severity note;
-			assert progcounter = x"00000044" report "progcounter error at step 366" severity error;
+			assert instr = x"00c12503" report "instruction error at step 366" severity error;
+			assert false report "183;0x00c12503;LDW : reg[10] = dataMem[reg[02] + 12];OK; ;" severity note;
+			assert progcounter = x"00000270" report "progcounter error at step 366" severity error;
+			assert dataAddr = x"00000ffc"    report "address error at step 366"     severity error;
+			assert dataLength = "010"        report "length error at step 366"      severity error;
+			assert load = '1'                report "load error at step 366"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 183
@@ -8801,13 +8795,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 367" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 367" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 367" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 367" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 367" severity error;
-			assert reg0c = x"00000019" report "reg0c error at step 367" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 367" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 367" severity error;
-			assert reg0f = x"00000018" report "reg0f error at step 367" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 367" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 367" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 367" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 367" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 367" severity error;
+			assert reg0e = x"00000012" report "reg0e error at step 367" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 367" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 367" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 367" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 367" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 367" severity error;
@@ -8823,19 +8817,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 367" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 367" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 367" severity error;
-			assert progcounter = x"00000048" report "progcounter error at step 367" severity error;
+			assert progcounter = x"00000274" report "progcounter error at step 367" severity error;
 			wait for 5 ns;
 
 		-- load instruction 184
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12623" report "instruction error at step 368" severity error;
-			assert false report "184;0x00c12623;STRW : dataMem[reg[02] + 12] = reg[12];OK; ;" severity note;
-			assert progcounter = x"00000048" report "progcounter error at step 368" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 368"     severity error;
-			assert inputData = x"00000019"   report "data error at step  368"       severity error;
-			assert dataLength = "010"        report "length error at step 368"      severity error;
-			assert store = '1'               report "store error at step 368"       severity error;
+			assert instr = x"02a76263" report "instruction error at step 368" severity error;
+			assert false report "184;0x02a76263;BLTU: if ( reg[14] < reg[10] ) PC = PC + 36;OK; ;" severity note;
+			assert progcounter = x"00000274" report "progcounter error at step 368" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 184
@@ -8851,13 +8841,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 369" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 369" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 369" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 369" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 369" severity error;
-			assert reg0c = x"00000019" report "reg0c error at step 369" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 369" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 369" severity error;
-			assert reg0f = x"00000018" report "reg0f error at step 369" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 369" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 369" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 369" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 369" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 369" severity error;
+			assert reg0e = x"00000012" report "reg0e error at step 369" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 369" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 369" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 369" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 369" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 369" severity error;
@@ -8873,15 +8863,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 369" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 369" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 369" severity error;
-			assert progcounter = x"0000004c" report "progcounter error at step 369" severity error;
+			assert progcounter = x"00000298" report "progcounter error at step 369" severity error;
 			wait for 5 ns;
 
 		-- load instruction 185
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00178793" report "instruction error at step 370" severity error;
-			assert false report "185;0x00178793;ADDI : reg[15] = reg[15] + 1;OK; ;" severity note;
-			assert progcounter = x"0000004c" report "progcounter error at step 370" severity error;
+			assert instr = x"00812503" report "instruction error at step 370" severity error;
+			assert false report "185;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"00000298" report "progcounter error at step 370" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 370"     severity error;
+			assert dataLength = "010"        report "length error at step 370"      severity error;
+			assert load = '1'                report "load error at step 370"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 185
@@ -8897,13 +8890,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 371" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 371" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 371" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 371" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 371" severity error;
-			assert reg0c = x"00000019" report "reg0c error at step 371" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 371" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 371" severity error;
-			assert reg0f = x"00000019" report "reg0f error at step 371" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 371" severity error;
+			assert reg0a = x"00000012" report "reg0a error at step 371" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 371" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 371" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 371" severity error;
+			assert reg0e = x"00000012" report "reg0e error at step 371" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 371" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 371" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 371" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 371" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 371" severity error;
@@ -8919,15 +8912,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 371" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 371" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 371" severity error;
-			assert progcounter = x"00000050" report "progcounter error at step 371" severity error;
+			assert progcounter = x"0000029c" report "progcounter error at step 371" severity error;
 			wait for 5 ns;
 
 		-- load instruction 186
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"fed794e3" report "instruction error at step 372" severity error;
-			assert false report "186;0xfed794e3;BNE : if ( reg[15] != reg[13] ) PC = PC + -24;OK; ;" severity note;
-			assert progcounter = x"00000050" report "progcounter error at step 372" severity error;
+			assert instr = x"00e51863" report "instruction error at step 372" severity error;
+			assert false report "186;0x00e51863;BNE : if ( reg[10] != reg[14] ) PC = PC + 16;OK; ;" severity note;
+			assert progcounter = x"0000029c" report "progcounter error at step 372" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 186
@@ -8943,13 +8936,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 373" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 373" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 373" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 373" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 373" severity error;
-			assert reg0c = x"00000019" report "reg0c error at step 373" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 373" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 373" severity error;
-			assert reg0f = x"00000019" report "reg0f error at step 373" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 373" severity error;
+			assert reg0a = x"00000012" report "reg0a error at step 373" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 373" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 373" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 373" severity error;
+			assert reg0e = x"00000012" report "reg0e error at step 373" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 373" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 373" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 373" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 373" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 373" severity error;
@@ -8965,16 +8958,16 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 373" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 373" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 373" severity error;
-			assert progcounter = x"00000038" report "progcounter error at step 373" severity error;
+			assert progcounter = x"000002a0" report "progcounter error at step 373" severity error;
 			wait for 5 ns;
 
 		-- load instruction 187
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 374" severity error;
-			assert false report "187;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000038" report "progcounter error at step 374" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 374"     severity error;
+			assert instr = x"00812503" report "instruction error at step 374" severity error;
+			assert false report "187;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"000002a0" report "progcounter error at step 374" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 374"     severity error;
 			assert dataLength = "010"        report "length error at step 374"      severity error;
 			assert load = '1'                report "load error at step 374"        severity error;
 			wait for 5 ns;
@@ -8992,13 +8985,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 375" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 375" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 375" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 375" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 375" severity error;
-			assert reg0c = x"00000019" report "reg0c error at step 375" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 375" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 375" severity error;
-			assert reg0f = x"00000019" report "reg0f error at step 375" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 375" severity error;
+			assert reg0a = x"00000012" report "reg0a error at step 375" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 375" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 375" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 375" severity error;
+			assert reg0e = x"00000012" report "reg0e error at step 375" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 375" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 375" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 375" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 375" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 375" severity error;
@@ -9014,15 +9007,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 375" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 375" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 375" severity error;
-			assert progcounter = x"0000003c" report "progcounter error at step 375" severity error;
+			assert progcounter = x"000002a4" report "progcounter error at step 375" severity error;
 			wait for 5 ns;
 
 		-- load instruction 188
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00f61863" report "instruction error at step 376" severity error;
-			assert false report "188;0x00f61863;BNE : if ( reg[12] != reg[15] ) PC = PC + 16;OK; ;" severity note;
-			assert progcounter = x"0000003c" report "progcounter error at step 376" severity error;
+			assert instr = x"00150513" report "instruction error at step 376" severity error;
+			assert false report "188;0x00150513;ADDI : reg[10] = reg[10] + 1;OK; ;" severity note;
+			assert progcounter = x"000002a4" report "progcounter error at step 376" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 188
@@ -9038,13 +9031,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 377" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 377" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 377" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 377" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 377" severity error;
-			assert reg0c = x"00000019" report "reg0c error at step 377" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 377" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 377" severity error;
-			assert reg0f = x"00000019" report "reg0f error at step 377" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 377" severity error;
+			assert reg0a = x"00000013" report "reg0a error at step 377" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 377" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 377" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 377" severity error;
+			assert reg0e = x"00000012" report "reg0e error at step 377" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 377" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 377" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 377" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 377" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 377" severity error;
@@ -9060,18 +9053,19 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 377" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 377" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 377" severity error;
-			assert progcounter = x"00000040" report "progcounter error at step 377" severity error;
+			assert progcounter = x"000002a8" report "progcounter error at step 377" severity error;
 			wait for 5 ns;
 
 		-- load instruction 189
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 378" severity error;
-			assert false report "189;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000040" report "progcounter error at step 378" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 378"     severity error;
+			assert instr = x"00a12423" report "instruction error at step 378" severity error;
+			assert false report "189;0x00a12423;STRW : dataMem[reg[02] + 8] = reg[10];OK; ;" severity note;
+			assert progcounter = x"000002a8" report "progcounter error at step 378" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 378"     severity error;
+			assert inputData = x"00000013"   report "data error at step  378"       severity error;
 			assert dataLength = "010"        report "length error at step 378"      severity error;
-			assert load = '1'                report "load error at step 378"        severity error;
+			assert store = '1'               report "store error at step 378"       severity error;
 			wait for 5 ns;
 
 		-- execute instruction 189
@@ -9087,13 +9081,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 379" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 379" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 379" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 379" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 379" severity error;
-			assert reg0c = x"00000019" report "reg0c error at step 379" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 379" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 379" severity error;
-			assert reg0f = x"00000019" report "reg0f error at step 379" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 379" severity error;
+			assert reg0a = x"00000013" report "reg0a error at step 379" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 379" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 379" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 379" severity error;
+			assert reg0e = x"00000012" report "reg0e error at step 379" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 379" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 379" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 379" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 379" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 379" severity error;
@@ -9109,15 +9103,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 379" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 379" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 379" severity error;
-			assert progcounter = x"00000044" report "progcounter error at step 379" severity error;
+			assert progcounter = x"000002ac" report "progcounter error at step 379" severity error;
 			wait for 5 ns;
 
 		-- load instruction 190
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00160613" report "instruction error at step 380" severity error;
-			assert false report "190;0x00160613;ADDI : reg[12] = reg[12] + 1;OK; ;" severity note;
-			assert progcounter = x"00000044" report "progcounter error at step 380" severity error;
+			assert instr = x"00170713" report "instruction error at step 380" severity error;
+			assert false report "190;0x00170713;ADDI : reg[14] = reg[14] + 1;OK; ;" severity note;
+			assert progcounter = x"000002ac" report "progcounter error at step 380" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 190
@@ -9133,13 +9127,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 381" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 381" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 381" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 381" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 381" severity error;
-			assert reg0c = x"0000001a" report "reg0c error at step 381" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 381" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 381" severity error;
-			assert reg0f = x"00000019" report "reg0f error at step 381" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 381" severity error;
+			assert reg0a = x"00000013" report "reg0a error at step 381" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 381" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 381" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 381" severity error;
+			assert reg0e = x"00000013" report "reg0e error at step 381" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 381" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 381" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 381" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 381" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 381" severity error;
@@ -9155,19 +9149,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 381" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 381" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 381" severity error;
-			assert progcounter = x"00000048" report "progcounter error at step 381" severity error;
+			assert progcounter = x"000002b0" report "progcounter error at step 381" severity error;
 			wait for 5 ns;
 
 		-- load instruction 191
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12623" report "instruction error at step 382" severity error;
-			assert false report "191;0x00c12623;STRW : dataMem[reg[02] + 12] = reg[12];OK; ;" severity note;
-			assert progcounter = x"00000048" report "progcounter error at step 382" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 382"     severity error;
-			assert inputData = x"0000001a"   report "data error at step  382"       severity error;
-			assert dataLength = "010"        report "length error at step 382"      severity error;
-			assert store = '1'               report "store error at step 382"       severity error;
+			assert instr = x"fc1ff06f" report "instruction error at step 382" severity error;
+			assert false report "191;0xfc1ff06f;JAL : reg[00] = PC+4 and PC = 0x2b0 + -64;OK; ;" severity note;
+			assert progcounter = x"000002b0" report "progcounter error at step 382" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 191
@@ -9183,13 +9173,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 383" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 383" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 383" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 383" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 383" severity error;
-			assert reg0c = x"0000001a" report "reg0c error at step 383" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 383" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 383" severity error;
-			assert reg0f = x"00000019" report "reg0f error at step 383" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 383" severity error;
+			assert reg0a = x"00000013" report "reg0a error at step 383" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 383" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 383" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 383" severity error;
+			assert reg0e = x"00000013" report "reg0e error at step 383" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 383" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 383" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 383" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 383" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 383" severity error;
@@ -9205,15 +9195,18 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 383" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 383" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 383" severity error;
-			assert progcounter = x"0000004c" report "progcounter error at step 383" severity error;
+			assert progcounter = x"00000270" report "progcounter error at step 383" severity error;
 			wait for 5 ns;
 
 		-- load instruction 192
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00178793" report "instruction error at step 384" severity error;
-			assert false report "192;0x00178793;ADDI : reg[15] = reg[15] + 1;OK; ;" severity note;
-			assert progcounter = x"0000004c" report "progcounter error at step 384" severity error;
+			assert instr = x"00c12503" report "instruction error at step 384" severity error;
+			assert false report "192;0x00c12503;LDW : reg[10] = dataMem[reg[02] + 12];OK; ;" severity note;
+			assert progcounter = x"00000270" report "progcounter error at step 384" severity error;
+			assert dataAddr = x"00000ffc"    report "address error at step 384"     severity error;
+			assert dataLength = "010"        report "length error at step 384"      severity error;
+			assert load = '1'                report "load error at step 384"        severity error;
 			wait for 5 ns;
 
 		-- execute instruction 192
@@ -9229,13 +9222,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 385" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 385" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 385" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 385" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 385" severity error;
-			assert reg0c = x"0000001a" report "reg0c error at step 385" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 385" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 385" severity error;
-			assert reg0f = x"0000001a" report "reg0f error at step 385" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 385" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 385" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 385" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 385" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 385" severity error;
+			assert reg0e = x"00000013" report "reg0e error at step 385" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 385" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 385" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 385" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 385" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 385" severity error;
@@ -9251,15 +9244,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 385" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 385" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 385" severity error;
-			assert progcounter = x"00000050" report "progcounter error at step 385" severity error;
+			assert progcounter = x"00000274" report "progcounter error at step 385" severity error;
 			wait for 5 ns;
 
 		-- load instruction 193
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"fed794e3" report "instruction error at step 386" severity error;
-			assert false report "193;0xfed794e3;BNE : if ( reg[15] != reg[13] ) PC = PC + -24;OK; ;" severity note;
-			assert progcounter = x"00000050" report "progcounter error at step 386" severity error;
+			assert instr = x"02a76263" report "instruction error at step 386" severity error;
+			assert false report "193;0x02a76263;BLTU: if ( reg[14] < reg[10] ) PC = PC + 36;OK; ;" severity note;
+			assert progcounter = x"00000274" report "progcounter error at step 386" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 193
@@ -9275,13 +9268,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 387" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 387" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 387" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 387" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 387" severity error;
-			assert reg0c = x"0000001a" report "reg0c error at step 387" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 387" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 387" severity error;
-			assert reg0f = x"0000001a" report "reg0f error at step 387" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 387" severity error;
+			assert reg0a = x"00004e20" report "reg0a error at step 387" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 387" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 387" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 387" severity error;
+			assert reg0e = x"00000013" report "reg0e error at step 387" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 387" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 387" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 387" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 387" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 387" severity error;
@@ -9297,16 +9290,16 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 387" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 387" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 387" severity error;
-			assert progcounter = x"00000038" report "progcounter error at step 387" severity error;
+			assert progcounter = x"00000298" report "progcounter error at step 387" severity error;
 			wait for 5 ns;
 
 		-- load instruction 194
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 388" severity error;
-			assert false report "194;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000038" report "progcounter error at step 388" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 388"     severity error;
+			assert instr = x"00812503" report "instruction error at step 388" severity error;
+			assert false report "194;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"00000298" report "progcounter error at step 388" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 388"     severity error;
 			assert dataLength = "010"        report "length error at step 388"      severity error;
 			assert load = '1'                report "load error at step 388"        severity error;
 			wait for 5 ns;
@@ -9324,13 +9317,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 389" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 389" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 389" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 389" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 389" severity error;
-			assert reg0c = x"0000001a" report "reg0c error at step 389" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 389" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 389" severity error;
-			assert reg0f = x"0000001a" report "reg0f error at step 389" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 389" severity error;
+			assert reg0a = x"00000013" report "reg0a error at step 389" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 389" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 389" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 389" severity error;
+			assert reg0e = x"00000013" report "reg0e error at step 389" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 389" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 389" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 389" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 389" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 389" severity error;
@@ -9346,15 +9339,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 389" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 389" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 389" severity error;
-			assert progcounter = x"0000003c" report "progcounter error at step 389" severity error;
+			assert progcounter = x"0000029c" report "progcounter error at step 389" severity error;
 			wait for 5 ns;
 
 		-- load instruction 195
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00f61863" report "instruction error at step 390" severity error;
-			assert false report "195;0x00f61863;BNE : if ( reg[12] != reg[15] ) PC = PC + 16;OK; ;" severity note;
-			assert progcounter = x"0000003c" report "progcounter error at step 390" severity error;
+			assert instr = x"00e51863" report "instruction error at step 390" severity error;
+			assert false report "195;0x00e51863;BNE : if ( reg[10] != reg[14] ) PC = PC + 16;OK; ;" severity note;
+			assert progcounter = x"0000029c" report "progcounter error at step 390" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 195
@@ -9370,13 +9363,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 391" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 391" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 391" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 391" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 391" severity error;
-			assert reg0c = x"0000001a" report "reg0c error at step 391" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 391" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 391" severity error;
-			assert reg0f = x"0000001a" report "reg0f error at step 391" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 391" severity error;
+			assert reg0a = x"00000013" report "reg0a error at step 391" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 391" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 391" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 391" severity error;
+			assert reg0e = x"00000013" report "reg0e error at step 391" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 391" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 391" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 391" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 391" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 391" severity error;
@@ -9392,16 +9385,16 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 391" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 391" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 391" severity error;
-			assert progcounter = x"00000040" report "progcounter error at step 391" severity error;
+			assert progcounter = x"000002a0" report "progcounter error at step 391" severity error;
 			wait for 5 ns;
 
 		-- load instruction 196
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12603" report "instruction error at step 392" severity error;
-			assert false report "196;0x00c12603;LDW : reg[12] = dataMem[reg[02] + 12];OK; ;" severity note;
-			assert progcounter = x"00000040" report "progcounter error at step 392" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 392"     severity error;
+			assert instr = x"00812503" report "instruction error at step 392" severity error;
+			assert false report "196;0x00812503;LDW : reg[10] = dataMem[reg[02] + 8];OK; ;" severity note;
+			assert progcounter = x"000002a0" report "progcounter error at step 392" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 392"     severity error;
 			assert dataLength = "010"        report "length error at step 392"      severity error;
 			assert load = '1'                report "load error at step 392"        severity error;
 			wait for 5 ns;
@@ -9419,13 +9412,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 393" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 393" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 393" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 393" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 393" severity error;
-			assert reg0c = x"0000001a" report "reg0c error at step 393" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 393" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 393" severity error;
-			assert reg0f = x"0000001a" report "reg0f error at step 393" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 393" severity error;
+			assert reg0a = x"00000013" report "reg0a error at step 393" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 393" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 393" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 393" severity error;
+			assert reg0e = x"00000013" report "reg0e error at step 393" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 393" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 393" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 393" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 393" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 393" severity error;
@@ -9441,15 +9434,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 393" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 393" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 393" severity error;
-			assert progcounter = x"00000044" report "progcounter error at step 393" severity error;
+			assert progcounter = x"000002a4" report "progcounter error at step 393" severity error;
 			wait for 5 ns;
 
 		-- load instruction 197
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00160613" report "instruction error at step 394" severity error;
-			assert false report "197;0x00160613;ADDI : reg[12] = reg[12] + 1;OK; ;" severity note;
-			assert progcounter = x"00000044" report "progcounter error at step 394" severity error;
+			assert instr = x"00150513" report "instruction error at step 394" severity error;
+			assert false report "197;0x00150513;ADDI : reg[10] = reg[10] + 1;OK; ;" severity note;
+			assert progcounter = x"000002a4" report "progcounter error at step 394" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 197
@@ -9465,13 +9458,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 395" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 395" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 395" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 395" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 395" severity error;
-			assert reg0c = x"0000001b" report "reg0c error at step 395" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 395" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 395" severity error;
-			assert reg0f = x"0000001a" report "reg0f error at step 395" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 395" severity error;
+			assert reg0a = x"00000014" report "reg0a error at step 395" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 395" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 395" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 395" severity error;
+			assert reg0e = x"00000013" report "reg0e error at step 395" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 395" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 395" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 395" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 395" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 395" severity error;
@@ -9487,17 +9480,17 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 395" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 395" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 395" severity error;
-			assert progcounter = x"00000048" report "progcounter error at step 395" severity error;
+			assert progcounter = x"000002a8" report "progcounter error at step 395" severity error;
 			wait for 5 ns;
 
 		-- load instruction 198
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00c12623" report "instruction error at step 396" severity error;
-			assert false report "198;0x00c12623;STRW : dataMem[reg[02] + 12] = reg[12];OK; ;" severity note;
-			assert progcounter = x"00000048" report "progcounter error at step 396" severity error;
-			assert dataAddr = x"00000ffc"    report "address error at step 396"     severity error;
-			assert inputData = x"0000001b"   report "data error at step  396"       severity error;
+			assert instr = x"00a12423" report "instruction error at step 396" severity error;
+			assert false report "198;0x00a12423;STRW : dataMem[reg[02] + 8] = reg[10];OK; ;" severity note;
+			assert progcounter = x"000002a8" report "progcounter error at step 396" severity error;
+			assert dataAddr = x"00000ff8"    report "address error at step 396"     severity error;
+			assert inputData = x"00000014"   report "data error at step  396"       severity error;
 			assert dataLength = "010"        report "length error at step 396"      severity error;
 			assert store = '1'               report "store error at step 396"       severity error;
 			wait for 5 ns;
@@ -9515,13 +9508,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 397" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 397" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 397" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 397" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 397" severity error;
-			assert reg0c = x"0000001b" report "reg0c error at step 397" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 397" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 397" severity error;
-			assert reg0f = x"0000001a" report "reg0f error at step 397" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 397" severity error;
+			assert reg0a = x"00000014" report "reg0a error at step 397" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 397" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 397" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 397" severity error;
+			assert reg0e = x"00000013" report "reg0e error at step 397" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 397" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 397" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 397" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 397" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 397" severity error;
@@ -9537,15 +9530,15 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 397" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 397" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 397" severity error;
-			assert progcounter = x"0000004c" report "progcounter error at step 397" severity error;
+			assert progcounter = x"000002ac" report "progcounter error at step 397" severity error;
 			wait for 5 ns;
 
 		-- load instruction 199
 			ck <= '0';
 			wait for 5 ns;
-			assert instr = x"00178793" report "instruction error at step 398" severity error;
-			assert false report "199;0x00178793;ADDI : reg[15] = reg[15] + 1;OK; ;" severity note;
-			assert progcounter = x"0000004c" report "progcounter error at step 398" severity error;
+			assert instr = x"00170713" report "instruction error at step 398" severity error;
+			assert false report "199;0x00170713;ADDI : reg[14] = reg[14] + 1;OK; ;" severity note;
+			assert progcounter = x"000002ac" report "progcounter error at step 398" severity error;
 			wait for 5 ns;
 
 		-- execute instruction 199
@@ -9561,13 +9554,13 @@ architecture VHDL of TestBenchTop is
 			assert reg07 = x"00000000" report "reg07 error at step 399" severity error;
 			assert reg08 = x"00000000" report "reg08 error at step 399" severity error;
 			assert reg09 = x"00000000" report "reg09 error at step 399" severity error;
-			assert reg0a = x"00000001" report "reg0a error at step 399" severity error;
-			assert reg0b = x"80000000" report "reg0b error at step 399" severity error;
-			assert reg0c = x"0000001b" report "reg0c error at step 399" severity error;
-			assert reg0d = x"00030d40" report "reg0d error at step 399" severity error;
-			assert reg0e = x"00000032" report "reg0e error at step 399" severity error;
-			assert reg0f = x"0000001b" report "reg0f error at step 399" severity error;
-			assert reg10 = x"00000000" report "reg10 error at step 399" severity error;
+			assert reg0a = x"00000014" report "reg0a error at step 399" severity error;
+			assert reg0b = x"ffffc0ab" report "reg0b error at step 399" severity error;
+			assert reg0c = x"ffc08e8e" report "reg0c error at step 399" severity error;
+			assert reg0d = x"00000064" report "reg0d error at step 399" severity error;
+			assert reg0e = x"00000014" report "reg0e error at step 399" severity error;
+			assert reg0f = x"80000000" report "reg0f error at step 399" severity error;
+			assert reg10 = x"00000001" report "reg10 error at step 399" severity error;
 			assert reg11 = x"00000000" report "reg11 error at step 399" severity error;
 			assert reg12 = x"00000000" report "reg12 error at step 399" severity error;
 			assert reg13 = x"00000000" report "reg13 error at step 399" severity error;
@@ -9583,7 +9576,7 @@ architecture VHDL of TestBenchTop is
 			assert reg1d = x"00000000" report "reg1d error at step 399" severity error;
 			assert reg1e = x"00000000" report "reg1e error at step 399" severity error;
 			assert reg1f = x"00000000" report "reg1f error at step 399" severity error;
-			assert progcounter = x"00000050" report "progcounter error at step 399" severity error;
+			assert progcounter = x"000002b0" report "progcounter error at step 399" severity error;
 			wait for 5 ns;
 
 			wait;

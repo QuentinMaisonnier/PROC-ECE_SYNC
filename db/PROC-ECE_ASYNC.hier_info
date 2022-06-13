@@ -1,11 +1,6 @@
 |Top
-TOPclock => clock1M:instPLL.inclk0
-reset => REGLed.ACLR
-reset => muxLoadDelay.ACLR
-reset => Processor:instPROC.PROCreset
-reset => Counter:instCPT.CPTreset
-reset => Displays:instDISP.DISPreset
-reset => clock1M:instPLL.areset
+TOPclock => test:instPLL.inclk0
+reset => TOPreset.DATAB
 TOPdisplay1[0] << Displays:instDISP.DISPdisplay1[0]
 TOPdisplay1[1] << Displays:instDISP.DISPdisplay1[1]
 TOPdisplay1[2] << Displays:instDISP.DISPdisplay1[2]
@@ -135,69 +130,69 @@ global.bp.work.simulPkg.PKG_addrDM_3_ <> SIGaddrDM[3]
 global.bp.work.simulPkg.PKG_addrDM_2_ <> SIGaddrDM[2]
 global.bp.work.simulPkg.PKG_addrDM_1_ <> SIGaddrDM[1]
 global.bp.work.simulPkg.PKG_addrDM_0_ <> SIGaddrDM[0]
-global.bp.work.simulPkg.PKG_outputDM_31_ <> global.bp.work.simulPkg.PKG_outputDM_31_
+global.bp.work.simulPkg.PKG_outputDM_31_ <> SIGoutputDM[31]
 global.bp.work.simulPkg.PKG_counter_31_ <> SIGcounter[31]
-global.bp.work.simulPkg.PKG_outputDM_30_ <> global.bp.work.simulPkg.PKG_outputDM_30_
+global.bp.work.simulPkg.PKG_outputDM_30_ <> SIGoutputDM[30]
 global.bp.work.simulPkg.PKG_counter_30_ <> SIGcounter[30]
-global.bp.work.simulPkg.PKG_outputDM_29_ <> global.bp.work.simulPkg.PKG_outputDM_29_
+global.bp.work.simulPkg.PKG_outputDM_29_ <> SIGoutputDM[29]
 global.bp.work.simulPkg.PKG_counter_29_ <> SIGcounter[29]
-global.bp.work.simulPkg.PKG_outputDM_28_ <> global.bp.work.simulPkg.PKG_outputDM_28_
+global.bp.work.simulPkg.PKG_outputDM_28_ <> SIGoutputDM[28]
 global.bp.work.simulPkg.PKG_counter_28_ <> SIGcounter[28]
-global.bp.work.simulPkg.PKG_outputDM_27_ <> global.bp.work.simulPkg.PKG_outputDM_27_
+global.bp.work.simulPkg.PKG_outputDM_27_ <> SIGoutputDM[27]
 global.bp.work.simulPkg.PKG_counter_27_ <> SIGcounter[27]
-global.bp.work.simulPkg.PKG_outputDM_26_ <> global.bp.work.simulPkg.PKG_outputDM_26_
+global.bp.work.simulPkg.PKG_outputDM_26_ <> SIGoutputDM[26]
 global.bp.work.simulPkg.PKG_counter_26_ <> SIGcounter[26]
-global.bp.work.simulPkg.PKG_outputDM_25_ <> global.bp.work.simulPkg.PKG_outputDM_25_
+global.bp.work.simulPkg.PKG_outputDM_25_ <> SIGoutputDM[25]
 global.bp.work.simulPkg.PKG_counter_25_ <> SIGcounter[25]
-global.bp.work.simulPkg.PKG_outputDM_24_ <> global.bp.work.simulPkg.PKG_outputDM_24_
+global.bp.work.simulPkg.PKG_outputDM_24_ <> SIGoutputDM[24]
 global.bp.work.simulPkg.PKG_counter_24_ <> SIGcounter[24]
-global.bp.work.simulPkg.PKG_outputDM_23_ <> global.bp.work.simulPkg.PKG_outputDM_23_
+global.bp.work.simulPkg.PKG_outputDM_23_ <> SIGoutputDM[23]
 global.bp.work.simulPkg.PKG_counter_23_ <> SIGcounter[23]
-global.bp.work.simulPkg.PKG_outputDM_22_ <> global.bp.work.simulPkg.PKG_outputDM_22_
+global.bp.work.simulPkg.PKG_outputDM_22_ <> SIGoutputDM[22]
 global.bp.work.simulPkg.PKG_counter_22_ <> SIGcounter[22]
-global.bp.work.simulPkg.PKG_outputDM_21_ <> global.bp.work.simulPkg.PKG_outputDM_21_
+global.bp.work.simulPkg.PKG_outputDM_21_ <> SIGoutputDM[21]
 global.bp.work.simulPkg.PKG_counter_21_ <> SIGcounter[21]
-global.bp.work.simulPkg.PKG_outputDM_20_ <> global.bp.work.simulPkg.PKG_outputDM_20_
+global.bp.work.simulPkg.PKG_outputDM_20_ <> SIGoutputDM[20]
 global.bp.work.simulPkg.PKG_counter_20_ <> SIGcounter[20]
-global.bp.work.simulPkg.PKG_outputDM_19_ <> global.bp.work.simulPkg.PKG_outputDM_19_
+global.bp.work.simulPkg.PKG_outputDM_19_ <> SIGoutputDM[19]
 global.bp.work.simulPkg.PKG_counter_19_ <> SIGcounter[19]
-global.bp.work.simulPkg.PKG_outputDM_18_ <> global.bp.work.simulPkg.PKG_outputDM_18_
+global.bp.work.simulPkg.PKG_outputDM_18_ <> SIGoutputDM[18]
 global.bp.work.simulPkg.PKG_counter_18_ <> SIGcounter[18]
-global.bp.work.simulPkg.PKG_outputDM_17_ <> global.bp.work.simulPkg.PKG_outputDM_17_
+global.bp.work.simulPkg.PKG_outputDM_17_ <> SIGoutputDM[17]
 global.bp.work.simulPkg.PKG_counter_17_ <> SIGcounter[17]
-global.bp.work.simulPkg.PKG_outputDM_16_ <> global.bp.work.simulPkg.PKG_outputDM_16_
+global.bp.work.simulPkg.PKG_outputDM_16_ <> SIGoutputDM[16]
 global.bp.work.simulPkg.PKG_counter_16_ <> SIGcounter[16]
-global.bp.work.simulPkg.PKG_outputDM_15_ <> global.bp.work.simulPkg.PKG_outputDM_15_
+global.bp.work.simulPkg.PKG_outputDM_15_ <> SIGoutputDM[15]
 global.bp.work.simulPkg.PKG_counter_15_ <> SIGcounter[15]
-global.bp.work.simulPkg.PKG_outputDM_14_ <> global.bp.work.simulPkg.PKG_outputDM_14_
+global.bp.work.simulPkg.PKG_outputDM_14_ <> SIGoutputDM[14]
 global.bp.work.simulPkg.PKG_counter_14_ <> SIGcounter[14]
-global.bp.work.simulPkg.PKG_outputDM_13_ <> global.bp.work.simulPkg.PKG_outputDM_13_
+global.bp.work.simulPkg.PKG_outputDM_13_ <> SIGoutputDM[13]
 global.bp.work.simulPkg.PKG_counter_13_ <> SIGcounter[13]
-global.bp.work.simulPkg.PKG_outputDM_12_ <> global.bp.work.simulPkg.PKG_outputDM_12_
+global.bp.work.simulPkg.PKG_outputDM_12_ <> SIGoutputDM[12]
 global.bp.work.simulPkg.PKG_counter_12_ <> SIGcounter[12]
-global.bp.work.simulPkg.PKG_outputDM_11_ <> global.bp.work.simulPkg.PKG_outputDM_11_
+global.bp.work.simulPkg.PKG_outputDM_11_ <> SIGoutputDM[11]
 global.bp.work.simulPkg.PKG_counter_11_ <> SIGcounter[11]
-global.bp.work.simulPkg.PKG_outputDM_10_ <> global.bp.work.simulPkg.PKG_outputDM_10_
+global.bp.work.simulPkg.PKG_outputDM_10_ <> SIGoutputDM[10]
 global.bp.work.simulPkg.PKG_counter_10_ <> SIGcounter[10]
-global.bp.work.simulPkg.PKG_outputDM_9_ <> global.bp.work.simulPkg.PKG_outputDM_9_
+global.bp.work.simulPkg.PKG_outputDM_9_ <> SIGoutputDM[9]
 global.bp.work.simulPkg.PKG_counter_9_ <> SIGcounter[9]
-global.bp.work.simulPkg.PKG_outputDM_8_ <> global.bp.work.simulPkg.PKG_outputDM_8_
+global.bp.work.simulPkg.PKG_outputDM_8_ <> SIGoutputDM[8]
 global.bp.work.simulPkg.PKG_counter_8_ <> SIGcounter[8]
-global.bp.work.simulPkg.PKG_outputDM_7_ <> global.bp.work.simulPkg.PKG_outputDM_7_
+global.bp.work.simulPkg.PKG_outputDM_7_ <> SIGoutputDM[7]
 global.bp.work.simulPkg.PKG_counter_7_ <> SIGcounter[7]
-global.bp.work.simulPkg.PKG_outputDM_6_ <> global.bp.work.simulPkg.PKG_outputDM_6_
+global.bp.work.simulPkg.PKG_outputDM_6_ <> SIGoutputDM[6]
 global.bp.work.simulPkg.PKG_counter_6_ <> SIGcounter[6]
-global.bp.work.simulPkg.PKG_outputDM_5_ <> global.bp.work.simulPkg.PKG_outputDM_5_
+global.bp.work.simulPkg.PKG_outputDM_5_ <> SIGoutputDM[5]
 global.bp.work.simulPkg.PKG_counter_5_ <> SIGcounter[5]
-global.bp.work.simulPkg.PKG_outputDM_4_ <> global.bp.work.simulPkg.PKG_outputDM_4_
+global.bp.work.simulPkg.PKG_outputDM_4_ <> SIGoutputDM[4]
 global.bp.work.simulPkg.PKG_counter_4_ <> SIGcounter[4]
-global.bp.work.simulPkg.PKG_outputDM_3_ <> global.bp.work.simulPkg.PKG_outputDM_3_
+global.bp.work.simulPkg.PKG_outputDM_3_ <> SIGoutputDM[3]
 global.bp.work.simulPkg.PKG_counter_3_ <> SIGcounter[3]
-global.bp.work.simulPkg.PKG_outputDM_2_ <> global.bp.work.simulPkg.PKG_outputDM_2_
+global.bp.work.simulPkg.PKG_outputDM_2_ <> SIGoutputDM[2]
 global.bp.work.simulPkg.PKG_counter_2_ <> SIGcounter[2]
-global.bp.work.simulPkg.PKG_outputDM_1_ <> global.bp.work.simulPkg.PKG_outputDM_1_
+global.bp.work.simulPkg.PKG_outputDM_1_ <> SIGoutputDM[1]
 global.bp.work.simulPkg.PKG_counter_1_ <> SIGcounter[1]
-global.bp.work.simulPkg.PKG_outputDM_0_ <> global.bp.work.simulPkg.PKG_outputDM_0_
+global.bp.work.simulPkg.PKG_outputDM_0_ <> SIGoutputDM[0]
 global.bp.work.simulPkg.PKG_counter_0_ <> SIGcounter[0]
 global.bp.work.simulPkg.PKG_inputDM_0_ <> SIGinputDM[0]
 global.bp.work.simulPkg.PKG_store <> SIGstore
@@ -8399,20 +8394,20 @@ DISPdisplay2[30] <= regDisplay2[30].DB_MAX_OUTPUT_PORT_TYPE
 DISPdisplay2[31] <= regDisplay2[31].DB_MAX_OUTPUT_PORT_TYPE
 
 
-|Top|clock1M:instPLL
+|Top|test:instPLL
 areset => altpll:altpll_component.areset
 inclk0 => altpll:altpll_component.inclk[0]
 c0 <= altpll:altpll_component.clk[0]
 locked <= altpll:altpll_component.locked
 
 
-|Top|clock1M:instPLL|altpll:altpll_component
-inclk[0] => clock1M_altpll:auto_generated.inclk[0]
-inclk[1] => clock1M_altpll:auto_generated.inclk[1]
+|Top|test:instPLL|altpll:altpll_component
+inclk[0] => test_altpll:auto_generated.inclk[0]
+inclk[1] => test_altpll:auto_generated.inclk[1]
 fbin => ~NO_FANOUT~
 pllena => ~NO_FANOUT~
 clkswitch => ~NO_FANOUT~
-areset => clock1M_altpll:auto_generated.areset
+areset => test_altpll:auto_generated.areset
 pfdena => ~NO_FANOUT~
 clkena[0] => ~NO_FANOUT~
 clkena[1] => ~NO_FANOUT~
@@ -8453,7 +8448,7 @@ enable1 <= <GND>
 enable0 <= <GND>
 activeclock <= <GND>
 clkloss <= <GND>
-locked <= clock1M_altpll:auto_generated.locked
+locked <= test_altpll:auto_generated.locked
 scandataout <= <GND>
 scandone <= <GND>
 sclkout0 <= <GND>
@@ -8466,7 +8461,7 @@ fref <= <GND>
 icdrclk <= <GND>
 
 
-|Top|clock1M:instPLL|altpll:altpll_component|clock1M_altpll:auto_generated
+|Top|test:instPLL|altpll:altpll_component|test_altpll:auto_generated
 areset => pll_lock_sync.ACLR
 areset => pll1.ARESET
 clk[0] <= pll1.CLK
