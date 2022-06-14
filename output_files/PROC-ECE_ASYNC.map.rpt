@@ -1,5 +1,5 @@
 Analysis & Synthesis report for PROC-ECE_ASYNC
-Mon Jun 13 11:47:38 2022
+Tue Jun 14 17:21:08 2022
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -53,16 +53,16 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon Jun 13 11:47:38 2022       ;
+; Analysis & Synthesis Status        ; Successful - Tue Jun 14 17:21:08 2022       ;
 ; Quartus Prime Version              ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                      ; PROC-ECE_ASYNC                              ;
 ; Top-level Entity Name              ; Top                                         ;
 ; Family                             ; MAX 10                                      ;
-; Total logic elements               ; 3,698                                       ;
-;     Total combinational functions  ; 3,602                                       ;
-;     Dedicated logic registers      ; 1,195                                       ;
-; Total registers                    ; 1195                                        ;
-; Total pins                         ; 99                                          ;
+; Total logic elements               ; 3,696                                       ;
+;     Total combinational functions  ; 3,600                                       ;
+;     Dedicated logic registers      ; 1,194                                       ;
+; Total registers                    ; 1194                                        ;
+; Total pins                         ; 98                                          ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 131,072                                     ;
 ; Embedded Multiplier 9-bit elements ; 0                                           ;
@@ -187,17 +187,17 @@ refer to the applicable agreement for further details.
 +-----------------------------------+-----------------+----------------------------------------+--------------------------------------------------------------------------------------------------+---------+
 ; File Name with User-Entered Path  ; Used in Netlist ; File Type                              ; File Name with Absolute Path                                                                     ; Library ;
 +-----------------------------------+-----------------+----------------------------------------+--------------------------------------------------------------------------------------------------+---------+
-; custom_lib/simul_var_pkg.vhd      ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/custom_lib/simul_var_pkg.vhd      ;         ;
-; vhdl_files/Top.vhd                ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Top.vhd                ;         ;
-; vhdl_files/RegisterFile.vhd       ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/RegisterFile.vhd       ;         ;
-; vhdl_files/ProgramCounter.vhd     ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/ProgramCounter.vhd     ;         ;
-; vhdl_files/Processor.vhd          ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Processor.vhd          ;         ;
-; vhdl_files/InstructionDecoder.vhd ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/InstructionDecoder.vhd ;         ;
-; vhdl_files/Displays.vhd           ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Displays.vhd           ;         ;
-; vhdl_files/Counter.vhd            ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Counter.vhd            ;         ;
-; vhdl_files/Alu.vhd                ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Alu.vhd                ;         ;
-; RAM_2PORT.vhd                     ; yes             ; User Wizard-Generated File             ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/RAM_2PORT.vhd                     ;         ;
-; test.vhd                          ; yes             ; User Wizard-Generated File             ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/test.vhd                          ;         ;
+; custom_lib/simul_var_pkg.vhd      ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/custom_lib/simul_var_pkg.vhd      ;         ;
+; vhdl_files/Top.vhd                ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd                ;         ;
+; vhdl_files/RegisterFile.vhd       ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/RegisterFile.vhd       ;         ;
+; vhdl_files/ProgramCounter.vhd     ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/ProgramCounter.vhd     ;         ;
+; vhdl_files/Processor.vhd          ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd          ;         ;
+; vhdl_files/InstructionDecoder.vhd ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/InstructionDecoder.vhd ;         ;
+; vhdl_files/Displays.vhd           ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Displays.vhd           ;         ;
+; vhdl_files/Counter.vhd            ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Counter.vhd            ;         ;
+; vhdl_files/Alu.vhd                ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Alu.vhd                ;         ;
+; RAM_2PORT.vhd                     ; yes             ; User Wizard-Generated File             ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/RAM_2PORT.vhd                     ;         ;
+; test.vhd                          ; yes             ; User Wizard-Generated File             ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/test.vhd                          ;         ;
 ; altsyncram.tdf                    ; yes             ; Megafunction                           ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altsyncram.tdf                            ;         ;
 ; stratix_ram_block.inc             ; yes             ; Megafunction                           ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/stratix_ram_block.inc                     ;         ;
 ; lpm_mux.inc                       ; yes             ; Megafunction                           ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/lpm_mux.inc                               ;         ;
@@ -207,13 +207,13 @@ refer to the applicable agreement for further details.
 ; altrom.inc                        ; yes             ; Megafunction                           ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altrom.inc                                ;         ;
 ; altram.inc                        ; yes             ; Megafunction                           ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altram.inc                                ;         ;
 ; altdpram.inc                      ; yes             ; Megafunction                           ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altdpram.inc                              ;         ;
-; db/altsyncram_gjt3.tdf            ; yes             ; Auto-Generated Megafunction            ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/db/altsyncram_gjt3.tdf            ;         ;
-; IMhex.hex                         ; yes             ; Auto-Found Memory Initialization File  ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/IMhex.hex                         ;         ;
+; db/altsyncram_gjt3.tdf            ; yes             ; Auto-Generated Megafunction            ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/db/altsyncram_gjt3.tdf            ;         ;
+; IMhex.hex                         ; yes             ; Auto-Found Memory Initialization File  ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/IMhex.hex                         ;         ;
 ; altpll.tdf                        ; yes             ; Megafunction                           ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altpll.tdf                                ;         ;
 ; stratix_pll.inc                   ; yes             ; Megafunction                           ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/stratix_pll.inc                           ;         ;
 ; stratixii_pll.inc                 ; yes             ; Megafunction                           ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/stratixii_pll.inc                         ;         ;
 ; cycloneii_pll.inc                 ; yes             ; Megafunction                           ; c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/cycloneii_pll.inc                         ;         ;
-; db/test_altpll.v                  ; yes             ; Auto-Generated Megafunction            ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/db/test_altpll.v                  ;         ;
+; db/test_altpll.v                  ; yes             ; Auto-Generated Megafunction            ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/db/test_altpll.v                  ;         ;
 +-----------------------------------+-----------------+----------------------------------------+--------------------------------------------------------------------------------------------------+---------+
 
 
@@ -222,23 +222,23 @@ refer to the applicable agreement for further details.
 +---------------------------------------------+----------------------------------------------------------------------------------+
 ; Resource                                    ; Usage                                                                            ;
 +---------------------------------------------+----------------------------------------------------------------------------------+
-; Estimated Total logic elements              ; 3,698                                                                            ;
+; Estimated Total logic elements              ; 3,696                                                                            ;
 ;                                             ;                                                                                  ;
-; Total combinational functions               ; 3602                                                                             ;
+; Total combinational functions               ; 3600                                                                             ;
 ; Logic element usage by number of LUT inputs ;                                                                                  ;
-;     -- 4 input functions                    ; 2918                                                                             ;
-;     -- 3 input functions                    ; 519                                                                              ;
-;     -- <=2 input functions                  ; 165                                                                              ;
+;     -- 4 input functions                    ; 2914                                                                             ;
+;     -- 3 input functions                    ; 520                                                                              ;
+;     -- <=2 input functions                  ; 166                                                                              ;
 ;                                             ;                                                                                  ;
 ; Logic elements by mode                      ;                                                                                  ;
-;     -- normal mode                          ; 3275                                                                             ;
+;     -- normal mode                          ; 3273                                                                             ;
 ;     -- arithmetic mode                      ; 327                                                                              ;
 ;                                             ;                                                                                  ;
-; Total registers                             ; 1195                                                                             ;
-;     -- Dedicated logic registers            ; 1195                                                                             ;
+; Total registers                             ; 1194                                                                             ;
+;     -- Dedicated logic registers            ; 1194                                                                             ;
 ;     -- I/O registers                        ; 0                                                                                ;
 ;                                             ;                                                                                  ;
-; I/O pins                                    ; 99                                                                               ;
+; I/O pins                                    ; 98                                                                               ;
 ; Total memory bits                           ; 131072                                                                           ;
 ;                                             ;                                                                                  ;
 ; Embedded Multiplier 9-bit elements          ; 0                                                                                ;
@@ -247,8 +247,8 @@ refer to the applicable agreement for further details.
 ;     -- PLLs                                 ; 1                                                                                ;
 ;                                             ;                                                                                  ;
 ; Maximum fan-out node                        ; test:instPLL|altpll:altpll_component|test_altpll:auto_generated|wire_pll1_clk[0] ;
-; Maximum fan-out                             ; 1229                                                                             ;
-; Total fan-out                               ; 18531                                                                            ;
+; Maximum fan-out                             ; 1228                                                                             ;
+; Total fan-out                               ; 18516                                                                            ;
 ; Average fan-out                             ; 3.69                                                                             ;
 +---------------------------------------------+----------------------------------------------------------------------------------+
 
@@ -258,13 +258,13 @@ refer to the applicable agreement for further details.
 +-------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+--------------------------------------------------------------------------------------+--------------------+--------------+
 ; Compilation Hierarchy Node                ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; UFM Blocks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; ADC blocks ; Full Hierarchy Name                                                                  ; Entity Name        ; Library Name ;
 +-------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+--------------------------------------------------------------------------------------+--------------------+--------------+
-; |Top                                      ; 3602 (3)            ; 1195 (1)                  ; 131072      ; 0          ; 0            ; 0       ; 0         ; 99   ; 0            ; 0          ; |Top                                                                                 ; Top                ; work         ;
+; |Top                                      ; 3600 (2)            ; 1194 (0)                  ; 131072      ; 0          ; 0            ; 0       ; 0         ; 98   ; 0            ; 0          ; |Top                                                                                 ; Top                ; work         ;
 ;    |Counter:instCPT|                      ; 36 (36)             ; 32 (32)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Counter:instCPT                                                                 ; Counter            ; work         ;
 ;    |Displays:instDISP|                    ; 4 (4)               ; 96 (96)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Displays:instDISP                                                               ; Displays           ; work         ;
-;    |Processor:instPROC|                   ; 3559 (254)          ; 1066 (10)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC                                                              ; Processor          ; work         ;
-;       |Alu:instALU|                       ; 752 (752)           ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC|Alu:instALU                                                  ; Alu                ; work         ;
+;    |Processor:instPROC|                   ; 3558 (254)          ; 1066 (10)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC                                                              ; Processor          ; work         ;
+;       |Alu:instALU|                       ; 753 (753)           ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC|Alu:instALU                                                  ; Alu                ; work         ;
 ;       |InstructionDecoder:instID|         ; 16 (16)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC|InstructionDecoder:instID                                    ; InstructionDecoder ; work         ;
-;       |ProgramCounter:instPC|             ; 154 (154)           ; 64 (64)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC|ProgramCounter:instPC                                        ; ProgramCounter     ; work         ;
+;       |ProgramCounter:instPC|             ; 152 (152)           ; 64 (64)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC|ProgramCounter:instPC                                        ; ProgramCounter     ; work         ;
 ;       |RegisterFile:instRF|               ; 2383 (2383)         ; 992 (992)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC|RegisterFile:instRF                                          ; RegisterFile       ; work         ;
 ;    |RAM_2PORT:Memory|                     ; 0 (0)               ; 0 (0)                     ; 131072      ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|RAM_2PORT:Memory                                                                ; RAM_2PORT          ; work         ;
 ;       |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 131072      ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|RAM_2PORT:Memory|altsyncram:altsyncram_component                                ; altsyncram         ; work         ;
@@ -310,10 +310,10 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 1195  ;
+; Total registers                              ; 1194  ;
 ; Number of registers using Synchronous Clear  ; 0     ;
 ; Number of registers using Synchronous Load   ; 85    ;
-; Number of registers using Asynchronous Clear ; 1195  ;
+; Number of registers using Asynchronous Clear ; 1194  ;
 ; Number of registers using Asynchronous Load  ; 0     ;
 ; Number of registers using Clock Enable       ; 128   ;
 ; Number of registers using Preset             ; 0     ;
@@ -853,26 +853,26 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; boundary_port         ; 1320                        ;
-; cycloneiii_ff         ; 1195                        ;
-;     CLR               ; 982                         ;
+; boundary_port         ; 1319                        ;
+; cycloneiii_ff         ; 1194                        ;
+;     CLR               ; 981                         ;
 ;     CLR SLD           ; 85                          ;
 ;     ENA CLR           ; 128                         ;
-; cycloneiii_lcell_comb ; 3602                        ;
+; cycloneiii_lcell_comb ; 3600                        ;
 ;     arith             ; 327                         ;
 ;         2 data inputs ; 60                          ;
 ;         3 data inputs ; 267                         ;
-;     normal            ; 3275                        ;
+;     normal            ; 3273                        ;
 ;         0 data inputs ; 1                           ;
-;         1 data inputs ; 3                           ;
-;         2 data inputs ; 101                         ;
-;         3 data inputs ; 252                         ;
-;         4 data inputs ; 2918                        ;
+;         1 data inputs ; 2                           ;
+;         2 data inputs ; 103                         ;
+;         3 data inputs ; 253                         ;
+;         4 data inputs ; 2914                        ;
 ; cycloneiii_pll        ; 1                           ;
 ; cycloneiii_ram_block  ; 32                          ;
 ;                       ;                             ;
-; Max LUT depth         ; 23.00                       ;
-; Average LUT depth     ; 17.82                       ;
+; Max LUT depth         ; 22.40                       ;
+; Average LUT depth     ; 17.64                       ;
 +-----------------------+-----------------------------+
 
 
@@ -891,73 +891,71 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
-    Info: Processing started: Mon Jun 13 11:47:15 2022
+    Info: Processing started: Tue Jun 14 17:20:47 2022
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off PROC-ECE_ASYNC -c PROC-ECE_ASYNC
 Info (20032): Parallel compilation is enabled and will use up to 4 processors
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/testbench.vhd
-    Info (12022): Found design unit 1: TestBenchTop-VHDL File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/TestBench.vhd Line: 14
-    Info (12023): Found entity 1: TestBenchTop File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/TestBench.vhd Line: 11
+    Info (12022): Found design unit 1: TestBenchTop-VHDL File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/TestBench.vhd Line: 14
+    Info (12023): Found entity 1: TestBenchTop File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/TestBench.vhd Line: 11
 Info (12021): Found 1 design units, including 0 entities, in source file custom_lib/simul_var_pkg.vhd
-    Info (12022): Found design unit 1: simulPkg File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/custom_lib/simul_var_pkg.vhd Line: 5
+    Info (12022): Found design unit 1: simulPkg File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/custom_lib/simul_var_pkg.vhd Line: 5
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/top.vhd
-    Info (12022): Found design unit 1: Top-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Top.vhd Line: 27
-    Info (12023): Found entity 1: Top File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Top.vhd Line: 12
+    Info (12022): Found design unit 1: Top-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 27
+    Info (12023): Found entity 1: Top File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 12
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/registerfile.vhd
-    Info (12022): Found design unit 1: RegisterFile-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/RegisterFile.vhd Line: 28
-    Info (12023): Found entity 1: RegisterFile File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/RegisterFile.vhd Line: 12
+    Info (12022): Found design unit 1: RegisterFile-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/RegisterFile.vhd Line: 28
+    Info (12023): Found entity 1: RegisterFile File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/RegisterFile.vhd Line: 12
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/programcounter.vhd
-    Info (12022): Found design unit 1: ProgramCounter-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/ProgramCounter.vhd Line: 35
-    Info (12023): Found entity 1: ProgramCounter File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/ProgramCounter.vhd Line: 11
+    Info (12022): Found design unit 1: ProgramCounter-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/ProgramCounter.vhd Line: 35
+    Info (12023): Found entity 1: ProgramCounter File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/ProgramCounter.vhd Line: 11
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/processor.vhd
-    Info (12022): Found design unit 1: Processor-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Processor.vhd Line: 29
-    Info (12023): Found entity 1: Processor File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Processor.vhd Line: 11
+    Info (12022): Found design unit 1: Processor-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd Line: 29
+    Info (12023): Found entity 1: Processor File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd Line: 11
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/instructionmemory.vhd
-    Info (12022): Found design unit 1: InstructionMemory-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/InstructionMemory.vhd Line: 22
-    Info (12023): Found entity 1: InstructionMemory File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/InstructionMemory.vhd Line: 11
+    Info (12022): Found design unit 1: InstructionMemory-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/InstructionMemory.vhd Line: 22
+    Info (12023): Found entity 1: InstructionMemory File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/InstructionMemory.vhd Line: 11
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/instructiondecoder.vhd
-    Info (12022): Found design unit 1: InstructionDecoder-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/InstructionDecoder.vhd Line: 40
-    Info (12023): Found entity 1: InstructionDecoder File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/InstructionDecoder.vhd Line: 11
+    Info (12022): Found design unit 1: InstructionDecoder-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/InstructionDecoder.vhd Line: 40
+    Info (12023): Found entity 1: InstructionDecoder File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/InstructionDecoder.vhd Line: 11
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/displays.vhd
-    Info (12022): Found design unit 1: Displays-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Displays.vhd Line: 28
-    Info (12023): Found entity 1: Displays File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Displays.vhd Line: 12
+    Info (12022): Found design unit 1: Displays-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Displays.vhd Line: 28
+    Info (12023): Found entity 1: Displays File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Displays.vhd Line: 12
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/datamemory.vhd
-    Info (12022): Found design unit 1: DataMemory-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/DataMemory.vhd Line: 26
-    Info (12023): Found entity 1: DataMemory File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/DataMemory.vhd Line: 11
+    Info (12022): Found design unit 1: DataMemory-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/DataMemory.vhd Line: 26
+    Info (12023): Found entity 1: DataMemory File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/DataMemory.vhd Line: 11
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/counter.vhd
-    Info (12022): Found design unit 1: Counter-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Counter.vhd Line: 24
-    Info (12023): Found entity 1: Counter File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Counter.vhd Line: 11
+    Info (12022): Found design unit 1: Counter-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Counter.vhd Line: 24
+    Info (12023): Found entity 1: Counter File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Counter.vhd Line: 11
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/alu.vhd
-    Info (12022): Found design unit 1: Alu-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Alu.vhd Line: 29
-    Info (12023): Found entity 1: Alu File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Alu.vhd Line: 11
+    Info (12022): Found design unit 1: Alu-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Alu.vhd Line: 29
+    Info (12023): Found entity 1: Alu File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Alu.vhd Line: 11
 Info (12021): Found 2 design units, including 1 entities, in source file qip_files/im/im.vhd
-    Info (12022): Found design unit 1: im-SYN File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/qip_files/IM/IM.vhd Line: 53
-    Info (12023): Found entity 1: IM File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/qip_files/IM/IM.vhd Line: 43
+    Info (12022): Found design unit 1: im-SYN File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/qip_files/IM/IM.vhd Line: 53
+    Info (12023): Found entity 1: IM File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/qip_files/IM/IM.vhd Line: 43
 Info (12021): Found 2 design units, including 1 entities, in source file qip_files/pll/pll.vhd
-    Info (12022): Found design unit 1: pll-SYN File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/qip_files/PLL/PLL.vhd Line: 55
-    Info (12023): Found entity 1: PLL File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/qip_files/PLL/PLL.vhd Line: 43
+    Info (12022): Found design unit 1: pll-SYN File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/qip_files/PLL/PLL.vhd Line: 55
+    Info (12023): Found entity 1: PLL File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/qip_files/PLL/PLL.vhd Line: 43
 Info (12021): Found 2 design units, including 1 entities, in source file ram_2port.vhd
-    Info (12022): Found design unit 1: ram_2port-SYN File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/RAM_2PORT.vhd Line: 59
-    Info (12023): Found entity 1: RAM_2PORT File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/RAM_2PORT.vhd Line: 42
+    Info (12022): Found design unit 1: ram_2port-SYN File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/RAM_2PORT.vhd Line: 59
+    Info (12023): Found entity 1: RAM_2PORT File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/RAM_2PORT.vhd Line: 42
 Info (12021): Found 2 design units, including 1 entities, in source file clock1m.vhd
-    Info (12022): Found design unit 1: clock1m-SYN File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/clock1M.vhd Line: 53
-    Info (12023): Found entity 1: clock1M File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/clock1M.vhd Line: 42
+    Info (12022): Found design unit 1: clock1m-SYN File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/clock1M.vhd Line: 53
+    Info (12023): Found entity 1: clock1M File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/clock1M.vhd Line: 42
 Info (12021): Found 2 design units, including 1 entities, in source file test.vhd
-    Info (12022): Found design unit 1: test-SYN File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/test.vhd Line: 53
-    Info (12023): Found entity 1: test File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/test.vhd Line: 42
+    Info (12022): Found design unit 1: test-SYN File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/test.vhd Line: 53
+    Info (12023): Found entity 1: test File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/test.vhd Line: 42
 Info (12127): Elaborating entity "Top" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at Top.vhd(141): object "SIGoutputDMorREG" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Top.vhd Line: 141
-Warning (10036): Verilog HDL or VHDL warning at Top.vhd(153): object "csLed" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Top.vhd Line: 153
-Warning (10036): Verilog HDL or VHDL warning at Top.vhd(153): object "muxLoadDelay" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Top.vhd Line: 153
-Warning (10036): Verilog HDL or VHDL warning at Top.vhd(154): object "ledstate" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Top.vhd Line: 154
-Info (12128): Elaborating entity "Processor" for hierarchy "Processor:instPROC" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Top.vhd Line: 208
-Info (12128): Elaborating entity "ProgramCounter" for hierarchy "Processor:instPROC|ProgramCounter:instPC" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Processor.vhd Line: 277
-Info (12128): Elaborating entity "InstructionDecoder" for hierarchy "Processor:instPROC|InstructionDecoder:instID" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Processor.vhd Line: 297
-Info (12128): Elaborating entity "RegisterFile" for hierarchy "Processor:instPROC|RegisterFile:instRF" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Processor.vhd Line: 322
-Info (12128): Elaborating entity "Alu" for hierarchy "Processor:instPROC|Alu:instALU" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Processor.vhd Line: 334
-Info (12128): Elaborating entity "RAM_2PORT" for hierarchy "RAM_2PORT:Memory" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Top.vhd Line: 225
-Info (12128): Elaborating entity "altsyncram" for hierarchy "RAM_2PORT:Memory|altsyncram:altsyncram_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/RAM_2PORT.vhd Line: 68
-Info (12130): Elaborated megafunction instantiation "RAM_2PORT:Memory|altsyncram:altsyncram_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/RAM_2PORT.vhd Line: 68
-Info (12133): Instantiated megafunction "RAM_2PORT:Memory|altsyncram:altsyncram_component" with the following parameter: File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/RAM_2PORT.vhd Line: 68
+Warning (10036): Verilog HDL or VHDL warning at Top.vhd(141): object "SIGoutputDMorREG" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 141
+Info (12128): Elaborating entity "Processor" for hierarchy "Processor:instPROC" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 187
+Warning (10036): Verilog HDL or VHDL warning at Processor.vhd(167): object "JumpTestopcode" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd Line: 167
+Info (12128): Elaborating entity "ProgramCounter" for hierarchy "Processor:instPROC|ProgramCounter:instPC" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd Line: 279
+Info (12128): Elaborating entity "InstructionDecoder" for hierarchy "Processor:instPROC|InstructionDecoder:instID" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd Line: 299
+Info (12128): Elaborating entity "RegisterFile" for hierarchy "Processor:instPROC|RegisterFile:instRF" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd Line: 324
+Info (12128): Elaborating entity "Alu" for hierarchy "Processor:instPROC|Alu:instALU" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd Line: 336
+Info (12128): Elaborating entity "RAM_2PORT" for hierarchy "RAM_2PORT:Memory" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 204
+Info (12128): Elaborating entity "altsyncram" for hierarchy "RAM_2PORT:Memory|altsyncram:altsyncram_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/RAM_2PORT.vhd Line: 68
+Info (12130): Elaborated megafunction instantiation "RAM_2PORT:Memory|altsyncram:altsyncram_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/RAM_2PORT.vhd Line: 68
+Info (12133): Instantiated megafunction "RAM_2PORT:Memory|altsyncram:altsyncram_component" with the following parameter: File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/RAM_2PORT.vhd Line: 68
     Info (12134): Parameter "address_aclr_a" = "UNUSED"
     Info (12134): Parameter "address_aclr_b" = "NONE"
     Info (12134): Parameter "address_reg_b" = "CLOCK0"
@@ -1009,15 +1007,15 @@ Info (12133): Instantiated megafunction "RAM_2PORT:Memory|altsyncram:altsyncram_
     Info (12134): Parameter "lpm_hint" = "UNUSED"
     Info (12134): Parameter "lpm_type" = "altsyncram"
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_gjt3.tdf
-    Info (12023): Found entity 1: altsyncram_gjt3 File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/db/altsyncram_gjt3.tdf Line: 27
+    Info (12023): Found entity 1: altsyncram_gjt3 File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/db/altsyncram_gjt3.tdf Line: 27
 Info (12128): Elaborating entity "altsyncram_gjt3" for hierarchy "RAM_2PORT:Memory|altsyncram:altsyncram_component|altsyncram_gjt3:auto_generated" File: c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altsyncram.tdf Line: 791
-Critical Warning (127005): Memory depth (4096) in the design file differs from memory depth (1024) in the Memory Initialization File "C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/IMhex.hex" -- setting initial value for remaining addresses to 0 File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/RAM_2PORT.vhd Line: 68
-Info (12128): Elaborating entity "Counter" for hierarchy "Counter:instCPT" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Top.vhd Line: 258
-Info (12128): Elaborating entity "Displays" for hierarchy "Displays:instDISP" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Top.vhd Line: 268
-Info (12128): Elaborating entity "test" for hierarchy "test:instPLL" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/vhdl_files/Top.vhd Line: 282
-Info (12128): Elaborating entity "altpll" for hierarchy "test:instPLL|altpll:altpll_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/test.vhd Line: 140
-Info (12130): Elaborated megafunction instantiation "test:instPLL|altpll:altpll_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/test.vhd Line: 140
-Info (12133): Instantiated megafunction "test:instPLL|altpll:altpll_component" with the following parameter: File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/test.vhd Line: 140
+Critical Warning (127005): Memory depth (4096) in the design file differs from memory depth (1024) in the Memory Initialization File "C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/IMhex.hex" -- setting initial value for remaining addresses to 0 File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/RAM_2PORT.vhd Line: 68
+Info (12128): Elaborating entity "Counter" for hierarchy "Counter:instCPT" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 237
+Info (12128): Elaborating entity "Displays" for hierarchy "Displays:instDISP" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 247
+Info (12128): Elaborating entity "test" for hierarchy "test:instPLL" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 261
+Info (12128): Elaborating entity "altpll" for hierarchy "test:instPLL|altpll:altpll_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/test.vhd Line: 140
+Info (12130): Elaborated megafunction instantiation "test:instPLL|altpll:altpll_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/test.vhd Line: 140
+Info (12133): Instantiated megafunction "test:instPLL|altpll:altpll_component" with the following parameter: File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/test.vhd Line: 140
     Info (12134): Parameter "bandwidth_type" = "AUTO"
     Info (12134): Parameter "clk0_divide_by" = "50"
     Info (12134): Parameter "clk0_duty_cycle" = "50"
@@ -1074,7 +1072,7 @@ Info (12133): Instantiated megafunction "test:instPLL|altpll:altpll_component" w
     Info (12134): Parameter "self_reset_on_loss_lock" = "OFF"
     Info (12134): Parameter "width_clock" = "5"
 Info (12021): Found 1 design units, including 1 entities, in source file db/test_altpll.v
-    Info (12023): Found entity 1: test_altpll File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC_GALOPE_V3/db/test_altpll.v Line: 30
+    Info (12023): Found entity 1: test_altpll File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/db/test_altpll.v Line: 30
 Info (12128): Elaborating entity "test_altpll" for hierarchy "test:instPLL|altpll:altpll_component|test_altpll:auto_generated" File: c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altpll.tdf Line: 897
 Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "global.bp.work.simulPkg.PKG_reg00_31__gl_output" is stuck at GND
@@ -1112,16 +1110,16 @@ Warning (13024): Output pins are stuck at VCC or GND
 Info (286030): Timing-Driven Synthesis is running
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 1 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 3888 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 3886 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 2 input pins
-    Info (21059): Implemented 97 output pins
-    Info (21061): Implemented 3756 logic cells
+    Info (21059): Implemented 96 output pins
+    Info (21061): Implemented 3755 logic cells
     Info (21064): Implemented 32 RAM segments
     Info (21065): Implemented 1 PLLs
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 38 warnings
-    Info: Peak virtual memory: 4834 megabytes
-    Info: Processing ended: Mon Jun 13 11:47:38 2022
-    Info: Elapsed time: 00:00:23
-    Info: Total CPU time (on all processors): 00:00:32
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 36 warnings
+    Info: Peak virtual memory: 4835 megabytes
+    Info: Processing ended: Tue Jun 14 17:21:08 2022
+    Info: Elapsed time: 00:00:21
+    Info: Total CPU time (on all processors): 00:00:31
 
 

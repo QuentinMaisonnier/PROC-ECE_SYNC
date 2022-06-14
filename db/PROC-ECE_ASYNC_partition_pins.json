@@ -388,10 +388,6 @@
 					"strict" : false
 				},
 				{
-					"name" : "TestLed",
-					"strict" : false
-				},
-				{
 					"name" : "reset",
 					"strict" : false
 				}

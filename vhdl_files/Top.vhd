@@ -18,8 +18,8 @@ ENTITY Top IS
 		-- DEMO OUTPUTS
 		TOPdisplay1 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0); --0x80000004
 		TOPdisplay2 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0); --0x80000008
-		TOPleds     : OUT STD_LOGIC_VECTOR(31 DOWNTO 0); --0x8000000c
-		TestLed     : OUT STD_LOGIC
+		TOPleds     : OUT STD_LOGIC_VECTOR(31 DOWNTO 0) --0x8000000c
+		--TestLed     : OUT STD_LOGIC
 	);
 END ENTITY;
 
@@ -181,28 +181,7 @@ BEGIN
 		SIGoutputDM;
 
 ---------------------------------------------
-	csLed <= SIGaddrDM(31);
-	
-	dataLed <= SIGinputDM(0);
 
-	muxLoadDelay <= '0' when TOPreset='1' else
-						 SIGaddrDM(31) when rising_edge(SIGclock);
-						 
-	SIGLed <= dataLed WHEN SIGaddrDM(31) = '1' AND SIGstore='1' ELSE
-				 REGLed;
-				 
-	ledstate <= x"0000000" & "000" & REGLed;
-				 
---	SIGoutputDM<= ledstate when muxLoadDelay='1' else
---							  SRAMq_b;
-						
-						
-	REGLed <= '0' WHEN TOPreset = '1' ELSE
-				 SIGLed WHEN rising_edge(SIGclock);
-
-	TestLed <= REGLed;
-	
-	CSRAM <= '1'; --NOT csLed;
 ---------------------------------------------
 	-- INSTANCES
 	instPROC : Processor
@@ -230,7 +209,7 @@ BEGIN
 		clock     => SIGclock, --: IN STD_LOGIC  := '1';
 		data_a => (OTHERS => '0'), --: IN STD_LOGIC_VECTOR (31 DOWNTO 0); -- Instruction
 		data_b    => SIGinputDM, --: IN STD_LOGIC_VECTOR (31 DOWNTO 0);	-- Data
-		enable	 => CSRAM,
+		enable	 => '1',
 		wren_a    => '0', --: IN STD_LOGIC  := '0';					-- Write Instruction Select
 		wren_b    => SIGstore, --: IN STD_LOGIC  := '0';					-- Write Data Select
 		q_a       => SIGinstruction, --: OUT STD_LOGIC_VECTOR (31 DOWNTO 0);-- DataOut Instruction

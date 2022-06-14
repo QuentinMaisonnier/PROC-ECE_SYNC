@@ -256,8 +256,10 @@ begin
 							 
 	 JumpTestopcode <= SIGopcode;
 	 
-	 MuxJumpTest <= '1' when JumpTestopcode="1101111" OR JumpTestopcode="1100111" OR JumpTestopcode="0000011" OR JumpTestopcode="1100011" else -- JUMP/JUMPR/LOAD/BEQ(IF)
-						 '0';
+	 --MuxJumpTest <= '1' when JumpTestopcode="1101111" OR JumpTestopcode="1100111" OR JumpTestopcode="0000011" OR JumpTestopcode="1100011" else -- JUMP/JUMPR/LOAD/BEQ(IF)
+	--					 '0';
+	MuxJumpTest <= '1' when SIGbranch='1' else -- JUMP/JUMPR/LOAD/BEQ(IF)
+						'0';
 	 RegJumpTest <= '0' when PROCreset='1' else
 						 MuxJumpTest when rising_edge(PROCclock);	 
 						 

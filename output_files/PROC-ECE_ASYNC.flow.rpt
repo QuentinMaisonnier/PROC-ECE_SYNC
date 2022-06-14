@@ -1,5 +1,5 @@
 Flow report for PROC-ECE_ASYNC
-Mon Jun 13 11:48:11 2022
+Tue Jun 14 17:21:40 2022
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -40,18 +40,18 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Mon Jun 13 11:48:11 2022       ;
+; Flow Status                        ; Successful - Tue Jun 14 17:21:40 2022       ;
 ; Quartus Prime Version              ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                      ; PROC-ECE_ASYNC                              ;
 ; Top-level Entity Name              ; Top                                         ;
 ; Family                             ; MAX 10                                      ;
 ; Device                             ; 10M50DAF484C7G                              ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 3,704 / 49,760 ( 7 % )                      ;
-;     Total combinational functions  ; 3,603 / 49,760 ( 7 % )                      ;
-;     Dedicated logic registers      ; 1,195 / 49,760 ( 2 % )                      ;
-; Total registers                    ; 1195                                        ;
-; Total pins                         ; 99 / 360 ( 28 % )                           ;
+; Total logic elements               ; 3,703 / 49,760 ( 7 % )                      ;
+;     Total combinational functions  ; 3,601 / 49,760 ( 7 % )                      ;
+;     Dedicated logic registers      ; 1,194 / 49,760 ( 2 % )                      ;
+; Total registers                    ; 1194                                        ;
+; Total pins                         ; 98 / 360 ( 27 % )                           ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 131,072 / 1,677,312 ( 8 % )                 ;
 ; Embedded Multiplier 9-bit elements ; 0 / 288 ( 0 % )                             ;
@@ -66,7 +66,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 06/13/2022 11:47:16 ;
+; Start date & time ; 06/14/2022 17:20:48 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; PROC-ECE_ASYNC      ;
 +-------------------+---------------------+
@@ -77,7 +77,7 @@ refer to the applicable agreement for further details.
 +--------------------------------------+-------------------------------------------------------------------+----------------+-------------+-----------------------------------+
 ; Assignment Name                      ; Value                                                             ; Default Value  ; Entity Name ; Section Id                        ;
 +--------------------------------------+-------------------------------------------------------------------+----------------+-------------+-----------------------------------+
-; COMPILER_SIGNATURE_ID                ; 10995770589198.165511363618392                                    ; --             ; --          ; --                                ;
+; COMPILER_SIGNATURE_ID                ; 10995770589198.165522004811700                                    ; --             ; --          ; --                                ;
 ; EDA_DESIGN_ENTRY_SYNTHESIS_TOOL      ; Synplify Pro                                                      ; <None>         ; --          ; --                                ;
 ; EDA_DESIGN_INSTANCE_NAME             ; NA                                                                ; --             ; --          ; Testbench                         ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST      ; Off                                                               ; --             ; --          ; eda_board_design_timing           ;
@@ -131,12 +131,12 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:22     ; 1.0                     ; 4834 MB             ; 00:00:31                           ;
-; Fitter               ; 00:00:19     ; 1.4                     ; 5682 MB             ; 00:00:29                           ;
-; Assembler            ; 00:00:03     ; 1.0                     ; 4696 MB             ; 00:00:03                           ;
-; Timing Analyzer      ; 00:00:05     ; 1.9                     ; 4859 MB             ; 00:00:09                           ;
-; EDA Netlist Writer   ; 00:00:02     ; 1.0                     ; 4699 MB             ; 00:00:02                           ;
-; Total                ; 00:00:51     ; --                      ; --                  ; 00:01:14                           ;
+; Analysis & Synthesis ; 00:00:21     ; 1.0                     ; 4835 MB             ; 00:00:30                           ;
+; Fitter               ; 00:00:18     ; 1.4                     ; 5676 MB             ; 00:00:29                           ;
+; Assembler            ; 00:00:03     ; 1.0                     ; 4691 MB             ; 00:00:03                           ;
+; Timing Analyzer      ; 00:00:05     ; 1.9                     ; 4856 MB             ; 00:00:09                           ;
+; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 4700 MB             ; 00:00:02                           ;
+; Total                ; 00:00:48     ; --                      ; --                  ; 00:01:13                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

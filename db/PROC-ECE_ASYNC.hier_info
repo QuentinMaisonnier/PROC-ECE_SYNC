@@ -97,7 +97,6 @@ TOPleds[28] << Displays:instDISP.DISPleds[28]
 TOPleds[29] << Displays:instDISP.DISPleds[29]
 TOPleds[30] << Displays:instDISP.DISPleds[30]
 TOPleds[31] << Displays:instDISP.DISPleds[31]
-TestLed << REGLed.DB_MAX_OUTPUT_PORT_TYPE
 global.bp.work.simulPkg.PKG_addrDM_31_ <> SIGaddrDM[31]
 global.bp.work.simulPkg.PKG_addrDM_30_ <> SIGaddrDM[30]
 global.bp.work.simulPkg.PKG_addrDM_29_ <> SIGaddrDM[29]
@@ -194,8 +193,6 @@ global.bp.work.simulPkg.PKG_outputDM_1_ <> SIGoutputDM[1]
 global.bp.work.simulPkg.PKG_counter_1_ <> SIGcounter[1]
 global.bp.work.simulPkg.PKG_outputDM_0_ <> SIGoutputDM[0]
 global.bp.work.simulPkg.PKG_counter_0_ <> SIGcounter[0]
-global.bp.work.simulPkg.PKG_inputDM_0_ <> SIGinputDM[0]
-global.bp.work.simulPkg.PKG_store <> SIGstore
 global.bp.work.simulPkg.PKG_instruction_31_ <> SIGinstruction[31]
 global.bp.work.simulPkg.PKG_instruction_30_ <> SIGinstruction[30]
 global.bp.work.simulPkg.PKG_instruction_29_ <> SIGinstruction[29]
@@ -260,6 +257,7 @@ global.bp.work.simulPkg.PKG_progcounter_3_ <> SIGprogcounter[3]
 global.bp.work.simulPkg.PKG_progcounter_2_ <> SIGprogcounter[2]
 global.bp.work.simulPkg.PKG_progcounter_1_ <> SIGprogcounter[1]
 global.bp.work.simulPkg.PKG_progcounter_0_ <> SIGprogcounter[0]
+global.bp.work.simulPkg.PKG_store <> SIGstore
 global.bp.work.simulPkg.PKG_load <> SIGload
 global.bp.work.simulPkg.PKG_funct3_2_ <> SIGfunct3[2]
 global.bp.work.simulPkg.PKG_funct3_1_ <> SIGfunct3[1]
@@ -295,6 +293,7 @@ global.bp.work.simulPkg.PKG_inputDM_4_ <> SIGinputDM[4]
 global.bp.work.simulPkg.PKG_inputDM_3_ <> SIGinputDM[3]
 global.bp.work.simulPkg.PKG_inputDM_2_ <> SIGinputDM[2]
 global.bp.work.simulPkg.PKG_inputDM_1_ <> SIGinputDM[1]
+global.bp.work.simulPkg.PKG_inputDM_0_ <> SIGinputDM[0]
 
 
 |Top|Processor:instPROC
