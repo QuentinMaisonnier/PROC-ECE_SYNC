@@ -25,6 +25,7 @@ ENTITY ProgramCounter IS
 		PCalusup      : IN    STD_LOGIC;
 		PCaluinfU     : IN    STD_LOGIC;
 		PCalusupU     : IN    STD_LOGIC;
+		PClock :in std_logic;
 		PCLoad : IN STD_LOGIC;
 		-- OUTPUTS
 		PCprogcounter : INOUT STD_LOGIC_VECTOR(31 DOWNTO 0)
@@ -37,10 +38,10 @@ ARCHITECTURE archi OF ProgramCounter IS
 	SIGNAL SigBranchCond : STD_LOGIC;
 	SIGNAL SigMux1Sel : STD_LOGIC;
 	SIGNAL SigMux2Sel : STD_LOGIC;
-	SIGNAL SigMux3Sel : STD_LOGIC;
+	--SIGNAL SigMux3Sel : STD_LOGIC;
 	SIGNAL SigMux1Out : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL SigMux2Out : STD_LOGIC_VECTOR(31 DOWNTO 0);
-	SIGNAL SigMux3Out : STD_LOGIC_VECTOR(31 DOWNTO 0);
+	--SIGNAL SigMux3Out : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL SigOffSum : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL SigOffSub : STD_LOGIC_VECTOR(31 DOWNTO 0);
 
@@ -66,13 +67,15 @@ BEGIN
 --	SigMux1Out <= x"00000001" WHEN SigMux1Sel = '0'ELSE 
 --					  "00" & PCoffset(31 DOWNTO 2) ; -- set lsb to 0
 
-SigMux1Out <= x"00000004" WHEN SigMux1Sel = '0'ELSE 
-				  PCoffset ; -- set lsb to 0
+   SigMux1Out <= x"00000004" WHEN SigMux1Sel = '0'ELSE 
+				     PCoffset ; -- set lsb to 0
 
 	-- adder
-	SigOffSum <= STD_LOGIC_VECTOR(unsigned(PCprogcounter) + unsigned(SigMux1Out)) when PCjal = '0' AND PCjalr = '0' AND PCLoad='0' AND PCbranch='0' else
+	SigOffSum <= STD_LOGIC_VECTOR(unsigned(PCprogcounter) + unsigned(SigMux1Out)) when PCjal = '0' AND PCjalr = '0' AND PCLoad='0' AND PCbranch='0' AND PClock='0' else
 						STD_LOGIC_VECTOR(unsigned(RPCprevious) + unsigned(SigMux1Out));
-	SigOffSub <= STD_LOGIC_VECTOR(unsigned(PCprogcounter) - unsigned(SigMux1Out));
+						
+	SigOffSub <= STD_LOGIC_VECTOR(unsigned(PCprogcounter) - unsigned(SigMux1Out)) when PCjal = '0' AND PCjalr = '0' AND PCLoad='0' AND PCbranch='0' AND PCLock='0' else
+					 STD_LOGIC_VECTOR(unsigned(RPCprevious) - unsigned(SigMux1Out));
 
 	-- mux 2
 	SigMux2Sel <= SigMux1Sel AND PCoffsetsign;
@@ -85,8 +88,9 @@ SigMux1Out <= x"00000004" WHEN SigMux1Sel = '0'ELSE
 		
 		
 	-----------------------------------------------------------------
-	MuxPCprevious <= PCprogcounter when PCjal = '0' AND PCjalr = '0' AND PCload='0' AND PCbranch='0' else
+	MuxPCprevious <= PCprogcounter when PCjal = '0' AND PCjalr = '0' AND PCload='0' AND PCbranch='0' AND PClock='0' else
 						  RPCprevious;
+						  
 	RPCprevious <= (others=>'0') when PCreset='1' else
 						MuxPCprevious when rising_edge(PCclock);		  
 	

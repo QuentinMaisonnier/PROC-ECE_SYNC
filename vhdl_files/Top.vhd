@@ -13,7 +13,7 @@ ENTITY Top IS
 	PORT (
 		-- INPUTS
 		TOPclock    : IN  STD_LOGIC; --must go through pll
-		--TOPreset    : IN  STD_LOGIC; --SW0
+--		TOPreset    : IN  STD_LOGIC; --SW0
 		reset    : IN  STD_LOGIC; --SW0
 		-- DEMO OUTPUTS
 		TOPdisplay1 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0); --0x80000004
@@ -138,7 +138,7 @@ ARCHITECTURE archi OF Top IS
 	SIGNAL SIGaddrDM : STD_LOGIC_VECTOR (31 DOWNTO 0);
 	SIGNAL SIGinputDM : STD_LOGIC_VECTOR (31 DOWNTO 0);
 	SIGNAL SIGoutputDM : STD_LOGIC_VECTOR (31 DOWNTO 0);
-	SIGNAL SIGoutputDMorREG : STD_LOGIC_VECTOR (31 DOWNTO 0);
+	--SIGNAL SIGoutputDMorREG : STD_LOGIC_VECTOR (31 DOWNTO 0);
 	SIGNAL SIGcounter : STD_LOGIC_VECTOR (31 DOWNTO 0); --0x80000000
 	SIGNAL SIGPLLclock : STD_LOGIC;
 	SIGNAL SIGPLLclockinverted : STD_LOGIC;
@@ -153,11 +153,13 @@ ARCHITECTURE archi OF Top IS
 	SIGNAL REGLed, SIGLed, csLed, CSRAM, dataLed, muxLoadDelay : STD_LOGIC; -- TEST LED Output
 	SIGNAL SRAMq_b, ledstate : std_logic_vector(31 downto 0);
 	SIGNAL PCTEST : STD_LOGIC_VECTOR (11 DOWNTO 0);
+	SIGNAL csDM : STD_LOGIC;
+	
 	
 
 BEGIN
-	TOPreset <= NOT reset when PLLlock='1' else
-						'1';
+	TOPreset <= '1' when reset='1' else
+					reset when rising_edge(SIGclock);
 	-- BEGIN
 	-- ALL
 	-- TEST BENCH ONLY ---
@@ -172,15 +174,18 @@ BEGIN
 	PKG_counter <= SIGcounter;
 	-----------------------
 
-	SIGsimulOn <= '0';
+	SIGsimulOn <= '1';
 	SIGclock <= TOPclock WHEN SIGsimulOn = '1' ELSE
 		SIGPLLclock;
 	--SIGclockInverted <= NOT TOPclock ;--WHEN SIGsimulOn = '1' ELSE
 		--SIGPLLclockinverted;
-	SIGoutputDMorREG <= SIGcounter WHEN SIGaddrDM = x"80000000" ELSE
-		SIGoutputDM;
+--	SIGoutputDMorREG <= SIGcounter WHEN SIGaddrDM = x"80000000" ELSE
+--		SIGoutputDM;
 
 ---------------------------------------------
+	csDM <= '0' when SIGaddrDM(31)='1' else
+			  '1';
+			  
 
 ---------------------------------------------
 	-- INSTANCES
@@ -199,6 +204,7 @@ BEGIN
 		PROCinputDM     => SIGinputDM
 	);
 	
+	
 	PCTEST <= SIGprogcounter(13 DOWNTO 2);
 	
 	Memory : RAM_2PORT
@@ -209,7 +215,7 @@ BEGIN
 		clock     => SIGclock, --: IN STD_LOGIC  := '1';
 		data_a => (OTHERS => '0'), --: IN STD_LOGIC_VECTOR (31 DOWNTO 0); -- Instruction
 		data_b    => SIGinputDM, --: IN STD_LOGIC_VECTOR (31 DOWNTO 0);	-- Data
-		enable	 => '1',
+		enable	 => csDM,
 		wren_a    => '0', --: IN STD_LOGIC  := '0';					-- Write Instruction Select
 		wren_b    => SIGstore, --: IN STD_LOGIC  := '0';					-- Write Data Select
 		q_a       => SIGinstruction, --: OUT STD_LOGIC_VECTOR (31 DOWNTO 0);-- DataOut Instruction

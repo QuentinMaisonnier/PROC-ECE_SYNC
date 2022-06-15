@@ -48,6 +48,7 @@ architecture archi of Processor is
 			PCaluinfU     : IN    STD_LOGIC;
 			PCalusupU     : IN    STD_LOGIC;
 			PCLoad : IN STD_LOGIC;
+			PClock : IN STD_LOGIC;
 			-- OUTPUTS
 			PCprogcounter : INOUT STD_LOGIC_VECTOR(31 DOWNTO 0)
         );
@@ -162,32 +163,34 @@ architecture archi of Processor is
     signal SIGsupUALU      : std_logic;
 	 
 	 
+	 
 	 --scotch reparateur
 	 signal Muxinstruction : std_logic_vector(31 downto 0);
-	 SIGNAL JumpTestopcode      : std_logic_vector (6 downto 0);
+	 --SIGNAL JumpTestopcode      : std_logic_vector (6 downto 0);
 	 SIGNAL MuxJumpTest, RegJumpTest : STD_logic;
 	 SIGNAL RegaddrLoad : std_logic_vector(4 downto 0);
 	 SIGNAL WriteReg : STD_LOGIC; --enable to write data load in register
 	 SIGNAL funct3Load, function3 : std_logic_vector(2 downto 0);
 	 SIGNAL DMout : std_logic_vector(31 downto 0);
-	 SIGNAL PCLoad : std_logic;
+	 SIGNAL Regreset : std_logic;
+	 signal SigLock         : std_logic;
 
 begin
     -- BEGIN
 	
     -- ALL
     -- program counter
-	 PCLoad <= '1' when SIGopcode="0000011" else
-				  '0';
 	 	  
-		
     PROCprogcounter <=  SIGprogcounter;
+	 
     SIGoffsetsignPC <=  SIGimm21J(20);
+	 
     SIGoffsetPC1    <=  SIGimm32U when SIGauipc = '1' else
                         SIGoutputALU when SIGjalr = '1' else
                         (others => '0');
+								
     SIGoffsetPC2(20 downto 0)   <= SIGimm21J;
-    SIGoffsetPC2(31 downto 21)  <= (others => '1') when SIGoffsetsignPC = '1'        else (others => '0');
+    SIGoffsetPC2(31 downto 21)  <= (others => '1') when SIGoffsetsignPC = '1' else (others => '0');
     SIGoffsetPC3(12 downto 0)   <= SIGimm13B;
     SIGoffsetPC3(31 downto 13)  <= (others => '1') when SIGoffsetsignPC = '1'        else (others => '0');
     SIGoffsetPC                 <= SIGoffsetPC1 when SIGauipc = '1' OR SIGjalr = '1' else
@@ -251,19 +254,21 @@ begin
 	 
     PROCload     <= SIGload;
     
-	 Muxinstruction <= x"00000013" when RegJumpTest = '1' else
+	 Muxinstruction <= x"00000013" when RegJumpTest = '1' OR RegReset='1'  else
 							 PROCinstruction;
-							 
-	 JumpTestopcode <= SIGopcode;
-	 
-	 --MuxJumpTest <= '1' when JumpTestopcode="1101111" OR JumpTestopcode="1100111" OR JumpTestopcode="0000011" OR JumpTestopcode="1100011" else -- JUMP/JUMPR/LOAD/BEQ(IF)
-	--					 '0';
-	MuxJumpTest <= '1' when SIGbranch='1' else -- JUMP/JUMPR/LOAD/BEQ(IF)
+	
+	MuxJumpTest <= '1' when SIGbranch='1' OR SIGjal='1' OR SIGjalr='1' OR SIGload='1' OR SIGoutputALU(31)='1' else -- JUMP/JUMPR/LOAD/BEQ(IF)
 						'0';
-	 RegJumpTest <= '0' when PROCreset='1' else
+						
+	RegJumpTest <= '0' when PROCreset='1' else
 						 MuxJumpTest when rising_edge(PROCclock);	 
 						 
+	RegReset <= '1' when PROCreset='1' else
+					PROcreset when rising_edge(PROCclock);
 						 
+						 
+	SigLock <='1' when SIGoutputALU(31)='1' else
+					'0';
 	------------------------------------
 	
 	DMout <= PROCoutputDM;
@@ -292,7 +297,8 @@ begin
         PCalusup         => SIGsupALU,
         PCaluinfU        => SIGinfUALU,
         PCalusupU        => SIGsupUALU,
-		  PCLoad 			 => PCLoad,
+		  PCLoad 			 => Sigload,
+		  PClock				 => SigLock,
         PCprogcounter    => SIGprogcounter
     );
 

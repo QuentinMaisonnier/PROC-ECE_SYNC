@@ -34,15 +34,15 @@ architecture archi of Displays is
 begin
 	-- BEGIN
 	
-	combDisplay1 <= DISPinput when (DISPwrite='1' and DISPaddr=x"80000004") else regDisplay1;
-	regDisplay1 <= (others => '1') when DISPreset='1' else
+	combDisplay1 <= DISPinput when (DISPwrite='1' and DISPaddr(31)='1' and DISPaddr(7 downto 0)=x"04") else regDisplay1;
+	regDisplay1 <= (others => '0') when DISPreset='1' else
 					combDisplay1 when rising_edge(DISPclock);
 					
-	combDisplay2 <= DISPinput when (DISPwrite='1' and DISPaddr=x"80000008") else regDisplay2;
-	regDisplay2 <= (others => '1') when DISPreset='1' else
+	combDisplay2 <= DISPinput when (DISPwrite='1' and DISPaddr(31)='1' and DISPaddr(7 downto 0)=X"08") else regDisplay2;
+	regDisplay2 <= (others => '0') when DISPreset='1' else
 					combDisplay2 when rising_edge(DISPclock);
 
-	combLed <= DISPinput when (DISPwrite='1' and DISPaddr=x"8000000c") else regLed;
+	combLed <= DISPinput when (DISPwrite='1' and DISPaddr(31)='1' and DISPaddr(7 downto 0)=X"0C") else regLed;
 	regLed <= (others => '0') when DISPreset='1' else
 					combLed when rising_edge(DISPclock);
 					
