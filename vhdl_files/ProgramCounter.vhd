@@ -28,7 +28,8 @@ ENTITY ProgramCounter IS
 		PClock :in std_logic;
 		PCLoad : IN STD_LOGIC;
 		-- OUTPUTS
-		PCprogcounter : INOUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+		PCprogcounter : INOUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+		PCprec : out STD_LOGIC_VECTOR(31 DOWNTO 0)
 	);
 END ENTITY;
 
@@ -92,7 +93,9 @@ BEGIN
 						  RPCprevious;
 						  
 	RPCprevious <= (others=>'0') when PCreset='1' else
-						MuxPCprevious when rising_edge(PCclock);		  
+						MuxPCprevious when rising_edge(PCclock);		
+				
+	PCprec <= RPCprevious;		
 	
 	-- END
 END archi;

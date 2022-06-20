@@ -174,7 +174,7 @@ BEGIN
 	PKG_counter <= SIGcounter;
 	-----------------------
 
-	SIGsimulOn <= '1';
+	SIGsimulOn <= '0';
 	SIGclock <= TOPclock WHEN SIGsimulOn = '1' ELSE
 		SIGPLLclock;
 	--SIGclockInverted <= NOT TOPclock ;--WHEN SIGsimulOn = '1' ELSE
@@ -206,12 +206,13 @@ BEGIN
 	
 	
 	PCTEST <= SIGprogcounter(13 DOWNTO 2);
+	--addrDM <= SIGaddrDM(13 DOWNTO 2)
 	
 	Memory : RAM_2PORT
 	PORT MAP(
 		address_a => PCTEST, --: IN STD_LOGIC_VECTOR (11 DOWNTO 0); --  Add instruction
 		--address_a => SIGprogcounter(10 DOWNTO 0), --: IN STD_LOGIC_VECTOR (11 DOWNTO 0); --  Add instruction
-		address_b => SIGaddrDM(11 DOWNTO 0), --: IN STD_LOGIC_VECTOR (11 DOWNTO 0); --  Add memory
+		address_b => SIGaddrDM(13 DOWNTO 2), --: IN STD_LOGIC_VECTOR (11 DOWNTO 0); --  Add memory
 		clock     => SIGclock, --: IN STD_LOGIC  := '1';
 		data_a => (OTHERS => '0'), --: IN STD_LOGIC_VECTOR (31 DOWNTO 0); -- Instruction
 		data_b    => SIGinputDM, --: IN STD_LOGIC_VECTOR (31 DOWNTO 0);	-- Data

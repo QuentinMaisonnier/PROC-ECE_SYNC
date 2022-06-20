@@ -47,10 +47,11 @@ architecture archi of Processor is
 			PCalusup      : IN    STD_LOGIC;
 			PCaluinfU     : IN    STD_LOGIC;
 			PCalusupU     : IN    STD_LOGIC;
+			PClock :in std_logic;
 			PCLoad : IN STD_LOGIC;
-			PClock : IN STD_LOGIC;
 			-- OUTPUTS
-			PCprogcounter : INOUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+			PCprogcounter : INOUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+			PCprec : out STD_LOGIC_VECTOR(31 DOWNTO 0)
         );
     end component;
 
@@ -174,12 +175,16 @@ architecture archi of Processor is
 	 SIGNAL DMout : std_logic_vector(31 downto 0);
 	 SIGNAL Regreset : std_logic;
 	 signal SigLock         : std_logic;
+	 
+	 SIGNAL PCprec : std_logic_vector (31 downto 0); -- send the last value of PC when instruction are JAL, JALR, LOAD or BRANCH
+	 SIGNAL PC : std_logic_vector (31 downto 0);
 
 begin
     -- BEGIN
 	
     -- ALL
     -- program counter
+	 
 	 	  
     PROCprogcounter <=  SIGprogcounter;
 	 
@@ -256,6 +261,9 @@ begin
     
 	 Muxinstruction <= x"00000013" when RegJumpTest = '1' OR RegReset='1'  else
 							 PROCinstruction;
+							 
+	SIGprogcounter <= PCprec when SIGbranch='1' OR SIGjal='1' OR SIGjalr='1' OR SIGload='1' OR SIGoutputALU(31)='1' else --when nop instruction we get the last PC
+							PC;
 	
 	MuxJumpTest <= '1' when SIGbranch='1' OR SIGjal='1' OR SIGjalr='1' OR SIGload='1' OR SIGoutputALU(31)='1' else -- JUMP/JUMPR/LOAD/BEQ(IF)
 						'0';
@@ -299,7 +307,8 @@ begin
         PCalusupU        => SIGsupUALU,
 		  PCLoad 			 => Sigload,
 		  PClock				 => SigLock,
-        PCprogcounter    => SIGprogcounter
+        PCprogcounter    => PC,
+		  PCprec 			 => Pcprec
     );
 
     instID  : InstructionDecoder
