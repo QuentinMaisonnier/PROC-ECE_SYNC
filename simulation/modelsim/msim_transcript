@@ -12,28 +12,28 @@
 # 
 # vlog -vlog01compat -work work +incdir+C:/Users/quent/Desktop/RSICV\ code/VHDL/PROC-ECE_SYNC-GALOPE-V3/db {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/db/test_altpll.v}
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 15:40:56 on Jun 15,2022
+# Start time: 14:05:00 on Jun 20,2022
 # vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/db" C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/db/test_altpll.v 
 # -- Compiling module test_altpll
 # 
 # Top level modules:
 # 	test_altpll
-# End time: 15:40:57 on Jun 15,2022, Elapsed time: 0:00:01
+# End time: 14:05:00 on Jun 20,2022, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/custom_lib/simul_var_pkg.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 15:40:57 on Jun 15,2022
+# Start time: 14:05:00 on Jun 20,2022
 # vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/custom_lib/simul_var_pkg.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package NUMERIC_STD
 # -- Compiling package simulPkg
-# End time: 15:40:57 on Jun 15,2022, Elapsed time: 0:00:00
+# End time: 14:05:00 on Jun 20,2022, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/ProgramCounter.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 15:40:57 on Jun 15,2022
+# Start time: 14:05:00 on Jun 20,2022
 # vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/ProgramCounter.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -41,11 +41,11 @@
 # -- Loading package NUMERIC_STD
 # -- Compiling entity ProgramCounter
 # -- Compiling architecture archi of ProgramCounter
-# End time: 15:40:57 on Jun 15,2022, Elapsed time: 0:00:00
+# End time: 14:05:00 on Jun 20,2022, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 15:40:57 on Jun 15,2022
+# Start time: 14:05:00 on Jun 20,2022
 # vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -53,11 +53,11 @@
 # -- Loading package NUMERIC_STD
 # -- Compiling entity Processor
 # -- Compiling architecture archi of Processor
-# End time: 15:40:57 on Jun 15,2022, Elapsed time: 0:00:00
+# End time: 14:05:00 on Jun 20,2022, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/InstructionDecoder.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 15:40:57 on Jun 15,2022
+# Start time: 14:05:00 on Jun 20,2022
 # vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/InstructionDecoder.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -65,11 +65,11 @@
 # -- Loading package NUMERIC_STD
 # -- Compiling entity InstructionDecoder
 # -- Compiling architecture archi of InstructionDecoder
-# End time: 15:40:57 on Jun 15,2022, Elapsed time: 0:00:00
+# End time: 14:05:00 on Jun 20,2022, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Displays.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 15:40:57 on Jun 15,2022
+# Start time: 14:05:00 on Jun 20,2022
 # vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Displays.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -77,11 +77,11 @@
 # -- Loading package NUMERIC_STD
 # -- Compiling entity Displays
 # -- Compiling architecture archi of Displays
-# End time: 15:40:57 on Jun 15,2022, Elapsed time: 0:00:00
+# End time: 14:05:00 on Jun 20,2022, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Counter.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 15:40:57 on Jun 15,2022
+# Start time: 14:05:00 on Jun 20,2022
 # vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Counter.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -89,11 +89,11 @@
 # -- Loading package NUMERIC_STD
 # -- Compiling entity Counter
 # -- Compiling architecture archi of Counter
-# End time: 15:40:57 on Jun 15,2022, Elapsed time: 0:00:00
+# End time: 14:05:00 on Jun 20,2022, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Alu.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 15:40:57 on Jun 15,2022
+# Start time: 14:05:00 on Jun 20,2022
 # vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Alu.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -101,11 +101,11 @@
 # -- Loading package NUMERIC_STD
 # -- Compiling entity Alu
 # -- Compiling architecture archi of Alu
-# End time: 15:40:57 on Jun 15,2022, Elapsed time: 0:00:00
+# End time: 14:05:00 on Jun 20,2022, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/RAM_2PORT.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 15:40:57 on Jun 15,2022
+# Start time: 14:05:00 on Jun 20,2022
 # vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/RAM_2PORT.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -113,22 +113,22 @@
 # -- Loading package altera_mf_components
 # -- Compiling entity RAM_2PORT
 # -- Compiling architecture SYN of ram_2port
-# End time: 15:40:57 on Jun 15,2022, Elapsed time: 0:00:00
+# End time: 14:05:01 on Jun 20,2022, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/test.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 15:40:57 on Jun 15,2022
+# Start time: 14:05:01 on Jun 20,2022
 # vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/test.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Compiling entity test
 # -- Compiling architecture SYN of test
-# End time: 15:40:57 on Jun 15,2022, Elapsed time: 0:00:00
+# End time: 14:05:01 on Jun 20,2022, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 15:40:57 on Jun 15,2022
+# Start time: 14:05:01 on Jun 20,2022
 # vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -137,11 +137,11 @@
 # -- Loading package simulPkg
 # -- Compiling entity Top
 # -- Compiling architecture archi of Top
-# End time: 15:40:57 on Jun 15,2022, Elapsed time: 0:00:00
+# End time: 14:05:01 on Jun 20,2022, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/RegisterFile.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 15:40:57 on Jun 15,2022
+# Start time: 14:05:01 on Jun 20,2022
 # vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/RegisterFile.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -150,12 +150,12 @@
 # -- Loading package simulPkg
 # -- Compiling entity RegisterFile
 # -- Compiling architecture archi of RegisterFile
-# End time: 15:40:57 on Jun 15,2022, Elapsed time: 0:00:00
+# End time: 14:05:01 on Jun 20,2022, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # 
 # vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/TestBench.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 15:40:57 on Jun 15,2022
+# Start time: 14:05:01 on Jun 20,2022
 # vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/TestBench.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -166,12 +166,12 @@
 # -- Compiling architecture VHDL of TestBenchTop
 # ** Warning: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/TestBench.vhd(95): (vcom-1207) An abstract literal and an identifier must have a separator between them.
 # ** Warning: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/TestBench.vhd(104): (vcom-1207) An abstract literal and an identifier must have a separator between them.
-# End time: 15:40:57 on Jun 15,2022, Elapsed time: 0:00:00
+# End time: 14:05:01 on Jun 20,2022, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 2
 # 
 # vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L fiftyfivenm -L rtl_work -L work -voptargs="+acc"  TestBenchTop
 # vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L fiftyfivenm -L rtl_work -L work -voptargs=""+acc"" TestBenchTop 
-# Start time: 15:40:57 on Jun 15,2022
+# Start time: 14:05:01 on Jun 20,2022
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
@@ -199,20 +199,452 @@
 # Loading altera_mf.mf_cycloneiii_pll(vital_pll)
 # Loading altera_mf.mf_cda_mn_cntr(behave)
 # Loading altera_mf.mf_cda_scale_cntr(behave)
-# ** Warning: Design size of 18759 statements exceeds ModelSim-Intel FPGA Starter Edition recommended capacity.
+# ** Warning: Design size of 18760 statements exceeds ModelSim-Intel FPGA Starter Edition recommended capacity.
 # Expect performance to be adversely affected.
 # 
 # add wave *
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 #           File in use by: quent  Hostname: QUENTIN  ProcessID: 684
-#           Attempting to use alternate WLF file "./wlftricyxy".
+#           Attempting to use alternate WLF file "./wlftym35mc".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlftricyxy
+#           Using alternate file: ./wlftym35mc
 # view structure
 # .main_pane.structure.interior.cs.body.struct
 # view signals
 # .main_pane.objects.interior.cs.body.tree
 # run -all
+# ** Warning: Warning: READ_DURING_WRITE_MODE_MIXED_PORTS is assumed as OLD_DATA
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/Memory/altsyncram_component
+# ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Note: MAX 10 PLL locked to incoming clock
+#    Time: 60 ns  Iteration: 3  Instance: /testbenchtop/iTop/instPLL/altpll_component/CYCLONEIII_ALTPLL/M5
+add wave -position 4  sim:/testbenchtop/iTop/instPROC/Muxinstruction
+restart
+run -all
+# ** Warning: Warning: READ_DURING_WRITE_MODE_MIXED_PORTS is assumed as OLD_DATA
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/Memory/altsyncram_component
+# ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Note: MAX 10 PLL locked to incoming clock
+#    Time: 60 ns  Iteration: 3  Instance: /testbenchtop/iTop/instPLL/altpll_component/CYCLONEIII_ALTPLL/M5
+add wave -position 4  sim:/testbenchtop/iTop/instPROC/PROCprogcounter
+restart
+run -all
+# ** Warning: Warning: READ_DURING_WRITE_MODE_MIXED_PORTS is assumed as OLD_DATA
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/Memory/altsyncram_component
+# ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Note: MAX 10 PLL locked to incoming clock
+#    Time: 60 ns  Iteration: 3  Instance: /testbenchtop/iTop/instPLL/altpll_component/CYCLONEIII_ALTPLL/M5
+vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Alu.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 14:24:10 on Jun 20,2022
+# vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Alu.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity Alu
+# -- Compiling architecture archi of Alu
+# End time: 14:24:10 on Jun 20,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Counter.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 14:24:10 on Jun 20,2022
+# vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Counter.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity Counter
+# -- Compiling architecture archi of Counter
+# End time: 14:24:10 on Jun 20,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Displays.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 14:24:10 on Jun 20,2022
+# vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Displays.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity Displays
+# -- Compiling architecture archi of Displays
+# End time: 14:24:10 on Jun 20,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/InstructionDecoder.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 14:24:10 on Jun 20,2022
+# vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/InstructionDecoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity InstructionDecoder
+# -- Compiling architecture archi of InstructionDecoder
+# End time: 14:24:10 on Jun 20,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 14:24:10 on Jun 20,2022
+# vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity Processor
+# -- Compiling architecture archi of Processor
+# End time: 14:24:10 on Jun 20,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/ProgramCounter.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 14:24:10 on Jun 20,2022
+# vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/ProgramCounter.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity ProgramCounter
+# -- Compiling architecture archi of ProgramCounter
+# End time: 14:24:10 on Jun 20,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/RAM_2PORT.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 14:24:10 on Jun 20,2022
+# vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/RAM_2PORT.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package altera_mf_components
+# -- Compiling entity RAM_2PORT
+# -- Compiling architecture SYN of ram_2port
+# End time: 14:24:10 on Jun 20,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/RegisterFile.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 14:24:10 on Jun 20,2022
+# vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/RegisterFile.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package simulPkg
+# -- Compiling entity RegisterFile
+# -- Compiling architecture archi of RegisterFile
+# End time: 14:24:10 on Jun 20,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/custom_lib/simul_var_pkg.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 14:24:10 on Jun 20,2022
+# vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/custom_lib/simul_var_pkg.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling package simulPkg
+# End time: 14:24:10 on Jun 20,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/test.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 14:24:10 on Jun 20,2022
+# vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/test.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity test
+# -- Compiling architecture SYN of test
+# End time: 14:24:10 on Jun 20,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vlog -vlog01compat -work work {+incdir+C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/db} {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/db/test_altpll.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 14:24:10 on Jun 20,2022
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/db" C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/db/test_altpll.v 
+# -- Compiling module test_altpll
+# 
+# Top level modules:
+# 	test_altpll
+# End time: 14:24:10 on Jun 20,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/TestBench.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 14:24:10 on Jun 20,2022
+# vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/TestBench.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package simulPkg
+# -- Compiling entity TestBenchTop
+# -- Compiling architecture VHDL of TestBenchTop
+# ** Warning: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/TestBench.vhd(95): (vcom-1207) An abstract literal and an identifier must have a separator between them.
+# ** Warning: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/TestBench.vhd(104): (vcom-1207) An abstract literal and an identifier must have a separator between them.
+# End time: 14:24:10 on Jun 20,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 2
+vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 14:24:10 on Jun 20,2022
+# vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package simulPkg
+# -- Compiling entity Top
+# -- Compiling architecture archi of Top
+# End time: 14:24:11 on Jun 20,2022, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+restart
+# Loading work.simulpkg
+# Loading work.testbenchtop(vhdl)
+# Loading work.top(archi)
+# Loading work.processor(archi)
+# Loading work.programcounter(archi)
+# Loading work.instructiondecoder(archi)
+# Loading work.registerfile(archi)
+# Loading work.alu(archi)
+# Loading work.ram_2port(syn)
+# Loading work.counter(archi)
+# Loading work.displays(archi)
+# Loading work.test(syn)
+# ** Warning: Design size of 12818 statements exceeds ModelSim-Intel FPGA Starter Edition recommended capacity.
+# Expect performance to be adversely affected.
+run -all
+# ** Warning: Warning: READ_DURING_WRITE_MODE_MIXED_PORTS is assumed as OLD_DATA
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/Memory/altsyncram_component
+# ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/instPROC/instALU
+# ** Note: MAX 10 PLL locked to incoming clock
+#    Time: 60 ns  Iteration: 3  Instance: /testbenchtop/iTop/instPLL/altpll_component/CYCLONEIII_ALTPLL/M5
+vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Alu.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 14:51:44 on Jun 20,2022
+# vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Alu.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity Alu
+# -- Compiling architecture archi of Alu
+# End time: 14:51:44 on Jun 20,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Counter.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 14:51:44 on Jun 20,2022
+# vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Counter.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity Counter
+# -- Compiling architecture archi of Counter
+# End time: 14:51:44 on Jun 20,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Displays.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 14:51:44 on Jun 20,2022
+# vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Displays.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity Displays
+# -- Compiling architecture archi of Displays
+# End time: 14:51:44 on Jun 20,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/InstructionDecoder.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 14:51:44 on Jun 20,2022
+# vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/InstructionDecoder.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity InstructionDecoder
+# -- Compiling architecture archi of InstructionDecoder
+# End time: 14:51:44 on Jun 20,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 14:51:44 on Jun 20,2022
+# vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity Processor
+# -- Compiling architecture archi of Processor
+# End time: 14:51:44 on Jun 20,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/ProgramCounter.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 14:51:44 on Jun 20,2022
+# vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/ProgramCounter.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity ProgramCounter
+# -- Compiling architecture archi of ProgramCounter
+# End time: 14:51:44 on Jun 20,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/RAM_2PORT.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 14:51:44 on Jun 20,2022
+# vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/RAM_2PORT.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package altera_mf_components
+# -- Compiling entity RAM_2PORT
+# -- Compiling architecture SYN of ram_2port
+# End time: 14:51:44 on Jun 20,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/RegisterFile.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 14:51:44 on Jun 20,2022
+# vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/RegisterFile.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package simulPkg
+# -- Compiling entity RegisterFile
+# -- Compiling architecture archi of RegisterFile
+# End time: 14:51:44 on Jun 20,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/custom_lib/simul_var_pkg.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 14:51:44 on Jun 20,2022
+# vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/custom_lib/simul_var_pkg.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling package simulPkg
+# End time: 14:51:44 on Jun 20,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/test.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 14:51:44 on Jun 20,2022
+# vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/test.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity test
+# -- Compiling architecture SYN of test
+# End time: 14:51:44 on Jun 20,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vlog -vlog01compat -work work {+incdir+C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/db} {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/db/test_altpll.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 14:51:44 on Jun 20,2022
+# vlog -reportprogress 300 -vlog01compat -work work "+incdir+C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/db" C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/db/test_altpll.v 
+# -- Compiling module test_altpll
+# 
+# Top level modules:
+# 	test_altpll
+# End time: 14:51:44 on Jun 20,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/TestBench.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 14:51:44 on Jun 20,2022
+# vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/TestBench.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package simulPkg
+# -- Compiling entity TestBenchTop
+# -- Compiling architecture VHDL of TestBenchTop
+# ** Warning: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/TestBench.vhd(95): (vcom-1207) An abstract literal and an identifier must have a separator between them.
+# ** Warning: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/TestBench.vhd(104): (vcom-1207) An abstract literal and an identifier must have a separator between them.
+# End time: 14:51:45 on Jun 20,2022, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 2
+vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd}
+# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 14:51:45 on Jun 20,2022
+# vcom -reportprogress 300 -93 -work work C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package simulPkg
+# -- Compiling entity Top
+# -- Compiling architecture archi of Top
+# End time: 14:51:45 on Jun 20,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+restart
+# Loading work.simulpkg
+# Loading work.testbenchtop(vhdl)
+# Loading work.top(archi)
+# Loading work.processor(archi)
+# Loading work.programcounter(archi)
+# Loading work.instructiondecoder(archi)
+# Loading work.registerfile(archi)
+# Loading work.alu(archi)
+# Loading work.ram_2port(syn)
+# Loading work.counter(archi)
+# Loading work.displays(archi)
+# Loading work.test(syn)
+# ** Warning: Design size of 12837 statements exceeds ModelSim-Intel FPGA Starter Edition recommended capacity.
+# Expect performance to be adversely affected.
+run -all
 # ** Warning: Warning: READ_DURING_WRITE_MODE_MIXED_PORTS is assumed as OLD_DATA
 #    Time: 0 ps  Iteration: 0  Instance: /testbenchtop/iTop/Memory/altsyncram_component
 # ** Warning: NUMERIC_STD."<": metavalue detected, returning FALSE
