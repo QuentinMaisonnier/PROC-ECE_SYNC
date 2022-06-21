@@ -165,10 +165,9 @@ architecture archi of Processor is
 	 
 	 
 	 
-	 --scotch reparateur
+	 --SIG delay for synchronous memory
 	 signal Muxinstruction : std_logic_vector(31 downto 0);
-	 --SIGNAL JumpTestopcode      : std_logic_vector (6 downto 0);
-	 SIGNAL MuxJumpTest, RegJumpTest : STD_logic;
+	 SIGNAL MuxNOPtest, RegNOPtest : STD_logic;
 	 SIGNAL RegaddrLoad : std_logic_vector(4 downto 0);
 	 SIGNAL WriteReg : STD_LOGIC; --enable to write data load in register
 	 SIGNAL funct3Load, function3 : std_logic_vector(2 downto 0);
@@ -212,6 +211,7 @@ begin
     SIGrdRF <=  RegaddrLoad when SIGstore = '0' AND WriteReg='1' else
 					 SIGrdID when (SIGbranch = '0' AND SIGstore = '0') else
                 (others => '0');
+					 
     SIGinputRF <= DMout when WriteReg = '1' else --- avant il y a avait sigload (au cas ou ca pmarche plus)
                 std_logic_vector(unsigned(SIGprogcounter)+4) when (SIGjal = '1' OR SIGjalr = '1') else
                 SIGimm32U when SIGlui = '1' else
@@ -258,18 +258,20 @@ begin
 	 PROCfunct3 <= function3;
 	 
     PROCload     <= SIGload;
-    
-	 Muxinstruction <= x"00000013" when RegJumpTest = '1' OR RegReset='1'  else
+	 
+	
+	 -----------NOP----------------------- 
+	 Muxinstruction <= x"00000013" when RegNOPtest = '1' OR RegReset='1'  else
 							 PROCinstruction;
 							 
-	SIGprogcounter <= PCprec when SIGbranch='1' OR SIGjal='1' OR SIGjalr='1' OR SIGload='1' OR SIGoutputALU(31)='1' else --when nop instruction we get the last PC
+	SIGprogcounter <= PCprec when SIGbranch='1' OR SIGjal='1' OR SIGjalr='1' OR SIGload='1' OR SIGoutputALU(31)='1' else --when nop instruction we use the last PC
 							PC;
 	
-	MuxJumpTest <= '1' when SIGbranch='1' OR SIGjal='1' OR SIGjalr='1' OR SIGload='1' OR SIGoutputALU(31)='1' else -- JUMP/JUMPR/LOAD/BEQ(IF)
+	MuxNOPtest <= '1' when SIGbranch='1' OR SIGjal='1' OR SIGjalr='1' OR SIGload='1' OR SIGoutputALU(31)='1' else -- JUMP/JUMPR/LOAD/BEQ(IF)
 						'0';
-						
-	RegJumpTest <= '0' when PROCreset='1' else
-						 MuxJumpTest when rising_edge(PROCclock);	 
+	
+	RegNOPtest <= '0' when PROCreset='1' else
+						 MuxNOPtest when rising_edge(PROCclock);	 -- if we detect a instruction that need a nop
 						 
 	RegReset <= '1' when PROCreset='1' else
 					PROcreset when rising_edge(PROCclock);
@@ -279,7 +281,15 @@ begin
 					'0';
 	------------------------------------
 	
-	DMout <= PROCoutputDM;
+--	DMout <= PROCoutputDM;
+	
+	DMout <= std_logic_vector(resize(signed(PROCoutputDM(7 downto 0)), DMout'length)) when WriteReg='1' and function3 = "000" else
+				std_logic_vector(resize(signed(PROCoutputDM(15 downto 0)), DMout'length)) when WriteReg='1' and function3 = "001" else
+				PROCoutputDM(31 downto 0) when WriteReg='1' and function3 = "010" else
+				std_logic_vector(resize(unsigned(PROCoutputDM(7 downto 0)), DMout'length)) when  WriteReg='1' and function3 = "100" else
+				std_logic_vector(resize(unsigned(PROCoutputDM(15 downto 0)), DMout'length)) when  WriteReg='1' and function3 = "101" else
+				(others=>'0');
+	
 --	(others=>'0') when Procreset='1' else
 --			PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7 downto 0) when WriteReg='1' and function3 = "000" else
 --			PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(15 downto 0) when WriteReg='1' and function3 = "001" else

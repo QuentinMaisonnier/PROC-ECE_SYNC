@@ -388,6 +388,22 @@
 					"strict" : false
 				},
 				{
+					"name" : "switchSEL2",
+					"strict" : false
+				},
+				{
+					"name" : "enableDebug",
+					"strict" : false
+				},
+				{
+					"name" : "switchSEL",
+					"strict" : false
+				},
+				{
+					"name" : "TOPclock",
+					"strict" : false
+				},
+				{
 					"name" : "reset",
 					"strict" : false
 				}

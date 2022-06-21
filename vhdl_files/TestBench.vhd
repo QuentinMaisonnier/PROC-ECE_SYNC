@@ -15,7 +15,7 @@ architecture VHDL of TestBenchTop is
 	component Top is
     port (
         -- INPUTS
-        TOPclock       : in std_logic;		--must go through pll
+        TOPclock    : in std_logic;		--must go through pll
         reset       : in std_logic; 	--SW0
         -- DEMO OUTPUTS
         TOPdisplay1    : out std_logic_vector(31 downto 0);	--0x80000004
@@ -41,7 +41,7 @@ architecture VHDL of TestBenchTop is
 	--instanciation de l'entité PROC
 	iTop : Top port map (
 		TOPclock        => ck,
-		reset        => reset,
+		reset        	=> reset,
 		TOPdisplay1     => SigTOPdisplay1,
 		TOPdisplay2     => SigTOPdisplay2
 	);

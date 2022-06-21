@@ -12,14 +12,14 @@ USE work.simulPkg.ALL;
 ENTITY Top IS
 	PORT (
 		-- INPUTS
-		TOPclock    : IN  STD_LOGIC; --must go through pll
---		TOPreset    : IN  STD_LOGIC; --SW0
-		reset    : IN  STD_LOGIC; --SW0
-		-- DEMO OUTPUTS
-		TOPdisplay1 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0); --0x80000004
-		TOPdisplay2 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0); --0x80000008
-		TOPleds     : OUT STD_LOGIC_VECTOR(31 DOWNTO 0) --0x8000000c
-		--TestLed     : OUT STD_LOGIC
+		enableDebug, switchSEL, switchSEL2 : IN STD_LOGIC; -- input for debuger
+		TOPclock    			  : IN  STD_LOGIC; --must go through pll
+		reset    				  : IN  STD_LOGIC; --SW0
+		-- OUTPUTS
+		TOPdisplay1 			  : OUT STD_LOGIC_VECTOR(31 DOWNTO 0); --0x80000004
+		TOPdisplay2 			  : OUT STD_LOGIC_VECTOR(31 DOWNTO 0); --0x80000008
+		TOPleds     			  : OUT STD_LOGIC_VECTOR(31 DOWNTO 0) --0x8000000c
+
 	);
 END ENTITY;
 
@@ -102,7 +102,7 @@ ARCHITECTURE archi OF Top IS
 	END COMPONENT;
 
 	
-	COMPONENT test IS
+	COMPONENT clock1M IS
 		PORT
 		(
 			areset		: IN STD_LOGIC  := '0';
@@ -126,6 +126,25 @@ ARCHITECTURE archi OF Top IS
 			q_b		: OUT STD_LOGIC_VECTOR (31 DOWNTO 0)
 		);
 	END COMPONENT;
+	
+	
+	COMPONENT DEBUGER IS
+		PORT (
+			-- INPUTS
+			--TOPclock    : IN STD_LOGIC; --must go through pll
+			enable 		: IN STD_LOGIC;
+			SwitchSel	: IN STD_LOGIC;
+			SwitchSel2	: IN STD_LOGIC;
+			--reset    	: IN STD_LOGIC; --SW0
+			PCregister  : IN STD_LOGIC_VECTOR(15 downto 0);
+			Instruction : IN STD_LOGIC_VECTOR(31 downto 0);
+			--OUTPUTS
+			TOPdisplay2 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0); --0x80000004
+			TOPdisplay1 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0); --0x80000004
+			TOPleds     : OUT STD_LOGIC_VECTOR(31 DOWNTO 0) --0x8000000c
+		);
+	END COMPONENT;
+	
 
 	-- SIGNALS
 	-- instruction memory
@@ -148,11 +167,10 @@ ARCHITECTURE archi OF Top IS
 	SIGNAL TOPreset : STD_LOGIC;
 	SIGNAL PLLlock : STD_LOGIC;
 	
+	--SIGNAL debuger
 	
-	
-	SIGNAL REGLed, SIGLed, csLed, CSRAM, dataLed, muxLoadDelay : STD_LOGIC; -- TEST LED Output
-	SIGNAL SRAMq_b, ledstate : std_logic_vector(31 downto 0);
-	SIGNAL PCTEST : STD_LOGIC_VECTOR (11 DOWNTO 0);
+	SIGNAL debugDisplay1, debugDisplay2, debugLed : STD_LOGIC_VECTOR(31 downto 0);
+	SIGNAL procDisplay1, procDisplay2, procLed : STD_LOGIC_VECTOR(31 downto 0);
 	SIGNAL csDM : STD_LOGIC;
 	
 	
@@ -174,7 +192,7 @@ BEGIN
 	PKG_counter <= SIGcounter;
 	-----------------------
 
-	SIGsimulOn <= '0';
+	SIGsimulOn <= '1';
 	SIGclock <= TOPclock WHEN SIGsimulOn = '1' ELSE
 		SIGPLLclock;
 	--SIGclockInverted <= NOT TOPclock ;--WHEN SIGsimulOn = '1' ELSE
@@ -186,9 +204,34 @@ BEGIN
 	csDM <= '0' when SIGaddrDM(31)='1' else
 			  '1';
 			  
+	TOPdisplay1 <= procDisplay1 when enableDebug='0' else
+						debugDisplay1;
+						
+	TOPdisplay2 <= procDisplay2 when enableDebug='0' else
+						debugDisplay2;
+						
+	TOPLeds <= procLed when enableDebug='0' else
+				  --debugLed;
+				  procLed;
 
 ---------------------------------------------
 	-- INSTANCES
+	
+	debug : debUGER
+	PORT MAP(
+		--TOPclock =>
+		enable => enableDebug,
+		SwitchSel => switchSEL,
+		SwitchSel2 => switchSEL2,
+		--reset => 
+		PCregister => SIGprogcounter(15 DOWNTO 0),
+		Instruction => SIGinstruction,
+		--OUTPUTS
+		TOPdisplay2 => debugDisplay2,
+		TOPdisplay1 => debugDisplay1,
+		TOPleds => debugLed
+		);
+		
 	instPROC : Processor
 	PORT MAP(
 		PROCclock       => SIGclock,
@@ -204,42 +247,20 @@ BEGIN
 		PROCinputDM     => SIGinputDM
 	);
 	
-	
-	PCTEST <= SIGprogcounter(13 DOWNTO 2);
-	--addrDM <= SIGaddrDM(13 DOWNTO 2)
-	
 	Memory : RAM_2PORT
 	PORT MAP(
-		address_a => PCTEST, --: IN STD_LOGIC_VECTOR (11 DOWNTO 0); --  Add instruction
-		--address_a => SIGprogcounter(10 DOWNTO 0), --: IN STD_LOGIC_VECTOR (11 DOWNTO 0); --  Add instruction
-		address_b => SIGaddrDM(13 DOWNTO 2), --: IN STD_LOGIC_VECTOR (11 DOWNTO 0); --  Add memory
-		clock     => SIGclock, --: IN STD_LOGIC  := '1';
-		data_a => (OTHERS => '0'), --: IN STD_LOGIC_VECTOR (31 DOWNTO 0); -- Instruction
-		data_b    => SIGinputDM, --: IN STD_LOGIC_VECTOR (31 DOWNTO 0);	-- Data
+		address_a => SIGprogcounter(13 DOWNTO 2), --  Addr instruction (divided by 4 because we use 32 bits memory)
+		address_b => SIGaddrDM(13 DOWNTO 2),   	--  Addr memory (divided by 4 because we use 32 bits memory)
+		clock     => SIGclock,
+		data_a => (OTHERS => '0'),						-- Instruction in
+		data_b    => SIGinputDM,						-- Data in
 		enable	 => csDM,
-		wren_a    => '0', --: IN STD_LOGIC  := '0';					-- Write Instruction Select
-		wren_b    => SIGstore, --: IN STD_LOGIC  := '0';					-- Write Data Select
-		q_a       => SIGinstruction, --: OUT STD_LOGIC_VECTOR (31 DOWNTO 0);-- DataOut Instruction
-		q_b       => SIGoutputDM --: OUT STD_LOGIC_VECTOR (31 DOWNTO 0) -- DataOut Data
+		wren_a    => '0',									-- Write Instruction Select
+		wren_b    => SIGstore,							-- Write Data Select
+		q_a       => SIGinstruction,					-- DataOut Instruction
+		q_b       => SIGoutputDM 						-- DataOut Data
 	);
-	--    instIM  : InstructionMemory
-	--    port map(
-	--        IMclock          => SIGclock,
-	--        IMprogcounter    => SIGprogcounter,
-	--        IMout            => SIGinstruction
-	--    );
-	--
-	--    instDM  : DataMemory
-	--    port map(
-	--        DMclock          => SIGclock,
-	--        --DMclock          => SIGclockInverted,
-	--        DMstore          => SIGstore,
-	--        DMload           => SIGload,
-	--        DMaddr           => SIGaddrDM,--complex
-	--        DMin             => SIGinputDM,--complex
-	--        DMfunct3         => SIGfunct3,
-	--        DMout            => SIGoutputDM--complex
---	);
+
 
 	instCPT : Counter
 	PORT MAP(
@@ -260,12 +281,12 @@ BEGIN
 		DISPinput    => SIGinputDM,
 		DISPWrite    => SIGstore,
 		--OUTPUTS
-		DISPleds     => TOPleds,
-		DISPdisplay1 => TOPdisplay1,
-		DISPdisplay2 => TOPdisplay2
+		DISPleds     => procLed,
+		DISPdisplay1 => procDisplay1,
+		DISPdisplay2 => procDisplay2
 	);
 
-	instPLL : test
+	instPLL : clock1M
 	PORT MAP(
 		areset => '0',
 		inclk0 => TOPclock,
