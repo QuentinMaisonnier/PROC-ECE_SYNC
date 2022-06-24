@@ -12,6 +12,7 @@ use work.simulPkg.all;
 entity RegisterFile is
     port (
         -- INPUTS
+		  hold		: in std_logic;
         RFclock	: in std_logic;
         RFreset	: in std_logic;
         RFin		: in std_logic_vector(31 downto 0);
@@ -19,245 +20,131 @@ entity RegisterFile is
         RFrs1		: in std_logic_vector(4 downto 0);
         RFrs2		: in std_logic_vector(4 downto 0);
         -- OUTPUTS
-        RFout1	: out std_logic_vector(31 downto 0);
-        RFout2	: out std_logic_vector(31 downto 0)
+        RFout1		: out std_logic_vector(31 downto 0);
+        RFout2		: out std_logic_vector(31 downto 0)
     );
 end entity;
 
 -- ARCHITECTURE
 architecture archi of RegisterFile is
 
-    signal RFreg00	:  std_logic_vector(31 downto 0);
-    signal RFreg01	:  std_logic_vector(31 downto 0);
-    signal RFreg02	:  std_logic_vector(31 downto 0);
-    signal RFreg03	:  std_logic_vector(31 downto 0);
-    signal RFreg04	:  std_logic_vector(31 downto 0);
-    signal RFreg05	:  std_logic_vector(31 downto 0);
-    signal RFreg06	:  std_logic_vector(31 downto 0);
-    signal RFreg07	:  std_logic_vector(31 downto 0);
-    signal RFreg08	:  std_logic_vector(31 downto 0);
-    signal RFreg09	:  std_logic_vector(31 downto 0);
-    signal RFreg0A	:  std_logic_vector(31 downto 0);
-    signal RFreg0B	:  std_logic_vector(31 downto 0);
-    signal RFreg0C	:  std_logic_vector(31 downto 0);
-    signal RFreg0D	:  std_logic_vector(31 downto 0);
-    signal RFreg0E	:  std_logic_vector(31 downto 0);
-    signal RFreg0F	:  std_logic_vector(31 downto 0);
-    signal RFreg10	:  std_logic_vector(31 downto 0);
-    signal RFreg11	:  std_logic_vector(31 downto 0);
-    signal RFreg12	:  std_logic_vector(31 downto 0);
-    signal RFreg13	:  std_logic_vector(31 downto 0);
-    signal RFreg14	:  std_logic_vector(31 downto 0);
-    signal RFreg15	:  std_logic_vector(31 downto 0);
-    signal RFreg16	:  std_logic_vector(31 downto 0);
-    signal RFreg17	:  std_logic_vector(31 downto 0);
-    signal RFreg18	:  std_logic_vector(31 downto 0);
-    signal RFreg19	:  std_logic_vector(31 downto 0);
-    signal RFreg1A	:  std_logic_vector(31 downto 0);
-    signal RFreg1B	:  std_logic_vector(31 downto 0);
-    signal RFreg1C	:  std_logic_vector(31 downto 0);
-    signal RFreg1D	:  std_logic_vector(31 downto 0);
-    signal RFreg1E	:  std_logic_vector(31 downto 0);
-    signal RFreg1F	:  std_logic_vector(31 downto 0);
+	 TYPE regfile IS ARRAY (0 TO 31) OF STD_LOGIC_vector(31 downto 0);
+	 signal RFreg, RFMux : regfile;
 
 begin
 	--BEGIN
 	-- output 1
-	RFout1 	<= RFreg00 WHEN RFrs1 = "00000" else 
-               RFreg01 WHEN RFrs1 = "00001" else 
-               RFreg02 WHEN RFrs1 = "00010" else 
-               RFreg03 WHEN RFrs1 = "00011" else 
-               RFreg04 WHEN RFrs1 = "00100" else 
-               RFreg05 WHEN RFrs1 = "00101" else 
-               RFreg06 WHEN RFrs1 = "00110" else 
-               RFreg07 WHEN RFrs1 = "00111" else 
-               RFreg08 WHEN RFrs1 = "01000" else 
-               RFreg09 WHEN RFrs1 = "01001" else 
-               RFreg0A WHEN RFrs1 = "01010" else 
-               RFreg0B WHEN RFrs1 = "01011" else 
-               RFreg0C WHEN RFrs1 = "01100" else 
-               RFreg0D WHEN RFrs1 = "01101" else 
-               RFreg0E WHEN RFrs1 = "01110" else 
-               RFreg0F WHEN RFrs1 = "01111" else 
-               RFreg10 WHEN RFrs1 = "10000" else 
-               RFreg11 WHEN RFrs1 = "10001" else 
-               RFreg12 WHEN RFrs1 = "10010" else 
-               RFreg13 WHEN RFrs1 = "10011" else 
-               RFreg14 WHEN RFrs1 = "10100" else 
-               RFreg15 WHEN RFrs1 = "10101" else 
-               RFreg16 WHEN RFrs1 = "10110" else 
-               RFreg17 WHEN RFrs1 = "10111" else 
-               RFreg18 WHEN RFrs1 = "11000" else 
-               RFreg19 WHEN RFrs1 = "11001" else 
-               RFreg1A WHEN RFrs1 = "11010" else 
-               RFreg1B WHEN RFrs1 = "11011" else 
-               RFreg1C WHEN RFrs1 = "11100" else 
-               RFreg1D WHEN RFrs1 = "11101" else 
-               RFreg1E WHEN RFrs1 = "11110" else 
-               RFreg1F WHEN RFrs1 = "11111" else 
+	RFout1 	<= RFreg(0) WHEN RFrs1 = "00000" else 
+               RFreg(1) WHEN RFrs1 = "00001" else 
+               RFreg(2) WHEN RFrs1 = "00010" else 
+               RFreg(3) WHEN RFrs1 = "00011" else 
+               RFreg(4) WHEN RFrs1 = "00100" else 
+               RFreg(5) WHEN RFrs1 = "00101" else 
+               RFreg(6) WHEN RFrs1 = "00110" else 
+               RFreg(7) WHEN RFrs1 = "00111" else 
+               RFreg(8) WHEN RFrs1 = "01000" else 
+               RFreg(9) WHEN RFrs1 = "01001" else 
+               RFreg(10) WHEN RFrs1 = "01010" else 
+               RFreg(11) WHEN RFrs1 = "01011" else 
+               RFreg(12) WHEN RFrs1 = "01100" else 
+               RFreg(13) WHEN RFrs1 = "01101" else 
+               RFreg(14) WHEN RFrs1 = "01110" else 
+               RFreg(15) WHEN RFrs1 = "01111" else 
+               RFreg(16) WHEN RFrs1 = "10000" else 
+               RFreg(17) WHEN RFrs1 = "10001" else 
+               RFreg(18) WHEN RFrs1 = "10010" else 
+               RFreg(19) WHEN RFrs1 = "10011" else 
+               RFreg(20) WHEN RFrs1 = "10100" else 
+               RFreg(21) WHEN RFrs1 = "10101" else 
+               RFreg(22) WHEN RFrs1 = "10110" else 
+               RFreg(23) WHEN RFrs1 = "10111" else 
+               RFreg(24) WHEN RFrs1 = "11000" else 
+               RFreg(25) WHEN RFrs1 = "11001" else 
+               RFreg(26) WHEN RFrs1 = "11010" else 
+               RFreg(27) WHEN RFrs1 = "11011" else 
+               RFreg(28) WHEN RFrs1 = "11100" else 
+               RFreg(29) WHEN RFrs1 = "11101" else 
+               RFreg(30) WHEN RFrs1 = "11110" else 
+               RFreg(31) WHEN RFrs1 = "11111" else 
                (others => '0');
 	-- output 1
-	RFout2 	<= RFreg00 WHEN RFrs2 = "00000" else 
-               RFreg01 WHEN RFrs2 = "00001" else 
-               RFreg02 WHEN RFrs2 = "00010" else 
-               RFreg03 WHEN RFrs2 = "00011" else 
-               RFreg04 WHEN RFrs2 = "00100" else 
-               RFreg05 WHEN RFrs2 = "00101" else 
-               RFreg06 WHEN RFrs2 = "00110" else 
-               RFreg07 WHEN RFrs2 = "00111" else 
-               RFreg08 WHEN RFrs2 = "01000" else 
-               RFreg09 WHEN RFrs2 = "01001" else 
-               RFreg0A WHEN RFrs2 = "01010" else 
-               RFreg0B WHEN RFrs2 = "01011" else 
-               RFreg0C WHEN RFrs2 = "01100" else 
-               RFreg0D WHEN RFrs2 = "01101" else 
-               RFreg0E WHEN RFrs2 = "01110" else 
-               RFreg0F WHEN RFrs2 = "01111" else 
-               RFreg10 WHEN RFrs2 = "10000" else 
-               RFreg11 WHEN RFrs2 = "10001" else 
-               RFreg12 WHEN RFrs2 = "10010" else 
-               RFreg13 WHEN RFrs2 = "10011" else 
-               RFreg14 WHEN RFrs2 = "10100" else 
-               RFreg15 WHEN RFrs2 = "10101" else 
-               RFreg16 WHEN RFrs2 = "10110" else 
-               RFreg17 WHEN RFrs2 = "10111" else 
-               RFreg18 WHEN RFrs2 = "11000" else 
-               RFreg19 WHEN RFrs2 = "11001" else 
-               RFreg1A WHEN RFrs2 = "11010" else 
-               RFreg1B WHEN RFrs2 = "11011" else 
-               RFreg1C WHEN RFrs2 = "11100" else 
-               RFreg1D WHEN RFrs2 = "11101" else 
-               RFreg1E WHEN RFrs2 = "11110" else 
-               RFreg1F WHEN RFrs2 = "11111" else 
+	RFout2 	<= RFreg(0) WHEN RFrs2 = "00000" else 
+               RFreg(1) WHEN RFrs2 = "00001" else 
+               RFreg(2) WHEN RFrs2 = "00010" else 
+               RFreg(3) WHEN RFrs2 = "00011" else 
+               RFreg(4) WHEN RFrs2 = "00100" else 
+               RFreg(5) WHEN RFrs2 = "00101" else 
+               RFreg(6) WHEN RFrs2 = "00110" else 
+               RFreg(7) WHEN RFrs2 = "00111" else 
+               RFreg(8) WHEN RFrs2 = "01000" else 
+               RFreg(9) WHEN RFrs2 = "01001" else 
+               RFreg(10) WHEN RFrs2 = "01010" else 
+               RFreg(11) WHEN RFrs2 = "01011" else 
+               RFreg(12) WHEN RFrs2 = "01100" else 
+               RFreg(13) WHEN RFrs2 = "01101" else 
+               RFreg(14) WHEN RFrs2 = "01110" else 
+               RFreg(15) WHEN RFrs2 = "01111" else 
+               RFreg(16) WHEN RFrs2 = "10000" else 
+               RFreg(17) WHEN RFrs2 = "10001" else 
+               RFreg(18) WHEN RFrs2 = "10010" else 
+               RFreg(19) WHEN RFrs2 = "10011" else 
+               RFreg(20) WHEN RFrs2 = "10100" else 
+               RFreg(21) WHEN RFrs2 = "10101" else 
+               RFreg(22) WHEN RFrs2 = "10110" else 
+               RFreg(23) WHEN RFrs2 = "10111" else 
+               RFreg(24) WHEN RFrs2 = "11000" else 
+               RFreg(25) WHEN RFrs2 = "11001" else 
+               RFreg(26) WHEN RFrs2 = "11010" else 
+               RFreg(27) WHEN RFrs2 = "11011" else 
+               RFreg(28) WHEN RFrs2 = "11100" else 
+               RFreg(29) WHEN RFrs2 = "11101" else 
+               RFreg(30) WHEN RFrs2 = "11110" else 
+               RFreg(31) WHEN RFrs2 = "11111" else 
                (others => '0');
 	-- registers update on clock event and with rd
-	RFreg00	<= (others => '0');
-	RFreg01	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "00001")
-	else RFreg01;
-	RFreg02	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "00010") 
-	else RFreg02;
-	RFreg03	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "00011") 
-	else RFreg03;
-	RFreg04	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "00100") 
-	else RFreg04;
-	RFreg05	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "00101") 
-	else RFreg05;
-	RFreg06	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "00110") 
-	else RFreg06;
-	RFreg07	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "00111") 
-	else RFreg07;
-	RFreg08	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "01000") 
-	else RFreg08;
-	RFreg09	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "01001") 
-	else RFreg09;
-	RFreg0A	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "01010") 
-	else RFreg0A;
-	RFreg0B	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "01011") 
-	else RFreg0B;
-	RFreg0C	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "01100") 
-	else RFreg0C;
-	RFreg0D	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "01101") 
-	else RFreg0D;
-	RFreg0E	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "01110") 
-	else RFreg0E;
-	RFreg0F	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "01111") 
-	else RFreg0F;
-	RFreg10	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "10000") 
-	else RFreg10;
-	RFreg11	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "10001") 
-	else RFreg11;
-	RFreg12	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "10010") 
-	else RFreg12;
-	RFreg13	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "10011") 
-	else RFreg13;
-	RFreg14	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "10100") 
-	else RFreg14;
-	RFreg15	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "10101") 
-	else RFreg15;
-	RFreg16	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "10110") 
-	else RFreg16;
-	RFreg17	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "10111") 
-	else RFreg17;
-	RFreg18	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "11000") 
-	else RFreg18;
-	RFreg19	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "11001") 
-	else RFreg19;
-	RFreg1A	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "11010") 
-	else RFreg1A;
-	RFreg1B	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "11011") 
-	else RFreg1B;
-	RFreg1C	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "11100") 
-	else RFreg1C;
-	RFreg1D	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "11101") 
-	else RFreg1D;
-	RFreg1E	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "11110") 
-	else RFreg1E;
-	RFreg1F	<= (others => '0') WHEN (RFreset = '1')
-	else RFin WHEN (rising_edge(RFclock) AND RFrd = "11111") 
-	else RFreg1F;
+	
+	RFreg(0)	<= (others => '0');
 
-    PKG_reg00	<= RFreg00;
-    PKG_reg01	<= RFreg01;
-    PKG_reg02	<= RFreg02;
-    PKG_reg03	<= RFreg03;
-    PKG_reg04	<= RFreg04;
-    PKG_reg05	<= RFreg05;
-    PKG_reg06	<= RFreg06;
-    PKG_reg07	<= RFreg07;
-    PKG_reg08	<= RFreg08;
-    PKG_reg09	<= RFreg09;
-    PKG_reg0A	<= RFreg0A;
-    PKG_reg0B	<= RFreg0B;
-    PKG_reg0C	<= RFreg0C;
-    PKG_reg0D	<= RFreg0D;
-    PKG_reg0E	<= RFreg0E;
-    PKG_reg0F	<= RFreg0F;
-    PKG_reg10	<= RFreg10;
-    PKG_reg11	<= RFreg11;
-    PKG_reg12	<= RFreg12;
-    PKG_reg13	<= RFreg13;
-    PKG_reg14	<= RFreg14;
-    PKG_reg15	<= RFreg15;
-    PKG_reg16	<= RFreg16;
-    PKG_reg17	<= RFreg17;
-    PKG_reg18	<= RFreg18;
-    PKG_reg19	<= RFreg19;
-    PKG_reg1A	<= RFreg1A;
-    PKG_reg1B	<= RFreg1B;
-    PKG_reg1C	<= RFreg1C;
-    PKG_reg1D	<= RFreg1D;
-    PKG_reg1E	<= RFreg1E;
-    PKG_reg1F	<= RFreg1F;
+	gen:
+	for i in 1 to 31 generate
+		RFMux(i) <= RFin when to_integer(unsigned(RFrd))=i AND hold='0' else RFreg(i);
+		RFreg(i)	<= (others => '0') WHEN (RFreset = '1')
+						else RFMux(i) WHEN rising_edge(RFclock);
+	end generate gen;
+
+
+    PKG_reg00	<= RFreg(0);
+    PKG_reg01	<= RFreg(1);
+    PKG_reg02	<= RFreg(2);
+    PKG_reg03	<= RFreg(3);
+    PKG_reg04	<= RFreg(4);
+    PKG_reg05	<= RFreg(5);
+    PKG_reg06	<= RFreg(6);
+    PKG_reg07	<= RFreg(7);
+    PKG_reg08	<= RFreg(8);
+    PKG_reg09	<= RFreg(9);
+    PKG_reg0A	<= RFreg(10);
+    PKG_reg0B	<= RFreg(11);
+    PKG_reg0C	<= RFreg(12);
+    PKG_reg0D	<= RFreg(13);
+    PKG_reg0E	<= RFreg(14);
+    PKG_reg0F	<= RFreg(15);
+    PKG_reg10	<= RFreg(16);
+    PKG_reg11	<= RFreg(17);
+    PKG_reg12	<= RFreg(18);
+    PKG_reg13	<= RFreg(19);
+    PKG_reg14	<= RFreg(20);
+    PKG_reg15	<= RFreg(21);
+    PKG_reg16	<= RFreg(22);
+    PKG_reg17	<= RFreg(23);
+    PKG_reg18	<= RFreg(24);
+    PKG_reg19	<= RFreg(25);
+    PKG_reg1A	<= RFreg(26);
+    PKG_reg1B	<= RFreg(27);
+    PKG_reg1C	<= RFreg(28);
+    PKG_reg1D	<= RFreg(29);
+    PKG_reg1E	<= RFreg(30);
+    PKG_reg1F	<= RFreg(31);
 	-- END
 end archi;
 -- END FILE

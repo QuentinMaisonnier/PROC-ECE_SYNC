@@ -1,5 +1,5 @@
 Analysis & Synthesis report for PROC-ECE_ASYNC
-Tue Jun 21 14:07:05 2022
+Thu Jun 23 15:04:55 2022
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -15,21 +15,27 @@ Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
   7. Analysis & Synthesis Resource Utilization by Entity
   8. Analysis & Synthesis RAM Summary
   9. Analysis & Synthesis IP Cores Summary
- 10. General Register Statistics
- 11. Inverted Register Statistics
- 12. Multiplexer Restructuring Statistics (Restructuring Performed)
- 13. Source assignments for RAM_2PORT:Memory|altsyncram:altsyncram_component|altsyncram_gjt3:auto_generated
- 14. Parameter Settings for User Entity Instance: RAM_2PORT:Memory|altsyncram:altsyncram_component
- 15. Parameter Settings for User Entity Instance: clock1M:instPLL|altpll:altpll_component
- 16. altsyncram Parameter Settings by Entity Instance
- 17. altpll Parameter Settings by Entity Instance
- 18. Port Connectivity Checks: "clock1M:instPLL"
- 19. Port Connectivity Checks: "RAM_2PORT:Memory"
- 20. Port Connectivity Checks: "Processor:instPROC|InstructionDecoder:instID"
- 21. Port Connectivity Checks: "debuger:debug"
- 22. Post-Synthesis Netlist Statistics for Top Partition
- 23. Elapsed Time Per Partition
- 24. Analysis & Synthesis Messages
+ 10. State Machine - |Top|SDRAM_controller:SDRAMcontroller|currentState
+ 11. State Machine - |Top|SDRAM_32b:SDRAMconverter|currentState
+ 12. Registers Removed During Synthesis
+ 13. Removed Registers Triggering Further Register Optimizations
+ 14. General Register Statistics
+ 15. Inverted Register Statistics
+ 16. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 17. Source assignments for RAM_2PORT:Memory|altsyncram:altsyncram_component|altsyncram_gjt3:auto_generated
+ 18. Parameter Settings for User Entity Instance: RAM_2PORT:Memory|altsyncram:altsyncram_component
+ 19. Parameter Settings for User Entity Instance: clock1M:instPLL|altpll:altpll_component
+ 20. altsyncram Parameter Settings by Entity Instance
+ 21. altpll Parameter Settings by Entity Instance
+ 22. Port Connectivity Checks: "SDRAM_controller:SDRAMcontroller"
+ 23. Port Connectivity Checks: "SDRAM_32b:SDRAMconverter"
+ 24. Port Connectivity Checks: "clock1M:instPLL"
+ 25. Port Connectivity Checks: "RAM_2PORT:Memory"
+ 26. Port Connectivity Checks: "Processor:instPROC|InstructionDecoder:instID"
+ 27. Port Connectivity Checks: "debuger:debug"
+ 28. Post-Synthesis Netlist Statistics for Top Partition
+ 29. Elapsed Time Per Partition
+ 30. Analysis & Synthesis Messages
 
 
 
@@ -55,20 +61,20 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Tue Jun 21 14:07:05 2022       ;
+; Analysis & Synthesis Status        ; Successful - Thu Jun 23 15:04:55 2022       ;
 ; Quartus Prime Version              ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                      ; PROC-ECE_ASYNC                              ;
 ; Top-level Entity Name              ; Top                                         ;
 ; Family                             ; MAX 10                                      ;
-; Total logic elements               ; 3,952                                       ;
-;     Total combinational functions  ; 3,918                                       ;
+; Total logic elements               ; 3,959                                       ;
+;     Total combinational functions  ; 3,925                                       ;
 ;     Dedicated logic registers      ; 1,196                                       ;
 ; Total registers                    ; 1196                                        ;
-; Total pins                         ; 101                                         ;
+; Total pins                         ; 141                                         ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 131,072                                     ;
 ; Embedded Multiplier 9-bit elements ; 0                                           ;
-; Total PLLs                         ; 0                                           ;
+; Total PLLs                         ; 1                                           ;
 ; UFM blocks                         ; 0                                           ;
 ; ADC blocks                         ; 0                                           ;
 +------------------------------------+---------------------------------------------+
@@ -189,6 +195,9 @@ refer to the applicable agreement for further details.
 +-----------------------------------+-----------------+----------------------------------------+--------------------------------------------------------------------------------------------------+---------+
 ; File Name with User-Entered Path  ; Used in Netlist ; File Type                              ; File Name with Absolute Path                                                                     ; Library ;
 +-----------------------------------+-----------------+----------------------------------------+--------------------------------------------------------------------------------------------------+---------+
+; vhdl_files/SDRAM_package.vhd      ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_package.vhd      ;         ;
+; vhdl_files/SDRAM_controller.vhd   ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_controller.vhd   ;         ;
+; vhdl_files/SDRAM_32b.vhd          ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_32b.vhd          ;         ;
 ; vhdl_files/SegmentDecoder.vhd     ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SegmentDecoder.vhd     ;         ;
 ; custom_lib/simul_var_pkg.vhd      ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/custom_lib/simul_var_pkg.vhd      ;         ;
 ; vhdl_files/Top.vhd                ; yes             ; User VHDL File                         ; C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd                ;         ;
@@ -221,37 +230,40 @@ refer to the applicable agreement for further details.
 +-----------------------------------+-----------------+----------------------------------------+--------------------------------------------------------------------------------------------------+---------+
 
 
-+--------------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary                  ;
-+---------------------------------------------+----------------+
-; Resource                                    ; Usage          ;
-+---------------------------------------------+----------------+
-; Estimated Total logic elements              ; 3,952          ;
-;                                             ;                ;
-; Total combinational functions               ; 3918           ;
-; Logic element usage by number of LUT inputs ;                ;
-;     -- 4 input functions                    ; 2966           ;
-;     -- 3 input functions                    ; 711            ;
-;     -- <=2 input functions                  ; 241            ;
-;                                             ;                ;
-; Logic elements by mode                      ;                ;
-;     -- normal mode                          ; 3591           ;
-;     -- arithmetic mode                      ; 327            ;
-;                                             ;                ;
-; Total registers                             ; 1196           ;
-;     -- Dedicated logic registers            ; 1196           ;
-;     -- I/O registers                        ; 0              ;
-;                                             ;                ;
-; I/O pins                                    ; 101            ;
-; Total memory bits                           ; 131072         ;
-;                                             ;                ;
-; Embedded Multiplier 9-bit elements          ; 0              ;
-;                                             ;                ;
-; Maximum fan-out node                        ; TOPclock~input ;
-; Maximum fan-out                             ; 1228           ;
-; Total fan-out                               ; 19396          ;
-; Average fan-out                             ; 3.63           ;
-+---------------------------------------------+----------------+
++----------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary              ;
++---------------------------------------------+------------+
+; Resource                                    ; Usage      ;
++---------------------------------------------+------------+
+; Estimated Total logic elements              ; 3,959      ;
+;                                             ;            ;
+; Total combinational functions               ; 3925       ;
+; Logic element usage by number of LUT inputs ;            ;
+;     -- 4 input functions                    ; 2972       ;
+;     -- 3 input functions                    ; 711        ;
+;     -- <=2 input functions                  ; 242        ;
+;                                             ;            ;
+; Logic elements by mode                      ;            ;
+;     -- normal mode                          ; 3598       ;
+;     -- arithmetic mode                      ; 327        ;
+;                                             ;            ;
+; Total registers                             ; 1196       ;
+;     -- Dedicated logic registers            ; 1196       ;
+;     -- I/O registers                        ; 0          ;
+;                                             ;            ;
+; I/O pins                                    ; 141        ;
+; Total memory bits                           ; 131072     ;
+;                                             ;            ;
+; Embedded Multiplier 9-bit elements          ; 0          ;
+;                                             ;            ;
+; Total PLLs                                  ; 1          ;
+;     -- PLLs                                 ; 1          ;
+;                                             ;            ;
+; Maximum fan-out node                        ; SIGclock~0 ;
+; Maximum fan-out                             ; 1228       ;
+; Total fan-out                               ; 19480      ;
+; Average fan-out                             ; 3.57       ;
++---------------------------------------------+------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -259,17 +271,20 @@ refer to the applicable agreement for further details.
 +-------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+--------------------------------------------------------------------------------------+--------------------+--------------+
 ; Compilation Hierarchy Node                ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; UFM Blocks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; ADC blocks ; Full Hierarchy Name                                                                  ; Entity Name        ; Library Name ;
 +-------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+--------------------------------------------------------------------------------------+--------------------+--------------+
-; |Top                                      ; 3918 (89)           ; 1196 (1)                  ; 131072      ; 0          ; 0            ; 0       ; 0         ; 101  ; 0            ; 0          ; |Top                                                                                 ; Top                ; work         ;
-;    |Counter:instCPT|                      ; 35 (35)             ; 32 (32)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Counter:instCPT                                                                 ; Counter            ; work         ;
+; |Top                                      ; 3925 (90)           ; 1196 (1)                  ; 131072      ; 0          ; 0            ; 0       ; 0         ; 141  ; 0            ; 0          ; |Top                                                                                 ; Top                ; work         ;
+;    |Counter:instCPT|                      ; 36 (36)             ; 32 (32)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Counter:instCPT                                                                 ; Counter            ; work         ;
 ;    |Displays:instDISP|                    ; 75 (75)             ; 96 (96)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Displays:instDISP                                                               ; Displays           ; work         ;
-;    |Processor:instPROC|                   ; 3641 (320)          ; 1067 (11)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC                                                              ; Processor          ; work         ;
+;    |Processor:instPROC|                   ; 3646 (322)          ; 1067 (11)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC                                                              ; Processor          ; work         ;
 ;       |Alu:instALU|                       ; 753 (753)           ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC|Alu:instALU                                                  ; Alu                ; work         ;
-;       |InstructionDecoder:instID|         ; 16 (16)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC|InstructionDecoder:instID                                    ; InstructionDecoder ; work         ;
+;       |InstructionDecoder:instID|         ; 18 (18)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC|InstructionDecoder:instID                                    ; InstructionDecoder ; work         ;
 ;       |ProgramCounter:instPC|             ; 167 (167)           ; 64 (64)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC|ProgramCounter:instPC                                        ; ProgramCounter     ; work         ;
-;       |RegisterFile:instRF|               ; 2385 (2385)         ; 992 (992)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC|RegisterFile:instRF                                          ; RegisterFile       ; work         ;
+;       |RegisterFile:instRF|               ; 2386 (2386)         ; 992 (992)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC|RegisterFile:instRF                                          ; RegisterFile       ; work         ;
 ;    |RAM_2PORT:Memory|                     ; 0 (0)               ; 0 (0)                     ; 131072      ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|RAM_2PORT:Memory                                                                ; RAM_2PORT          ; work         ;
 ;       |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 131072      ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|RAM_2PORT:Memory|altsyncram:altsyncram_component                                ; altsyncram         ; work         ;
 ;          |altsyncram_gjt3:auto_generated| ; 0 (0)               ; 0 (0)                     ; 131072      ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|RAM_2PORT:Memory|altsyncram:altsyncram_component|altsyncram_gjt3:auto_generated ; altsyncram_gjt3    ; work         ;
+;    |clock1M:instPLL|                      ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|clock1M:instPLL                                                                 ; clock1M            ; work         ;
+;       |altpll:altpll_component|           ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|clock1M:instPLL|altpll:altpll_component                                         ; altpll             ; work         ;
+;          |clock1M_altpll:auto_generated|  ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|clock1M:instPLL|altpll:altpll_component|clock1M_altpll:auto_generated           ; clock1M_altpll     ; work         ;
 ;    |debuger:debug|                        ; 78 (46)             ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|debuger:debug                                                                   ; debuger            ; work         ;
 ;       |SegmentDecoder:decoder1|           ; 4 (4)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|debuger:debug|SegmentDecoder:decoder1                                           ; SegmentDecoder     ; work         ;
 ;       |SegmentDecoder:decoder2|           ; 4 (4)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|debuger:debug|SegmentDecoder:decoder2                                           ; SegmentDecoder     ; work         ;
@@ -298,6 +313,115 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Altera ; ALTPLL       ; 18.0    ; N/A          ; N/A          ; |Top|clock1M:instPLL  ; clock1M.vhd     ;
 ; Altera ; RAM: 2-PORT  ; 18.0    ; N/A          ; N/A          ; |Top|RAM_2PORT:Memory ; RAM_2PORT.vhd   ;
 +--------+--------------+---------+--------------+--------------+-----------------------+-----------------+
+
+
+Encoding Type:  One-Hot
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |Top|SDRAM_controller:SDRAMcontroller|currentState                                                                                                                                                                                                                                                                                                                                                                                                                                           ;
++-------------------------------+-----------------------------+-----------------------------+-----------------------------+------------------------+--------------------------+--------------------------+--------------------------+--------------------------+-----------------------------+-----------------------+---------------------+-----------------------------+-------------------------+-----------------------------+-------------------------------+----------------------+----------------------+
+; Name                          ; currentState.S_Refresh_NOP3 ; currentState.S_Refresh_NOP2 ; currentState.S_Refresh_NOP1 ; currentState.S_Refresh ; currentState.S_NOP2_READ ; currentState.S_NOP1_READ ; currentState.S_Read_READ ; currentState.S_Precharge ; currentState.S_Write_WRITE1 ; currentState.S_Active ; currentState.S_IDLE ; currentState.S_LoadRegister ; currentState.S_NOP_INIT ; currentState.S_Refresh_INIT ; currentState.S_PRECHARGE_INIT ; currentState.S_Start ; currentState.S_First ;
++-------------------------------+-----------------------------+-----------------------------+-----------------------------+------------------------+--------------------------+--------------------------+--------------------------+--------------------------+-----------------------------+-----------------------+---------------------+-----------------------------+-------------------------+-----------------------------+-------------------------------+----------------------+----------------------+
+; currentState.S_First          ; 0                           ; 0                           ; 0                           ; 0                      ; 0                        ; 0                        ; 0                        ; 0                        ; 0                           ; 0                     ; 0                   ; 0                           ; 0                       ; 0                           ; 0                             ; 0                    ; 0                    ;
+; currentState.S_Start          ; 0                           ; 0                           ; 0                           ; 0                      ; 0                        ; 0                        ; 0                        ; 0                        ; 0                           ; 0                     ; 0                   ; 0                           ; 0                       ; 0                           ; 0                             ; 1                    ; 1                    ;
+; currentState.S_PRECHARGE_INIT ; 0                           ; 0                           ; 0                           ; 0                      ; 0                        ; 0                        ; 0                        ; 0                        ; 0                           ; 0                     ; 0                   ; 0                           ; 0                       ; 0                           ; 1                             ; 0                    ; 1                    ;
+; currentState.S_Refresh_INIT   ; 0                           ; 0                           ; 0                           ; 0                      ; 0                        ; 0                        ; 0                        ; 0                        ; 0                           ; 0                     ; 0                   ; 0                           ; 0                       ; 1                           ; 0                             ; 0                    ; 1                    ;
+; currentState.S_NOP_INIT       ; 0                           ; 0                           ; 0                           ; 0                      ; 0                        ; 0                        ; 0                        ; 0                        ; 0                           ; 0                     ; 0                   ; 0                           ; 1                       ; 0                           ; 0                             ; 0                    ; 1                    ;
+; currentState.S_LoadRegister   ; 0                           ; 0                           ; 0                           ; 0                      ; 0                        ; 0                        ; 0                        ; 0                        ; 0                           ; 0                     ; 0                   ; 1                           ; 0                       ; 0                           ; 0                             ; 0                    ; 1                    ;
+; currentState.S_IDLE           ; 0                           ; 0                           ; 0                           ; 0                      ; 0                        ; 0                        ; 0                        ; 0                        ; 0                           ; 0                     ; 1                   ; 0                           ; 0                       ; 0                           ; 0                             ; 0                    ; 1                    ;
+; currentState.S_Active         ; 0                           ; 0                           ; 0                           ; 0                      ; 0                        ; 0                        ; 0                        ; 0                        ; 0                           ; 1                     ; 0                   ; 0                           ; 0                       ; 0                           ; 0                             ; 0                    ; 1                    ;
+; currentState.S_Write_WRITE1   ; 0                           ; 0                           ; 0                           ; 0                      ; 0                        ; 0                        ; 0                        ; 0                        ; 1                           ; 0                     ; 0                   ; 0                           ; 0                       ; 0                           ; 0                             ; 0                    ; 1                    ;
+; currentState.S_Precharge      ; 0                           ; 0                           ; 0                           ; 0                      ; 0                        ; 0                        ; 0                        ; 1                        ; 0                           ; 0                     ; 0                   ; 0                           ; 0                       ; 0                           ; 0                             ; 0                    ; 1                    ;
+; currentState.S_Read_READ      ; 0                           ; 0                           ; 0                           ; 0                      ; 0                        ; 0                        ; 1                        ; 0                        ; 0                           ; 0                     ; 0                   ; 0                           ; 0                       ; 0                           ; 0                             ; 0                    ; 1                    ;
+; currentState.S_NOP1_READ      ; 0                           ; 0                           ; 0                           ; 0                      ; 0                        ; 1                        ; 0                        ; 0                        ; 0                           ; 0                     ; 0                   ; 0                           ; 0                       ; 0                           ; 0                             ; 0                    ; 1                    ;
+; currentState.S_NOP2_READ      ; 0                           ; 0                           ; 0                           ; 0                      ; 1                        ; 0                        ; 0                        ; 0                        ; 0                           ; 0                     ; 0                   ; 0                           ; 0                       ; 0                           ; 0                             ; 0                    ; 1                    ;
+; currentState.S_Refresh        ; 0                           ; 0                           ; 0                           ; 1                      ; 0                        ; 0                        ; 0                        ; 0                        ; 0                           ; 0                     ; 0                   ; 0                           ; 0                       ; 0                           ; 0                             ; 0                    ; 1                    ;
+; currentState.S_Refresh_NOP1   ; 0                           ; 0                           ; 1                           ; 0                      ; 0                        ; 0                        ; 0                        ; 0                        ; 0                           ; 0                     ; 0                   ; 0                           ; 0                       ; 0                           ; 0                             ; 0                    ; 1                    ;
+; currentState.S_Refresh_NOP2   ; 0                           ; 1                           ; 0                           ; 0                      ; 0                        ; 0                        ; 0                        ; 0                        ; 0                           ; 0                     ; 0                   ; 0                           ; 0                       ; 0                           ; 0                             ; 0                    ; 1                    ;
+; currentState.S_Refresh_NOP3   ; 1                           ; 0                           ; 0                           ; 0                      ; 0                        ; 0                        ; 0                        ; 0                        ; 0                           ; 0                     ; 0                   ; 0                           ; 0                       ; 0                           ; 0                             ; 0                    ; 1                    ;
++-------------------------------+-----------------------------+-----------------------------+-----------------------------+------------------------+--------------------------+--------------------------+--------------------------+--------------------------+-----------------------------+-----------------------+---------------------+-----------------------------+-------------------------+-----------------------------+-------------------------------+----------------------+----------------------+
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |Top|SDRAM_32b:SDRAMconverter|currentState                                                                                                                                                            ;
++----------------------------+------------------------+------------------------+---------------------------+---------------------------+----------------------------+----------------------------+----------------------+
+; Name                       ; currentState.WRITE_MSB ; currentState.WRITE_LSB ; currentState.READ_MSB_GET ; currentState.READ_LSB_GET ; currentState.READ_MSB_SEND ; currentState.READ_LSB_SEND ; currentState.WAITING ;
++----------------------------+------------------------+------------------------+---------------------------+---------------------------+----------------------------+----------------------------+----------------------+
+; currentState.WAITING       ; 0                      ; 0                      ; 0                         ; 0                         ; 0                          ; 0                          ; 0                    ;
+; currentState.READ_LSB_SEND ; 0                      ; 0                      ; 0                         ; 0                         ; 0                          ; 1                          ; 1                    ;
+; currentState.READ_MSB_SEND ; 0                      ; 0                      ; 0                         ; 0                         ; 1                          ; 0                          ; 1                    ;
+; currentState.READ_LSB_GET  ; 0                      ; 0                      ; 0                         ; 1                         ; 0                          ; 0                          ; 1                    ;
+; currentState.READ_MSB_GET  ; 0                      ; 0                      ; 1                         ; 0                         ; 0                          ; 0                          ; 1                    ;
+; currentState.WRITE_LSB     ; 0                      ; 1                      ; 0                         ; 0                         ; 0                          ; 0                          ; 1                    ;
+; currentState.WRITE_MSB     ; 1                      ; 0                      ; 0                         ; 0                         ; 0                          ; 0                          ; 1                    ;
++----------------------------+------------------------+------------------------+---------------------------+---------------------------+----------------------------+----------------------------+----------------------+
+
+
++-------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                  ;
++----------------------------------------------------------------+--------------------+
+; Register name                                                  ; Reason for Removal ;
++----------------------------------------------------------------+--------------------+
+; SDRAM_controller:SDRAMcontroller|R_CPT[0..13]                  ; Lost fanout        ;
+; SDRAM_controller:SDRAMcontroller|R_CPT_REFRESH[0..21]          ; Lost fanout        ;
+; SDRAM_controller:SDRAMcontroller|reg_A[10..24]                 ; Lost fanout        ;
+; SDRAM_controller:SDRAMcontroller|R_Write_IN                    ; Lost fanout        ;
+; SDRAM_controller:SDRAMcontroller|Data_Ready                    ; Lost fanout        ;
+; SDRAM_controller:SDRAMcontroller|R_CPT_DATA[0..3]              ; Lost fanout        ;
+; SDRAM_controller:SDRAMcontroller|currentState.S_First          ; Lost fanout        ;
+; SDRAM_controller:SDRAMcontroller|currentState.S_Start          ; Lost fanout        ;
+; SDRAM_controller:SDRAMcontroller|currentState.S_PRECHARGE_INIT ; Lost fanout        ;
+; SDRAM_controller:SDRAMcontroller|currentState.S_Refresh_INIT   ; Lost fanout        ;
+; SDRAM_controller:SDRAMcontroller|currentState.S_NOP_INIT       ; Lost fanout        ;
+; SDRAM_controller:SDRAMcontroller|currentState.S_LoadRegister   ; Lost fanout        ;
+; SDRAM_controller:SDRAMcontroller|currentState.S_IDLE           ; Lost fanout        ;
+; SDRAM_controller:SDRAMcontroller|currentState.S_Active         ; Lost fanout        ;
+; SDRAM_controller:SDRAMcontroller|currentState.S_Write_WRITE1   ; Lost fanout        ;
+; SDRAM_controller:SDRAMcontroller|currentState.S_Precharge      ; Lost fanout        ;
+; SDRAM_controller:SDRAMcontroller|currentState.S_Read_READ      ; Lost fanout        ;
+; SDRAM_controller:SDRAMcontroller|currentState.S_NOP1_READ      ; Lost fanout        ;
+; SDRAM_controller:SDRAMcontroller|currentState.S_NOP2_READ      ; Lost fanout        ;
+; SDRAM_controller:SDRAMcontroller|currentState.S_Refresh        ; Lost fanout        ;
+; SDRAM_controller:SDRAMcontroller|currentState.S_Refresh_NOP1   ; Lost fanout        ;
+; SDRAM_controller:SDRAMcontroller|currentState.S_Refresh_NOP2   ; Lost fanout        ;
+; SDRAM_controller:SDRAMcontroller|currentState.S_Refresh_NOP3   ; Lost fanout        ;
+; SDRAM_32b:SDRAMconverter|currentState.WAITING                  ; Lost fanout        ;
+; SDRAM_32b:SDRAMconverter|currentState.READ_LSB_SEND            ; Lost fanout        ;
+; SDRAM_32b:SDRAMconverter|currentState.READ_MSB_SEND            ; Lost fanout        ;
+; SDRAM_32b:SDRAMconverter|currentState.READ_LSB_GET             ; Lost fanout        ;
+; SDRAM_32b:SDRAMconverter|currentState.READ_MSB_GET             ; Lost fanout        ;
+; SDRAM_32b:SDRAMconverter|currentState.WRITE_LSB                ; Lost fanout        ;
+; SDRAM_32b:SDRAMconverter|currentState.WRITE_MSB                ; Lost fanout        ;
+; Total Number of Removed Registers = 81                         ;                    ;
++----------------------------------------------------------------+--------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                        ;
++---------------------------------------------+--------------------+-----------------------------------------------------------------+
+; Register name                               ; Reason for Removal ; Registers Removed due to This Register                          ;
++---------------------------------------------+--------------------+-----------------------------------------------------------------+
+; SDRAM_controller:SDRAMcontroller|R_CPT[13]  ; Lost Fanouts       ; SDRAM_controller:SDRAMcontroller|currentState.S_First,          ;
+;                                             ;                    ; SDRAM_controller:SDRAMcontroller|currentState.S_Start,          ;
+;                                             ;                    ; SDRAM_controller:SDRAMcontroller|currentState.S_PRECHARGE_INIT, ;
+;                                             ;                    ; SDRAM_controller:SDRAMcontroller|currentState.S_Refresh_INIT,   ;
+;                                             ;                    ; SDRAM_controller:SDRAMcontroller|currentState.S_NOP_INIT,       ;
+;                                             ;                    ; SDRAM_controller:SDRAMcontroller|currentState.S_LoadRegister,   ;
+;                                             ;                    ; SDRAM_controller:SDRAMcontroller|currentState.S_IDLE,           ;
+;                                             ;                    ; SDRAM_controller:SDRAMcontroller|currentState.S_Write_WRITE1,   ;
+;                                             ;                    ; SDRAM_controller:SDRAMcontroller|currentState.S_Precharge,      ;
+;                                             ;                    ; SDRAM_controller:SDRAMcontroller|currentState.S_Read_READ,      ;
+;                                             ;                    ; SDRAM_controller:SDRAMcontroller|currentState.S_NOP1_READ,      ;
+;                                             ;                    ; SDRAM_controller:SDRAMcontroller|currentState.S_NOP2_READ,      ;
+;                                             ;                    ; SDRAM_controller:SDRAMcontroller|currentState.S_Refresh,        ;
+;                                             ;                    ; SDRAM_controller:SDRAMcontroller|currentState.S_Refresh_NOP1    ;
+; SDRAM_controller:SDRAMcontroller|Data_Ready ; Lost Fanouts       ; SDRAM_controller:SDRAMcontroller|R_CPT_DATA[3],                 ;
+;                                             ;                    ; SDRAM_controller:SDRAMcontroller|R_CPT_DATA[2],                 ;
+;                                             ;                    ; SDRAM_controller:SDRAMcontroller|R_CPT_DATA[1],                 ;
+;                                             ;                    ; SDRAM_controller:SDRAMcontroller|R_CPT_DATA[0]                  ;
+; SDRAM_controller:SDRAMcontroller|R_Write_IN ; Lost Fanouts       ; SDRAM_32b:SDRAMconverter|currentState.WRITE_LSB,                ;
+;                                             ;                    ; SDRAM_32b:SDRAMconverter|currentState.WRITE_MSB                 ;
++---------------------------------------------+--------------------+-----------------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -395,29 +519,31 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                           ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------+
-; 5:1                ; 31 bits   ; 93 LEs        ; 93 LEs               ; 0 LEs                  ; Yes        ; |Top|Processor:instPROC|ProgramCounter:instPC|PCprogcounter[31]~reg0 ;
-; 3:1                ; 20 bits   ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGinput2ALU[28]                             ;
-; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGinput2ALU[1]                              ;
-; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGrdRF[1]                                   ;
+; 5:1                ; 31 bits   ; 93 LEs        ; 93 LEs               ; 0 LEs                  ; Yes        ; |Top|Processor:instPROC|ProgramCounter:instPC|PCprogcounter[26]~reg0 ;
+; 11:1               ; 13 bits   ; 91 LEs        ; 13 LEs               ; 78 LEs                 ; Yes        ; |Top|SDRAM_controller:SDRAMcontroller|R_CPT[13]                      ;
+; 3:1                ; 20 bits   ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGinput2ALU[17]                             ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGinput2ALU[2]                              ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGrdRF[4]                                   ;
 ; 4:1                ; 11 bits   ; 22 LEs        ; 22 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGoffsetPC[24]                              ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGoffsetPC[16]                              ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |Top|debuger:debug|display6[1]                                       ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; No         ; |Top|debuger:debug|display1[0]                                       ;
-; 5:1                ; 6 bits    ; 18 LEs        ; 12 LEs               ; 6 LEs                  ; No         ; |Top|Processor:instPROC|SIGoffsetPC[5]                               ;
-; 32:1               ; 32 bits   ; 672 LEs       ; 672 LEs              ; 0 LEs                  ; No         ; |Top|Processor:instPROC|RegisterFile:instRF|RFout1[7]                ;
-; 32:1               ; 32 bits   ; 672 LEs       ; 672 LEs              ; 0 LEs                  ; No         ; |Top|Processor:instPROC|RegisterFile:instRF|RFout2[22]               ;
-; 6:1                ; 5 bits    ; 20 LEs        ; 15 LEs               ; 5 LEs                  ; No         ; |Top|Processor:instPROC|SIGoffsetPC[11]                              ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGoffsetPC[18]                              ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |Top|debuger:debug|display5[1]                                       ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; No         ; |Top|debuger:debug|display2[0]                                       ;
+; 5:1                ; 6 bits    ; 18 LEs        ; 12 LEs               ; 6 LEs                  ; No         ; |Top|Processor:instPROC|SIGoffsetPC[8]                               ;
+; 32:1               ; 32 bits   ; 672 LEs       ; 672 LEs              ; 0 LEs                  ; No         ; |Top|Processor:instPROC|RegisterFile:instRF|RFout1[13]               ;
+; 32:1               ; 32 bits   ; 672 LEs       ; 672 LEs              ; 0 LEs                  ; No         ; |Top|Processor:instPROC|RegisterFile:instRF|RFout2[29]               ;
+; 6:1                ; 5 bits    ; 20 LEs        ; 15 LEs               ; 5 LEs                  ; No         ; |Top|Processor:instPROC|SIGoffsetPC[4]                               ;
 ; 7:1                ; 2 bits    ; 8 LEs         ; 6 LEs                ; 2 LEs                  ; No         ; |Top|Processor:instPROC|SIGinputRF[1]                                ;
-; 7:1                ; 6 bits    ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGinputRF[7]                                ;
-; 9:1                ; 16 bits   ; 96 LEs        ; 64 LEs               ; 32 LEs                 ; No         ; |Top|Processor:instPROC|SIGinputRF[16]                               ;
-; 10:1               ; 4 bits    ; 24 LEs        ; 16 LEs               ; 8 LEs                  ; No         ; |Top|Processor:instPROC|SIGinputRF[8]                                ;
-; 10:1               ; 4 bits    ; 24 LEs        ; 16 LEs               ; 8 LEs                  ; No         ; |Top|Processor:instPROC|SIGinputRF[12]                               ;
-; 119:1              ; 8 bits    ; 632 LEs       ; 56 LEs               ; 576 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[11]                       ;
-; 120:1              ; 7 bits    ; 560 LEs       ; 56 LEs               ; 504 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[19]                       ;
-; 120:1              ; 4 bits    ; 320 LEs       ; 32 LEs               ; 288 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[7]                        ;
+; 7:1                ; 6 bits    ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGinputRF[6]                                ;
+; 9:1                ; 16 bits   ; 96 LEs        ; 64 LEs               ; 32 LEs                 ; No         ; |Top|Processor:instPROC|SIGinputRF[27]                               ;
+; 10:1               ; 4 bits    ; 24 LEs        ; 16 LEs               ; 8 LEs                  ; No         ; |Top|Processor:instPROC|SIGinputRF[9]                                ;
+; 10:1               ; 4 bits    ; 24 LEs        ; 16 LEs               ; 8 LEs                  ; No         ; |Top|Processor:instPROC|SIGinputRF[15]                               ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |Top|SDRAM_32b:SDRAMconverter|Selector6                              ;
+; 119:1              ; 8 bits    ; 632 LEs       ; 56 LEs               ; 576 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[8]                        ;
+; 120:1              ; 7 bits    ; 560 LEs       ; 56 LEs               ; 504 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[21]                       ;
+; 120:1              ; 4 bits    ; 320 LEs       ; 32 LEs               ; 288 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[6]                        ;
 ; 121:1              ; 4 bits    ; 320 LEs       ; 32 LEs               ; 288 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[27]                       ;
 ; 121:1              ; 2 bits    ; 160 LEs       ; 16 LEs               ; 144 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[2]                        ;
-; 122:1              ; 2 bits    ; 162 LEs       ; 16 LEs               ; 146 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[29]                       ;
+; 122:1              ; 2 bits    ; 162 LEs       ; 16 LEs               ; 146 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[28]                       ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------------------------------------+
 
 
@@ -902,13 +1028,41 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------------------------------+-----------------------------------------+
 
 
++-----------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "SDRAM_controller:SDRAMcontroller"                                                          ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port        ; Type   ; Severity ; Details                                                                             ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+; sdram_addr  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; sdram_dq    ; Bidir  ; Warning  ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; sdram_ba    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; sdram_dqm   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; sdram_ras_n ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; sdram_cas_n ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; sdram_we_n  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; sdram_cke   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; sdram_cs_n  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; sdram_clk   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "SDRAM_32b:SDRAMconverter"                                                                     ;
++----------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port           ; Type   ; Severity ; Details                                                                             ;
++----------------+--------+----------+-------------------------------------------------------------------------------------+
+; ready_32b      ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; data_ready_32b ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; dataout_32b    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++----------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
 +------------------------------------------------------------------------------------------------------------------+
 ; Port Connectivity Checks: "clock1M:instPLL"                                                                      ;
 +--------+--------+----------+-------------------------------------------------------------------------------------+
 ; Port   ; Type   ; Severity ; Details                                                                             ;
 +--------+--------+----------+-------------------------------------------------------------------------------------+
 ; areset ; Input  ; Info     ; Stuck at GND                                                                        ;
-; c0     ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
 ; locked ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
 +--------+--------+----------+-------------------------------------------------------------------------------------+
 
@@ -946,25 +1100,27 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; boundary_port         ; 1322                        ;
+; boundary_port         ; 1362                        ;
 ; cycloneiii_ff         ; 1196                        ;
 ;     CLR               ; 995                         ;
 ;     CLR SLD           ; 73                          ;
 ;     ENA CLR           ; 128                         ;
-; cycloneiii_lcell_comb ; 3918                        ;
+; cycloneiii_io_obuf    ; 16                          ;
+; cycloneiii_lcell_comb ; 3925                        ;
 ;     arith             ; 327                         ;
 ;         2 data inputs ; 60                          ;
 ;         3 data inputs ; 267                         ;
-;     normal            ; 3591                        ;
+;     normal            ; 3598                        ;
 ;         0 data inputs ; 1                           ;
 ;         1 data inputs ; 66                          ;
-;         2 data inputs ; 114                         ;
+;         2 data inputs ; 115                         ;
 ;         3 data inputs ; 444                         ;
-;         4 data inputs ; 2966                        ;
+;         4 data inputs ; 2972                        ;
+; cycloneiii_pll        ; 1                           ;
 ; cycloneiii_ram_block  ; 32                          ;
 ;                       ;                             ;
-; Max LUT depth         ; 25.80                       ;
-; Average LUT depth     ; 20.80                       ;
+; Max LUT depth         ; 26.00                       ;
+; Average LUT depth     ; 21.05                       ;
 +-----------------------+-----------------------------+
 
 
@@ -983,9 +1139,17 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
-    Info: Processing started: Tue Jun 21 14:06:44 2022
+    Info: Processing started: Thu Jun 23 15:04:33 2022
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off PROC-ECE_ASYNC -c PROC-ECE_ASYNC
 Info (20032): Parallel compilation is enabled and will use up to 4 processors
+Info (12021): Found 1 design units, including 0 entities, in source file vhdl_files/sdram_package.vhd
+    Info (12022): Found design unit 1: SDRAM_package File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_package.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/sdram_controller.vhd
+    Info (12022): Found design unit 1: SDRAM_controller-vhdl File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_controller.vhd Line: 32
+    Info (12023): Found entity 1: SDRAM_controller File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_controller.vhd Line: 11
+Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/sdram_32b.vhd
+    Info (12022): Found design unit 1: SDRAM_32b-vhdl File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_32b.vhd Line: 39
+    Info (12023): Found entity 1: SDRAM_32b File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_32b.vhd Line: 8
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/segmentdecoder.vhd
     Info (12022): Found design unit 1: SegmentDecoder-vhdl File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SegmentDecoder.vhd Line: 11
     Info (12023): Found entity 1: SegmentDecoder File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SegmentDecoder.vhd Line: 5
@@ -995,8 +1159,8 @@ Info (12021): Found 2 design units, including 1 entities, in source file vhdl_fi
 Info (12021): Found 1 design units, including 0 entities, in source file custom_lib/simul_var_pkg.vhd
     Info (12022): Found design unit 1: simulPkg File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/custom_lib/simul_var_pkg.vhd Line: 5
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/top.vhd
-    Info (12022): Found design unit 1: Top-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 27
-    Info (12023): Found entity 1: Top File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 12
+    Info (12022): Found design unit 1: Top-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 38
+    Info (12023): Found entity 1: Top File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 13
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/registerfile.vhd
     Info (12022): Found design unit 1: RegisterFile-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/RegisterFile.vhd Line: 28
     Info (12023): Found entity 1: RegisterFile File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/RegisterFile.vhd Line: 12
@@ -1040,9 +1204,30 @@ Info (12021): Found 2 design units, including 1 entities, in source file vhdl_fi
     Info (12022): Found design unit 1: debuger-archi File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/DEBUGER.vhd Line: 29
     Info (12023): Found entity 1: debuger File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/DEBUGER.vhd Line: 11
 Info (12127): Elaborating entity "Top" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at Top.vhd(168): object "PLLlock" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 168
-Warning (10036): Verilog HDL or VHDL warning at Top.vhd(172): object "debugLed" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 172
-Info (12128): Elaborating entity "debuger" for hierarchy "debuger:debug" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 220
+Warning (10541): VHDL Signal Declaration warning at Top.vhd(26): used implicit default value for signal "SDRAM_ADDR" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 26
+Warning (10541): VHDL Signal Declaration warning at Top.vhd(28): used implicit default value for signal "SDRAM_BA" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 28
+Warning (10541): VHDL Signal Declaration warning at Top.vhd(29): used implicit default value for signal "SDRAM_DQM" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 29
+Warning (10541): VHDL Signal Declaration warning at Top.vhd(30): used implicit default value for signal "SDRAM_RAS_N" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 30
+Warning (10541): VHDL Signal Declaration warning at Top.vhd(30): used implicit default value for signal "SDRAM_CAS_N" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 30
+Warning (10541): VHDL Signal Declaration warning at Top.vhd(30): used implicit default value for signal "SDRAM_WE_N" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 30
+Warning (10541): VHDL Signal Declaration warning at Top.vhd(31): used implicit default value for signal "SDRAM_CKE" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 31
+Warning (10541): VHDL Signal Declaration warning at Top.vhd(31): used implicit default value for signal "SDRAM_CS_N" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 31
+Warning (10541): VHDL Signal Declaration warning at Top.vhd(32): used implicit default value for signal "SDRAM_CLK" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 32
+Warning (10036): Verilog HDL or VHDL warning at Top.vhd(227): object "PLLlock" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 227
+Warning (10036): Verilog HDL or VHDL warning at Top.vhd(231): object "debugLed" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 231
+Warning (10036): Verilog HDL or VHDL warning at Top.vhd(237): object "SIGSDRAM_ADDR" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 237
+Warning (10036): Verilog HDL or VHDL warning at Top.vhd(239): object "SIGSDRAM_BA" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 239
+Warning (10036): Verilog HDL or VHDL warning at Top.vhd(240): object "SIGSDRAM_DQM" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 240
+Warning (10036): Verilog HDL or VHDL warning at Top.vhd(241): object "SIGSDRAM_RAS_N" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 241
+Warning (10036): Verilog HDL or VHDL warning at Top.vhd(241): object "SIGSDRAM_CAS_N" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 241
+Warning (10036): Verilog HDL or VHDL warning at Top.vhd(241): object "SIGSDRAM_WE_N" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 241
+Warning (10036): Verilog HDL or VHDL warning at Top.vhd(242): object "SIGSDRAM_CKE" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 242
+Warning (10036): Verilog HDL or VHDL warning at Top.vhd(242): object "SIGSDRAM_CS_N" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 242
+Warning (10036): Verilog HDL or VHDL warning at Top.vhd(243): object "SIGSDRAM_CLK" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 243
+Warning (10036): Verilog HDL or VHDL warning at Top.vhd(255): object "SIGReady_32b" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 255
+Warning (10036): Verilog HDL or VHDL warning at Top.vhd(256): object "SIGData_Ready_32b" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 256
+Warning (10036): Verilog HDL or VHDL warning at Top.vhd(257): object "SIGDataOut_32b" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 257
+Info (12128): Elaborating entity "debuger" for hierarchy "debuger:debug" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 311
 Warning (10541): VHDL Signal Declaration warning at DEBUGER.vhd(24): used implicit default value for signal "TOPleds" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/DEBUGER.vhd Line: 24
 Warning (10873): Using initial value X (don't care) for net "TOPdisplay2[31..16]" at DEBUGER.vhd(22) File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/DEBUGER.vhd Line: 22
 Info (12128): Elaborating entity "SegmentDecoder" for hierarchy "debuger:debug|SegmentDecoder:decoder1" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/DEBUGER.vhd Line: 73
@@ -1054,16 +1239,16 @@ Info (10041): Inferred latch for "decodeOut[4]" at SegmentDecoder.vhd(14) File: 
 Info (10041): Inferred latch for "decodeOut[5]" at SegmentDecoder.vhd(14) File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SegmentDecoder.vhd Line: 14
 Info (10041): Inferred latch for "decodeOut[6]" at SegmentDecoder.vhd(14) File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SegmentDecoder.vhd Line: 14
 Info (10041): Inferred latch for "decodeOut[7]" at SegmentDecoder.vhd(14) File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SegmentDecoder.vhd Line: 14
-Info (12128): Elaborating entity "Processor" for hierarchy "Processor:instPROC" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 235
+Info (12128): Elaborating entity "Processor" for hierarchy "Processor:instPROC" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 326
 Warning (10036): Verilog HDL or VHDL warning at Processor.vhd(130): object "SIGopcode" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd Line: 130
-Info (12128): Elaborating entity "ProgramCounter" for hierarchy "Processor:instPROC|ProgramCounter:instPC" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd Line: 302
-Info (12128): Elaborating entity "InstructionDecoder" for hierarchy "Processor:instPROC|InstructionDecoder:instID" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd Line: 324
-Info (12128): Elaborating entity "RegisterFile" for hierarchy "Processor:instPROC|RegisterFile:instRF" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd Line: 349
-Info (12128): Elaborating entity "Alu" for hierarchy "Processor:instPROC|Alu:instALU" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd Line: 361
-Info (12128): Elaborating entity "RAM_2PORT" for hierarchy "RAM_2PORT:Memory" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 250
-Info (12128): Elaborating entity "altsyncram" for hierarchy "RAM_2PORT:Memory|altsyncram:altsyncram_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/RAM_2PORT.vhd Line: 72
-Info (12130): Elaborated megafunction instantiation "RAM_2PORT:Memory|altsyncram:altsyncram_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/RAM_2PORT.vhd Line: 72
-Info (12133): Instantiated megafunction "RAM_2PORT:Memory|altsyncram:altsyncram_component" with the following parameter: File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/RAM_2PORT.vhd Line: 72
+Info (12128): Elaborating entity "ProgramCounter" for hierarchy "Processor:instPROC|ProgramCounter:instPC" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd Line: 294
+Info (12128): Elaborating entity "InstructionDecoder" for hierarchy "Processor:instPROC|InstructionDecoder:instID" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd Line: 316
+Info (12128): Elaborating entity "RegisterFile" for hierarchy "Processor:instPROC|RegisterFile:instRF" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd Line: 341
+Info (12128): Elaborating entity "Alu" for hierarchy "Processor:instPROC|Alu:instALU" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd Line: 353
+Info (12128): Elaborating entity "RAM_2PORT" for hierarchy "RAM_2PORT:Memory" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 341
+Info (12128): Elaborating entity "altsyncram" for hierarchy "RAM_2PORT:Memory|altsyncram:altsyncram_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/RAM_2PORT.vhd Line: 76
+Info (12130): Elaborated megafunction instantiation "RAM_2PORT:Memory|altsyncram:altsyncram_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/RAM_2PORT.vhd Line: 76
+Info (12133): Instantiated megafunction "RAM_2PORT:Memory|altsyncram:altsyncram_component" with the following parameter: File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/RAM_2PORT.vhd Line: 76
     Info (12134): Parameter "address_aclr_a" = "UNUSED"
     Info (12134): Parameter "address_aclr_b" = "NONE"
     Info (12134): Parameter "address_reg_b" = "CLOCK0"
@@ -1117,9 +1302,9 @@ Info (12133): Instantiated megafunction "RAM_2PORT:Memory|altsyncram:altsyncram_
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_gjt3.tdf
     Info (12023): Found entity 1: altsyncram_gjt3 File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/db/altsyncram_gjt3.tdf Line: 27
 Info (12128): Elaborating entity "altsyncram_gjt3" for hierarchy "RAM_2PORT:Memory|altsyncram:altsyncram_component|altsyncram_gjt3:auto_generated" File: c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altsyncram.tdf Line: 791
-Info (12128): Elaborating entity "Counter" for hierarchy "Counter:instCPT" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 265
-Info (12128): Elaborating entity "Displays" for hierarchy "Displays:instDISP" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 275
-Info (12128): Elaborating entity "clock1M" for hierarchy "clock1M:instPLL" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 289
+Info (12128): Elaborating entity "Counter" for hierarchy "Counter:instCPT" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 356
+Info (12128): Elaborating entity "Displays" for hierarchy "Displays:instDISP" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 366
+Info (12128): Elaborating entity "clock1M" for hierarchy "clock1M:instPLL" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 380
 Info (12128): Elaborating entity "altpll" for hierarchy "clock1M:instPLL|altpll:altpll_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/clock1M.vhd Line: 140
 Info (12130): Elaborated megafunction instantiation "clock1M:instPLL|altpll:altpll_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/clock1M.vhd Line: 140
 Info (12133): Instantiated megafunction "clock1M:instPLL|altpll:altpll_component" with the following parameter: File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/clock1M.vhd Line: 140
@@ -1181,12 +1366,57 @@ Info (12133): Instantiated megafunction "clock1M:instPLL|altpll:altpll_component
 Info (12021): Found 1 design units, including 1 entities, in source file db/clock1m_altpll.v
     Info (12023): Found entity 1: clock1M_altpll File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/db/clock1m_altpll.v Line: 30
 Info (12128): Elaborating entity "clock1M_altpll" for hierarchy "clock1M:instPLL|altpll:altpll_component|clock1M_altpll:auto_generated" File: c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altpll.tdf Line: 897
-Warning (14284): Synthesized away the following node(s):
-    Warning (14285): Synthesized away the following PLL node(s):
-        Warning (14320): Synthesized away node "clock1M:instPLL|altpll:altpll_component|clock1M_altpll:auto_generated|wire_pll1_clk[0]" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/db/clock1m_altpll.v Line: 92
+Info (12128): Elaborating entity "SDRAM_32b" for hierarchy "SDRAM_32b:SDRAMconverter" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 388
+Warning (10541): VHDL Signal Declaration warning at SDRAM_32b.vhd(42): used implicit default value for signal "address_select" because signal was never assigned a value or an explicit default value. Use of implicit default value may introduce unintended design optimizations. File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_32b.vhd Line: 42
+Warning (10492): VHDL Process Statement warning at SDRAM_32b.vhd(84): signal "DQM" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_32b.vhd Line: 84
+Warning (10492): VHDL Process Statement warning at SDRAM_32b.vhd(98): signal "DQM" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_32b.vhd Line: 98
+Info (12128): Elaborating entity "SDRAM_controller" for hierarchy "SDRAM_controller:SDRAMcontroller" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 415
+Warning (19016): Clock multiplexers are found and protected
+    Warning (19017): Found clock multiplexer SIGclock~0 File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 223
+Warning (12241): 1 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Warning (13039): The following bidirectional pins have no drivers
+    Warning (13040): bidirectional pin "SDRAM_DQ[0]" has no driver File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 27
+    Warning (13040): bidirectional pin "SDRAM_DQ[1]" has no driver File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 27
+    Warning (13040): bidirectional pin "SDRAM_DQ[2]" has no driver File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 27
+    Warning (13040): bidirectional pin "SDRAM_DQ[3]" has no driver File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 27
+    Warning (13040): bidirectional pin "SDRAM_DQ[4]" has no driver File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 27
+    Warning (13040): bidirectional pin "SDRAM_DQ[5]" has no driver File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 27
+    Warning (13040): bidirectional pin "SDRAM_DQ[6]" has no driver File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 27
+    Warning (13040): bidirectional pin "SDRAM_DQ[7]" has no driver File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 27
+    Warning (13040): bidirectional pin "SDRAM_DQ[8]" has no driver File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 27
+    Warning (13040): bidirectional pin "SDRAM_DQ[9]" has no driver File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 27
+    Warning (13040): bidirectional pin "SDRAM_DQ[10]" has no driver File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 27
+    Warning (13040): bidirectional pin "SDRAM_DQ[11]" has no driver File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 27
+    Warning (13040): bidirectional pin "SDRAM_DQ[12]" has no driver File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 27
+    Warning (13040): bidirectional pin "SDRAM_DQ[13]" has no driver File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 27
+    Warning (13040): bidirectional pin "SDRAM_DQ[14]" has no driver File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 27
+    Warning (13040): bidirectional pin "SDRAM_DQ[15]" has no driver File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 27
 Info (13000): Registers with preset signals will power-up high File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Displays.vhd Line: 39
 Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "SDRAM_ADDR[0]" is stuck at GND File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 26
+    Warning (13410): Pin "SDRAM_ADDR[1]" is stuck at GND File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 26
+    Warning (13410): Pin "SDRAM_ADDR[2]" is stuck at GND File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 26
+    Warning (13410): Pin "SDRAM_ADDR[3]" is stuck at GND File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 26
+    Warning (13410): Pin "SDRAM_ADDR[4]" is stuck at GND File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 26
+    Warning (13410): Pin "SDRAM_ADDR[5]" is stuck at GND File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 26
+    Warning (13410): Pin "SDRAM_ADDR[6]" is stuck at GND File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 26
+    Warning (13410): Pin "SDRAM_ADDR[7]" is stuck at GND File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 26
+    Warning (13410): Pin "SDRAM_ADDR[8]" is stuck at GND File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 26
+    Warning (13410): Pin "SDRAM_ADDR[9]" is stuck at GND File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 26
+    Warning (13410): Pin "SDRAM_ADDR[10]" is stuck at GND File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 26
+    Warning (13410): Pin "SDRAM_ADDR[11]" is stuck at GND File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 26
+    Warning (13410): Pin "SDRAM_ADDR[12]" is stuck at GND File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 26
+    Warning (13410): Pin "SDRAM_BA[0]" is stuck at GND File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 28
+    Warning (13410): Pin "SDRAM_BA[1]" is stuck at GND File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 28
+    Warning (13410): Pin "SDRAM_DQM[0]" is stuck at GND File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 29
+    Warning (13410): Pin "SDRAM_DQM[1]" is stuck at GND File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 29
+    Warning (13410): Pin "SDRAM_RAS_N" is stuck at GND File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 30
+    Warning (13410): Pin "SDRAM_CAS_N" is stuck at GND File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 30
+    Warning (13410): Pin "SDRAM_WE_N" is stuck at GND File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 30
+    Warning (13410): Pin "SDRAM_CKE" is stuck at GND File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 31
+    Warning (13410): Pin "SDRAM_CS_N" is stuck at GND File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 31
+    Warning (13410): Pin "SDRAM_CLK" is stuck at GND File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd Line: 32
     Warning (13410): Pin "global.bp.work.simulPkg.PKG_reg00_31__gl_output" is stuck at GND
     Warning (13410): Pin "global.bp.work.simulPkg.PKG_reg00_30__gl_output" is stuck at GND
     Warning (13410): Pin "global.bp.work.simulPkg.PKG_reg00_29__gl_output" is stuck at GND
@@ -1220,17 +1450,20 @@ Warning (13024): Output pins are stuck at VCC or GND
     Warning (13410): Pin "global.bp.work.simulPkg.PKG_reg00_1__gl_output" is stuck at GND
     Warning (13410): Pin "global.bp.work.simulPkg.PKG_reg00_0__gl_output" is stuck at GND
 Info (286030): Timing-Driven Synthesis is running
+Info (17049): 81 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
-    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 4132 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 5 input pins
-    Info (21059): Implemented 96 output pins
-    Info (21061): Implemented 3999 logic cells
+    Info (16011): Adding 1 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 4183 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 6 input pins
+    Info (21059): Implemented 119 output pins
+    Info (21060): Implemented 16 bidirectional pins
+    Info (21061): Implemented 4009 logic cells
     Info (21064): Implemented 32 RAM segments
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 41 warnings
-    Info: Peak virtual memory: 4829 megabytes
-    Info: Processing ended: Tue Jun 21 14:07:05 2022
-    Info: Elapsed time: 00:00:21
+    Info (21065): Implemented 1 PLLs
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 105 warnings
+    Info: Peak virtual memory: 4854 megabytes
+    Info: Processing ended: Thu Jun 23 15:04:55 2022
+    Info: Elapsed time: 00:00:22
     Info: Total CPU time (on all processors): 00:00:32
 
 

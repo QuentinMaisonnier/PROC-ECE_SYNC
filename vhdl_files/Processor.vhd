@@ -11,6 +11,7 @@ use ieee.numeric_std.all;
 entity Processor is
     port (
         -- INPUTS
+		  Hold				 : in std_logic;
         PROCclock        : in std_logic;
         PROCreset        : in std_logic;
         PROCinstruction  : in std_logic_vector(31 downto 0);
@@ -33,6 +34,7 @@ architecture archi of Processor is
     component ProgramCounter is
         port (
 			-- INPUTS
+			PChold		  : IN    STD_LOGIC;
 			PCclock       : IN    STD_LOGIC;
 			PCreset       : IN    STD_LOGIC;
 			PCoffset      : IN    STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -58,67 +60,69 @@ architecture archi of Processor is
     -- instruction decoder
     component InstructionDecoder is
         port (
-            -- INPUTS
-            -- instruction endianness must be Big Endian !
-            IDinstruction : in std_logic_vector (31 downto 0);
-            -- OUTPUTS
-            IDopcode      : out std_logic_vector (6 downto 0);
-            IDimmSel      : out std_logic;
-            IDrd          : out std_logic_vector (4 downto 0);
-            IDrs1         : out std_logic_vector (4 downto 0);
-            IDrs2         : out std_logic_vector (4 downto 0);
-            IDfunct3      : out std_logic_vector (2 downto 0);
-            IDfunct7      : out std_logic;
-            IDimm12I      : out std_logic_vector (11 downto 0);
-            IDimm12S      : out std_logic_vector (11 downto 0);
-            IDimm13B      : out std_logic_vector (12 downto 0);
-            IDimm32U      : out std_logic_vector (31 downto 0);
-            IDimm21J      : out std_logic_vector (20 downto 0);
-            IDload        : out std_logic;
-            IDstore       : out std_logic;
-            IDlui         : out std_logic;
-            IDauipc       : out std_logic;
-            IDjal         : out std_logic;
-            IDjalr        : out std_logic;
-            IDbranch      : out std_logic
+			-- INPUTS
+			-- instruction endianness must be Big Endian !
+			IDinstruction : in std_logic_vector (31 downto 0);
+			-- OUTPUTS
+			IDopcode      : out std_logic_vector (6 downto 0);
+			IDimmSel      : out std_logic;
+			IDrd          : out std_logic_vector (4 downto 0);
+			IDrs1         : out std_logic_vector (4 downto 0);
+			IDrs2         : out std_logic_vector (4 downto 0);
+			IDfunct3      : out std_logic_vector (2 downto 0);
+			IDfunct7      : out std_logic;
+			IDimm12I      : out std_logic_vector (11 downto 0);
+			IDimm12S      : out std_logic_vector (11 downto 0);
+			IDimm13B      : out std_logic_vector (12 downto 0);
+			IDimm32U      : out std_logic_vector (31 downto 0);
+			IDimm21J      : out std_logic_vector (20 downto 0);
+			IDload        : out std_logic;
+			IDstore       : out std_logic;
+			IDlui         : out std_logic;
+			IDauipc       : out std_logic;
+			IDjal         : out std_logic;
+			IDjalr        : out std_logic;
+			IDbranch      : out std_logic
         );
     end component;
 
     --register file
     component RegisterFile is
         port (
-            -- INPUTS
-            RFclock        : in std_logic;
-            RFreset        : in std_logic;
-            RFin           : in std_logic_vector(31 downto 0);
-            RFrd           : in std_logic_vector(4 downto 0);
-            RFrs1          : in std_logic_vector(4 downto 0);
-            RFrs2          : in std_logic_vector(4 downto 0);
-            -- OUTPUTS
-            RFout1         : out std_logic_vector(31 downto 0);
-            RFout2         : out std_logic_vector(31 downto 0)
+        -- INPUTS
+		  hold		: in std_logic;
+        RFclock	: in std_logic;
+        RFreset	: in std_logic;
+        RFin		: in std_logic_vector(31 downto 0);
+        RFrd		: in std_logic_vector(4 downto 0);
+        RFrs1		: in std_logic_vector(4 downto 0);
+        RFrs2		: in std_logic_vector(4 downto 0);
+        -- OUTPUTS
+        RFout1		: out std_logic_vector(31 downto 0);
+        RFout2		: out std_logic_vector(31 downto 0)
         );
     end component;
 
     --alu
     component Alu is
         port (
-            -- INPUTS
-            ALUin1         : in std_logic_vector (31 downto 0);
-            ALUin2         : in std_logic_vector (31 downto 0);
-            ALUfunct7      : in std_logic;
-            ALUfunct3      : in std_logic_vector (2 downto 0);
-            -- OUTPUTS
-            ALUout         : out std_logic_vector (31 downto 0);
-            ALUsup         : out std_logic;
-            ALUeq          : out std_logic;
-            ALUinf         : out std_logic;
-            ALUinfU        : out std_logic;
-            ALUsupU        : out std_logic
+			-- INPUTS
+			ALUin1         : in std_logic_vector (31 downto 0);
+			ALUin2         : in std_logic_vector (31 downto 0);
+			ALUfunct7      : in std_logic;
+			ALUfunct3      : in std_logic_vector (2 downto 0);
+			-- OUTPUTS
+			ALUout         : out std_logic_vector (31 downto 0);
+			ALUsup         : out std_logic;
+			ALUeq          : out std_logic;
+			ALUinf         : out std_logic;
+			ALUinfU        : out std_logic;
+			ALUsupU        : out std_logic
         );
     end component;
 
     -- SIGNALS
+	 signal SIGhold 			: std_logic;
     -- program counter
     signal SIGoffsetPC1    : std_logic_vector (31 downto 0);
     signal SIGoffsetPC2    : std_logic_vector (31 downto 0);
@@ -129,18 +133,20 @@ architecture archi of Processor is
     -- instruction decoder
     signal SIGopcode       : std_logic_vector (6 downto 0);
     signal SIGimmSel       : std_logic;
-    signal SIGrdID         : std_logic_vector (4 downto 0);
+    signal SIGrdID, MuxrdID: std_logic_vector (4 downto 0);
     signal SIGrdRF         : std_logic_vector (4 downto 0);
     signal SIGrs1          : std_logic_vector (4 downto 0);
     signal SIGrs2          : std_logic_vector (4 downto 0);
     signal SIGfunct3       : std_logic_vector (2 downto 0);
+	 SIGNAL Muxfunct3			: std_logic_vector (2 downto 0);
+	 
     signal SIGfunct7       : std_logic;
     signal SIGimm12I       : std_logic_vector (11 downto 0);
     signal SIGimm12S       : std_logic_vector (11 downto 0);
     signal SIGimm13B       : std_logic_vector (12 downto 0);
     signal SIGimm32U       : std_logic_vector (31 downto 0);
     signal SIGimm21J       : std_logic_vector (20 downto 0);
-    signal SIGload         : std_logic;
+    signal SIGload, Muxload: std_logic;
     signal SIGstore        : std_logic;
     signal SIGlui          : std_logic;
     signal SIGauipc        : std_logic;
@@ -203,10 +209,15 @@ begin
     -- register file
 	 
 	 RegaddrLoad <= (others=>'0') when PROCreset='1' else
-						 SIGrdID when rising_edge(PROCclock);
+						 MuxrdID when rising_edge(PROCclock);
+	 MuxrdID <= SIGrdID when Hold='0' else
+					RegaddrLoad;
 						 
 	 WriteReg <= '0' when PROCreset='1' else --- on decale juste sigload de 1 cycle
-					 sigload when rising_edge(PROCclock);
+					 Muxload when rising_edge(PROCclock);
+					 
+	 Muxload <=  SIGload when hold='0' else
+					 WriteReg
 					 
     SIGrdRF <=  RegaddrLoad when SIGstore = '0' AND WriteReg='1' else
 					 SIGrdID when (SIGbranch = '0' AND SIGstore = '0') else
@@ -251,9 +262,11 @@ begin
 	 
 	 funct3Load <= (others=>'0') when procreset='1' else
 						SIGfunct3 when rising_edge(proCclock);
-						
+	 Muxfunct3 <= SIGfunct3 when hold='0' else
+					  funct3Load;
+					  
 	 function3 <= funct3Load when writeReg='1' else
-						  SIGfunct3;	
+					  SIGfunct3;	
 	 
 	 PROCfunct3 <= function3;
 	 
@@ -261,24 +274,27 @@ begin
 	 
 	
 	 -----------NOP----------------------- 
-	 Muxinstruction <= x"00000013" when RegNOPtest = '1' OR RegReset='1'  else
+	Muxinstruction <= x"00000013" when RegNOPtest = '1' OR RegReset='1'  else
 							 PROCinstruction;
 							 
 	SIGprogcounter <= PCprec when SIGbranch='1' OR SIGjal='1' OR SIGjalr='1' OR SIGload='1' OR SIGoutputALU(31)='1' else --when nop instruction we use the last PC
 							PC;
 	
-	MuxNOPtest <= '1' when SIGbranch='1' OR SIGjal='1' OR SIGjalr='1' OR SIGload='1' OR SIGoutputALU(31)='1' else -- JUMP/JUMPR/LOAD/BEQ(IF)
-						'0';
+	MuxNOPtest <= RegNOPtest when hold='1' else
+					  '1' when SIGbranch='1' OR SIGjal='1' OR SIGjalr='1' OR SIGload='1' OR SIGoutputALU(31)='1' else -- JUMP/JUMPR/LOAD/BEQ(IF)
+					  '0'
+					  
 	
 	RegNOPtest <= '0' when PROCreset='1' else
-						 MuxNOPtest when rising_edge(PROCclock);	 -- if we detect a instruction that need a nop
+					  MuxNOPtest when rising_edge(PROCclock);	 -- if we detect a instruction that need a nop
+						 
 						 
 	RegReset <= '1' when PROCreset='1' else
 					PROcreset when rising_edge(PROCclock);
 						 
 						 
 	SigLock <='1' when SIGoutputALU(31)='1' else
-					'0';
+				 '0';
 	------------------------------------
 	
 --	DMout <= PROCoutputDM;
@@ -289,18 +305,11 @@ begin
 				std_logic_vector(resize(unsigned(PROCoutputDM(7 downto 0)), DMout'length)) when  WriteReg='1' and function3 = "100" else
 				std_logic_vector(resize(unsigned(PROCoutputDM(15 downto 0)), DMout'length)) when  WriteReg='1' and function3 = "101" else
 				(others=>'0');
-	
---	(others=>'0') when Procreset='1' else
---			PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7 downto 0) when WriteReg='1' and function3 = "000" else
---			PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(7) & PROCoutputDM(15 downto 0) when WriteReg='1' and function3 = "001" else
---			PROCoutputDM(31 downto 0) when WriteReg='1' and function3 = "010" else
---			x"000000" & PROCoutputDM(7 downto 0) when  WriteReg='1' and function3 = "100" else
---			x"0000" & PROCoutputDM(15 downto 0) when  WriteReg='1' and function3 = "101" else
---			(others=>'0');
 
     -- INSTANCES
     instPC  : ProgramCounter
     port map(
+		  PChold 			 => SIGhold,
         PCclock          => PROCclock,
         PCreset          => PROCreset,
         PCoffset         => SIGoffsetPC,--complex
@@ -348,6 +357,7 @@ begin
 
     instRF  : RegisterFile
     port map(
+		  Hold 				=> SIGhold,
         RFclock         => PROCclock,
         RFreset         => PROCreset,
         RFin            => SIGinputRF,--complex

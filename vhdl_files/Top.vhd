@@ -7,6 +7,7 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 USE work.simulPkg.ALL;
+use work.SDRAM_package.ALL;
 
 -- ENTITY
 ENTITY Top IS
@@ -14,11 +15,21 @@ ENTITY Top IS
 		-- INPUTS
 		enableDebug, switchSEL, switchSEL2 : IN STD_LOGIC; -- input for debuger
 		TOPclock    			  : IN  STD_LOGIC; --must go through pll
+		buttonClock				  : IN STD_LOGIC;
 		reset    				  : IN  STD_LOGIC; --SW0
+		
 		-- OUTPUTS
 		TOPdisplay1 			  : OUT STD_LOGIC_VECTOR(31 DOWNTO 0); --0x80000004
 		TOPdisplay2 			  : OUT STD_LOGIC_VECTOR(31 DOWNTO 0); --0x80000008
-		TOPleds     			  : OUT STD_LOGIC_VECTOR(31 DOWNTO 0) --0x8000000c
+		TOPleds     			  : OUT STD_LOGIC_VECTOR(31 DOWNTO 0); --0x8000000c
+		
+		SDRAM_ADDR   	 		  : out STD_LOGIC_VECTOR (12 downto 0);  -- Address
+	   SDRAM_DQ   	 			  : inout STD_LOGIC_VECTOR ((DATA_WIDTH-1) downto 0); -- data input / output
+		SDRAM_BA   	 			  : out STD_LOGIC_VECTOR (1 downto 0);  -- BA0 / BA1 ?
+	   SDRAM_DQM				  : out STD_LOGIC_VECTOR ((DQM_WIDTH-1) downto 0);          -- LDQM ? UDQM ?
+		SDRAM_RAS_N, SDRAM_CAS_N, SDRAM_WE_N : out STD_LOGIC;  -- RAS + CAS + WE = CMD
+		SDRAM_CKE, SDRAM_CS_N  : out STD_LOGIC ;             -- CKE (clock rising edge) | CS ?
+		SDRAM_CLK 				  : out STD_LOGIC 
 
 	);
 END ENTITY;
@@ -145,6 +156,54 @@ ARCHITECTURE archi OF Top IS
 		);
 	END COMPONENT;
 	
+	COMPONENT SDRAM_32b IS
+		PORT (
+		  -- SDRAM Inputs
+        Clock, Reset : in STD_LOGIC;
+		  -- Inputs (32bits)
+		  IN_Address 		: in STD_LOGIC_VECTOR(25 downto 0);
+		  IN_Write_Select	: in STD_LOGIC;
+		  IN_Data_32		: in STD_LOGIC_VECTOR(31 downto 0);
+		  IN_Select			: in STD_LOGIC;
+		  IN_Function3		: in STD_LOGIC_VECTOR(1 downto 0);
+		  -- Outputs (16b)
+		  OUT_Address 			: out STD_LOGIC_VECTOR(24 downto 0);
+		  OUT_Write_Select	: out STD_LOGIC;
+		  OUT_Data_16			: out STD_LOGIC_VECTOR(15 downto 0);
+		  OUT_Select			: out STD_LOGIC;
+		  OUT_DQM				: out STD_LOGIC_VECTOR(1 downto 0);
+		  -- Test Outputs (32bits)
+		  Ready_32b				: out STD_LOGIC;
+		  Data_Ready_32b		: out STD_LOGIC;
+		  DataOut_32b			: out STD_LOGIC_VECTOR(31 downto 0);
+		  -- Test Outputs (16bits)
+		  Ready_16b				: in STD_LOGIC;
+		  Data_Ready_16b		: in STD_LOGIC;
+		  DataOut_16b			: in STD_LOGIC_VECTOR(15 downto 0)
+		);
+	END COMPONENT;
+	
+	COMPONENT SDRAM_controller IS
+		PORT (
+        clk, Reset : in STD_LOGIC;
+        SDRAM_ADDR   	 : out STD_LOGIC_VECTOR (12 downto 0);  -- Address
+		  SDRAM_DQ   	 : inout STD_LOGIC_VECTOR ((DATA_WIDTH-1) downto 0); -- data input / output
+		  SDRAM_BA   	 : out STD_LOGIC_VECTOR (1 downto 0);  -- BA0 / BA1 ?
+		  SDRAM_DQM		: out STD_LOGIC_VECTOR ((DQM_WIDTH-1) downto 0);          -- LDQM ? UDQM ?
+		  SDRAM_RAS_N, SDRAM_CAS_N, SDRAM_WE_N : out STD_LOGIC;  -- RAS + CAS + WE = CMD
+		  SDRAM_CKE, SDRAM_CS_N : out STD_LOGIC ;             -- CKE (clock rising edge) | CS ?
+		  SDRAM_CLK : out STD_LOGIC ;
+		  Data_OUT : out STD_LOGIC_VECTOR ((DATA_WIDTH-1) downto 0);
+		  Data_IN : in STD_LOGIC_VECTOR ((DATA_WIDTH-1) downto 0);
+		  DQM : in STD_LOGIC_VECTOR ((DQM_WIDTH-1) downto 0);
+		  Address_IN : in STD_LOGIC_VECTOR (24 downto 0);
+		  Write_IN : in STD_LOGIC;
+		  Select_IN : in STD_LOGIC;
+		  Ready : out STD_LOGIC;
+		  Data_Ready : out STD_LOGIC
+		);
+	END COMPONENT;
+	
 
 	-- SIGNALS
 	-- instruction memory
@@ -174,6 +233,35 @@ ARCHITECTURE archi OF Top IS
 	SIGNAL csDM : STD_LOGIC;
 	
 	
+	-- SIGNAL SDRAM_controler to SDRAM
+	SIGNAL SIGSDRAM_ADDR   	 		  								: STD_LOGIC_VECTOR (12 downto 0);
+	SIGNAL SIGSDRAM_DQ   	 			  							: STD_LOGIC_VECTOR ((DATA_WIDTH-1) downto 0);
+	SIGNAL SIGSDRAM_BA   	 			  							: STD_LOGIC_VECTOR (1 downto 0); 
+	SIGNAL SIGSDRAM_DQM				  								: STD_LOGIC_VECTOR ((DQM_WIDTH-1) downto 0);  
+	SIGNAL SIGSDRAM_RAS_N, SIGSDRAM_CAS_N, SIGSDRAM_WE_N  : STD_LOGIC; 
+	SIGNAL SIGSDRAM_CKE, SIGSDRAM_CS_N  						: STD_LOGIC ;
+	SIGNAL SIGSDRAM_CLK 				  								: STD_LOGIC ;
+	
+	
+	--SIGNAL SDRAM_controler to SDRAM converter 32bits
+
+	-- Outputs to SDRAM controlle(16b)
+	SIGNAL SIGOUT_Address 			: STD_LOGIC_VECTOR(24 downto 0);
+	SIGNAL SIGOUT_Write_Select		: STD_LOGIC;
+	SIGNAL SIGOUT_Data_16			: STD_LOGIC_VECTOR(15 downto 0);
+	SIGNAL SIGOUT_Select				: STD_LOGIC;
+	SIGNAL SIGOUT_DQM					: STD_LOGIC_VECTOR(1 downto 0);
+	-- Outputs of 32 bits module to proc(32bits)
+	SIGNAL SIGReady_32b				: STD_LOGIC;
+	SIGNAL SIGData_Ready_32b		: STD_LOGIC;
+	SIGNAL SIGDataOut_32b			: STD_LOGIC_VECTOR(31 downto 0);
+	-- Outputs of SDRAM controller (16bits)
+	SIGNAL SIGReady_16b				: STD_LOGIC;
+	SIGNAL SIGData_Ready_16b		: STD_LOGIC;
+	SIGNAL SIGDataOut_16b			: STD_LOGIC_VECTOR(15 downto 0);
+
+	
+	
 
 BEGIN
 	TOPreset <= '1' when reset='1' else
@@ -191,10 +279,13 @@ BEGIN
 	PKG_progcounter <= SIGprogcounter;
 	PKG_counter <= SIGcounter;
 	-----------------------
-
-	SIGsimulOn <= '1';
+	
+	SIGsimulOn <= '0';
+	
 	SIGclock <= TOPclock WHEN SIGsimulOn = '1' ELSE
-		SIGPLLclock;
+					SIGPLLclock WHEN enableDebug='0' ELSE
+					buttonClock;
+					
 	--SIGclockInverted <= NOT TOPclock ;--WHEN SIGsimulOn = '1' ELSE
 		--SIGPLLclockinverted;
 --	SIGoutputDMorREG <= SIGcounter WHEN SIGaddrDM = x"80000000" ELSE
@@ -292,6 +383,57 @@ BEGIN
 		inclk0 => TOPclock,
 		c0     => SIGPLLclock,
 		locked     => PLLlock
+	);
+	
+	SDRAMconverter : SDRAM_32b
+	PORT MAP(
+		-- SDRAM Inputs
+		Clock 				=> SIGclock,
+		Reset					=> reset,
+		-- Inputs (32bits)
+		IN_Address			=> SIGaddrDM(25 DOWNTO 0),
+		IN_Write_Select	=> SIGstore,
+		IN_Data_32			=> SIGinputDM,
+		IN_Select			=> csDM,
+		IN_Function3		=> SIGfunct3(1 downto 0),
+		-- Outputs (16b)
+		OUT_Address			=> SIGOUT_Address,
+		OUT_Write_Select	=> SIGOUT_Write_Select,
+		OUT_Data_16			=> SIGOUT_Data_16,
+		OUT_Select			=> SIGOUT_Select,
+		OUT_DQM				=> SIGOUT_DQM,
+		-- Outputs (32bits)
+		Ready_32b			=> SIGReady_32b,
+		Data_Ready_32b		=> SIGData_Ready_32b,
+		DataOut_32b			=> SIGDataOut_32b,
+		-- Outputs (16bits)
+		Ready_16b			=> SIGReady_16b,
+		Data_Ready_16b		=> SIGData_Ready_16b,
+		DataOut_16b			=> SIGDataOut_16b
+	);
+	
+	SDRAMcontroller : SDRAM_controller
+	PORT MAP(
+		clk			=> SIGClock,
+		Reset			=> reset,
+		SDRAM_ADDR	=> SIGSDRAM_ADDR,
+		SDRAM_DQ 	=> SIGSDRAM_DQ,
+		SDRAM_BA		=> SIGSDRAM_BA,
+		SDRAM_DQM   => SIGSDRAM_DQM,
+		SDRAM_RAS_N => SIGSDRAM_RAS_N,
+		SDRAM_CAS_N => SIGSDRAM_CAS_N,
+		SDRAM_WE_N	=> SIGSDRAM_WE_N,
+		SDRAM_CKE	=> SIGSDRAM_CKE,
+		SDRAM_CS_N	=> SIGSDRAM_CS_N,
+		SDRAM_CLK	=> SIGSDRAM_CLK,
+		Data_OUT		=> SIGDataOut_16b,
+		Data_IN		=> SIGOUT_Data_16,
+		DQM			=> SIGOUT_DQM,
+		Address_IN	=> SIGOUT_Address,
+		Write_IN		=> SIGOUT_Write_Select,
+		Select_IN	=> SIGOUT_Select,
+		Ready			=> SIGReady_16b,
+		Data_Ready	=> SIGData_Ready_16b
 	);
 	-- END
 END archi;

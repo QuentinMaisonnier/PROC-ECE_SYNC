@@ -11,6 +11,7 @@ USE ieee.numeric_std.ALL;
 ENTITY ProgramCounter IS
 	PORT (
 		-- INPUTS
+		PChold		  : IN    STD_LOGIC;
 		PCclock       : IN    STD_LOGIC;
 		PCreset       : IN    STD_LOGIC;
 		PCoffset      : IN    STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -80,16 +81,18 @@ BEGIN
 
 	-- mux 2
 	SigMux2Sel <= SigMux1Sel AND PCoffsetsign;
-	SigMux2Out <= (PCoffset AND x"fffffffe") WHEN PCjalr = '1' ELSE
-		SigOffSum WHEN (SigMux2Sel = '0' AND PCjalr = '0') OR PCjal = '1' OR PCbranch = '1' ELSE
-		SigOffSub;
+	SigMux2Out <= PCprogcounter when PChold='1' else
+					  (PCoffset AND x"fffffffe") WHEN PCjalr = '1' ELSE
+					  SigOffSum WHEN (SigMux2Sel = '0' AND PCjalr = '0') OR PCjal = '1' OR PCbranch = '1' ELSE
+				     SigOffSub;
 
 	PCprogcounter <= (OTHERS => '0') WHEN PCreset = '1' ELSE
-		SigMux2Out WHEN (PCclock'event AND PCclock = '1');
+						  SigMux2Out WHEN (rising_edge(PCclock));
 		
 		
 	-----------------------------------------------------------------
-	MuxPCprevious <= PCprogcounter when PCjal = '0' AND PCjalr = '0' AND PCload='0' AND PCbranch='0' AND PClock='0' else
+	MuxPCprevious <= RPCprevious when hold='1' else
+						  PCprogcounter when PCjal = '0' AND PCjalr = '0' AND PCload='0' AND PCbranch='0' AND PClock='0' else
 						  RPCprevious;
 						  
 	RPCprevious <= (others=>'0') when PCreset='1' else

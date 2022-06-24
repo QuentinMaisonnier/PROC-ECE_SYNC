@@ -64,14 +64,10 @@ ARCHITECTURE SYN OF ram_2port IS
 	SIGNAL sub_data : STD_LOGIC_VECTOR(31 downto 0); -- store in big endian (little -> big) when we load (big -> little)
 
 BEGIN
-	q_a <= sub_wire0;
-	q_b <= sub_wire1;
+	q_a    <= sub_wire0(7 downto  0) & sub_wire0(15 downto  8) & sub_wire0(23 downto 16) & sub_wire0(31 downto 24);
+	q_b    <= sub_wire1(7 downto  0) & sub_wire1(15 downto  8) & sub_wire1(23 downto 16) & sub_wire1(31 downto 24);
 	
-	
---	q_a    <= sub_wire0(7 downto  0) & sub_wire0(15 downto  8) & sub_wire0(23 downto 16) & sub_wire0(31 downto 24);
---	q_b    <= sub_wire1(7 downto  0) & sub_wire1(15 downto  8) & sub_wire1(23 downto 16) & sub_wire1(31 downto 24);
---	
---	sub_data <= data_b(7 downto  0) & data_b(15 downto  8) & data_b(23 downto 16) & data_b(31 downto 24);
+	sub_data <= data_b(7 downto  0) & data_b(15 downto  8) & data_b(23 downto 16) & data_b(31 downto 24);
 
 	altsyncram_component : altsyncram
 	GENERIC MAP (
@@ -109,7 +105,7 @@ BEGIN
 		clock0 => clock,
 		clocken0 => enable,
 		data_a => data_a,
-		data_b => data_b,
+		data_b => sub_data,
 		wren_a => wren_a,
 		wren_b => wren_b,
 		q_a => sub_wire0,
