@@ -41,18 +41,19 @@ ARCHITECTURE archi OF Top IS
 	-- processor
 	COMPONENT Processor IS
 		PORT (
-			-- INPUTS
-			PROCclock       : IN  STD_LOGIC;
-			PROCreset       : IN  STD_LOGIC;
-			PROCinstruction : IN  STD_LOGIC_VECTOR(31 DOWNTO 0);
-			PROCoutputDM    : IN  STD_LOGIC_VECTOR(31 DOWNTO 0);
-			-- OUTPUTS
-			PROCprogcounter : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-			PROCstore       : OUT STD_LOGIC;
-			PROCload        : OUT STD_LOGIC;
-			PROCfunct3      : OUT STD_LOGIC_VECTOR(2 DOWNTO 0);
-			PROCaddrDM      : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-			PROCinputDM     : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
+        -- INPUTS
+		  Hold				 : in std_logic;
+        PROCclock        : in std_logic;
+        PROCreset        : in std_logic;
+        PROCinstruction  : in std_logic_vector(31 downto 0);
+        PROCoutputDM     : in std_logic_vector(31 downto 0);
+        -- OUTPUTS
+        PROCprogcounter  : out std_logic_vector(31 downto 0);
+        PROCstore        : out std_logic;
+        PROCload         : out std_logic;
+        PROCfunct3       : out std_logic_vector(2 downto 0);
+        PROCaddrDM       : out std_logic_vector(31 downto 0);
+        PROCinputDM      : out std_logic_vector(31 downto 0)
 		);
 	END COMPONENT;
 
@@ -206,6 +207,7 @@ ARCHITECTURE archi OF Top IS
 	
 
 	-- SIGNALS
+	SIGNAL SIGHold 		 : STD_LOGIC; 
 	-- instruction memory
 	SIGNAL SIGprogcounter : STD_LOGIC_VECTOR (31 DOWNTO 0);
 	SIGNAL SIGinstruction : STD_LOGIC_VECTOR (31 DOWNTO 0);
@@ -259,11 +261,24 @@ ARCHITECTURE archi OF Top IS
 	SIGNAL SIGReady_16b				: STD_LOGIC;
 	SIGNAL SIGData_Ready_16b		: STD_LOGIC;
 	SIGNAL SIGDataOut_16b			: STD_LOGIC_VECTOR(15 downto 0);
-
 	
+	--SIGNAL Boot loader
 	
+	SIGNAL SIGcptAddr, RcptAddr, inputDMboot   : STD_LOGIC_VECTOR(31 downto 0);
+	SIGNAL SIGstoreboot, csDMboot				: STD_LOGIC;
+	CONSTANT SizeSRAM 				: integer := 1023;
+	
+	SIGNAL funct3boot					: STD_LOGIC_VECTOR(2 downto 0);
+	Type state is (WAITING, cpy, next_Addr, stop);
+	signal currentState, nextState : state;
+	
+	-----SIGNAL for SDRAM 
+	SIGNAL Muxfunct3   : STD_LOGIC_VECTOR(2 downto 0);
+	SIGNAL Muxsigstore, MuxcsDM : STD_LOGIC;
+	SIGNAL MuxAddr, MuxinputDM   : STD_LOGIC_VECTOR(31 downto 0);
 
 BEGIN
+
 	TOPreset <= '1' when reset='1' else
 					reset when rising_edge(SIGclock);
 	-- BEGIN
@@ -306,6 +321,71 @@ BEGIN
 				  procLed;
 
 ---------------------------------------------
+-----------------BOOT LOADER-----------------
+---------------------------------------------
+
+SIGHold <= '1' when unsigned(RcptAddr)/=SizeSRAM OR (SIGReady_32b='1' AND (sigstore='1' OR sigload='1')) else
+			  '0';
+
+RcptAddr <= (others=> '0') when reset='1' else
+				SIGcptAddr when rising_edge(SigClock);
+				
+--SIGcptAddr <= RcptAddr when add4='0' else
+--				  std_LOGIC_VECTOR(unsigned(RcptAddr) + 4);
+
+load : process(SIGReady_32b, RcptAddr, SIGinstruction)
+begin
+
+funct3boot <= "010";
+SIGcptAddr <= RcptAddr;
+SIGstoreboot <= '0';
+inputDMboot <= SIGinstruction;
+csDMboot <= '0';
+nextState <= currentState;
+
+CASE currentState IS
+
+	WHEN WAITING =>
+		IF unsigned(RcptAddr)/=SizeSRAM THEN
+			IF SIGReady_32b='1' THEN
+				nextState <= cpy;
+			END IF;
+		ELSE 
+			nextState <= stop;
+		END IF;
+
+	WHEN cpy =>
+		SIGstoreboot <= '1';
+		csDMboot <= '1';
+		nextState <= next_Addr;
+	
+	when next_Addr =>
+		csDMboot <= '0';
+		SIGcptAddr <= STD_LOGIC_VECTOR(unsigned(RcptAddr) + 4);
+		nextState <= WAITING;
+		
+	WHEN stop => 
+		
+
+END CASE;
+end process;
+
+currentState <= WAITING when reset = '1' else
+				    nextState when rising_edge(sigClock);
+					 
+Muxfunct3 <= funct3boot when unsigned(RcptAddr)/=SizeSRAM else
+				 sigfunct3;
+Muxsigstore <= SIGstoreboot when unsigned(RcptAddr)/=SizeSRAM else
+					SIGstore;
+MuxAddr <= RcptAddr when unsigned(RcptAddr)/=SizeSRAM else
+			  SIGaddrDM;
+MuxcsDM <= csDMboot when unsigned(RcptAddr)/=SizeSRAM else
+			  csDM;
+MuxinputDM <= inputDMboot when unsigned(RcptAddr)/=SizeSRAM else
+				  siginputDM;
+
+
+---------------------------------------------
 	-- INSTANCES
 	
 	debug : debUGER
@@ -325,6 +405,7 @@ BEGIN
 		
 	instPROC : Processor
 	PORT MAP(
+		Hold 				 => SIGHold,
 		PROCclock       => SIGclock,
 		PROCreset       => TOPreset,
 		PROCinstruction => SIGinstruction,
@@ -338,18 +419,32 @@ BEGIN
 		PROCinputDM     => SIGinputDM
 	);
 	
+--	Memory : RAM_2PORT
+--	PORT MAP(
+--		address_a => SIGprogcounter(13 DOWNTO 2), --  Addr instruction (divided by 4 because we use 32 bits memory)
+--		address_b => SIGaddrDM(13 DOWNTO 2),   	--  Addr memory (divided by 4 because we use 32 bits memory)
+--		clock     => SIGclock,
+--		data_a => (OTHERS => '0'),						-- Instruction in
+--		data_b    => SIGinputDM,						-- Data in
+--		enable	 => csDM,
+--		wren_a    => '0',									-- Write Instruction Select
+--		wren_b    => SIGstore,							-- Write Data Select
+--		q_a       => SIGinstruction,					-- DataOut Instruction
+--		q_b       => SIGoutputDM 						-- DataOut Data
+--	);
+
 	Memory : RAM_2PORT
 	PORT MAP(
-		address_a => SIGprogcounter(13 DOWNTO 2), --  Addr instruction (divided by 4 because we use 32 bits memory)
-		address_b => SIGaddrDM(13 DOWNTO 2),   	--  Addr memory (divided by 4 because we use 32 bits memory)
+		address_a => RcptAddr(13 DOWNTO 2), --  Addr instruction (divided by 4 because we use 32 bits memory)
+		address_b => (others => '0'),   	--  Addr memory (divided by 4 because we use 32 bits memory)
 		clock     => SIGclock,
-		data_a => (OTHERS => '0'),						-- Instruction in
-		data_b    => SIGinputDM,						-- Data in
-		enable	 => csDM,
+		data_a 	 => (OTHERS => '0'),						-- Instruction in
+		data_b    => (OTHERS => '0'),						-- Data in
+		enable	 => '1',
 		wren_a    => '0',									-- Write Instruction Select
-		wren_b    => SIGstore,							-- Write Data Select
-		q_a       => SIGinstruction,					-- DataOut Instruction
-		q_b       => SIGoutputDM 						-- DataOut Data
+		wren_b    => '0',							-- Write Data Select
+		q_a       => SIGinstruction					-- DataOut Instruction
+		--q_b       => SIGoutputDM 						-- DataOut Data
 	);
 
 
@@ -363,19 +458,19 @@ BEGIN
 		CPTcounter => SIGcounter
 	);
 
-	instDISP : Displays
-	PORT MAP(
-		--INPUTS
-		DISPclock    => SIGclock,
-		DISPreset    => TOPreset,
-		DISPaddr     => SIGaddrDM,
-		DISPinput    => SIGinputDM,
-		DISPWrite    => SIGstore,
-		--OUTPUTS
-		DISPleds     => procLed,
-		DISPdisplay1 => procDisplay1,
-		DISPdisplay2 => procDisplay2
-	);
+--	instDISP : Displays
+--	PORT MAP(
+--		--INPUTS
+--		DISPclock    => SIGclock,
+--		DISPreset    => TOPreset,
+--		DISPaddr     => SIGaddrDM,
+--		DISPinput    => SIGinputDM,
+--		DISPWrite    => SIGstore,
+--		--OUTPUTS
+--		DISPleds     => procLed,
+--		DISPdisplay1 => procDisplay1,
+--		DISPdisplay2 => procDisplay2
+--	);
 
 	instPLL : clock1M
 	PORT MAP(
@@ -391,11 +486,11 @@ BEGIN
 		Clock 				=> SIGclock,
 		Reset					=> reset,
 		-- Inputs (32bits)
-		IN_Address			=> SIGaddrDM(25 DOWNTO 0),
-		IN_Write_Select	=> SIGstore,
-		IN_Data_32			=> SIGinputDM,
-		IN_Select			=> csDM,
-		IN_Function3		=> SIGfunct3(1 downto 0),
+		IN_Address			=> MuxAddr(25 DOWNTO 0),
+		IN_Write_Select	=> Muxsigstore,
+		IN_Data_32			=> MuxinputDM,
+		IN_Select			=> MuxcsDM,
+		IN_Function3		=> Muxfunct3(1 downto 0),
 		-- Outputs (16b)
 		OUT_Address			=> SIGOUT_Address,
 		OUT_Write_Select	=> SIGOUT_Write_Select,
@@ -405,7 +500,7 @@ BEGIN
 		-- Outputs (32bits)
 		Ready_32b			=> SIGReady_32b,
 		Data_Ready_32b		=> SIGData_Ready_32b,
-		DataOut_32b			=> SIGDataOut_32b,
+		DataOut_32b			=> SIGoutputDM,
 		-- Outputs (16bits)
 		Ready_16b			=> SIGReady_16b,
 		Data_Ready_16b		=> SIGData_Ready_16b,
@@ -416,16 +511,16 @@ BEGIN
 	PORT MAP(
 		clk			=> SIGClock,
 		Reset			=> reset,
-		SDRAM_ADDR	=> SIGSDRAM_ADDR,
-		SDRAM_DQ 	=> SIGSDRAM_DQ,
-		SDRAM_BA		=> SIGSDRAM_BA,
-		SDRAM_DQM   => SIGSDRAM_DQM,
-		SDRAM_RAS_N => SIGSDRAM_RAS_N,
-		SDRAM_CAS_N => SIGSDRAM_CAS_N,
-		SDRAM_WE_N	=> SIGSDRAM_WE_N,
-		SDRAM_CKE	=> SIGSDRAM_CKE,
-		SDRAM_CS_N	=> SIGSDRAM_CS_N,
-		SDRAM_CLK	=> SIGSDRAM_CLK,
+		SDRAM_ADDR	=> SDRAM_ADDR,
+		SDRAM_DQ 	=> SDRAM_DQ,
+		SDRAM_BA		=> SDRAM_BA,
+		SDRAM_DQM   => SDRAM_DQM,
+		SDRAM_RAS_N => SDRAM_RAS_N,
+		SDRAM_CAS_N => SDRAM_CAS_N,
+		SDRAM_WE_N	=> SDRAM_WE_N,
+		SDRAM_CKE	=> SDRAM_CKE,
+		SDRAM_CS_N	=> SDRAM_CS_N,
+		SDRAM_CLK	=> SDRAM_CLK,
 		Data_OUT		=> SIGDataOut_16b,
 		Data_IN		=> SIGOUT_Data_16,
 		DQM			=> SIGOUT_DQM,

@@ -91,7 +91,7 @@ BEGIN
 		
 		
 	-----------------------------------------------------------------
-	MuxPCprevious <= RPCprevious when hold='1' else
+	MuxPCprevious <= RPCprevious when PChold='1' else
 						  PCprogcounter when PCjal = '0' AND PCjalr = '0' AND PCload='0' AND PCbranch='0' AND PClock='0' else
 						  RPCprevious;
 						  

@@ -19,9 +19,9 @@ ENTITY debuger IS
 		PCregister  : IN STD_LOGIC_VECTOR(15 downto 0);
 		Instruction : IN STD_LOGIC_VECTOR(31 downto 0);
 		--OUTPUTS
-		TOPdisplay2 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0); --0x80000004
-		TOPdisplay1 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0); --0x80000004
-		TOPleds     : OUT STD_LOGIC_VECTOR(31 DOWNTO 0) --0x8000000c
+		TOPdisplay2 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0) := (others => '1'); --0x80000004
+		TOPdisplay1 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0) := (others => '1'); --0x80000004
+		TOPleds     : OUT STD_LOGIC_VECTOR(31 DOWNTO 0) := (others => '1') --0x8000000c
 
 	);
 END ENTITY;	

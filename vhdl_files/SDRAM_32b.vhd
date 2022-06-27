@@ -25,7 +25,7 @@ entity SDRAM_32b is
 		  OUT_DQM				: out STD_LOGIC_VECTOR(1 downto 0);
 		 
 		  -- Test Outputs (32bits)
-		  Ready_32b				: out STD_LOGIC;
+		  Ready_32b				: out STD_LOGIC := '0';
 		  Data_Ready_32b		: out STD_LOGIC;
 		  DataOut_32b			: out STD_LOGIC_VECTOR(31 downto 0);
 		  
@@ -39,7 +39,8 @@ end SDRAM_32b;
 architecture vhdl of SDRAM_32b is 
 
 signal R_address_in, S_address_in 	: STD_LOGIC_VECTOR(23 downto 0);
-signal address_select, R_Data_Ready_32	: STD_LOGIC;
+signal address_select, R_Data_Ready_32, signal_Ready_32b  : STD_LOGIC;
+signal S_CPT, R_CPT 	: STD_LOGIC_VECTOR(3 downto 0);
 signal DQM 	: STD_LOGIC_VECTOR(3 downto 0);
 
 signal R_DATA, S_DATA	: STD_LOGIC_VECTOR(31 downto 0);
@@ -49,9 +50,9 @@ signal currentState, nextState : state;
 
 begin
 
+Ready_32b <= signal_Ready_32b;
 
--- Data_Ready_16b in the sensitivity list : cause peut-être un BUG
-fsm : Process( Clock, Reset, DQM, currentState, Ready_16b, DataOut_16b, R_DATA, IN_Write_Select, IN_Address, IN_Data_32, IN_Function3, IN_Select, Data_Ready_16b)
+fsm : Process( Clock, DQM, Reset, currentState, Ready_16b, DataOut_16b, R_CPT, R_DATA, IN_Write_Select, IN_Address, IN_Data_32, IN_Function3, IN_Select, Data_Ready_16b)
 begin 
 	OUT_Address <= (others=>'0');
 	OUT_Write_Select <= '0';
@@ -59,24 +60,40 @@ begin
 	OUT_Select <= '0';
 	OUT_DQM <= (others=>'0');
 	S_DATA <= R_DATA;
-	ready_32b <= '1';
+	signal_Ready_32b <= '0';
 	R_Data_Ready_32 <= '0';
 	nextState <= currentState;
+	S_CPT <= R_CPT;
 
 CASE currentState IS
 
 when WAITING =>
+
+	if(unsigned(R_CPT) < 2)then
+		S_CPT <= STD_LOGIC_VECTOR(unsigned(R_CPT) + 1);
+	end if;
+	
+	if(Ready_16b = '1' AND IN_Write_Select = '0')then
+		signal_Ready_32b <= '1';
+	else
+		if(Ready_16b = '1' AND unsigned(R_CPT) >= 2)then
+			signal_Ready_32b <= '1';
+		else
+			signal_Ready_32b <= '0';
+		end if;
+	end if;
+	
 	if(IN_Select = '1' AND Ready_16b = '1') then
 			if(IN_Write_Select = '1') then
 				nextState <= WRITE_MSB;
 			else
 				nextState <= READ_MSB_SEND;
 			end if;
+			S_CPT <= (others =>'0');
 	end if;
 	
 	
 when WRITE_MSB =>
-	ready_32b <= '0';
 	OUT_Address 	  <= IN_Address(25 downto 2) & '0'; 
 	OUT_Write_Select <= '1';							
 	OUT_Data_16 	  <= IN_Data_32(31 downto 16);
@@ -90,7 +107,6 @@ when WRITE_MSB =>
 
 
 when WRITE_LSB =>
-	ready_32b <= '0';
 	OUT_Address 	  <= IN_Address(25 downto 2) & '1';
 	OUT_Write_Select <= '1';
 	OUT_Data_16 	  <= IN_Data_32(15 downto 0);
@@ -102,7 +118,7 @@ when WRITE_LSB =>
 	end if;
 
 when READ_MSB_SEND =>
-	ready_32b <= '0';
+	--ready_32b <= '0';
 	OUT_Address 	  <= IN_Address(25 downto 2) & '0';
 	OUT_Write_Select <= '0';
 	OUT_Select		  <= '1';
@@ -113,7 +129,7 @@ when READ_MSB_SEND =>
 	end if;
 
 when READ_LSB_SEND =>
-	ready_32b <= '0';
+	--ready_32b <= '0';
 	OUT_Address 	  <= IN_Address(25 downto 2) & '1';
 	OUT_Write_Select <= '0';
 	OUT_Select		  <= '1';
@@ -124,7 +140,7 @@ when READ_LSB_SEND =>
 	end if;
 	
 when READ_MSB_GET =>
-	ready_32b <= '0';
+	--ready_32b <= '0';
 	
 	if(Data_Ready_16b = '1') then
 		S_DATA(31 downto 16) <= DataOut_16b;
@@ -132,7 +148,7 @@ when READ_MSB_GET =>
 	end if;
 
 when READ_LSB_GET =>
-	ready_32b <= '0';
+	--ready_32b <= '0';
 	OUT_Address 	  <= IN_Address(25 downto 2) & '1';
 	OUT_Write_Select <= '0';
 	OUT_Select		  <= '1';
@@ -162,6 +178,9 @@ S_address_in <= IN_Address when address_select = '1' else
 			 
 R_DATA <= (others => '0') when reset = '1' else
 		    S_DATA when rising_edge(Clock);
+			 
+R_CPT <= (others => '0') when reset = '1' else
+			S_CPT when rising_edge(Clock);
 			 
 DataOut_32b <= R_DATA 				 				   when  DQM="0000" else
 					x"000000" & R_DATA(7 downto 0)   when  DQM="1110" else

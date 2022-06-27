@@ -14,13 +14,23 @@ end entity;
 architecture VHDL of TestBenchTop is
 	component Top is
     port (
-        -- INPUTS
-        TOPclock    : in std_logic;		--must go through pll
-        reset       : in std_logic; 	--SW0
-        -- DEMO OUTPUTS
-        TOPdisplay1    : out std_logic_vector(31 downto 0);	--0x80000004
-        TOPdisplay2    : out std_logic_vector(31 downto 0);	--0x80000008
-        TOPleds        : out std_logic_vector(31 downto 0)	--0x8000000c
+		enableDebug, switchSEL, switchSEL2 : IN STD_LOGIC; -- input for debuger
+		TOPclock    			  : IN  STD_LOGIC; --must go through pll
+		buttonClock				  : IN STD_LOGIC;
+		reset    				  : IN  STD_LOGIC; --SW0
+		
+		-- OUTPUTS
+		TOPdisplay1 			  : OUT STD_LOGIC_VECTOR(31 DOWNTO 0); --0x80000004
+		TOPdisplay2 			  : OUT STD_LOGIC_VECTOR(31 DOWNTO 0); --0x80000008
+		TOPleds     			  : OUT STD_LOGIC_VECTOR(31 DOWNTO 0); --0x8000000c
+		
+		SDRAM_ADDR   	 		  : out STD_LOGIC_VECTOR (12 downto 0);  -- Address
+	   SDRAM_DQ   	 			  : inout STD_LOGIC_VECTOR ((31) downto 0); -- data input / output
+		SDRAM_BA   	 			  : out STD_LOGIC_VECTOR (1 downto 0);  -- BA0 / BA1 ?
+	   SDRAM_DQM				  : out STD_LOGIC_VECTOR ((31) downto 0);          -- LDQM ? UDQM ?
+		SDRAM_RAS_N, SDRAM_CAS_N, SDRAM_WE_N : out STD_LOGIC;  -- RAS + CAS + WE = CMD
+		SDRAM_CKE, SDRAM_CS_N  : out STD_LOGIC ;             -- CKE (clock rising edge) | CS ?
+		SDRAM_CLK 				  : out STD_LOGIC 
 
 	);
 	end component;
@@ -32,7 +42,8 @@ architecture VHDL of TestBenchTop is
 	signal load, store : std_logic;
 	signal dataLength : std_logic_vector(2 downto 0);
 	signal inputData, outputData: std_logic_vector(31 downto 0);
-    
+   
+	
 	signal reg00, reg01, reg02, reg03, reg04, reg05, reg06, reg07, reg08, reg09, reg0A, reg0B, reg0C, reg0D, reg0E, reg0F, reg10, reg11, reg12, reg13, reg14, reg15, reg16, reg17, reg18, reg19, reg1A, reg1B, reg1C, reg1D, reg1E, reg1F : std_logic_vector(31 downto 0);
 	signal SigTOPdisplay1, SigTOPdisplay2 : std_logic_vector (31 downto 0);
 	
@@ -40,10 +51,17 @@ architecture VHDL of TestBenchTop is
 	
 	--instanciation de l'entité PROC
 	iTop : Top port map (
+	
 		TOPclock        => ck,
-		reset        	=> reset,
+		reset        	 => reset,
 		TOPdisplay1     => SigTOPdisplay1,
-		TOPdisplay2     => SigTOPdisplay2
+		TOPdisplay2     => SigTOPdisplay2,
+		
+		enableDebug 	 => '0',
+		switchSEL		 => '0',
+		switchSEL2      => '0',
+		buttonClock		 => '0'
+		
 	);
     
     counter     <= PKG_counter;

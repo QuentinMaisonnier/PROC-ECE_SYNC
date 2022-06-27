@@ -32,10 +32,6 @@
 					"strict" : false
 				},
 				{
-					"name" : "TOPdisplay1[7]",
-					"strict" : false
-				},
-				{
 					"name" : "TOPdisplay1[8]",
 					"strict" : false
 				},
@@ -61,10 +57,6 @@
 				},
 				{
 					"name" : "TOPdisplay1[14]",
-					"strict" : false
-				},
-				{
-					"name" : "TOPdisplay1[15]",
 					"strict" : false
 				},
 				{
@@ -96,10 +88,6 @@
 					"strict" : false
 				},
 				{
-					"name" : "TOPdisplay1[23]",
-					"strict" : false
-				},
-				{
 					"name" : "TOPdisplay1[24]",
 					"strict" : false
 				},
@@ -125,10 +113,6 @@
 				},
 				{
 					"name" : "TOPdisplay1[30]",
-					"strict" : false
-				},
-				{
-					"name" : "TOPdisplay1[31]",
 					"strict" : false
 				},
 				{
@@ -160,10 +144,6 @@
 					"strict" : false
 				},
 				{
-					"name" : "TOPdisplay2[7]",
-					"strict" : false
-				},
-				{
 					"name" : "TOPdisplay2[8]",
 					"strict" : false
 				},
@@ -192,199 +172,143 @@
 					"strict" : false
 				},
 				{
-					"name" : "TOPdisplay2[15]",
+					"name" : "SDRAM_ADDR[0]",
 					"strict" : false
 				},
 				{
-					"name" : "TOPdisplay2[16]",
+					"name" : "SDRAM_ADDR[1]",
 					"strict" : false
 				},
 				{
-					"name" : "TOPdisplay2[17]",
+					"name" : "SDRAM_ADDR[2]",
 					"strict" : false
 				},
 				{
-					"name" : "TOPdisplay2[18]",
+					"name" : "SDRAM_ADDR[3]",
 					"strict" : false
 				},
 				{
-					"name" : "TOPdisplay2[19]",
+					"name" : "SDRAM_ADDR[4]",
 					"strict" : false
 				},
 				{
-					"name" : "TOPdisplay2[20]",
+					"name" : "SDRAM_ADDR[5]",
 					"strict" : false
 				},
 				{
-					"name" : "TOPdisplay2[21]",
+					"name" : "SDRAM_ADDR[6]",
 					"strict" : false
 				},
 				{
-					"name" : "TOPdisplay2[22]",
+					"name" : "SDRAM_ADDR[7]",
 					"strict" : false
 				},
 				{
-					"name" : "TOPdisplay2[23]",
+					"name" : "SDRAM_ADDR[8]",
 					"strict" : false
 				},
 				{
-					"name" : "TOPdisplay2[24]",
+					"name" : "SDRAM_ADDR[9]",
 					"strict" : false
 				},
 				{
-					"name" : "TOPdisplay2[25]",
+					"name" : "SDRAM_ADDR[10]",
 					"strict" : false
 				},
 				{
-					"name" : "TOPdisplay2[26]",
+					"name" : "SDRAM_ADDR[11]",
 					"strict" : false
 				},
 				{
-					"name" : "TOPdisplay2[27]",
+					"name" : "SDRAM_ADDR[12]",
 					"strict" : false
 				},
 				{
-					"name" : "TOPdisplay2[28]",
+					"name" : "SDRAM_BA[0]",
 					"strict" : false
 				},
 				{
-					"name" : "TOPdisplay2[29]",
+					"name" : "SDRAM_BA[1]",
 					"strict" : false
 				},
 				{
-					"name" : "TOPdisplay2[30]",
+					"name" : "SDRAM_RAS_N",
 					"strict" : false
 				},
 				{
-					"name" : "TOPdisplay2[31]",
+					"name" : "SDRAM_CAS_N",
 					"strict" : false
 				},
 				{
-					"name" : "TOPleds[0]",
+					"name" : "SDRAM_WE_N",
 					"strict" : false
 				},
 				{
-					"name" : "TOPleds[1]",
+					"name" : "SDRAM_CLK",
 					"strict" : false
 				},
 				{
-					"name" : "TOPleds[2]",
+					"name" : "SDRAM_DQ[0]",
 					"strict" : false
 				},
 				{
-					"name" : "TOPleds[3]",
+					"name" : "SDRAM_DQ[1]",
 					"strict" : false
 				},
 				{
-					"name" : "TOPleds[4]",
+					"name" : "SDRAM_DQ[2]",
 					"strict" : false
 				},
 				{
-					"name" : "TOPleds[5]",
+					"name" : "SDRAM_DQ[3]",
 					"strict" : false
 				},
 				{
-					"name" : "TOPleds[6]",
+					"name" : "SDRAM_DQ[4]",
 					"strict" : false
 				},
 				{
-					"name" : "TOPleds[7]",
+					"name" : "SDRAM_DQ[5]",
 					"strict" : false
 				},
 				{
-					"name" : "TOPleds[8]",
+					"name" : "SDRAM_DQ[6]",
 					"strict" : false
 				},
 				{
-					"name" : "TOPleds[9]",
+					"name" : "SDRAM_DQ[7]",
 					"strict" : false
 				},
 				{
-					"name" : "TOPleds[10]",
+					"name" : "SDRAM_DQ[8]",
 					"strict" : false
 				},
 				{
-					"name" : "TOPleds[11]",
+					"name" : "SDRAM_DQ[9]",
 					"strict" : false
 				},
 				{
-					"name" : "TOPleds[12]",
+					"name" : "SDRAM_DQ[10]",
 					"strict" : false
 				},
 				{
-					"name" : "TOPleds[13]",
+					"name" : "SDRAM_DQ[11]",
 					"strict" : false
 				},
 				{
-					"name" : "TOPleds[14]",
+					"name" : "SDRAM_DQ[12]",
 					"strict" : false
 				},
 				{
-					"name" : "TOPleds[15]",
+					"name" : "SDRAM_DQ[13]",
 					"strict" : false
 				},
 				{
-					"name" : "TOPleds[16]",
+					"name" : "SDRAM_DQ[14]",
 					"strict" : false
 				},
 				{
-					"name" : "TOPleds[17]",
-					"strict" : false
-				},
-				{
-					"name" : "TOPleds[18]",
-					"strict" : false
-				},
-				{
-					"name" : "TOPleds[19]",
-					"strict" : false
-				},
-				{
-					"name" : "TOPleds[20]",
-					"strict" : false
-				},
-				{
-					"name" : "TOPleds[21]",
-					"strict" : false
-				},
-				{
-					"name" : "TOPleds[22]",
-					"strict" : false
-				},
-				{
-					"name" : "TOPleds[23]",
-					"strict" : false
-				},
-				{
-					"name" : "TOPleds[24]",
-					"strict" : false
-				},
-				{
-					"name" : "TOPleds[25]",
-					"strict" : false
-				},
-				{
-					"name" : "TOPleds[26]",
-					"strict" : false
-				},
-				{
-					"name" : "TOPleds[27]",
-					"strict" : false
-				},
-				{
-					"name" : "TOPleds[28]",
-					"strict" : false
-				},
-				{
-					"name" : "TOPleds[29]",
-					"strict" : false
-				},
-				{
-					"name" : "TOPleds[30]",
-					"strict" : false
-				},
-				{
-					"name" : "TOPleds[31]",
+					"name" : "SDRAM_DQ[15]",
 					"strict" : false
 				},
 				{
@@ -400,11 +324,11 @@
 					"strict" : false
 				},
 				{
-					"name" : "buttonClock",
+					"name" : "reset",
 					"strict" : false
 				},
 				{
-					"name" : "reset",
+					"name" : "buttonClock",
 					"strict" : false
 				}
 			]

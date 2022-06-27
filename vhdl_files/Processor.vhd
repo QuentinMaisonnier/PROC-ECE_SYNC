@@ -122,7 +122,6 @@ architecture archi of Processor is
     end component;
 
     -- SIGNALS
-	 signal SIGhold 			: std_logic;
     -- program counter
     signal SIGoffsetPC1    : std_logic_vector (31 downto 0);
     signal SIGoffsetPC2    : std_logic_vector (31 downto 0);
@@ -138,7 +137,7 @@ architecture archi of Processor is
     signal SIGrs1          : std_logic_vector (4 downto 0);
     signal SIGrs2          : std_logic_vector (4 downto 0);
     signal SIGfunct3       : std_logic_vector (2 downto 0);
-	 SIGNAL Muxfunct3			: std_logic_vector (2 downto 0);
+	 SIGNAL Muxfunct3Load			: std_logic_vector (2 downto 0);
 	 
     signal SIGfunct7       : std_logic;
     signal SIGimm12I       : std_logic_vector (11 downto 0);
@@ -216,8 +215,8 @@ begin
 	 WriteReg <= '0' when PROCreset='1' else --- on decale juste sigload de 1 cycle
 					 Muxload when rising_edge(PROCclock);
 					 
-	 Muxload <=  SIGload when hold='0' else
-					 WriteReg
+	 Muxload <=  SIGload when Hold='0' else
+					 WriteReg;
 					 
     SIGrdRF <=  RegaddrLoad when SIGstore = '0' AND WriteReg='1' else
 					 SIGrdID when (SIGbranch = '0' AND SIGstore = '0') else
@@ -261,9 +260,9 @@ begin
     PROCstore    <= SIGstore;
 	 
 	 funct3Load <= (others=>'0') when procreset='1' else
-						SIGfunct3 when rising_edge(proCclock);
-	 Muxfunct3 <= SIGfunct3 when hold='0' else
-					  funct3Load;
+						Muxfunct3Load when rising_edge(proCclock);
+	 Muxfunct3Load <= SIGfunct3 when Hold='0' else
+							funct3Load;
 					  
 	 function3 <= funct3Load when writeReg='1' else
 					  SIGfunct3;	
@@ -280,9 +279,9 @@ begin
 	SIGprogcounter <= PCprec when SIGbranch='1' OR SIGjal='1' OR SIGjalr='1' OR SIGload='1' OR SIGoutputALU(31)='1' else --when nop instruction we use the last PC
 							PC;
 	
-	MuxNOPtest <= RegNOPtest when hold='1' else
+	MuxNOPtest <= RegNOPtest when Hold='1' else
 					  '1' when SIGbranch='1' OR SIGjal='1' OR SIGjalr='1' OR SIGload='1' OR SIGoutputALU(31)='1' else -- JUMP/JUMPR/LOAD/BEQ(IF)
-					  '0'
+					  '0';
 					  
 	
 	RegNOPtest <= '0' when PROCreset='1' else
@@ -309,7 +308,7 @@ begin
     -- INSTANCES
     instPC  : ProgramCounter
     port map(
-		  PChold 			 => SIGhold,
+		  PChold 			 => Hold,
         PCclock          => PROCclock,
         PCreset          => PROCreset,
         PCoffset         => SIGoffsetPC,--complex
@@ -357,7 +356,7 @@ begin
 
     instRF  : RegisterFile
     port map(
-		  Hold 				=> SIGhold,
+		  Hold 				=> Hold,
         RFclock         => PROCclock,
         RFreset         => PROCreset,
         RFin            => SIGinputRF,--complex
