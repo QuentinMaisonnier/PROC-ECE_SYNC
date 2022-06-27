@@ -210,7 +210,7 @@ ARCHITECTURE archi OF Top IS
 	SIGNAL SIGHold 		 : STD_LOGIC; 
 	-- instruction memory
 	SIGNAL SIGprogcounter : STD_LOGIC_VECTOR (31 DOWNTO 0);
-	SIGNAL SIGinstruction : STD_LOGIC_VECTOR (31 DOWNTO 0);
+	SIGNAL SIGinstruction, Reginstruction : STD_LOGIC_VECTOR (31 DOWNTO 0);
 	-- data memory
 	SIGNAL SIGfunct3 : STD_LOGIC_VECTOR (2 DOWNTO 0);
 	SIGNAL SIGload : STD_LOGIC;
@@ -266,16 +266,21 @@ ARCHITECTURE archi OF Top IS
 	
 	SIGNAL SIGcptAddr, RcptAddr, inputDMboot   : STD_LOGIC_VECTOR(31 downto 0);
 	SIGNAL SIGstoreboot, csDMboot				: STD_LOGIC;
-	CONSTANT SizeSRAM 				: integer := 1023;
+	CONSTANT SizeSRAM 				: integer := 1024;
 	
 	SIGNAL funct3boot					: STD_LOGIC_VECTOR(2 downto 0);
 	Type state is (WAITING, cpy, next_Addr, stop);
 	signal currentState, nextState : state;
 	
 	-----SIGNAL for SDRAM 
-	SIGNAL Muxfunct3   : STD_LOGIC_VECTOR(2 downto 0);
-	SIGNAL Muxsigstore, MuxcsDM : STD_LOGIC;
-	SIGNAL MuxAddr, MuxinputDM   : STD_LOGIC_VECTOR(31 downto 0);
+	SIGNAL Muxinstruction 			: STD_LOGIC_VECTOR(31 downto 0);
+	SIGNAL Muxfunct3   				: STD_LOGIC_VECTOR(2 downto 0);
+	SIGNAL Muxsigstore, MuxcsDM 	: STD_LOGIC;
+	SIGNAL MuxAddr, MuxinputDM, MuxoutputDM    : STD_LOGIC_VECTOR(31 downto 0);
+	
+	
+	-- TEST NUL
+	SIGNAL OutputSDRAM32 			: STD_LOGIC_VECTOR(31 downto 0);
 
 BEGIN
 
@@ -284,22 +289,30 @@ BEGIN
 	-- BEGIN
 	-- ALL
 	-- TEST BENCH ONLY ---
+	
+	--PKG_SDRAM_Output <=
+	
 	PKG_instruction <= SIGinstruction;
 	PKG_store <= SIGstore;
 	PKG_load <= SIGload;
 	PKG_funct3 <= SIGfunct3;
 	PKG_addrDM <= SIGaddrDM;
 	PKG_inputDM <= SIGinputDM;
-	PKG_outputDM <= SIGoutputDM;
+	--PKG_outputDM <= SIGoutputDM;
+	--SIGoutputDM <= PKG_outputDM;
 	PKG_progcounter <= SIGprogcounter;
 	PKG_counter <= SIGcounter;
 	-----------------------
 	
-	SIGsimulOn <= '0';
+	SIGsimulOn <= '1';
 	
 	SIGclock <= TOPclock WHEN SIGsimulOn = '1' ELSE
 					SIGPLLclock WHEN enableDebug='0' ELSE
 					buttonClock;
+					
+	-- For testbench Simulation --
+	SIGoutputDM <= PKG_outputDM when SIGsimulOn = '1' else
+						OutputSDRAM32;
 					
 	--SIGclockInverted <= NOT TOPclock ;--WHEN SIGsimulOn = '1' ELSE
 		--SIGPLLclockinverted;
@@ -307,8 +320,8 @@ BEGIN
 --		SIGoutputDM;
 
 ---------------------------------------------
-	csDM <= '0' when SIGaddrDM(31)='1' else
-			  '1';
+	csDM <= '1' when (SIGaddrDM(31)='0') else
+			  '0';
 			  
 	TOPdisplay1 <= procDisplay1 when enableDebug='0' else
 						debugDisplay1;
@@ -324,29 +337,27 @@ BEGIN
 -----------------BOOT LOADER-----------------
 ---------------------------------------------
 
-SIGHold <= '1' when unsigned(RcptAddr)/=SizeSRAM OR (SIGReady_32b='1' AND (sigstore='1' OR sigload='1')) else
-			  '0';
+SIGHold <=  '1' when currentState/=stop else
+				NOT SIGReady_32b ;
 
 RcptAddr <= (others=> '0') when reset='1' else
 				SIGcptAddr when rising_edge(SigClock);
-				
---SIGcptAddr <= RcptAddr when add4='0' else
---				  std_LOGIC_VECTOR(unsigned(RcptAddr) + 4);
 
-load : process(SIGReady_32b, RcptAddr, SIGinstruction)
+load : process(SIGReady_32b, RcptAddr, SIGinstruction, currentState)
 begin
 
 funct3boot <= "010";
 SIGcptAddr <= RcptAddr;
 SIGstoreboot <= '0';
 inputDMboot <= SIGinstruction;
+inputDMboot <= x"12345678";
 csDMboot <= '0';
 nextState <= currentState;
 
 CASE currentState IS
 
 	WHEN WAITING =>
-		IF unsigned(RcptAddr)/=SizeSRAM THEN
+		IF unsigned(RcptAddr)<SizeSRAM THEN
 			IF SIGReady_32b='1' THEN
 				nextState <= cpy;
 			END IF;
@@ -371,21 +382,36 @@ END CASE;
 end process;
 
 currentState <= WAITING when reset = '1' else
-				    nextState when rising_edge(sigClock);
-					 
-Muxfunct3 <= funct3boot when unsigned(RcptAddr)/=SizeSRAM else
-				 sigfunct3;
-Muxsigstore <= SIGstoreboot when unsigned(RcptAddr)/=SizeSRAM else
+				    nextState when rising_edge(sigClock);				 
+
+---------------------------------------------------------------
+---------------------SDRAM to uP-------------------------------
+---------------------------------------------------------------
+
+Muxfunct3 <= funct3boot when unsigned(RcptAddr)<SizeSRAM else
+				 SIGfunct3;
+Muxsigstore <= SIGstoreboot when unsigned(RcptAddr)<SizeSRAM else
 					SIGstore;
-MuxAddr <= RcptAddr when unsigned(RcptAddr)/=SizeSRAM else
-			  SIGaddrDM;
-MuxcsDM <= csDMboot when unsigned(RcptAddr)/=SizeSRAM else
+MuxAddr <= RcptAddr when unsigned(RcptAddr)<SizeSRAM else
+			  SIGaddrDM when sigload='1' OR sigstore='1' else
+			  SIGprogcounter;
+			  
+MuxcsDM <= csDMboot when unsigned(RcptAddr)<SizeSRAM else
 			  csDM;
-MuxinputDM <= inputDMboot when unsigned(RcptAddr)/=SizeSRAM else
-				  siginputDM;
+			  
+MuxinputDM <= inputDMboot when unsigned(RcptAddr)<SizeSRAM else
+				  siginputDM when sigstore='1' else
+				  (OTHERS => '0');
+				  
+MuxoutputDM <= SIGoutputDM when sigload='1' else
+					(others => 'Z');
+					
+Muxinstruction <= Reginstruction when sigload='1' OR SIGReady_32b='0' else
+						SigoutputDM;
 
-
----------------------------------------------
+Reginstruction <= (others => '0') when topreset='1' else
+						Muxinstruction when rising_edge(sigClock);
+---------------------------------------------------------------
 	-- INSTANCES
 	
 	debug : debUGER
@@ -396,7 +422,7 @@ MuxinputDM <= inputDMboot when unsigned(RcptAddr)/=SizeSRAM else
 		SwitchSel2 => switchSEL2,
 		--reset => 
 		PCregister => SIGprogcounter(15 DOWNTO 0),
-		Instruction => SIGinstruction,
+		Instruction => Reginstruction,
 		--OUTPUTS
 		TOPdisplay2 => debugDisplay2,
 		TOPdisplay1 => debugDisplay1,
@@ -408,8 +434,8 @@ MuxinputDM <= inputDMboot when unsigned(RcptAddr)/=SizeSRAM else
 		Hold 				 => SIGHold,
 		PROCclock       => SIGclock,
 		PROCreset       => TOPreset,
-		PROCinstruction => SIGinstruction,
-		PROCoutputDM    => SIGoutputDM,
+		PROCinstruction => Reginstruction,
+		PROCoutputDM    => MuxoutputDM,
 		-- OUTPUTS
 		PROCprogcounter => SIGprogcounter,
 		PROCstore       => SIGstore,
@@ -447,7 +473,6 @@ MuxinputDM <= inputDMboot when unsigned(RcptAddr)/=SizeSRAM else
 		--q_b       => SIGoutputDM 						-- DataOut Data
 	);
 
-
 	instCPT : Counter
 	PORT MAP(
 		CPTclock   => SIGclock,
@@ -458,19 +483,19 @@ MuxinputDM <= inputDMboot when unsigned(RcptAddr)/=SizeSRAM else
 		CPTcounter => SIGcounter
 	);
 
---	instDISP : Displays
---	PORT MAP(
---		--INPUTS
---		DISPclock    => SIGclock,
---		DISPreset    => TOPreset,
---		DISPaddr     => SIGaddrDM,
---		DISPinput    => SIGinputDM,
---		DISPWrite    => SIGstore,
---		--OUTPUTS
---		DISPleds     => procLed,
---		DISPdisplay1 => procDisplay1,
---		DISPdisplay2 => procDisplay2
---	);
+	instDISP : Displays
+	PORT MAP(
+		--INPUTS
+		DISPclock    => SIGclock,
+		DISPreset    => TOPreset,
+		DISPaddr     => SIGaddrDM,
+		DISPinput    => SIGinputDM,
+		DISPWrite    => SIGstore,
+		--OUTPUTS
+		DISPleds     => procLed,
+		DISPdisplay1 => procDisplay1,
+		DISPdisplay2 => procDisplay2
+	);
 
 	instPLL : clock1M
 	PORT MAP(
@@ -500,13 +525,13 @@ MuxinputDM <= inputDMboot when unsigned(RcptAddr)/=SizeSRAM else
 		-- Outputs (32bits)
 		Ready_32b			=> SIGReady_32b,
 		Data_Ready_32b		=> SIGData_Ready_32b,
-		DataOut_32b			=> SIGoutputDM,
+		DataOut_32b			=> OutputSDRAM32, -- For TestBench Simulation
+		--DataOut_32b			=> SIGoutputDM,
 		-- Outputs (16bits)
 		Ready_16b			=> SIGReady_16b,
 		Data_Ready_16b		=> SIGData_Ready_16b,
 		DataOut_16b			=> SIGDataOut_16b
 	);
-	
 	SDRAMcontroller : SDRAM_controller
 	PORT MAP(
 		clk			=> SIGClock,

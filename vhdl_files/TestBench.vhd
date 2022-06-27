@@ -70,7 +70,8 @@ architecture VHDL of TestBenchTop is
     dataLength  <= PKG_funct3;     
     dataAddr    <= PKG_addrDM;     
     inputData   <= PKG_inputDM;    
-    outputData  <= PKG_outputDM;   
+    --outputData  <= PKG_outputDM; 
+	 PKG_outputDM  <= outputData;	 
     progcounter <= PKG_progcounter;
     instr       <= PKG_instruction;
     reg00       <= PKG_reg00;
@@ -105,6 +106,33 @@ architecture VHDL of TestBenchTop is
     reg1D       <= PKG_reg1D;
     reg1E       <= PKG_reg1E;
     reg1F       <= PKG_reg1F;
+	 
+	 datatestbench: process
+		begin
+		-- init  simulation
+			outputData <= (others => 'Z');
+			wait for 136400 ns;
+			outputData <= x"00001137";
+			wait for 20 ns;
+			outputData <= (others => 'Z');
+			wait for 140 ns;
+			outputData <= x"03c000ef";
+			wait for 20 ns;
+			outputData <= (others => 'Z');
+			wait for 140 ns;
+			outputData <= x"fe010113";
+			wait for 20 ns;
+			outputData <= (others => 'Z');
+			wait for 140 ns;
+			outputData <= x"01212823";
+			wait for 20 ns;
+			outputData <= (others => 'Z');
+			wait for 140 ns;
+			outputData <= x"00005937";
+			wait for 20 ns;
+			outputData <= (others => 'Z');
+			
+		end process;
 
 	clocktestbench: process
 		begin
