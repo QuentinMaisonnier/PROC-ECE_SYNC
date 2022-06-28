@@ -120,15 +120,23 @@ architecture VHDL of TestBenchTop is
 			wait for 20 ns;
 			outputData <= (others => 'Z');
 			wait for 140 ns;
-			outputData <= x"fe010113";
+			outputData <= x"03c000ef";
 			wait for 20 ns;
 			outputData <= (others => 'Z');
 			wait for 140 ns;
+			outputData <= x"fe010113";
+			wait for 20 ns;
+			outputData <= (others => 'Z');
+			wait for 220 ns;
 			outputData <= x"01212823";
 			wait for 20 ns;
 			outputData <= (others => 'Z');
 			wait for 140 ns;
 			outputData <= x"00005937";
+			wait for 20 ns;
+			outputData <= (others => 'Z');
+			wait for 380 ns;
+			outputData <= x"00812c23";
 			wait for 20 ns;
 			outputData <= (others => 'Z');
 			

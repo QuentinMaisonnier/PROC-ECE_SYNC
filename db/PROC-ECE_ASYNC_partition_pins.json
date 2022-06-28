@@ -548,11 +548,11 @@
 					"strict" : false
 				},
 				{
-					"name" : "TOPclock",
+					"name" : "reset",
 					"strict" : false
 				},
 				{
-					"name" : "reset",
+					"name" : "buttonClock",
 					"strict" : false
 				}
 			]

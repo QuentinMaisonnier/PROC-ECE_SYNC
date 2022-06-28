@@ -11,13 +11,12 @@ USE work.simulPkg.ALL;
 ENTITY debuger IS
 	PORT (
 		-- INPUTS
-		--TOPclock    : IN STD_LOGIC; --must go through pll
 		enable 		: IN STD_LOGIC;
-		SwitchSel	: IN STD_LOGIC;
-		SwitchSel2	: IN STD_LOGIC;
+		SwitchSel, SwitchSel2: IN STD_LOGIC;
 		--reset    	: IN STD_LOGIC; --SW0
 		PCregister  : IN STD_LOGIC_VECTOR(15 downto 0);
 		Instruction : IN STD_LOGIC_VECTOR(31 downto 0);
+		
 		--OUTPUTS
 		TOPdisplay2 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0) := (others => '1'); --0x80000004
 		TOPdisplay1 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0) := (others => '1'); --0x80000004
@@ -39,34 +38,34 @@ END COMPONENT;
 
 begin
 
-display1 <= PCregister(15 downto 12) when enable='1' AND SwitchSel='1' else
-				Instruction(31 downto 28) when enable='1' AND SwitchSel2='0' else
-				Instruction(23 downto 20) when enable='1' AND SwitchSel2='1' else
+display1 <= PCregister(15 downto 12) when enable='1' AND SwitchSel='0' else
+				Instruction(31 downto 28) when enable='1' AND SwitchSel='1' AND SwitchSel2='0' else
+				Instruction(23 downto 20) when enable='1' AND SwitchSel='1' AND SwitchSel2='1' else
 				x"f";
 				
-display2 <= PCregister(11 downto 8) when enable='1' AND SwitchSel='1' else
-				Instruction(27 downto 24) when enable='1' AND SwitchSel2='0' else
-				Instruction(19 downto 16) when enable='1' AND SwitchSel2='1' else
+display2 <= PCregister(11 downto 8) when enable='1' AND SwitchSel='0' else
+				Instruction(27 downto 24) when enable='1' AND SwitchSel='1' AND SwitchSel2='0' else
+				Instruction(19 downto 16) when enable='1' AND  SwitchSel='1' AND SwitchSel2='1' else
 				x"f";
 				
-display3 <= PCregister(7 downto 4) when enable='1' AND SwitchSel='1' else
-				Instruction(23 downto 20) when enable='1' AND SwitchSel2='0' else
-				Instruction(15 downto 12) when enable='1' AND SwitchSel2='1' else
+display3 <= PCregister(7 downto 4) when enable='1' AND SwitchSel='0' AND SwitchSel='1' else
+				Instruction(23 downto 20) when enable='1' AND SwitchSel='1' AND SwitchSel2='0' else
+				Instruction(15 downto 12) when enable='1' AND SwitchSel='1' AND SwitchSel2='1' else
 				x"f";
 				
-display4 <= PCregister(3 downto 0) when enable='1' AND SwitchSel='1' else
-				Instruction(19 downto 16) when enable='1' AND SwitchSel2='0' else
-				Instruction(11 downto 8) when enable='1' AND SwitchSel2='1' else
+display4 <= PCregister(3 downto 0) when enable='1' AND SwitchSel='0' else
+				Instruction(19 downto 16) when enable='1' AND SwitchSel='1' AND SwitchSel2='0' else
+				Instruction(11 downto 8) when enable='1' AND SwitchSel='1' AND SwitchSel2='1' else
 				x"f";
 				
 display5 <= x"f" when enable='1' AND SwitchSel='1' else
-				Instruction(15 downto 12) when enable='1' AND SwitchSel2='0' else
-				Instruction(7 downto 4) when enable='1' AND SwitchSel2='1' else
+				Instruction(15 downto 12) when enable='1' AND SwitchSel='0' AND SwitchSel2='0' else
+				Instruction(7 downto 4) when enable='1' AND SwitchSel='0' AND SwitchSel2='1' else
 				x"f";
 				
 display6 <= x"f" when enable='1' AND SwitchSel='1' else
-				Instruction(11 downto 8) when enable='1' AND SwitchSel2='0' else
-				Instruction(3 downto 0) when enable='1' AND SwitchSel2='1' else
+				Instruction(11 downto 8) when enable='1' AND SwitchSel='0' AND SwitchSel2='0' else
+				Instruction(3 downto 0) when enable='1' AND SwitchSel='0' AND SwitchSel2='1' else
 				x"f";
 
 
