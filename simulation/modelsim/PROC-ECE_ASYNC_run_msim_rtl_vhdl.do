@@ -17,12 +17,12 @@ vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE
 vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Alu.vhd}
 vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/RAM_2PORT.vhd}
 vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/clock1M.vhd}
+vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/miniCache.vhd}
 vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_controller.vhd}
 vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_32b.vhd}
 vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd}
 vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/RegisterFile.vhd}
 vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/DEBUGER.vhd}
-vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/miniCache.vhd}
 
 vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/TestBench.vhd}
 

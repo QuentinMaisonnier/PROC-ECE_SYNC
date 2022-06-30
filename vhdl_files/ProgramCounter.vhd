@@ -74,8 +74,8 @@ BEGIN
 
 	-- adder
 	SigOffSum <= --STD_LOGIC_VECTOR(unsigned(PCprogcounter) + unsigned(SigMux1Out)) when PCjal = '0' AND PCjalr = '0' AND PCLoad='0' AND PCbranch='0' AND PClock='0' else
-					 STD_LOGIC_VECTOR(unsigned(PCprogcounter) + unsigned(SigMux1Out)) when PCLoad='0' AND PCbranch='0' AND PClock='0' else
-						STD_LOGIC_VECTOR(unsigned(RPCprevious) + unsigned(SigMux1Out));
+					 STD_LOGIC_VECTOR(unsigned(PCprogcounter) + unsigned(SigMux1Out)); --when PCLoad='0' AND PCbranch='0' AND PClock='0' else
+					 --STD_LOGIC_VECTOR(unsigned(RPCprevious) + unsigned(SigMux1Out));
 						
 	SigOffSub <= STD_LOGIC_VECTOR(unsigned(PCprogcounter) - unsigned(SigMux1Out)) when PCjal = '0' AND PCjalr = '0' AND PCLoad='0' AND PCbranch='0' AND PCLock='0' else
 					 STD_LOGIC_VECTOR(unsigned(RPCprevious) - unsigned(SigMux1Out));

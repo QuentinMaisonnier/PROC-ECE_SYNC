@@ -47,7 +47,15 @@ architecture VHDL of TestBenchTop is
 	
 	signal reg00, reg01, reg02, reg03, reg04, reg05, reg06, reg07, reg08, reg09, reg0A, reg0B, reg0C, reg0D, reg0E, reg0F, reg10, reg11, reg12, reg13, reg14, reg15, reg16, reg17, reg18, reg19, reg1A, reg1B, reg1C, reg1D, reg1E, reg1F : std_logic_vector(31 downto 0);
 	signal SigTOPdisplay1, SigTOPdisplay2 : std_logic_vector (31 downto 0);
-	
+
+	TYPE instructiontab IS ARRAY (0 TO 25) OF STD_LOGIC_vector(31 downto 0);
+	signal TabInstruction : instructiontab := (x"00001137", x"03c000ef", x"fe010113", x"01212823", x"00005937",
+															 x"00812c23", x"00912a23", x"01312623", x"00112e23", x"00100493",
+															 x"00000413", x"00a00993", x"e2090913", x"00149493", x"01341663",
+															 x"00902623", x"00090513", x"00140413", x"f89ff0ef", x"ff010113",
+															 x"00012623", x"00000793", x"00a7c863", x"00c12703", x"00000000",x"00178793"
+															 );
+
 	BEGIN
 	
 	dataReady_32b <= PKG_dataReady_32b;
@@ -111,13 +119,26 @@ architecture VHDL of TestBenchTop is
     reg1F       <= PKG_reg1F;
 	 
 	 datatestbench: process
+	 VARIABLE cpt : integer:=0;
 		begin
-		
---			outputData <= (others => 'Z');
+			
+			IF dataReady_32b='1' THEN
+				outputData <= TabInstruction(cpt);
+				CPT := CPT + 1;
+				wait for 20ns;
+				
+			ELSE
+				outputData <= (others => 'Z');
+				wait for 1ns;
+			END IF;
+			
+			IF CPT>25 THEN
+				outputData <= (others => 'Z');
+				wait;
+			END IF;
+--			wait for 136200 ns;
 --			
---			wait for 136000 ns;
---			
---			while(dataReady_32b = '0')loop
+--			if(dataReady_32b = '0')loop
 --				outputData <= (others => 'Z');
 --			end loop;
 --			outputData <= x"00001137";
@@ -170,60 +191,60 @@ architecture VHDL of TestBenchTop is
 		
 		
 		-- init  simulation
-			outputData <= (others => 'Z');
-			wait for 136420 ns;
-			outputData <= x"00001137";
-			wait for 20 ns;
-			outputData <= (others => 'Z');
-			wait for 180 ns;
-			outputData <= x"03c000ef";
-			wait for 20 ns;
-			outputData <= (others => 'Z');
-			wait for 180 ns;
-			outputData <= x"fe010113";
-			wait for 20 ns;
-			outputData <= (others => 'Z');
-			wait for 300 ns;
-			outputData <= x"01212823";
-			wait for 20 ns;
-			outputData <= (others => 'Z');
-			wait for 320 ns;
-			outputData <= x"00c12703";
-			--outputData <= x"00005937";
-			wait for 20 ns;
-			outputData <= (others => 'Z');
-			wait for 180 ns;
-			outputData <= x"00812c23";
-			wait for 20 ns;
-			outputData <= (others => 'Z');
-			wait for 320 ns;
-			outputData <= x"00912a23";
-			wait for 20 ns;
-			outputData <= (others => 'Z');
-			wait for 180 ns;
-			outputData <= x"01312623";
-			wait for 20 ns;
-			outputData <= (others => 'Z');
-			wait for 180 ns;
-			outputData <= x"00112e23";
-			wait for 20 ns;
-			outputData <= (others => 'Z');
-			wait for 180 ns;
-			outputData <= x"00100493";
-			wait for 20 ns;
-			outputData <= (others => 'Z');
-			wait for 180 ns;
-			outputData <= x"00000413";
-			wait for 20 ns;
-			outputData <= (others => 'Z');
-			wait for 180 ns;
-			outputData <= x"00a00993";
-			wait for 20 ns;
-			outputData <= (others => 'Z');
-			wait for 180 ns;
-			outputData <= x"e2090913";
-			wait for 20 ns;
-			outputData <= (others => 'Z');
+--			outputData <= (others => 'Z');
+--			wait for 136420 ns;
+--			outputData <= x"00001137";
+--			wait for 20 ns;
+--			outputData <= (others => 'Z');
+--			wait for 180 ns;
+--			outputData <= x"03c000ef";
+--			wait for 20 ns;
+--			outputData <= (others => 'Z');
+--			wait for 180 ns;
+--			outputData <= x"fe010113";
+--			wait for 20 ns;
+--			outputData <= (others => 'Z');
+--			wait for 300 ns;
+--			outputData <= x"01212823";
+--			wait for 20 ns;
+--			outputData <= (others => 'Z');
+--			wait for 320 ns;
+--			outputData <= x"00c12703";
+--			--outputData <= x"00005937";
+--			wait for 20 ns;
+--			outputData <= (others => 'Z');
+--			wait for 180 ns;
+--			outputData <= x"00812c23";
+--			wait for 20 ns;
+--			outputData <= (others => 'Z');
+--			wait for 320 ns;
+--			outputData <= x"00912a23";
+--			wait for 20 ns;
+--			outputData <= (others => 'Z');
+--			wait for 180 ns;
+--			outputData <= x"01312623";
+--			wait for 20 ns;
+--			outputData <= (others => 'Z');
+--			wait for 180 ns;
+--			outputData <= x"00112e23";
+--			wait for 20 ns;
+--			outputData <= (others => 'Z');
+--			wait for 180 ns;
+--			outputData <= x"00100493";
+--			wait for 20 ns;
+--			outputData <= (others => 'Z');
+--			wait for 180 ns;
+--			outputData <= x"00000413";
+--			wait for 20 ns;
+--			outputData <= (others => 'Z');
+--			wait for 180 ns;
+--			outputData <= x"00a00993";
+--			wait for 20 ns;
+--			outputData <= (others => 'Z');
+--			wait for 180 ns;
+--			outputData <= x"e2090913";
+--			wait for 20 ns;
+--			outputData <= (others => 'Z');
 			
 		end process;
 
