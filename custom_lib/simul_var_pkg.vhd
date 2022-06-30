@@ -4,7 +4,8 @@ use ieee.numeric_std.all;
 
 package simulPkg is
 
-	signal PKG_simulON       : std_logic;
+	signal PKG_simulON        : std_logic 	:= '0';
+	signal PKG_dataReady_32b  : std_logic;
 
 	signal PKG_store       : std_logic;
 	signal PKG_load        : std_logic;

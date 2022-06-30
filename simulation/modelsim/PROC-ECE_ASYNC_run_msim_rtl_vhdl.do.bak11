@@ -22,6 +22,7 @@ vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE
 vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd}
 vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/RegisterFile.vhd}
 vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/DEBUGER.vhd}
+vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/miniCache.vhd}
 
 vcom -93 -work work {C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/TestBench.vhd}
 

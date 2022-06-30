@@ -36,6 +36,7 @@ architecture VHDL of TestBenchTop is
 	end component;
 
 	signal reset, ck : std_logic;
+	signal dataReady_32b : std_logic;
 	signal counter, progcounter, instr: std_logic_vector(31 downto 0);
     
 	signal dataAddr: std_logic_vector(31 downto 0);
@@ -48,6 +49,8 @@ architecture VHDL of TestBenchTop is
 	signal SigTOPdisplay1, SigTOPdisplay2 : std_logic_vector (31 downto 0);
 	
 	BEGIN
+	
+	dataReady_32b <= PKG_dataReady_32b;
 	
 	--instanciation de l'entité PROC
 	iTop : Top port map (
@@ -109,34 +112,116 @@ architecture VHDL of TestBenchTop is
 	 
 	 datatestbench: process
 		begin
+		
+--			outputData <= (others => 'Z');
+--			
+--			wait for 136000 ns;
+--			
+--			while(dataReady_32b = '0')loop
+--				outputData <= (others => 'Z');
+--			end loop;
+--			outputData <= x"00001137";
+--			
+--			wait for 20 ns;
+--			
+--			while(dataReady_32b = '0')loop
+--				outputData <= (others => 'Z');
+--			end loop;
+--			outputData <= x"03c000ef";
+--			
+--			wait for 20 ns;
+--			
+--			while(dataReady_32b = '0')loop
+--				outputData <= (others => 'Z');
+--			end loop;
+--			outputData <= x"03c000ef";
+--			
+--			wait for 20 ns;
+--			
+--			while(dataReady_32b = '0')loop
+--				outputData <= (others => 'Z');
+--			end loop;
+--			outputData <= x"fe010113";
+--			
+--			wait for 20 ns;
+--			
+--			while(dataReady_32b = '0')loop
+--				outputData <= (others => 'Z');
+--			end loop;
+--			outputData <= x"01212823";
+--			
+--			wait for 20 ns;
+--			
+--			while(dataReady_32b = '0')loop
+--				outputData <= (others => 'Z');
+--			end loop;
+--			outputData <= x"00005937";
+--			
+--			wait for 20 ns;
+--		
+--			while(dataReady_32b = '0')loop
+--				outputData <= (others => 'Z');
+--			end loop;
+--			outputData <= x"00812c23";
+--			
+--			wait for 20 ns;
+--			
+--			outputData <= (others => 'Z');
+		
+		
 		-- init  simulation
 			outputData <= (others => 'Z');
-			wait for 136400 ns;
+			wait for 136420 ns;
 			outputData <= x"00001137";
 			wait for 20 ns;
 			outputData <= (others => 'Z');
-			wait for 140 ns;
+			wait for 180 ns;
 			outputData <= x"03c000ef";
 			wait for 20 ns;
 			outputData <= (others => 'Z');
-			wait for 140 ns;
-			outputData <= x"03c000ef";
-			wait for 20 ns;
-			outputData <= (others => 'Z');
-			wait for 140 ns;
+			wait for 180 ns;
 			outputData <= x"fe010113";
 			wait for 20 ns;
 			outputData <= (others => 'Z');
-			wait for 220 ns;
+			wait for 300 ns;
 			outputData <= x"01212823";
 			wait for 20 ns;
 			outputData <= (others => 'Z');
-			wait for 140 ns;
-			outputData <= x"00005937";
+			wait for 320 ns;
+			outputData <= x"00c12703";
+			--outputData <= x"00005937";
 			wait for 20 ns;
 			outputData <= (others => 'Z');
-			wait for 380 ns;
+			wait for 180 ns;
 			outputData <= x"00812c23";
+			wait for 20 ns;
+			outputData <= (others => 'Z');
+			wait for 320 ns;
+			outputData <= x"00912a23";
+			wait for 20 ns;
+			outputData <= (others => 'Z');
+			wait for 180 ns;
+			outputData <= x"01312623";
+			wait for 20 ns;
+			outputData <= (others => 'Z');
+			wait for 180 ns;
+			outputData <= x"00112e23";
+			wait for 20 ns;
+			outputData <= (others => 'Z');
+			wait for 180 ns;
+			outputData <= x"00100493";
+			wait for 20 ns;
+			outputData <= (others => 'Z');
+			wait for 180 ns;
+			outputData <= x"00000413";
+			wait for 20 ns;
+			outputData <= (others => 'Z');
+			wait for 180 ns;
+			outputData <= x"00a00993";
+			wait for 20 ns;
+			outputData <= (others => 'Z');
+			wait for 180 ns;
+			outputData <= x"e2090913";
 			wait for 20 ns;
 			outputData <= (others => 'Z');
 			

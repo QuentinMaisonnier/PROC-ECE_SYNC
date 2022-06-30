@@ -38,34 +38,34 @@ END COMPONENT;
 
 begin
 
-display1 <= PCregister(15 downto 12) when enable='1' AND SwitchSel='0' else
-				Instruction(31 downto 28) when enable='1' AND SwitchSel='1' AND SwitchSel2='0' else
-				Instruction(23 downto 20) when enable='1' AND SwitchSel='1' AND SwitchSel2='1' else
+display1 <= PCregister(15 downto 12) when enable='1' AND SwitchSel='1' else
+				Instruction(31 downto 28) when enable='1' AND SwitchSel2='0' else
+				Instruction(23 downto 20) when enable='1' AND SwitchSel2='1' else
 				x"f";
 				
-display2 <= PCregister(11 downto 8) when enable='1' AND SwitchSel='0' else
-				Instruction(27 downto 24) when enable='1' AND SwitchSel='1' AND SwitchSel2='0' else
-				Instruction(19 downto 16) when enable='1' AND  SwitchSel='1' AND SwitchSel2='1' else
+display2 <= PCregister(11 downto 8) when enable='1' AND SwitchSel='1' else
+				Instruction(27 downto 24) when enable='1' AND SwitchSel2='0' else
+				Instruction(19 downto 16) when enable='1' AND SwitchSel2='1' else
 				x"f";
 				
-display3 <= PCregister(7 downto 4) when enable='1' AND SwitchSel='0' AND SwitchSel='1' else
-				Instruction(23 downto 20) when enable='1' AND SwitchSel='1' AND SwitchSel2='0' else
-				Instruction(15 downto 12) when enable='1' AND SwitchSel='1' AND SwitchSel2='1' else
+display3 <= PCregister(7 downto 4) when enable='1' AND SwitchSel='1' else
+				Instruction(23 downto 20) when enable='1' AND SwitchSel2='0' else
+				Instruction(15 downto 12) when enable='1' AND SwitchSel2='1' else
 				x"f";
 				
-display4 <= PCregister(3 downto 0) when enable='1' AND SwitchSel='0' else
-				Instruction(19 downto 16) when enable='1' AND SwitchSel='1' AND SwitchSel2='0' else
-				Instruction(11 downto 8) when enable='1' AND SwitchSel='1' AND SwitchSel2='1' else
+display4 <= PCregister(3 downto 0) when enable='1' AND SwitchSel='1' else
+				Instruction(19 downto 16) when enable='1' AND SwitchSel2='0' else
+				Instruction(11 downto 8) when enable='1' AND SwitchSel2='1' else
 				x"f";
 				
 display5 <= x"f" when enable='1' AND SwitchSel='1' else
-				Instruction(15 downto 12) when enable='1' AND SwitchSel='0' AND SwitchSel2='0' else
-				Instruction(7 downto 4) when enable='1' AND SwitchSel='0' AND SwitchSel2='1' else
+				Instruction(15 downto 12) when enable='1' AND SwitchSel2='0' else
+				Instruction(7 downto 4) when enable='1' AND SwitchSel2='1' else
 				x"f";
 				
 display6 <= x"f" when enable='1' AND SwitchSel='1' else
-				Instruction(11 downto 8) when enable='1' AND SwitchSel='0' AND SwitchSel2='0' else
-				Instruction(3 downto 0) when enable='1' AND SwitchSel='0' AND SwitchSel2='1' else
+				Instruction(11 downto 8) when enable='1' AND SwitchSel2='0' else
+				Instruction(3 downto 0) when enable='1' AND SwitchSel2='1' else
 				x"f";
 
 

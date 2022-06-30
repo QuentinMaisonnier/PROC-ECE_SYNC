@@ -296,14 +296,14 @@ begin
 				 '0';
 	------------------------------------
 	
---	DMout <= PROCoutputDM;
+	DMout <= PROCoutputDM;
 	
-	DMout <= std_logic_vector(resize(signed(PROCoutputDM(7 downto 0)), DMout'length)) when WriteReg='1' and function3 = "000" else
-				std_logic_vector(resize(signed(PROCoutputDM(15 downto 0)), DMout'length)) when WriteReg='1' and function3 = "001" else
-				PROCoutputDM(31 downto 0) when WriteReg='1' and function3 = "010" else
-				std_logic_vector(resize(unsigned(PROCoutputDM(7 downto 0)), DMout'length)) when  WriteReg='1' and function3 = "100" else
-				std_logic_vector(resize(unsigned(PROCoutputDM(15 downto 0)), DMout'length)) when  WriteReg='1' and function3 = "101" else
-				(others=>'0');
+--	DMout <= std_logic_vector(resize(signed(PROCoutputDM(7 downto 0)), DMout'length)) when WriteReg='1' and function3 = "000" else
+--				std_logic_vector(resize(signed(PROCoutputDM(15 downto 0)), DMout'length)) when WriteReg='1' and function3 = "001" else
+--				PROCoutputDM(31 downto 0) when WriteReg='1' and function3 = "010" else
+--				std_logic_vector(resize(unsigned(PROCoutputDM(7 downto 0)), DMout'length)) when  WriteReg='1' and function3 = "100" else
+--				std_logic_vector(resize(unsigned(PROCoutputDM(15 downto 0)), DMout'length)) when  WriteReg='1' and function3 = "101" else
+--				(others=>'0');
 
     -- INSTANCES
     instPC  : ProgramCounter
