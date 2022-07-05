@@ -63,7 +63,7 @@ SIGNAL Reginstruction, SIGinstruction        : STD_LOGIC_VECTOR(31 downto 0);
 SIGNAL Regdata, SIGdata        : STD_LOGIC_VECTOR(31 downto 0);
 
 SIGNAL SIGstore, SIGcsDM                        : STD_LOGIC;
-TYPE state IS (INIT, IDLE, LOADdataReq, LOADdataGet, STOREdataReq, STOREdataEnd, NEXTinstReq, NEXTinstGet);
+TYPE state IS (INIT, IDLE, LOADdataGet, STOREdataEnd, NEXTinstGet);
 SIGNAL currentState, nextState : state;	
 
 ----------------------SIGNALS INIT SDRAM (BOOTLOADER)----------------------------
@@ -81,7 +81,6 @@ SIGNAL currentStateInit, nextStateInit : stateInit;
 begin
 
 	funct3 <= funct3boot when currentStateInit /= STOP else
-				 "010" when currentState=LOADdataGet OR currentState=LOADdataReq OR currentState=NEXTinstReq OR currentState=NEXTinstGet else
 				 "010";
 				 --PROCfunct3;
 						
@@ -92,7 +91,7 @@ begin
 			  SIGcsDM;
 						
 	AddressDM <= RcptAddr when currentStateInit /= STOP else
-			       PROCaddrDM when currentState = LOADdataReq OR currentState = STOREdataReq OR currentState = LOADdataGet OR currentState = STOREdataEnd else
+			       PROCaddrDM when nextState /= NEXTinstGet else
 					 PROCprogcounter;
 	
 	inputDM <= inputDMboot when currentStateInit /= STOP else
@@ -110,7 +109,7 @@ begin
 	
 	
 	
-	SDRAMmemory : PROCESS (ready_32b, PROCLoad, PROCstore, currentState, data_Ready_32b, dataOut_32b)
+	SDRAMmemory : PROCESS (ready_32b, PROCload, PROCstore, currentState, data_Ready_32b, dataOut_32b, currentStateInit, REGdata, Reginstruction)
 	BEGIN
 		PROChold <='1';
 		nextState <= currentState;
@@ -131,10 +130,14 @@ begin
 			
 				
 				IF ready_32b = '1' THEN
-					IF PROCLoad ='1' THEN
-						nextstate <= LOADdataReq;
+					IF PROCload ='1' THEN
+						SIGstore <= '0';
+						SIGcsDM     <= '1';
+						nextstate <= LOADdataGet;
 					ELSIF PROCstore ='1' THEN
-						nextstate <= STOREdataReq;
+						SIGstore <= '1';
+						SIGcsDM     <= '1';
+						nextstate <= STOREdataEnd;
 					ELSE
 						PROChold <='0'; -- TEST
 						SIGstore <= '0';
@@ -142,12 +145,7 @@ begin
 						nextstate <= NEXTinstGet;
 					END IF;
 				END IF;
-------------------- LOADdataReq -----------------------
-			WHEN LOADdataReq =>
-				SIGstore <= '0';
-				SIGcsDM     <= '1';
-				nextstate <= LOADdataGet;
-				
+------------------- LOADdataReq -----------------------			
 ------------------- LOADdataGet -----------------------
 			WHEN LOADdataGet =>
 			
@@ -156,29 +154,23 @@ begin
 				END IF;
 				
 				IF ready_32b = '1' THEN
-					nextstate <= NEXTinstReq;
+					SIGstore <= '0';
+					SIGcsDM     <= '1';
+					nextstate <= NEXTinstGet;
 					PROChold <='0'; -- TEST
 				END IF;
 
 ------------------- STOREdataReq -----------------------
-			WHEN STOREdataReq =>
-				SIGstore <= '1';
-				SIGcsDM     <= '1';
-				nextstate <= STOREdataEnd;
 ------------------- STOREdataEnd -----------------------
 			WHEN STOREdataEnd =>
-				IF ready_32b = '1' THEN
-					nextstate <= NEXTinstReq;
-					PROChold <='0'; -- TEST
-				END IF;
-------------------- NEXTinstReq -----------------------
-			WHEN NEXTinstReq =>
 			
-				IF ready_32b='1' THEN
+				IF ready_32b = '1' THEN
+					PROChold <='0'; -- TEST
 					SIGstore <= '0';
 					SIGcsDM     <= '1';
 					nextstate <= NEXTinstGet;
 				END IF;
+------------------- NEXTinstReq -----------------------
 ------------------- NEXTinstGet -----------------------	
 			WHEN NEXTinstGet =>
 				IF data_Ready_32b = '1' THEN

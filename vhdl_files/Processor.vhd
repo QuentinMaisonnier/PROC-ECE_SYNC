@@ -52,8 +52,8 @@ ARCHITECTURE archi OF Processor IS
 			PClock        : IN    STD_LOGIC;
 			PCLoad        : IN    STD_LOGIC;
 			-- OUTPUTS
-			PCprogcounter : INOUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-			PCprec        : OUT   STD_LOGIC_VECTOR(31 DOWNTO 0)
+			PCnext : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+		   PC 	 : out STD_LOGIC_VECTOR(31 DOWNTO 0)
 		);
 	END COMPONENT;
 
@@ -129,6 +129,7 @@ ARCHITECTURE archi OF Processor IS
 	SIGNAL SIGoffsetPC            : STD_LOGIC_VECTOR (31 DOWNTO 0);
 	SIGNAL SIGoffsetsignPC        : STD_LOGIC;
 	SIGNAL SIGprogcounter         : STD_LOGIC_VECTOR (31 DOWNTO 0);
+	SIGNAL SIGprogcounterfetch    : STD_LOGIC_VECTOR (31 DOWNTO 0);
 	-- instruction decoder
 	SIGNAL SIGopcode              : STD_LOGIC_VECTOR (6 DOWNTO 0);
 	SIGNAL SIGimmSel              : STD_LOGIC;
@@ -186,7 +187,7 @@ BEGIN
 
 	-- ALL
 	-- program counter
-	PROCprogcounter <= SIGprogcounter;
+	PROCprogcounter <= SIGprogcounterfetch;
 
 	SIGoffsetsignPC <= SIGimm21J(20);
 
@@ -259,6 +260,7 @@ BEGIN
 	PROCaddrDM  <= SIGoutputALU;
 	PROCinputDM <= SIGoutput2RF;
 	PROCstore   <= SIGstore;
+	
 
 	funct3Load  <= (OTHERS => '0') WHEN procreset = '1' ELSE
 						Muxfunct3Load WHEN rising_edge(proCclock);
@@ -273,21 +275,10 @@ BEGIN
 
 	PROCload <= SIGload;
 	-----------NOP----------------------- 
-	Muxinstruction <= x"00000013" WHEN RegNOPtest = '1' OR RegReset = '1'  ELSE
+	Muxinstruction <= x"00000013" WHEN PROCreset = '1'  ELSE
 							PROCinstruction;
-
-	SIGprogcounter <= --PCprec WHEN MuxNOPtest='1' ELSE --when nop instruction we use the last PC
-							PC;
-
-	MuxNOPtest <= '1' WHEN (SIGbranch = '1' OR SIGjal = '1' OR SIGjalr = '1' OR SIGload = '1' OR SIGoutputALU(31) = '1') AND Hold='0' ELSE -- JUMP/JUMPR/LOAD/BEQ(IF)
-					  '0';
-					  
-	RegNOPtest <= '0' WHEN PROCreset = '1' ELSE
-					  MuxNOPtest WHEN rising_edge(PROCclock); -- if we detect a instruction that need a nop
-					  
-	RegReset <= '1' WHEN PROCreset = '1' ELSE
-					PROcreset WHEN rising_edge(PROCclock);
-					
+							
+				
 	SigLock <= '1' WHEN SIGoutputALU(31) = '1' ELSE
 				  '0';
 	------------------------------------
@@ -300,8 +291,8 @@ BEGIN
 	--				std_logic_vector(resize(unsigned(PROCoutputDM(7 downto 0)), DMout'length)) when  WriteReg='1' and function3 = "100" else
 	--				std_logic_vector(resize(unsigned(PROCoutputDM(15 downto 0)), DMout'length)) when  WriteReg='1' and function3 = "101" else
 	--				(others=>'0');
-
 	-- INSTANCES
+	
 	instPC : ProgramCounter
 	PORT MAP(
 		PChold        => Hold,
@@ -321,14 +312,14 @@ BEGIN
 		PCalusupU     => SIGsupUALU,
 		PCLoad        => Sigload,
 		PClock        => SigLock,
-		PCprogcounter => PC,
-		PCprec        => Pcprec
+		PCnext		  => SIGprogcounterfetch,
+		PC 			  => SIGprogcounter
 	);
 
 	instID : InstructionDecoder
 	PORT MAP(
 		IDinstruction => Muxinstruction, -- ICI
-		--IDinstruction    => PROCinstruction, -- ICI
+--		IDinstruction    => PROCinstruction, -- ICI
 		IDopcode      => SIGopcode,
 		IDimmSel      => SIGimmSel,
 		IDrd          => SIGrdID,

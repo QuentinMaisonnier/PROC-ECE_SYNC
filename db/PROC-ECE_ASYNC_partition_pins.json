@@ -536,11 +536,11 @@
 					"strict" : false
 				},
 				{
-					"name" : "switchSEL2",
+					"name" : "enableDebug",
 					"strict" : false
 				},
 				{
-					"name" : "enableDebug",
+					"name" : "switchSEL2",
 					"strict" : false
 				},
 				{

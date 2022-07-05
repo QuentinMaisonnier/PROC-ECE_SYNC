@@ -38,6 +38,7 @@ architecture VHDL of TestBenchTop is
 	signal reset, ck : std_logic;
 	signal dataReady_32b : std_logic;
 	signal counter, progcounter, instr: std_logic_vector(31 downto 0);
+	signal R_In_Addr: std_logic_vector(25 downto 0);
     
 	signal dataAddr: std_logic_vector(31 downto 0);
 	signal load, store : std_logic;
@@ -48,15 +49,32 @@ architecture VHDL of TestBenchTop is
 	signal reg00, reg01, reg02, reg03, reg04, reg05, reg06, reg07, reg08, reg09, reg0A, reg0B, reg0C, reg0D, reg0E, reg0F, reg10, reg11, reg12, reg13, reg14, reg15, reg16, reg17, reg18, reg19, reg1A, reg1B, reg1C, reg1D, reg1E, reg1F : std_logic_vector(31 downto 0);
 	signal SigTOPdisplay1, SigTOPdisplay2 : std_logic_vector (31 downto 0);
 
-	TYPE instructiontab IS ARRAY (0 TO 25) OF STD_LOGIC_vector(31 downto 0);
-	signal TabInstruction : instructiontab := (x"00001137", x"03c000ef", x"fe010113", x"01212823", x"00005937",
-															 x"00812c23", x"00912a23", x"01312623", x"00112e23", x"00100493",
-															 x"00000413", x"00a00993", x"e2090913", x"00149493", x"01341663",
-															 x"00902623", x"00090513", x"00140413", x"f89ff0ef", x"ff010113",
-															 x"00012623", x"00000793", x"00a7c863", x"00c12703", x"00000000",x"00178793"
+	TYPE instructiontab IS ARRAY (0 TO 59) OF STD_LOGIC_vector(31 downto 0);
+--	signal TabInstruction : instructiontab := (x"00001137", x"03c000ef", x"fe010113", x"01212823", x"00005937",
+--															 x"00812c23", x"00912a23", x"01312623", x"00112e23", x"00100493",
+--															 x"00000413", x"00a00993", x"e2090913", x"00149493", x"01341663",
+--															 x"00902623", x"00090513", x"00140413", x"f89ff0ef", x"ff010113",
+--															 x"00012623", x"00000793", x"00a7c863", x"00c12703", x"00000000",x"00178793"
+--															 );
+
+	signal TabInstruction : instructiontab := (x"00001137", x"03c000ef", x"00100073", x"0000006f", x"ff010113",
+															 x"00012623", x"00000793", x"00a7c863", x"00012623", x"01010113",
+															 x"00008067", x"00c12703", x"00178793", x"00170713", x"00e12623",
+															 x"fe1ff06f", x"fe010113", x"01212823", x"00005937", x"00812c23",
+															 x"00912a23", x"01312623", x"00112e23", x"00100493", x"00000413",
+															 x"00a00993", x"e2090913", x"00149493", x"01341663", x"00100493",
+															 x"00000413", x"00902623", x"00090513", x"00140413", x"f89ff0ef",
+															 x"fe1ff06f", x"00000000", x"00000000", x"00000000", x"00000000",
+															 x"00000000", x"00000000", x"00000000", x"00000000", x"00000000",
+															 x"00000000", x"00000000", x"00000000", x"00000000", x"00000000",
+															 x"00000000", x"00000000", x"00000000", x"00000000", x"00000000",
+															 x"00000000", x"00000000", x"00000000", x"00000000", x"00000000"
 															 );
 
+
 	BEGIN
+	
+	R_In_Addr <= "00" & PKG_R_In_Addr(25 downto 2);
 	
 	dataReady_32b <= PKG_dataReady_32b;
 	
@@ -123,7 +141,8 @@ architecture VHDL of TestBenchTop is
 		begin
 			
 			IF dataReady_32b='1' THEN
-				outputData <= TabInstruction(cpt);
+--				outputData <= TabInstruction(cpt);
+				outputData <= TabInstruction(to_integer(unsigned(R_In_Addr)));
 				CPT := CPT + 1;
 				wait for 20ns;
 				
@@ -132,120 +151,11 @@ architecture VHDL of TestBenchTop is
 				wait for 1ns;
 			END IF;
 			
-			IF CPT>25 THEN
-				outputData <= (others => 'Z');
-				wait;
-			END IF;
---			wait for 136200 ns;
---			
---			if(dataReady_32b = '0')loop
+--			IF CPT>25 THEN
 --				outputData <= (others => 'Z');
---			end loop;
---			outputData <= x"00001137";
+--				wait;
+--			END IF;
 --			
---			wait for 20 ns;
---			
---			while(dataReady_32b = '0')loop
---				outputData <= (others => 'Z');
---			end loop;
---			outputData <= x"03c000ef";
---			
---			wait for 20 ns;
---			
---			while(dataReady_32b = '0')loop
---				outputData <= (others => 'Z');
---			end loop;
---			outputData <= x"03c000ef";
---			
---			wait for 20 ns;
---			
---			while(dataReady_32b = '0')loop
---				outputData <= (others => 'Z');
---			end loop;
---			outputData <= x"fe010113";
---			
---			wait for 20 ns;
---			
---			while(dataReady_32b = '0')loop
---				outputData <= (others => 'Z');
---			end loop;
---			outputData <= x"01212823";
---			
---			wait for 20 ns;
---			
---			while(dataReady_32b = '0')loop
---				outputData <= (others => 'Z');
---			end loop;
---			outputData <= x"00005937";
---			
---			wait for 20 ns;
---		
---			while(dataReady_32b = '0')loop
---				outputData <= (others => 'Z');
---			end loop;
---			outputData <= x"00812c23";
---			
---			wait for 20 ns;
---			
---			outputData <= (others => 'Z');
-		
-		
-		-- init  simulation
---			outputData <= (others => 'Z');
---			wait for 136420 ns;
---			outputData <= x"00001137";
---			wait for 20 ns;
---			outputData <= (others => 'Z');
---			wait for 180 ns;
---			outputData <= x"03c000ef";
---			wait for 20 ns;
---			outputData <= (others => 'Z');
---			wait for 180 ns;
---			outputData <= x"fe010113";
---			wait for 20 ns;
---			outputData <= (others => 'Z');
---			wait for 300 ns;
---			outputData <= x"01212823";
---			wait for 20 ns;
---			outputData <= (others => 'Z');
---			wait for 320 ns;
---			outputData <= x"00c12703";
---			--outputData <= x"00005937";
---			wait for 20 ns;
---			outputData <= (others => 'Z');
---			wait for 180 ns;
---			outputData <= x"00812c23";
---			wait for 20 ns;
---			outputData <= (others => 'Z');
---			wait for 320 ns;
---			outputData <= x"00912a23";
---			wait for 20 ns;
---			outputData <= (others => 'Z');
---			wait for 180 ns;
---			outputData <= x"01312623";
---			wait for 20 ns;
---			outputData <= (others => 'Z');
---			wait for 180 ns;
---			outputData <= x"00112e23";
---			wait for 20 ns;
---			outputData <= (others => 'Z');
---			wait for 180 ns;
---			outputData <= x"00100493";
---			wait for 20 ns;
---			outputData <= (others => 'Z');
---			wait for 180 ns;
---			outputData <= x"00000413";
---			wait for 20 ns;
---			outputData <= (others => 'Z');
---			wait for 180 ns;
---			outputData <= x"00a00993";
---			wait for 20 ns;
---			outputData <= (others => 'Z');
---			wait for 180 ns;
---			outputData <= x"e2090913";
---			wait for 20 ns;
---			outputData <= (others => 'Z');
-			
 		end process;
 
 	clocktestbench: process

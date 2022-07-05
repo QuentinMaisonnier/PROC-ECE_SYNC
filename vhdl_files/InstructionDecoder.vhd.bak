@@ -74,7 +74,6 @@ begin
 	IDimm21J(11) 		<= IDinstruction(20);
 	IDimm21J(10 downto 1) 	<= IDinstruction(30 downto 21);
 	IDimm21J(0) 	<= '0';
-	
 	-- Load instruction ?
 	IDload 	<= '1' when  IDinstruction(6 downto 0) = "0000011" else '0';
 	-- Store instruction ?

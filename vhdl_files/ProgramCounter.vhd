@@ -29,8 +29,9 @@ ENTITY ProgramCounter IS
 		PClock :in std_logic;
 		PCLoad : IN STD_LOGIC;
 		-- OUTPUTS
-		PCprogcounter : INOUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-		PCprec : out STD_LOGIC_VECTOR(31 DOWNTO 0)
+		--PCnext : INOUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+		PCnext : out STD_LOGIC_VECTOR(31 DOWNTO 0);
+		PC 	 : out STD_LOGIC_VECTOR(31 DOWNTO 0)
 	);
 END ENTITY;
 
@@ -47,59 +48,94 @@ ARCHITECTURE archi OF ProgramCounter IS
 	SIGNAL SigOffSum : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL SigOffSub : STD_LOGIC_VECTOR(31 DOWNTO 0);
 
-	SIGNAL MuxPCprevious, RPCprevious : std_LOGIC_VECTOR(31 downto 0);
+--	SIGNAL MuxPCfetch, PC : std_LOGIC_VECTOR(31 downto 0);
+	SIGNAL SigPC, SigPCnext, MuxPC : std_LOGIC_VECTOR(31 downto 0);
+
 
 BEGIN
 	-- BEGIN
 
+
+	
+--	SigMux1Out <= x"00000001" WHEN SigMux1Sel = '0'ELSE 
+--					  "00" & PCoffset(31 DOWNTO 2) ; -- set lsb to 0
+	
+--	PCfetch <= (others=>'0') when PCreset='1' else
+--				  SigMux2Out when rising_edge(PCclock);	
+				  
+
+	
+--	-- adder
+--	SigOffSum <= STD_LOGIC_VECTOR(unsigned(PCfetch) + unsigned(SigMux1Out)) when PCjal = '0' AND PCjalr = '0' AND PCLoad='0' AND PCbranch='0' AND PClock='0' else
+----					 STD_LOGIC_VECTOR(unsigned(PCfetch) + unsigned(SigMux1Out)); --when PCLoad='0' AND PCbranch='0' AND PClock='0' else
+--					 STD_LOGIC_VECTOR(unsigned(PC) + unsigned(SigMux1Out));
+--						
+--	SigOffSub <= STD_LOGIC_VECTOR(unsigned(PCfetch) - unsigned(SigMux1Out)) when PCjal = '0' AND PCjalr = '0' AND PCLoad='0' AND PCbranch='0' AND PCLock='0' else
+--					 STD_LOGIC_VECTOR(unsigned(PC) - unsigned(SigMux1Out));
+
+--	-- mux 2
+--	SigMux2Sel <= SigMux1Sel AND PCoffsetsign;
+--	SigMux2Out <= PCfetch when PChold='1' else
+--					  (PCoffset AND x"fffffffe") WHEN PCjalr = '1' ELSE
+--					  SigOffSum WHEN (SigMux2Sel = '0' AND PCjalr = '0') OR PCjal = '1' OR PCbranch = '1' ELSE
+--				     SigOffSub;
+--
+--	PCfetch <= (OTHERS => '0') WHEN PCreset = '1' ELSE
+--				  SigMux2Out WHEN (rising_edge(PCclock));
+		
+		
+	-----------------------------------------------------------------
+	-------------------------- PC REG -------------------------------
+	-----------------------------------------------------------------
+	MuxPC <= SigPC when PChold='1' else
+				SIGPCnext;
+				
+	SigPC 	<= (others => '0') when PCreset='1' else
+				MuxPC when rising_edge(PCclock);
+--	PC 	<= x"FFFFFFFC" when PCreset='1' else
+--				MuxPC when rising_edge(PCclock);
+	-----------------------------------------------------------------
+	
+	
+	-----------------------------------------------------------------
+	-------------------------- COMBINATORY --------------------------
+	-----------------------------------------------------------------
+	
 	-- branch cond
 	SigBranchCond <= PCalueq WHEN PCfunct3 = "000" ELSE
-		NOT PCalueq WHEN PCfunct3 = "001" ELSE
-		'0' WHEN PCfunct3 = "010" ELSE
-		'0' WHEN PCfunct3 = "011" ELSE
-		PCaluinf WHEN PCfunct3 = "100" ELSE
-		PCalusup OR PCalueq WHEN PCfunct3 = "101" ELSE
-		PCaluinfU WHEN PCfunct3 = "110" ELSE
-		PCalusupU OR PCalueq WHEN PCfunct3 = "111" ELSE
-		'0';
+							NOT PCalueq WHEN PCfunct3 = "001" ELSE
+							'0' WHEN PCfunct3 = "010" ELSE
+							'0' WHEN PCfunct3 = "011" ELSE
+							PCaluinf WHEN PCfunct3 = "100" ELSE
+							PCalusup OR PCalueq WHEN PCfunct3 = "101" ELSE
+							PCaluinfU WHEN PCfunct3 = "110" ELSE
+							PCalusupU OR PCalueq WHEN PCfunct3 = "111" ELSE
+							'0';
 
 	-- mux 1
 	SigMux1Sel <= (SigBranchCond AND PCbranch) OR PCjal OR PCjalr; --mux3
 	
---	SigMux1Out <= x"00000001" WHEN SigMux1Sel = '0'ELSE 
---					  "00" & PCoffset(31 DOWNTO 2) ; -- set lsb to 0
-
    SigMux1Out <= x"00000004" WHEN SigMux1Sel = '0'ELSE 
 				     PCoffset ; -- set lsb to 0
-
-	-- adder
-	SigOffSum <= --STD_LOGIC_VECTOR(unsigned(PCprogcounter) + unsigned(SigMux1Out)) when PCjal = '0' AND PCjalr = '0' AND PCLoad='0' AND PCbranch='0' AND PClock='0' else
-					 STD_LOGIC_VECTOR(unsigned(PCprogcounter) + unsigned(SigMux1Out)); --when PCLoad='0' AND PCbranch='0' AND PClock='0' else
-					 --STD_LOGIC_VECTOR(unsigned(RPCprevious) + unsigned(SigMux1Out));
-						
-	SigOffSub <= STD_LOGIC_VECTOR(unsigned(PCprogcounter) - unsigned(SigMux1Out)) when PCjal = '0' AND PCjalr = '0' AND PCLoad='0' AND PCbranch='0' AND PCLock='0' else
-					 STD_LOGIC_VECTOR(unsigned(RPCprevious) - unsigned(SigMux1Out));
-
-	-- mux 2
+					  
+	SigOffSum <= STD_LOGIC_VECTOR(unsigned(SigPC) + unsigned(SigMux1Out)) when SigMux1Sel='0' else
+					 STD_LOGIC_VECTOR(unsigned(SigPC) + unsigned(SigMux1Out));
+					 
+	SigOffSub <= STD_LOGIC_VECTOR(unsigned(SigPC) - unsigned(SigMux1Out)) when SigMux1Sel='0' else
+					 STD_LOGIC_VECTOR(unsigned(SIGPCnext) - unsigned(SigMux1Out));
+	
 	SigMux2Sel <= SigMux1Sel AND PCoffsetsign;
-	SigMux2Out <= PCprogcounter when PChold='1' else
-					  (PCoffset AND x"fffffffe") WHEN PCjalr = '1' ELSE
+	
+	SigMux2Out <= (PCoffset AND x"fffffffe") WHEN PCjalr = '1' ELSE
 					  SigOffSum WHEN (SigMux2Sel = '0' AND PCjalr = '0') OR PCjal = '1' OR PCbranch = '1' ELSE
 				     SigOffSub;
-
-	PCprogcounter <= (OTHERS => '0') WHEN PCreset = '1' ELSE
-						  SigMux2Out WHEN (rising_edge(PCclock));
-		
-		
-	-----------------------------------------------------------------
-	MuxPCprevious <= RPCprevious when PChold='1' else
-						  PCprogcounter when PCjal = '0' AND PCjalr = '0' AND PCload='0' AND PCbranch='0' AND PClock='0' else
-						  RPCprevious;
-						  
-	RPCprevious <= (others=>'0') when PCreset='1' else
-						MuxPCprevious when rising_edge(PCclock);		
-				
-	PCprec <= RPCprevious;		
+					  
+	SIGPCnext <= SigMux2Out when PChold='0' else
+					 SigPC;
+					
+	PC <= SigPC;
+	
+	PCnext    <= SIGPCnext;
 	
 	-- END
 END archi;

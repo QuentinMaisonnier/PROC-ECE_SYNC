@@ -54,6 +54,8 @@ signal currentState, nextState : state;
 
 begin
 
+PKG_R_In_Addr <= R_IN_Address;-- Test Bench
+
 Ready_32b <= signal_Ready_32b;
 
 fsm : Process( Clock, Reset, currentState, Ready_16b, DataOut_16b, R_CPT, R_DATA, IN_Write_Select, IN_Address, IN_Data_32, IN_Select, Data_Ready_16b, R_IN_Address, DQM, R_IN_Data_32)

@@ -256,7 +256,7 @@ ARCHITECTURE archi OF Top IS
 BEGIN
 
 	TOPreset <= '1' WHEN reset = '1' ELSE
-		reset WHEN rising_edge(SIGclock);
+				   reset WHEN rising_edge(SIGclock);
 	-- BEGIN
 	-- ALL
 	-- TEST BENCH ONLY ---
