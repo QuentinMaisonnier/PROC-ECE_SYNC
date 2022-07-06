@@ -548,15 +548,15 @@
 					"strict" : false
 				},
 				{
+					"name" : "reset",
+					"strict" : false
+				},
+				{
 					"name" : "buttonClock",
 					"strict" : false
 				},
 				{
 					"name" : "TOPclock",
-					"strict" : false
-				},
-				{
-					"name" : "reset",
 					"strict" : false
 				}
 			]

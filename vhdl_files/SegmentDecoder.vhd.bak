@@ -26,6 +26,6 @@ decodeOut <= "11000000" when Sin7seg="0000" else
              "11000110" when Sin7seg="1100" else
              "10100001" when Sin7seg="1101" else
              "10000110" when Sin7seg="1110" else
-             "10001110";
+             "10001110" when Sin7seg="1111";
 
 end vhdl;

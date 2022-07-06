@@ -63,7 +63,7 @@ SIGNAL Reginstruction, SIGinstruction        : STD_LOGIC_VECTOR(31 downto 0);
 SIGNAL Regdata, SIGdata        : STD_LOGIC_VECTOR(31 downto 0);
 
 SIGNAL SIGstore, SIGcsDM                        : STD_LOGIC;
-TYPE state IS (INIT, IDLE, LOADdataGet, STOREdataEnd, NEXTinstGet);
+TYPE state IS (INIT, LOADdataGet, STOREdataEnd, NEXTinstGet);
 SIGNAL currentState, nextState : state;	
 
 ----------------------SIGNALS INIT SDRAM (BOOTLOADER)----------------------------
@@ -126,25 +126,25 @@ begin
 					nextstate <= NEXTinstGet;
 				END IF;
   ------------------- IDLE -----------------------
-			WHEN IDLE =>
-			
-				
-				IF ready_32b = '1' THEN
-					IF PROCload ='1' THEN
-						SIGstore <= '0';
-						SIGcsDM     <= '1';
-						nextstate <= LOADdataGet;
-					ELSIF PROCstore ='1' THEN
-						SIGstore <= '1';
-						SIGcsDM     <= '1';
-						nextstate <= STOREdataEnd;
-					ELSE
-						PROChold <='0'; -- TEST
-						SIGstore <= '0';
-						SIGcsDM     <= '1';
-						nextstate <= NEXTinstGet;
-					END IF;
-				END IF;
+--			WHEN IDLE =>
+--			
+--				
+--				IF ready_32b = '1' THEN
+--					IF PROCload ='1' THEN
+--						SIGstore <= '0';
+--						SIGcsDM     <= '1';
+--						nextstate <= LOADdataGet;
+--					ELSIF PROCstore ='1' THEN
+--						SIGstore <= '1';
+--						SIGcsDM     <= '1';
+--						nextstate <= STOREdataEnd;
+--					ELSE
+--						PROChold <='0'; -- TEST
+--						SIGstore <= '0';
+--						SIGcsDM     <= '1';
+--						nextstate <= NEXTinstGet;
+--					END IF;
+--				END IF;
 ------------------- LOADdataReq -----------------------			
 ------------------- LOADdataGet -----------------------
 			WHEN LOADdataGet =>
@@ -178,7 +178,22 @@ begin
 				END IF;
 				
 				IF ready_32b = '1' THEN
-					nextstate <= IDLE;
+				
+--					nextstate <= IDLE;
+					IF PROCload ='1' THEN
+						SIGstore <= '0';
+						SIGcsDM     <= '1';
+						nextstate <= LOADdataGet;
+					ELSIF PROCstore ='1' THEN
+						SIGstore <= '1';
+						SIGcsDM     <= '1';
+						nextstate <= STOREdataEnd;
+					ELSE
+						PROChold <='0'; -- TEST
+						SIGstore <= '0';
+						SIGcsDM     <= '1';
+						nextstate <= NEXTinstGet;
+					END IF;
 				END IF;
 			
 	   END CASE;
