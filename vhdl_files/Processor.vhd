@@ -62,27 +62,30 @@ ARCHITECTURE archi OF Processor IS
 		PORT (
 			-- INPUTS
 			-- instruction endianness must be Big Endian !
-			IDinstruction : IN  STD_LOGIC_VECTOR (31 DOWNTO 0);
+			hold				: in std_logic;
+			reset, clock	: in std_logic;
+			IDinstruction 	: in std_logic_vector (31 downto 0);
 			-- OUTPUTS
-			IDopcode      : OUT STD_LOGIC_VECTOR (6 DOWNTO 0);
-			IDimmSel      : OUT STD_LOGIC;
-			IDrd          : OUT STD_LOGIC_VECTOR (4 DOWNTO 0);
-			IDrs1         : OUT STD_LOGIC_VECTOR (4 DOWNTO 0);
-			IDrs2         : OUT STD_LOGIC_VECTOR (4 DOWNTO 0);
-			IDfunct3      : OUT STD_LOGIC_VECTOR (2 DOWNTO 0);
-			IDfunct7      : OUT STD_LOGIC;
-			IDimm12I      : OUT STD_LOGIC_VECTOR (11 DOWNTO 0);
-			IDimm12S      : OUT STD_LOGIC_VECTOR (11 DOWNTO 0);
-			IDimm13B      : OUT STD_LOGIC_VECTOR (12 DOWNTO 0);
-			IDimm32U      : OUT STD_LOGIC_VECTOR (31 DOWNTO 0);
-			IDimm21J      : OUT STD_LOGIC_VECTOR (20 DOWNTO 0);
-			IDload        : OUT STD_LOGIC;
-			IDstore       : OUT STD_LOGIC;
-			IDlui         : OUT STD_LOGIC;
-			IDauipc       : OUT STD_LOGIC;
-			IDjal         : OUT STD_LOGIC;
-			IDjalr        : OUT STD_LOGIC;
-			IDbranch      : OUT STD_LOGIC
+			IDopcode 		: out std_logic_vector (6 downto 0);
+			IDimmSel 		: out std_logic;
+			IDrd 			   : out std_logic_vector (4 downto 0);
+			IDrs1 			: out std_logic_vector (4 downto 0);
+			IDrs2 			: out std_logic_vector (4 downto 0);
+			IDfunct3 		: out std_logic_vector (2 downto 0);
+			IDfunct7 		: out std_logic;
+			IDimm12I 		: out std_logic_vector (11 downto 0);
+			IDimm12S 		: out std_logic_vector (11 downto 0);
+			IDimm13B 		: out std_logic_vector (12 downto 0);
+			IDimm32U 		: out std_logic_vector (31 downto 0);
+			IDimm21J 		: out std_logic_vector (20 downto 0);
+			IDload 			: out std_logic;
+			IDloadP2		   : out std_logic;
+			IDstore 		   : out std_logic;
+			IDlui 			: out std_logic;
+			IDauipc 		   : out std_logic;
+			IDjal 			: out std_logic;
+			IDjalr 			: out std_logic;
+			IDbranch 		: out std_logic
 		);
 	END COMPONENT;
 
@@ -146,7 +149,8 @@ ARCHITECTURE archi OF Processor IS
 	SIGNAL SIGimm13B              : STD_LOGIC_VECTOR (12 DOWNTO 0);
 	SIGNAL SIGimm32U              : STD_LOGIC_VECTOR (31 DOWNTO 0);
 	SIGNAL SIGimm21J              : STD_LOGIC_VECTOR (20 DOWNTO 0);
-	SIGNAL SIGload, Muxload       : STD_LOGIC;
+	SIGNAL SIGload, SIGloadP2		: STD_LOGIC;
+	SIGNAL MuxHoldPC              : STD_LOGIC;
 	SIGNAL SIGstore               : STD_LOGIC;
 	SIGNAL SIGlui                 : STD_LOGIC;
 	SIGNAL SIGauipc               : STD_LOGIC;
@@ -173,7 +177,6 @@ ARCHITECTURE archi OF Processor IS
 	SIGNAL Muxinstruction         : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL MuxNOPtest, RegNOPtest : STD_LOGIC;
 	SIGNAL RegaddrLoad            : STD_LOGIC_VECTOR(4 DOWNTO 0);
-	SIGNAL WriteReg               : STD_LOGIC; --enable to write data load in register
 	SIGNAL funct3Load, function3  : STD_LOGIC_VECTOR(2 DOWNTO 0);
 	SIGNAL DMout                  : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL Regreset               : STD_LOGIC;
@@ -214,17 +217,16 @@ BEGIN
 	MuxrdID <= SIGrdID WHEN Hold = '0' ELSE
 		        RegaddrLoad;
 
-	WriteReg <= '0' WHEN PROCreset = '1' ELSE --- on decale juste sigload de 1 cycle
-		         Muxload WHEN rising_edge(PROCclock);
+	MuxHoldPC <= '1' WHEN Hold='1' OR SIGload='1' ELSE
+				    '0';
+				  
+	PROCload <= SIGload;
 
-	Muxload <= SIGload WHEN Hold = '0' ELSE
-				  WriteReg;
-
-	SIGrdRF <= RegaddrLoad WHEN SIGstore = '0' AND WriteReg = '1' ELSE
+	SIGrdRF <= RegaddrLoad WHEN SIGstore = '0' AND SIGloadP2 = '1' ELSE
 				  SIGrdID WHEN (SIGbranch = '0' AND SIGstore = '0') ELSE
 				  (OTHERS => '0');
 
-	SIGinputRF <= DMout WHEN WriteReg = '1' ELSE --- avant il y a avait sigload (au cas ou ca pmarche plus)
+	SIGinputRF <= DMout WHEN SIGloadP2 = '1' ELSE --- avant il y a avait sigload (au cas ou ca pmarche plus)
 					  STD_LOGIC_VECTOR(unsigned(SIGprogcounter) + 4) WHEN (SIGjal = '1' OR SIGjalr = '1') ELSE
 					  SIGimm32U WHEN SIGlui = '1' ELSE
 					  STD_LOGIC_VECTOR(unsigned(SIGimm32U) + unsigned(SIGprogcounter)) WHEN SIGauipc = '1' ELSE
@@ -268,12 +270,12 @@ BEGIN
 	Muxfunct3Load <= SIGfunct3 WHEN Hold = '0' ELSE
 						  funct3Load;
 
-	function3 <= funct3Load WHEN writeReg = '1' ELSE
+	function3 <= funct3Load WHEN SIGloadP2 = '1' ELSE
 					 SIGfunct3;
 
 	PROCfunct3 <= function3;
 
-	PROCload <= SIGload;
+
 	-----------NOP----------------------- 
 	Muxinstruction <= x"00000013" WHEN PROCreset = '1'  ELSE
 							PROCinstruction;
@@ -295,7 +297,7 @@ BEGIN
 	
 	instPC : ProgramCounter
 	PORT MAP(
-		PChold        => Hold,
+		PChold        => MuxHoldPC,
 		PCclock       => PROCclock,
 		PCreset       => PROCreset,
 		PCoffset      => SIGoffsetPC,     --complex
@@ -318,6 +320,9 @@ BEGIN
 
 	instID : InstructionDecoder
 	PORT MAP(
+		hold			  => hold,
+		reset 		  => Procreset,
+		clock 		  => PRoCclock,
 		IDinstruction => Muxinstruction, -- ICI
 --		IDinstruction    => PROCinstruction, -- ICI
 		IDopcode      => SIGopcode,
@@ -333,6 +338,7 @@ BEGIN
 		IDimm32U      => SIGimm32U,
 		IDimm21J      => SIGimm21J,
 		IDload        => SIGload,
+		IDloadP2 	  => SIGloadP2,
 		IDstore       => SIGstore,
 		IDlui         => SIGlui,
 		IDauipc       => SIGauipc,

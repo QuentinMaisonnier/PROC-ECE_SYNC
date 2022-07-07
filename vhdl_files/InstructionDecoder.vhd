@@ -2,6 +2,10 @@
 -- ECE Paris / SECAPEM
 -- Instruction Decoder VHDL
 
+-- 06/07/2022 : Decoupage de l'instruction load en deux parties:
+-- Partie 1 : IDload effectue la requête de lecture à la mémoire mais n'incrémente pas son PC. L'instruction LOAD doit rester sur le bus d'instruction (pas de requête de  nouvelle instruction).
+-- Partie 2 : IDloadP2 récupère la données provenant de la mémoire et la stock dans le banc de registre. La requête de la nouvelle instruction est effectuee
+
 -- LIBRARIES
 library ieee;
 use ieee.std_logic_1164.all;
@@ -12,11 +16,13 @@ entity InstructionDecoder is
 	port (
 		-- INPUTS
 		-- instruction endianness must be Big Endian !
+		hold				: in std_logic;
+		reset, clock	: in std_logic;
 		IDinstruction 	: in std_logic_vector (31 downto 0);
 		-- OUTPUTS
 		IDopcode 		: out std_logic_vector (6 downto 0);
 		IDimmSel 		: out std_logic;
-		IDrd 				: out std_logic_vector (4 downto 0);
+		IDrd 			   : out std_logic_vector (4 downto 0);
 		IDrs1 			: out std_logic_vector (4 downto 0);
 		IDrs2 			: out std_logic_vector (4 downto 0);
 		IDfunct3 		: out std_logic_vector (2 downto 0);
@@ -27,9 +33,10 @@ entity InstructionDecoder is
 		IDimm32U 		: out std_logic_vector (31 downto 0);
 		IDimm21J 		: out std_logic_vector (20 downto 0);
 		IDload 			: out std_logic;
-		IDstore 			: out std_logic;
+		IDloadP2		   : out std_logic;
+		IDstore 		   : out std_logic;
 		IDlui 			: out std_logic;
-		IDauipc 			: out std_logic;
+		IDauipc 		   : out std_logic;
 		IDjal 			: out std_logic;
 		IDjalr 			: out std_logic;
 		IDbranch 		: out std_logic
@@ -38,6 +45,9 @@ end entity;
 
 -- ARCHITECTURE
 architecture archi of InstructionDecoder is
+
+SIGNAL RegIDloadP2, SIGIDload, MuxIDloadP2, MuxIDload : STD_LOGIC;
+
 begin
 	--BEGIN
 	-- opcode
@@ -76,7 +86,16 @@ begin
 	IDimm21J(0) 	<= '0';
 	
 	-- Load instruction ?
-	IDload 	<= '1' when  IDinstruction(6 downto 0) = "0000011" else '0';
+	MuxIDloadP2 		<= RegIDloadP2 when hold='1' else
+								'0' when reset='1' else
+								SIGIDload;
+								
+	SIGIDload 	   <= '1' when  IDinstruction(6 downto 0) = "0000011" and RegIDloadP2='0' else '0';
+	RegIDloadP2 	<= MuxIDloadP2 when rising_edge(clock);
+	
+	IDloadP2 <= RegIDloadP2;
+	IDload   <= SIGIDload;
+	
 	-- Store instruction ?
 	IDstore 	<= '1' when IDinstruction(6 downto 0) = "0100011" else '0';
 	-- LUI instruction ?

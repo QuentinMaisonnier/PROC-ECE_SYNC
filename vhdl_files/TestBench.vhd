@@ -71,7 +71,6 @@ architecture VHDL of TestBenchTop is
 															 x"00000000", x"00000000", x"00000000", x"00000000", x"00000000"
 															 );
 
-
 	BEGIN
 	
 	R_In_Addr <= "00" & PKG_R_In_Addr(25 downto 2);
@@ -142,13 +141,14 @@ architecture VHDL of TestBenchTop is
 			
 			IF dataReady_32b='1' THEN
 --				outputData <= TabInstruction(cpt);
+
 				outputData <= TabInstruction(to_integer(unsigned(R_In_Addr)));
 				CPT := CPT + 1;
-				wait for 20ns;
+				wait for 20 ns;
 				
 			ELSE
 				outputData <= (others => 'Z');
-				wait for 1ns;
+				wait for 1 ns;
 			END IF;
 			
 --			IF CPT>25 THEN
@@ -162,7 +162,7 @@ architecture VHDL of TestBenchTop is
 		begin
 		-- init  simulation
 			ck <= '1';
-			wait for 10ns;
+			wait for 10 ns;
 			ck <= '0';
 			wait for 10 ns;
 		end process;
@@ -171,7 +171,7 @@ architecture VHDL of TestBenchTop is
 		begin
 		-- init  simulation
 			reset <= '1';
-			wait for 2ns;
+			wait for 2 ns;
 			reset <= '0';
 			wait;
 		end process;
