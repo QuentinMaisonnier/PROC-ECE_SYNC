@@ -159,6 +159,7 @@ begin
 
 ------------------- STOREdataReq -----------------------
 			WHEN STOREdataReq =>
+					PROChold <='0';
 					SIGstore <= '1';
 					SIGcsDM     <= '1';
 					nextState <= STOREdataEnd;
@@ -167,7 +168,7 @@ begin
 			WHEN STOREdataEnd =>
 			
 				IF ready_32b = '1' THEN
-					PROChold <= '0'; -- TEST
+					--PROChold <= '0'; -- TEST
 					SIGstore <= '0';
 					SIGcsDM  <= '1';
 					nextstate <= NEXTinstGet;

@@ -49,7 +49,7 @@ architecture VHDL of TestBenchTop is
 	signal reg00, reg01, reg02, reg03, reg04, reg05, reg06, reg07, reg08, reg09, reg0A, reg0B, reg0C, reg0D, reg0E, reg0F, reg10, reg11, reg12, reg13, reg14, reg15, reg16, reg17, reg18, reg19, reg1A, reg1B, reg1C, reg1D, reg1E, reg1F : std_logic_vector(31 downto 0);
 	signal SigTOPdisplay1, SigTOPdisplay2 : std_logic_vector (31 downto 0);
 
-	TYPE instructiontab IS ARRAY (0 TO 59) OF STD_LOGIC_vector(31 downto 0);
+	TYPE instructiontab IS ARRAY (0 TO 4096) OF STD_LOGIC_vector(31 downto 0);
 --	signal TabInstruction : instructiontab := (x"00001137", x"03c000ef", x"fe010113", x"01212823", x"00005937",
 --															 x"00812c23", x"00912a23", x"01312623", x"00112e23", x"00100493",
 --															 x"00000413", x"00a00993", x"e2090913", x"00149493", x"01341663",

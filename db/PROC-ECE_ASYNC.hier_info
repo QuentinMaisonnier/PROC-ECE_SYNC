@@ -9352,7 +9352,6 @@ Ready_32b => nextStateInit.OUTPUTSELECT
 Ready_32b => nextStateInit.OUTPUTSELECT
 Ready_32b => nextStateInit.OUTPUTSELECT
 Ready_32b => nextStateInit.OUTPUTSELECT
-Ready_32b => Selector7.IN2
 Ready_32b => Selector7.IN3
 Data_Ready_32b => SIGdata.OUTPUTSELECT
 Data_Ready_32b => SIGdata.OUTPUTSELECT
