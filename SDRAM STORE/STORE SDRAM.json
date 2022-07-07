@@ -1,0 +1,25 @@
+{signal: [
+  {name: 'clk', wave: 'P...........' },
+  {name: 'reset', wave: '0...........'},
+  {name: 'PC', wave: '4.5........7', data:"4 8 12"},
+  {name: 'PCnext', wave: '45........7.' , data: "4 8 12 "},
+  {name: 'csDM', wave: '010..10...10'},
+
+  {name: 'Load', wave: '0...........'},
+  {name: 'Store', wave: '010.........'},
+  
+  {name: 'Bus Instruction', wave: '34........5.', data: ["0" ,"4 (Store)", "8 (+4)"]},
+  {name: 'Proc Instruction', wave: '34........5.', data: ["0", "4 (Store)", "8 (+4)"]},
+  
+  {name: 'Proc Addr Data', wave: 'z4........z.', data: ["A 4"]},
+  {name: 'Proc data TX', wave: 'z4........z.', data: ["D 4"]},
+  {name: 'Proc data RX', wave: 'z...........', data: ["D 4"]},
+ // {name: 'Instruction', wave: '2....32..42..62.', data: ["NOP" , "0 (+4)","NOP" , " 4 (Branch)","NOP" , "20 (+4)","NOP" ]},
+  
+  {name: 'data ready32', wave: '10.......10.'},
+  {name: 'Memory ready32', wave: '1.0..10..1.0'},
+  {name: 'hold', wave: '101.......01'},
+  {name: 'State MiniCache', wave: '574...5...75', data: ["","Idle", "Store Data", "Load Instruction", "Idle", ""]}
+],
+	"config" : { "hscale" : 2 },
+}
