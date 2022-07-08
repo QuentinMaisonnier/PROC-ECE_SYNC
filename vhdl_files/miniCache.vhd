@@ -15,6 +15,8 @@ ENTITY miniCache IS
 		-- INPUTS
 		clock             : IN  STD_LOGIC;
 		reset             : IN  STD_LOGIC;
+		
+		bootfinish			: out std_logic;
 
 		------------------------ TO PROC -----------------------
 		PROCinstruction   : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -60,7 +62,7 @@ END COMPONENT;
 ----------------------SIGNALS SDRAM MEMORY/PROC RISCV----------------------------
 
 SIGNAL Reginstruction, SIGinstruction        : STD_LOGIC_VECTOR(31 downto 0);
-SIGNAL Regdata, Muxdata        : STD_LOGIC_VECTOR(31 downto 0);
+SIGNAL Regdata, Muxdata, SIGdata       : STD_LOGIC_VECTOR(31 downto 0);
 
 SIGNAL SIGstore, SIGcsDM                        : STD_LOGIC;
 TYPE state IS (INIT, IDLE, LOADdataGet, STOREdataReq, STOREdataEnd, NEXTinstGet);
@@ -81,7 +83,7 @@ SIGNAL currentStateInit, nextStateInit : stateInit;
 begin
 
 	funct3 <= funct3boot when currentStateInit /= STOP else
-				 "010" 		when currentState = NEXTinstGet OR nextState = NEXTinstGet else
+				 "010"	when currentState = NEXTinstGet OR nextState = NEXTinstGet else
 				 PROCfunct3 ;
 						
 	writeSelect <= SIGstoreboot when currentStateInit /= STOP else
@@ -100,6 +102,7 @@ begin
 	PROCinstruction <= Reginstruction;
 	
 	PROCoutputDM <= Muxdata;
+--	PROCoutputDM <= regData;
 	
 	--PKG_instruction   <= inputDM;
 	
@@ -109,13 +112,14 @@ begin
 	
 	
 	
-	SDRAMmemory : PROCESS (ready_32b, PROCload, PROCstore, currentState, data_Ready_32b, dataOut_32b, currentStateInit, REGdata, Reginstruction)
+	SDRAMmemory : PROCESS (ready_32b, PROCload, PROCstore, currentState, data_Ready_32b, dataOut_32b, currentStateInit, REGdata, Reginstruction, PROCaddrDM)
 	BEGIN
 		PROChold <='1';
 		nextState <= currentState;
 		SIGinstruction <= Reginstruction;
 		SIGstore 		<= '0';
-		SIGcsDM				<= '0';
+		SIGcsDM			<= '0';
+		SIGdata <= regdata;
 		CASE currentState IS
    ------------------- INIT -----------------------
 			WHEN INIT =>
@@ -132,8 +136,8 @@ begin
 						SIGstore <= '0';
 						SIGcsDM     <= '1';
 						nextstate <= LOADdataGet;
-					ELSIF PROCstore ='1' THEN
-						nextstate <= STOREdataReq;
+					ELSIF PROCstore ='1' AND PROCaddrDM(31)='0' THEN
+							nextstate <= STOREdataReq;
 					ELSE
 						PROChold <='0'; -- TEST
 						SIGstore <= '0';
@@ -190,6 +194,9 @@ begin
 						 
 	Reginstruction <= (others => '0') WHEN reset = '1' ELSE
 					      SIGinstruction WHEN rising_edge(Clock);
+							
+--	Regdata <= (others => '0') WHEN reset = '1' ELSE
+--				  SIGdata WHEN rising_edge(Clock);
 						 
 	Regdata <= (others => '0') WHEN reset = '1' ELSE
 				  Muxdata WHEN rising_edge(Clock);
@@ -210,6 +217,7 @@ begin
 		inputDMboot  <= SIGinstructionInit;
 		csDMboot     <= '0';
 		nextStateInit    <= currentStateInit;
+		bootfinish <= '0';
 		
 
 		CASE currentStateInit IS
@@ -234,6 +242,7 @@ begin
 				nextStateInit  <= WAITING;
 
 			WHEN stop      =>
+				bootfinish <= '1';
 
 			WHEN testwrite =>
 				SIGstoreboot <= '1';

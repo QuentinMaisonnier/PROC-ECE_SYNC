@@ -177,6 +177,7 @@ ARCHITECTURE archi OF Top IS
 			-- INPUTS
 			clock             : IN  STD_LOGIC;
 			reset             : IN  STD_LOGIC;
+			bootfinish			: out std_logic;
 
 			------------------------ TO PROC -----------------------
 			PROCinstruction   : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
@@ -253,6 +254,8 @@ ARCHITECTURE archi OF Top IS
 	SIGNAL SIGinputDM, SIGAddressDM : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL SIGReady_32b, SIGData_Ready_32b : STD_LOGIC;
 	SIGNAL SIGDataOut_32b : STD_LOGIC_VECTOR(31 DOWNTO 0);
+	
+	SIGNAL SIGbootfinish	 : std_logic;
 BEGIN
 
 	TOPreset <= '1' WHEN reset = '1' ELSE
@@ -278,9 +281,9 @@ BEGIN
 
 	--SIGsimulOn        <= '0';
 
-	SIGclock          <= TOPclock WHEN SIGsimulOn = '1' ELSE
-		SIGPLLclock WHEN enableDebug = '0' ELSE
-		buttonClock;
+		SIGclock          <= TOPclock WHEN SIGsimulOn = '1' ELSE
+		buttonClock WHEN enableDebug = '1' AND SIGbootfinish='1'  ELSE
+		SIGPLLclock;
 
 
 
@@ -416,6 +419,7 @@ BEGIN
 		-- SDRAM Inputs
 		clock            => SIGclock,
 		reset            => TOPreset,
+		bootfinish		  => SIGbootfinish,
 		------------------------ TO PROC -----------------------
 		PROCinstruction  => SIGPROCinstruction,
 		PROCoutputDM     => SIGPROCoutputDM,

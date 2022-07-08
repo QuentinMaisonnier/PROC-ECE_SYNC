@@ -42,12 +42,13 @@ architecture vhdl of SDRAM_32b is
 signal R_Data_Ready_32,	signal_Ready_32b  : STD_LOGIC;
 signal S_CPT, R_CPT 	: STD_LOGIC_VECTOR(3 downto 0);
 signal DQM, R_DQM, S_DQM 	: STD_LOGIC_VECTOR(3 downto 0);
+signal SIG_selectOUT16	: std_logic;
 
 signal R_DATA, S_DATA	: STD_LOGIC_VECTOR(31 downto 0);
 
-signal R_IN_Data_32, S_IN_Data_32, Muxdata	: STD_LOGIC_VECTOR(31 downto 0);
-signal R_IN_Function3, S_IN_Function3	: STD_LOGIC_VECTOR(1 downto 0);
-signal R_IN_Address, S_IN_Address	: STD_LOGIC_VECTOR(25 downto 0);
+signal R_IN_Data_32, Mux_IN_Data_32, Muxdata	: STD_LOGIC_VECTOR(31 downto 0);
+signal R_IN_Function3, Mux_IN_Function3	: STD_LOGIC_VECTOR(1 downto 0);
+signal R_IN_Address, Mux_IN_Address	: STD_LOGIC_VECTOR(25 downto 0);
 
 Type state is (WAITING, READ_LSB_SEND, READ_MSB_SEND, READ_LSB_GET, READ_MSB_GET, WRITE_LSB, WRITE_MSB);
 signal currentState, nextState : state;
@@ -58,12 +59,12 @@ PKG_R_In_Addr <= R_IN_Address;-- Test Bench
 
 Ready_32b <= signal_Ready_32b;
 
-fsm : Process( Clock, Reset, currentState, Ready_16b, DataOut_16b, R_CPT, R_DATA, IN_Write_Select, IN_Address, IN_Data_32, IN_Select, Data_Ready_16b, R_IN_Address, DQM, R_IN_Data_32)
+fsm : Process( Clock, Mux_IN_Data_32, Reset, currentState, Ready_16b, DataOut_16b, R_CPT, R_DATA, IN_Write_Select, IN_Address, IN_Data_32, IN_Select, Data_Ready_16b, R_IN_Address, DQM, R_IN_Data_32)
 begin 
 	OUT_Address <= (others=>'0');
 	OUT_Write_Select <= '0';
 	OUT_Data_16 <= (others=>'0');
-	OUT_Select <= '0';
+	SIG_selectOUT16 <= '0';
 	OUT_DQM <= (others=>'0');
 	S_DATA <= R_DATA;
 	signal_Ready_32b <= '0';
@@ -102,9 +103,9 @@ when WAITING =>
 when WRITE_MSB =>
 	OUT_Address 	  <= R_IN_Address(25 downto 2) & '0'; 
 	OUT_Write_Select <= '1';							
-	OUT_Data_16 	  <= R_IN_Data_32(31 downto 16);
-	OUT_Select		  <= '1';
-	OUT_DQM			  <= DQM(2) & DQM(3);
+	OUT_Data_16 	  <= Mux_IN_Data_32(31 downto 16);
+	SIG_selectOUT16		  <= '1';
+	OUT_DQM			  <= DQM(3) & DQM(2);
 	
 	if(Ready_16b = '1')then
 		nextstate <= WRITE_LSB;
@@ -115,9 +116,9 @@ when WRITE_MSB =>
 when WRITE_LSB =>
 	OUT_Address 	  <= R_IN_Address(25 downto 2) & '1';
 	OUT_Write_Select <= '1';
-	OUT_Data_16 	  <= R_IN_Data_32(15 downto 0);
-	OUT_Select		  <= '1';
-	OUT_DQM			  <= DQM(0) & DQM(1);
+	OUT_Data_16 	  <= Mux_IN_Data_32(15 downto 0);
+	SIG_selectOUT16		  <= '1';
+	OUT_DQM			  <= DQM(1) & DQM(0);
 	
 	if(Ready_16b = '1')then
 		nextstate <= WAITING;
@@ -127,7 +128,7 @@ when READ_MSB_SEND =>
 	--ready_32b <= '0';
 	OUT_Address 	  <= R_IN_Address(25 downto 2) & '0';
 	OUT_Write_Select <= '0';
-	OUT_Select		  <= '1';
+	SIG_selectOUT16		  <= '1';
 	OUT_DQM			  <= "00";
 	
 	if(Ready_16b = '1')then
@@ -138,7 +139,7 @@ when READ_LSB_SEND =>
 	--ready_32b <= '0';
 	OUT_Address 	  <= R_IN_Address(25 downto 2) & '1';
 	OUT_Write_Select <= '0';
-	OUT_Select		  <= '1';
+	SIG_selectOUT16		  <= '1';
 	OUT_DQM			  <= "00";
 
 	if(Ready_16b = '1')then
@@ -157,7 +158,7 @@ when READ_LSB_GET =>
 	--ready_32b <= '0';
 	OUT_Address 	  <= R_IN_Address(25 downto 2) & '1';
 	OUT_Write_Select <= '0';
-	OUT_Select		  <= '1';
+	SIG_selectOUT16		  <= '1';
 	OUT_DQM			  <= "00";
 	
 	if(Data_Ready_16b = '1') then
@@ -184,16 +185,17 @@ R_CPT <= (others => '0') when reset = '1' else
 			
 			
 R_IN_Data_32 <= (others => '0') when reset = '1' else
-		    S_IN_Data_32 when rising_edge(Clock);
+					 Mux_IN_Data_32 when rising_edge(Clock);
 R_IN_Function3 <= (others => '0') when reset = '1' else
-		    S_IN_Function3 when rising_edge(Clock);
+						Mux_IN_Function3 when rising_edge(Clock);
 R_IN_Address <= (others => '0') when reset = '1' else
-		    S_IN_Address when rising_edge(Clock);		 
+				    Mux_IN_Address when rising_edge(Clock);		 
 			
 					 
-S_IN_Address <= IN_Address when IN_Select='1' else
+Mux_IN_Address <= IN_Address when IN_Select='1' else
 					 R_IN_Address;
-S_IN_Function3 <= IN_Function3 when IN_Select='1' else
+					 
+Mux_IN_Function3 <= IN_Function3 when IN_Select='1' else
 					 R_IN_Function3;
 			 
 DataOut_32b <= MuxData 				 				    when  DQM="0000" else
@@ -208,14 +210,22 @@ DataOut_32b <= MuxData 				 				    when  DQM="0000" else
 MuxData <= PKG_outputDM when PKG_simulON = '1' else
 			  R_DATA;
 			  
-S_IN_Data_32 <= IN_Data_32 				  							when IN_Select='1' AND DQM = "0000" else
-					 x"0000" & IN_Data_32(15 downto 0)           when IN_Select='1' AND DQM = "1100" else
-					 IN_Data_32(31 downto 16) & x"0000"          when IN_Select='1' AND DQM = "0011" else
-					 x"000000" & IN_Data_32(7 downto 0)          when IN_Select='1' AND DQM = "1110" else
-					 x"0000" & IN_Data_32(15 downto 8) & x"00"   when IN_Select='1' AND DQM = "1101" else
-					 x"00" & IN_Data_32(23 downto 16) & x"0000"  when IN_Select='1' AND DQM = "1011" else
-					 IN_Data_32(31 downto 24) & x"000000" 			when IN_Select='1' AND DQM = "0111" else
-					 R_IN_Data_32;
+PKG_inputData32 <= Mux_IN_Data_32;
+PKG_SDRAMselect <= SIG_selectOUT16;
+
+OUT_Select <= SIG_selectOUT16;
+			  
+Mux_IN_Data_32 <= IN_Data_32 				  							when IN_Select='1' AND DQM = "0000" else
+						x"0000" & IN_Data_32(15 downto 0)           when IN_Select='1' AND DQM = "1100" else
+						IN_Data_32(31 downto 16) & x"0000"          when IN_Select='1' AND DQM = "0011" else
+						x"000000" & IN_Data_32(7 downto 0)          when IN_Select='1' AND DQM = "1110" else
+						x"0000" & IN_Data_32(15 downto 8) & x"00"   when IN_Select='1' AND DQM = "1101" else
+						x"00" & IN_Data_32(23 downto 16) & x"0000"  when IN_Select='1' AND DQM = "1011" else
+						IN_Data_32(31 downto 24) & x"000000" 			when IN_Select='1' AND DQM = "0111" else
+						R_IN_Data_32;
+--
+--Mux_IN_Data_32 <= IN_Data_32 when IN_Select='1' else
+--					   R_IN_Data_32;
 					 
 DQM <= "0000" when R_IN_Function3 = "10" else 											     -- 4 octets
 		 "1100" when R_IN_Function3 = "01" AND R_IN_Address(1) =  '0' else 			  -- 2 octets
