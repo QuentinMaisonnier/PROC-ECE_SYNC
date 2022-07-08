@@ -45,7 +45,7 @@ signal DQM, R_DQM, S_DQM 	: STD_LOGIC_VECTOR(3 downto 0);
 
 signal R_DATA, S_DATA	: STD_LOGIC_VECTOR(31 downto 0);
 
-signal R_IN_Data_32, S_IN_Data_32	: STD_LOGIC_VECTOR(31 downto 0);
+signal R_IN_Data_32, S_IN_Data_32, Muxdata	: STD_LOGIC_VECTOR(31 downto 0);
 signal R_IN_Function3, S_IN_Function3	: STD_LOGIC_VECTOR(1 downto 0);
 signal R_IN_Address, S_IN_Address	: STD_LOGIC_VECTOR(25 downto 0);
 
@@ -190,23 +190,33 @@ R_IN_Function3 <= (others => '0') when reset = '1' else
 R_IN_Address <= (others => '0') when reset = '1' else
 		    S_IN_Address when rising_edge(Clock);		 
 			
-S_IN_Data_32 <= IN_Data_32 when IN_Select='1' else
-					 R_IN_Data_32;
+					 
 S_IN_Address <= IN_Address when IN_Select='1' else
 					 R_IN_Address;
 S_IN_Function3 <= IN_Function3 when IN_Select='1' else
 					 R_IN_Function3;
 			 
-DataOut_32b <= PKG_outputDM when PKG_simulON = '1' else
-					R_DATA 				 				   when  DQM="0000" else
-					x"000000" & R_DATA(7 downto 0)   when  DQM="1110" else
-					x"000000" & R_DATA(15 downto 8)  when  DQM="1101" else
-					x"000000" & R_DATA(23 downto 16) when  DQM="1011" else
-					x"000000" & R_DATA(31 downto 24) when  DQM="0111" else
-					x"0000" 	 & R_DATA(15 downto 0)  when  DQM="1100" else
-					x"0000" 	 & R_DATA(31 downto 16) when  DQM="0011" else
+DataOut_32b <= MuxData 				 				    when  DQM="0000" else
+					x"000000" & MuxData(7 downto 0)   when  DQM="1110" else
+					x"000000" & MuxData(15 downto 8)  when  DQM="1101" else
+					x"000000" & MuxData(23 downto 16) when  DQM="1011" else
+					x"000000" & MuxData(31 downto 24) when  DQM="0111" else
+					x"0000" 	 & MuxData(15 downto 0)  when  DQM="1100" else
+					x"0000" 	 & MuxData(31 downto 16) when  DQM="0011" else
 					(others=>'0');
-
+					
+MuxData <= PKG_outputDM when PKG_simulON = '1' else
+			  R_DATA;
+			  
+S_IN_Data_32 <= IN_Data_32 				  							when IN_Select='1' AND DQM = "0000" else
+					 x"0000" & IN_Data_32(15 downto 0)           when IN_Select='1' AND DQM = "1100" else
+					 IN_Data_32(31 downto 16) & x"0000"          when IN_Select='1' AND DQM = "0011" else
+					 x"000000" & IN_Data_32(7 downto 0)          when IN_Select='1' AND DQM = "1110" else
+					 x"0000" & IN_Data_32(15 downto 8) & x"00"   when IN_Select='1' AND DQM = "1101" else
+					 x"00" & IN_Data_32(23 downto 16) & x"0000"  when IN_Select='1' AND DQM = "1011" else
+					 IN_Data_32(31 downto 24) & x"000000" 			when IN_Select='1' AND DQM = "0111" else
+					 R_IN_Data_32;
+					 
 DQM <= "0000" when R_IN_Function3 = "10" else 											     -- 4 octets
 		 "1100" when R_IN_Function3 = "01" AND R_IN_Address(1) =  '0' else 			  -- 2 octets
 		 "0011" when R_IN_Function3 = "01" AND R_IN_Address(1) =  '1' else  			  -- 2 octets 

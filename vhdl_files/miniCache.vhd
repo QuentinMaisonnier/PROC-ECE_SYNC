@@ -60,7 +60,7 @@ END COMPONENT;
 ----------------------SIGNALS SDRAM MEMORY/PROC RISCV----------------------------
 
 SIGNAL Reginstruction, SIGinstruction        : STD_LOGIC_VECTOR(31 downto 0);
-SIGNAL Regdata, SIGdata        : STD_LOGIC_VECTOR(31 downto 0);
+SIGNAL Regdata, Muxdata        : STD_LOGIC_VECTOR(31 downto 0);
 
 SIGNAL SIGstore, SIGcsDM                        : STD_LOGIC;
 TYPE state IS (INIT, IDLE, LOADdataGet, STOREdataReq, STOREdataEnd, NEXTinstGet);
@@ -81,8 +81,8 @@ SIGNAL currentStateInit, nextStateInit : stateInit;
 begin
 
 	funct3 <= funct3boot when currentStateInit /= STOP else
-				 "010";
-				 --PROCfunct3;
+				 "010" 		when currentState = NEXTinstGet OR nextState = NEXTinstGet else
+				 PROCfunct3 ;
 						
 	writeSelect <= SIGstoreboot when currentStateInit /= STOP else
 						SIGstore;
@@ -99,7 +99,7 @@ begin
 				  
 	PROCinstruction <= Reginstruction;
 	
-	PROCoutputDM <= Regdata;
+	PROCoutputDM <= Muxdata;
 	
 	--PKG_instruction   <= inputDM;
 	
@@ -114,7 +114,6 @@ begin
 		PROChold <='1';
 		nextState <= currentState;
 		SIGinstruction <= Reginstruction;
-		SIGdata			<= REGdata;
 		SIGstore 		<= '0';
 		SIGcsDM				<= '0';
 		CASE currentState IS
@@ -146,15 +145,15 @@ begin
 ------------------- LOADdataGet -----------------------
 			WHEN LOADdataGet =>
 			
-				IF data_Ready_32b = '1' THEN
-					SIGdata <= dataOut_32b;
-				END IF;
+--				IF data_Ready_32b = '1' THEN
+--					SIGdata <= dataOut_32b;
+--				END IF;
 				
 				IF ready_32b = '1' THEN
+					PROChold <='0'; -- TEST
 					SIGstore <= '0';
 					SIGcsDM     <= '1';
 					nextstate <= NEXTinstGet;
-					PROChold <='0'; -- TEST
 				END IF;
 
 ------------------- STOREdataReq -----------------------
@@ -193,7 +192,10 @@ begin
 					      SIGinstruction WHEN rising_edge(Clock);
 						 
 	Regdata <= (others => '0') WHEN reset = '1' ELSE
-				  SIGdata WHEN rising_edge(Clock);
+				  Muxdata WHEN rising_edge(Clock);
+				  
+	Muxdata <= dataOut_32b when data_Ready_32b='1' AND currentState=LOADdataGet elsE
+				  regdata;
    ---------------------------------------------
 	
 	

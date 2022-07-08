@@ -36,9 +36,9 @@ Type state is (S_First, S_Start, S_PRECHARGE_INIT, S_Refresh_INIT, S_NOP_INIT, S
 		
 signal currentState, nextState : state;
 
-signal Reg_D : STD_LOGIC_VECTOR ((DATA_WIDTH-1) downto 0);
-signal reg_A : STD_LOGIC_VECTOR (24 downto 0);
-signal reg_DQM : STD_LOGIC_VECTOR ((DQM_WIDTH-1) downto 0);
+signal Reg_D, muxRegD : STD_LOGIC_VECTOR ((DATA_WIDTH-1) downto 0);
+signal reg_A, muxRegA : STD_LOGIC_VECTOR (24 downto 0);
+signal reg_DQM, muxRegDQM : STD_LOGIC_VECTOR ((DQM_WIDTH-1) downto 0);
 
 
 signal S_DQM, R_DQM : STD_LOGIC_VECTOR ((DQM_WIDTH-1) downto 0);
@@ -64,7 +64,6 @@ constant  T_RESET      	  : std_logic_vector(13 downto 0) := B"00000000000001";
 constant  T_RESET_REFRESH : std_logic_vector(21 downto 0) := B"0000000000000000000001";
 
 
-
 begin
 
 SDRAM_CLK <= clk;
@@ -77,15 +76,29 @@ SDRAM_CAS_N <= R_CMD(1); -- CAS
 SDRAM_WE_N  <= R_CMD(0); -- WE
 -- init --
 
+muxRegA <= reg_A when reg_ready = '1' else 
+			  address_in;
+reg_A <= (others=>'0') when reset='1' else 
+				muxRegA when rising_edge(clk);
+		 
+		 
+muxRegD <= reg_D when reg_ready = '1' else 
+			  Data_IN;
+reg_D <= (others=>'0') when reset='1' else 
+			muxRegD when rising_edge(clk);
 
-reg_A <= (others=>'0') when reset='1' 
-		 else Address_IN when reg_Ready = '1' AND rising_edge(clk);
+
+muxRegDQM <= DQM when reg_Ready = '1' else
+				 reg_DQM;
+				
+reg_DQM <= (others=>'0') when reset='1' else 
+				muxRegDQM when rising_edge(clk);
 		 
-reg_D <= (others=>'0') when reset='1' 
-		 else Data_IN when reg_Ready = '1' AND rising_edge(clk);
-		 
-reg_DQM <= (others=>'0') when reset='1' 
-		 else DQM when reg_Ready = '1' AND rising_edge(clk);
+--reg_A <= (others=>'0') when reset='1' 
+--		 else Address_IN when reg_Ready = '1' AND rising_edge(clk);
+
+--reg_D <= (others=>'0') when reset='1' 
+--		 else Data_IN when reg_Ready = '1' AND rising_edge(clk);
 
 
 
@@ -478,5 +491,3 @@ Data_OUT <=  RegRead2;
 
 
 end vhdl;
-
-
