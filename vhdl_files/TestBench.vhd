@@ -36,7 +36,7 @@ architecture VHDL of TestBenchTop is
 	end component;
 
 	signal reset, ck : std_logic;
-	signal dataReady_32b, selectSDRAM : std_logic;
+	signal dataReady_32b, selectSDRAM, storeSDRAM : std_logic;
 	signal counter, progcounter, instr, dataIN: std_logic_vector(31 downto 0);
 	signal R_In_Addr: std_logic_vector(25 downto 0);
     
@@ -208,6 +208,7 @@ architecture VHDL of TestBenchTop is
 	selectSDRAM <= PKG_SDRAMselect;
 	dataIN      <= PKG_inputData32;
 	R_In_Addr <= "00" & PKG_R_In_Addr(25 downto 2);
+	storeSDRAM <= PKG_SDRAMwrite;
 	
 	dataReady_32b <= PKG_dataReady_32b;
 	
@@ -273,13 +274,12 @@ architecture VHDL of TestBenchTop is
 	 VARIABLE cpt : integer:=0;
 		begin
 			
+			IF selectSDRAM='1' AND storeSDRAM='1' THEN
+					TabInstruction(to_integer(unsigned(R_In_Addr))) <= dataIN;
+			END IF;
+			
 			IF dataReady_32b='1' THEN
 --				outputData <= TabInstruction(cpt);
-
-				IF selectSDRAM='1' THEN
-					TabInstruction(to_integer(unsigned(R_In_Addr))) <= dataIN;
-				END IF;
-
 				outputData <= TabInstruction(to_integer(unsigned(R_In_Addr)));
 				CPT := CPT + 1;
 				wait for 20 ns;

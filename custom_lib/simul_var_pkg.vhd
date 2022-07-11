@@ -4,11 +4,14 @@ use ieee.numeric_std.all;
 
 package simulPkg is
 
+	
 	signal PKG_simulON        : std_logic 	:= '1';
 	signal PKG_dataReady_32b  : std_logic;
 	signal PKG_R_In_Addr  	  : std_logic_vector(25 downto 0);
 	signal PKG_inputData32	  : std_logic_vector(31 downto 0);
 	SIGNAL PKG_SDRAMselect : std_logic;
+
+	SIGNAL PKG_SDRAMwrite: std_logic;
 
 	signal PKG_store       : std_logic;
 	signal PKG_load        : std_logic;

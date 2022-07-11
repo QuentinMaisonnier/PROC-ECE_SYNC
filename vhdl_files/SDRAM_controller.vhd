@@ -7,6 +7,7 @@ library work;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 use work.SDRAM_package.ALL;
+USE work.simulPkg.ALL;
 
 entity SDRAM_controller is 
     Port (
@@ -450,7 +451,8 @@ R_CPT_DATA <= (others => '0') when reset = '1'
 Ready <= reg_Ready;
 -- --
 R_Write_IN <= '0' when reset = '1'
-		else S_Write_IN when falling_edge(clk);
+				  else S_Write_IN when falling_edge(clk);
+PKG_SDRAMwrite <= R_Write_IN;
 -- --
 R_DQM <= (others => '0') when reset = '1'
 		else S_DQM when falling_edge(clk);

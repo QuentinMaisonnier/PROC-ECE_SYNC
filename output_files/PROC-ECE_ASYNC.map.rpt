@@ -1,5 +1,5 @@
 Analysis & Synthesis report for PROC-ECE_ASYNC
-Fri Jul 08 12:17:12 2022
+Fri Jul 08 15:36:21 2022
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -62,13 +62,13 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Jul 08 12:17:12 2022       ;
+; Analysis & Synthesis Status        ; Successful - Fri Jul 08 15:36:21 2022       ;
 ; Quartus Prime Version              ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                      ; PROC-ECE_ASYNC                              ;
 ; Top-level Entity Name              ; Top                                         ;
 ; Family                             ; MAX 10                                      ;
-; Total logic elements               ; 4,551                                       ;
-;     Total combinational functions  ; 4,480                                       ;
+; Total logic elements               ; 4,550                                       ;
+;     Total combinational functions  ; 4,479                                       ;
 ;     Dedicated logic registers      ; 1,521                                       ;
 ; Total registers                    ; 1521                                        ;
 ; Total pins                         ; 141                                         ;
@@ -237,16 +237,16 @@ refer to the applicable agreement for further details.
 +---------------------------------------------+----------+
 ; Resource                                    ; Usage    ;
 +---------------------------------------------+----------+
-; Estimated Total logic elements              ; 4,551    ;
+; Estimated Total logic elements              ; 4,550    ;
 ;                                             ;          ;
-; Total combinational functions               ; 4480     ;
+; Total combinational functions               ; 4479     ;
 ; Logic element usage by number of LUT inputs ;          ;
-;     -- 4 input functions                    ; 2684     ;
+;     -- 4 input functions                    ; 2683     ;
 ;     -- 3 input functions                    ; 1454     ;
 ;     -- <=2 input functions                  ; 342      ;
 ;                                             ;          ;
 ; Logic elements by mode                      ;          ;
-;     -- normal mode                          ; 4122     ;
+;     -- normal mode                          ; 4121     ;
 ;     -- arithmetic mode                      ; 358      ;
 ;                                             ;          ;
 ; Total registers                             ; 1521     ;
@@ -262,8 +262,8 @@ refer to the applicable agreement for further details.
 ;     -- PLLs                                 ; 1        ;
 ;                                             ;          ;
 ; Maximum fan-out node                        ; TOPreset ;
-; Maximum fan-out                             ; 1737     ;
-; Total fan-out                               ; 21451    ;
+; Maximum fan-out                             ; 1736     ;
+; Total fan-out                               ; 21447    ;
 ; Average fan-out                             ; 3.39     ;
 +---------------------------------------------+----------+
 
@@ -273,14 +273,14 @@ refer to the applicable agreement for further details.
 +----------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+--------------------------------------------------------------------------------------------------------------+--------------------+--------------+
 ; Compilation Hierarchy Node                   ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; UFM Blocks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; ADC blocks ; Full Hierarchy Name                                                                                          ; Entity Name        ; Library Name ;
 +----------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+--------------------------------------------------------------------------------------------------------------+--------------------+--------------+
-; |Top                                         ; 4480 (129)          ; 1521 (1)                  ; 131072      ; 0          ; 0            ; 0       ; 0         ; 141  ; 0            ; 0          ; |Top                                                                                                         ; Top                ; work         ;
+; |Top                                         ; 4479 (129)          ; 1521 (1)                  ; 131072      ; 0          ; 0            ; 0       ; 0         ; 141  ; 0            ; 0          ; |Top                                                                                                         ; Top                ; work         ;
 ;    |Counter:instCPT|                         ; 35 (35)             ; 32 (32)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Counter:instCPT                                                                                         ; Counter            ; work         ;
 ;    |Displays:instDISP|                       ; 75 (75)             ; 96 (96)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Displays:instDISP                                                                                       ; Displays           ; work         ;
-;    |Processor:instPROC|                      ; 3639 (316)          ; 1033 (8)                  ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC                                                                                      ; Processor          ; work         ;
+;    |Processor:instPROC|                      ; 3638 (316)          ; 1033 (8)                  ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC                                                                                      ; Processor          ; work         ;
 ;       |Alu:instALU|                          ; 757 (757)           ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC|Alu:instALU                                                                          ; Alu                ; work         ;
 ;       |InstructionDecoder:instID|            ; 16 (16)             ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC|InstructionDecoder:instID                                                            ; InstructionDecoder ; work         ;
 ;       |ProgramCounter:instPC|                ; 175 (175)           ; 32 (32)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC|ProgramCounter:instPC                                                                ; ProgramCounter     ; work         ;
-;       |RegisterFile:instRF|                  ; 2375 (2375)         ; 992 (992)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC|RegisterFile:instRF                                                                  ; RegisterFile       ; work         ;
+;       |RegisterFile:instRF|                  ; 2374 (2374)         ; 992 (992)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC|RegisterFile:instRF                                                                  ; RegisterFile       ; work         ;
 ;    |SDRAM_32b:SDRAMconverter|                ; 285 (285)           ; 104 (104)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|SDRAM_32b:SDRAMconverter                                                                                ; SDRAM_32b          ; work         ;
 ;    |SDRAM_controller:SDRAMcontroller|        ; 142 (142)           ; 151 (151)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|SDRAM_controller:SDRAMcontroller                                                                        ; SDRAM_controller   ; work         ;
 ;    |clock1M:instPLL|                         ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|clock1M:instPLL                                                                                         ; clock1M            ; work         ;
@@ -456,7 +456,7 @@ Note: All cells listed above may not be present at the end of synthesis due to v
 ; Displays:instDISP|regDisplay1[13]                 ; 1       ;
 ; Displays:instDISP|regDisplay1[14]                 ; 1       ;
 ; Displays:instDISP|regDisplay1[15]                 ; 1       ;
-; TOPreset                                          ; 1737    ;
+; TOPreset                                          ; 1736    ;
 ; Displays:instDISP|regDisplay1[16]                 ; 1       ;
 ; Displays:instDISP|regDisplay1[17]                 ; 1       ;
 ; Displays:instDISP|regDisplay1[18]                 ; 1       ;
@@ -524,37 +524,37 @@ Note: All cells listed above may not be present at the end of synthesis due to v
 ; 4:1                ; 24 bits   ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; Yes        ; |Top|SDRAM_32b:SDRAMconverter|R_IN_Address[2]           ;
 ; 11:1               ; 13 bits   ; 91 LEs        ; 13 LEs               ; 78 LEs                 ; Yes        ; |Top|SDRAM_controller:SDRAMcontroller|R_CPT[4]          ;
 ; 3:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |Top|miniCache:minicacheInst|nextStateInit              ;
-; 3:1                ; 20 bits   ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGinput2ALU[31]                ;
-; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGinput2ALU[4]                 ;
-; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGrdRF[0]                      ;
-; 4:1                ; 11 bits   ; 22 LEs        ; 22 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGoffsetPC[24]                 ;
+; 3:1                ; 20 bits   ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGinput2ALU[12]                ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGinput2ALU[0]                 ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGrdRF[1]                      ;
+; 4:1                ; 11 bits   ; 22 LEs        ; 22 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGoffsetPC[27]                 ;
 ; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGoffsetPC[14]                 ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |Top|SDRAM_32b:SDRAMconverter|DataOut_32b[11]           ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |Top|debuger:debug|display5[2]                          ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; No         ; |Top|debuger:debug|display2[2]                          ;
-; 5:1                ; 6 bits    ; 18 LEs        ; 12 LEs               ; 6 LEs                  ; No         ; |Top|Processor:instPROC|SIGoffsetPC[7]                  ;
-; 5:1                ; 31 bits   ; 93 LEs        ; 93 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|ProgramCounter:instPC|SigPCnext ;
-; 32:1               ; 32 bits   ; 672 LEs       ; 672 LEs              ; 0 LEs                  ; No         ; |Top|Processor:instPROC|RegisterFile:instRF|RFout1[0]   ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |Top|SDRAM_32b:SDRAMconverter|DataOut_32b[14]           ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |Top|debuger:debug|display6[1]                          ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; No         ; |Top|debuger:debug|display1[1]                          ;
+; 5:1                ; 6 bits    ; 18 LEs        ; 12 LEs               ; 6 LEs                  ; No         ; |Top|Processor:instPROC|SIGoffsetPC[9]                  ;
+; 5:1                ; 31 bits   ; 93 LEs        ; 93 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|ProgramCounter:instPC|PCnext[2] ;
+; 32:1               ; 32 bits   ; 672 LEs       ; 672 LEs              ; 0 LEs                  ; No         ; |Top|Processor:instPROC|RegisterFile:instRF|RFout1[13]  ;
 ; 32:1               ; 32 bits   ; 672 LEs       ; 672 LEs              ; 0 LEs                  ; No         ; |Top|Processor:instPROC|RegisterFile:instRF|RFout2[0]   ;
 ; 6:1                ; 5 bits    ; 20 LEs        ; 15 LEs               ; 5 LEs                  ; No         ; |Top|Processor:instPROC|SIGoffsetPC[2]                  ;
-; 5:1                ; 8 bits    ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; No         ; |Top|SDRAM_32b:SDRAMconverter|DataOut_32b[4]            ;
+; 5:1                ; 8 bits    ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; No         ; |Top|SDRAM_32b:SDRAMconverter|DataOut_32b[0]            ;
 ; 27:1               ; 8 bits    ; 144 LEs       ; 16 LEs               ; 128 LEs                ; No         ; |Top|SDRAM_32b:SDRAMconverter|Mux_IN_Data_32            ;
 ; 27:1               ; 8 bits    ; 144 LEs       ; 16 LEs               ; 128 LEs                ; No         ; |Top|SDRAM_32b:SDRAMconverter|Mux_IN_Data_32            ;
 ; 27:1               ; 8 bits    ; 144 LEs       ; 16 LEs               ; 128 LEs                ; No         ; |Top|SDRAM_32b:SDRAMconverter|Mux_IN_Data_32            ;
 ; 27:1               ; 8 bits    ; 144 LEs       ; 16 LEs               ; 128 LEs                ; No         ; |Top|SDRAM_32b:SDRAMconverter|Mux_IN_Data_32            ;
 ; 7:1                ; 2 bits    ; 8 LEs         ; 6 LEs                ; 2 LEs                  ; No         ; |Top|Processor:instPROC|SIGinputRF[1]                   ;
-; 7:1                ; 6 bits    ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGinputRF[7]                   ;
-; 9:1                ; 16 bits   ; 96 LEs        ; 64 LEs               ; 32 LEs                 ; No         ; |Top|Processor:instPROC|SIGinputRF[23]                  ;
+; 7:1                ; 6 bits    ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; No         ; |Top|Processor:instPROC|SIGinputRF[5]                   ;
+; 9:1                ; 16 bits   ; 96 LEs        ; 64 LEs               ; 32 LEs                 ; No         ; |Top|Processor:instPROC|SIGinputRF[24]                  ;
 ; 7:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; No         ; |Top|miniCache:minicacheInst|Selector1                  ;
-; 10:1               ; 4 bits    ; 24 LEs        ; 16 LEs               ; 8 LEs                  ; No         ; |Top|Processor:instPROC|SIGinputRF[8]                   ;
-; 10:1               ; 4 bits    ; 24 LEs        ; 16 LEs               ; 8 LEs                  ; No         ; |Top|Processor:instPROC|SIGinputRF[12]                  ;
+; 10:1               ; 4 bits    ; 24 LEs        ; 16 LEs               ; 8 LEs                  ; No         ; |Top|Processor:instPROC|SIGinputRF[11]                  ;
+; 10:1               ; 4 bits    ; 24 LEs        ; 16 LEs               ; 8 LEs                  ; No         ; |Top|Processor:instPROC|SIGinputRF[13]                  ;
 ; 9:1                ; 2 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; No         ; |Top|miniCache:minicacheInst|Selector3                  ;
 ; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |Top|SDRAM_32b:SDRAMconverter|Selector6                 ;
-; 119:1              ; 8 bits    ; 632 LEs       ; 56 LEs               ; 576 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[12]          ;
-; 120:1              ; 7 bits    ; 560 LEs       ; 56 LEs               ; 504 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[23]          ;
+; 119:1              ; 8 bits    ; 632 LEs       ; 56 LEs               ; 576 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[11]          ;
+; 120:1              ; 7 bits    ; 560 LEs       ; 56 LEs               ; 504 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[22]          ;
 ; 120:1              ; 4 bits    ; 320 LEs       ; 32 LEs               ; 288 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[7]           ;
-; 121:1              ; 4 bits    ; 320 LEs       ; 32 LEs               ; 288 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[24]          ;
-; 121:1              ; 2 bits    ; 160 LEs       ; 16 LEs               ; 144 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[2]           ;
+; 121:1              ; 4 bits    ; 320 LEs       ; 32 LEs               ; 288 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[27]          ;
+; 121:1              ; 2 bits    ; 160 LEs       ; 16 LEs               ; 144 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[3]           ;
 ; 122:1              ; 2 bits    ; 162 LEs       ; 16 LEs               ; 146 LEs                ; No         ; |Top|Processor:instPROC|Alu:instALU|ALUout[28]          ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------+
 
@@ -1098,7 +1098,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; boundary_port         ; 1423                        ;
+; boundary_port         ; 1424                        ;
 ; cycloneiii_ff         ; 1521                        ;
 ;     CLR               ; 1132                        ;
 ;     CLR SLD           ; 64                          ;
@@ -1106,17 +1106,17 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     ENA CLR           ; 323                         ;
 ;     plain             ; 1                           ;
 ; cycloneiii_io_obuf    ; 16                          ;
-; cycloneiii_lcell_comb ; 4483                        ;
+; cycloneiii_lcell_comb ; 4482                        ;
 ;     arith             ; 358                         ;
 ;         1 data inputs ; 1                           ;
 ;         2 data inputs ; 120                         ;
 ;         3 data inputs ; 237                         ;
-;     normal            ; 4125                        ;
+;     normal            ; 4124                        ;
 ;         0 data inputs ; 2                           ;
 ;         1 data inputs ; 73                          ;
 ;         2 data inputs ; 149                         ;
 ;         3 data inputs ; 1217                        ;
-;         4 data inputs ; 2684                        ;
+;         4 data inputs ; 2683                        ;
 ; cycloneiii_pll        ; 1                           ;
 ; cycloneiii_ram_block  ; 32                          ;
 ;                       ;                             ;
@@ -1130,7 +1130,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:11     ;
+; Top            ; 00:00:13     ;
 +----------------+--------------+
 
 
@@ -1140,7 +1140,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
-    Info: Processing started: Fri Jul 08 12:16:48 2022
+    Info: Processing started: Fri Jul 08 15:35:55 2022
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off PROC-ECE_ASYNC -c PROC-ECE_ASYNC
 Info (20032): Parallel compilation is enabled and will use up to 4 processors
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/minicache.vhd
@@ -1149,8 +1149,8 @@ Info (12021): Found 2 design units, including 1 entities, in source file vhdl_fi
 Info (12021): Found 1 design units, including 0 entities, in source file vhdl_files/sdram_package.vhd
     Info (12022): Found design unit 1: SDRAM_package File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_package.vhd Line: 5
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/sdram_controller.vhd
-    Info (12022): Found design unit 1: SDRAM_controller-vhdl File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_controller.vhd Line: 32
-    Info (12023): Found entity 1: SDRAM_controller File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_controller.vhd Line: 11
+    Info (12022): Found design unit 1: SDRAM_controller-vhdl File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_controller.vhd Line: 33
+    Info (12023): Found entity 1: SDRAM_controller File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_controller.vhd Line: 12
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/sdram_32b.vhd
     Info (12022): Found design unit 1: SDRAM_32b-vhdl File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_32b.vhd Line: 40
     Info (12023): Found entity 1: SDRAM_32b File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_32b.vhd Line: 9
@@ -1420,17 +1420,17 @@ Critical Warning (35046): Net "work.simulPkg.PKG_outputDM_9_" has a missing sour
 Critical Warning (35046): Net "work.simulPkg.PKG_simulON" has a missing source. The net will be connected to GND and its default value will be ignored.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 1 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 4911 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 4910 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 6 input pins
     Info (21059): Implemented 119 output pins
     Info (21060): Implemented 16 bidirectional pins
-    Info (21061): Implemented 4737 logic cells
+    Info (21061): Implemented 4736 logic cells
     Info (21064): Implemented 32 RAM segments
     Info (21065): Implemented 1 PLLs
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 76 warnings
-    Info: Peak virtual memory: 4837 megabytes
-    Info: Processing ended: Fri Jul 08 12:17:12 2022
-    Info: Elapsed time: 00:00:24
-    Info: Total CPU time (on all processors): 00:00:34
+    Info: Peak virtual memory: 4839 megabytes
+    Info: Processing ended: Fri Jul 08 15:36:21 2022
+    Info: Elapsed time: 00:00:26
+    Info: Total CPU time (on all processors): 00:00:36
 
 

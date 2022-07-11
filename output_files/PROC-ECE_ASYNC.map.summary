@@ -1,10 +1,10 @@
-Analysis & Synthesis Status : Successful - Fri Jul 08 12:17:12 2022
+Analysis & Synthesis Status : Successful - Fri Jul 08 15:36:21 2022
 Quartus Prime Version : 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 Revision Name : PROC-ECE_ASYNC
 Top-level Entity Name : Top
 Family : MAX 10
-Total logic elements : 4,551
-    Total combinational functions : 4,480
+Total logic elements : 4,550
+    Total combinational functions : 4,479
     Dedicated logic registers : 1,521
 Total registers : 1521
 Total pins : 141
