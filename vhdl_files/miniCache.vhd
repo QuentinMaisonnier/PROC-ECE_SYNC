@@ -76,7 +76,7 @@ SIGNAL inputDMboot             : STD_LOGIC_VECTOR(31 DOWNTO 0);
 SIGNAL SIGstoreboot, csDMboot                        : STD_LOGIC;
 CONSTANT SizeSRAM                                    : INTEGER := 1023;
 
-TYPE stateInit IS (WAITING, cpy, next_Addr, stop, testwrite);
+TYPE stateInit IS (WAITING, cpy, next_Addr, stop);
 SIGNAL currentStateInit, nextStateInit : stateInit;
 ---------------------------------------------------------------------------------
 
@@ -93,7 +93,7 @@ begin
 			  SIGcsDM;
 						
 	AddressDM <= RcptAddr when currentStateInit /= STOP else
-			       PROCaddrDM when nextState /= NEXTinstGet else
+			       PROCaddrDM when currentState = STOREdataReq OR currentState=STOREdataEnd else
 					 PROCprogcounter;
 	
 	inputDM <= inputDMboot when currentStateInit /= STOP else
@@ -243,11 +243,6 @@ begin
 
 			WHEN stop      =>
 				bootfinish <= '1';
-
-			WHEN testwrite =>
-				SIGstoreboot <= '1';
-				csDMboot     <= '1';
-				nextStateInit    <= stop;
 		END CASE;
 	END PROCESS;
 

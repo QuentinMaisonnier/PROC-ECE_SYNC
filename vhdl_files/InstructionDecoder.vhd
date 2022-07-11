@@ -35,6 +35,7 @@ entity InstructionDecoder is
 		IDload 			: out std_logic;
 		IDloadP2		   : out std_logic;
 		IDstore 		   : out std_logic;
+		--IDstoreP2 		: out std_logic;
 		IDlui 			: out std_logic;
 		IDauipc 		   : out std_logic;
 		IDjal 			: out std_logic;
@@ -47,6 +48,8 @@ end entity;
 architecture archi of InstructionDecoder is
 
 SIGNAL RegIDloadP2, SIGIDload, MuxIDloadP2, MuxIDload : STD_LOGIC;
+
+SIGNAL RegIDstoreP2, SIGIDstore, MuxIDstoreP2, MuxIDstore : STD_LOGIC;
 
 begin
 	--BEGIN
@@ -97,7 +100,15 @@ begin
 	IDload   <= SIGIDload;
 	
 	-- Store instruction ?
-	IDstore 	<= '1' when IDinstruction(6 downto 0) = "0100011" else '0';
+	SIGIDstore 	<= '1' when IDinstruction(6 downto 0) = "0100011" and RegIDstoreP2='0' else '0';
+	RegIDstoreP2 <= MuxIDstoreP2 when rising_edge(clock);
+	
+	--IDstoreP2 <= RegIDstoreP2;
+	IDstore <= SIGIDstore;
+	
+	MuxIDstoreP2 <= RegIDstoreP2 when hold='1' else
+					  '0' when reset='1' else
+					  SIGIDstore;
 	-- LUI instruction ?
 	IDlui 	<= '1' when IDinstruction(6 downto 0) = "0110111" else '0';
 	-- AUIPC instruction ?

@@ -1,4 +1,3 @@
-
 -- 32M x 16 SDRAM
 -- 8M (addresses) * 4 (Banks) * 16 (16 bits Data) = 512 Mb SDRAM <=> 64 MB SDRAM
 
@@ -7,7 +6,6 @@ library work;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 use work.SDRAM_package.ALL;
-USE work.simulPkg.ALL;
 
 entity SDRAM_controller is 
     Port (
@@ -37,9 +35,9 @@ Type state is (S_First, S_Start, S_PRECHARGE_INIT, S_Refresh_INIT, S_NOP_INIT, S
 		
 signal currentState, nextState : state;
 
-signal Reg_D : STD_LOGIC_VECTOR ((DATA_WIDTH-1) downto 0);
-signal reg_A : STD_LOGIC_VECTOR (24 downto 0);
-signal reg_DQM : STD_LOGIC_VECTOR ((DQM_WIDTH-1) downto 0);
+signal Reg_D, muxRegD : STD_LOGIC_VECTOR ((DATA_WIDTH-1) downto 0);
+signal reg_A, muxRegA : STD_LOGIC_VECTOR (24 downto 0);
+signal reg_DQM, muxRegDQM : STD_LOGIC_VECTOR ((DQM_WIDTH-1) downto 0);
 
 
 signal S_DQM, R_DQM : STD_LOGIC_VECTOR ((DQM_WIDTH-1) downto 0);
@@ -65,7 +63,6 @@ constant  T_RESET      	  : std_logic_vector(13 downto 0) := B"00000000000001";
 constant  T_RESET_REFRESH : std_logic_vector(21 downto 0) := B"0000000000000000000001";
 
 
-
 begin
 
 SDRAM_CLK <= clk;
@@ -78,15 +75,29 @@ SDRAM_CAS_N <= R_CMD(1); -- CAS
 SDRAM_WE_N  <= R_CMD(0); -- WE
 -- init --
 
+muxRegA <= address_in when reg_ready = '1' else 
+			  reg_A;
+			  
+reg_A <= (others=>'0') when reset='1' else 
+			muxRegA when rising_edge(clk);
+		 
+muxRegD <= Data_IN when reg_ready = '1' else 
+			  reg_D;
+			  
+reg_D <= (others=>'0') when reset='1' else 
+			muxRegD when rising_edge(clk);
 
-reg_A <= (others=>'0') when reset='1' 
-		 else Address_IN when reg_Ready = '1' AND rising_edge(clk);
+muxRegDQM <= DQM when reg_Ready = '1' else
+				 reg_DQM;
+			 
+reg_DQM <= (others=>'0') when reset='1' else 
+				muxRegDQM when rising_edge(clk);
 		 
-reg_D <= (others=>'0') when reset='1' 
-		 else Data_IN when reg_Ready = '1' AND rising_edge(clk);
-		 
-reg_DQM <= (others=>'0') when reset='1' 
-		 else DQM when reg_Ready = '1' AND rising_edge(clk);
+--reg_A <= (others=>'0') when reset='1' 
+--		 else Address_IN when reg_Ready = '1' AND rising_edge(clk);
+
+--reg_D <= (others=>'0') when reset='1' 
+--		 else Data_IN when reg_Ready = '1' AND rising_edge(clk);
 
 
 
@@ -451,8 +462,7 @@ R_CPT_DATA <= (others => '0') when reset = '1'
 Ready <= reg_Ready;
 -- --
 R_Write_IN <= '0' when reset = '1'
-				  else S_Write_IN when falling_edge(clk);
-PKG_SDRAMwrite <= R_Write_IN;
+		else S_Write_IN when falling_edge(clk);
 -- --
 R_DQM <= (others => '0') when reset = '1'
 		else S_DQM when falling_edge(clk);
@@ -475,9 +485,4 @@ Data_Ready <= reg_DataReady when rising_edge(clk);
 Data_OUT <=  RegRead2;
 -- Data INOUT --
 
-
-
-
-
 end vhdl;
-

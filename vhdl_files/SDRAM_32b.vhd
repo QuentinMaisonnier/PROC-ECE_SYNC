@@ -196,7 +196,7 @@ Mux_IN_Address <= IN_Address when IN_Select='1' else
 					 R_IN_Address;
 					 
 Mux_IN_Function3 <= IN_Function3 when IN_Select='1' else
-					 R_IN_Function3;
+					     R_IN_Function3;
 			 
 DataOut_32b <= MuxData 				 				    when  DQM="0000" else
 					x"000000" & MuxData(7 downto 0)   when  DQM="1110" else
@@ -215,7 +215,7 @@ PKG_SDRAMselect <= SIG_selectOUT16;
 
 OUT_Select <= SIG_selectOUT16;
 			  
-Mux_IN_Data_32 <= IN_Data_32 				  							when IN_Select='1' AND DQM = "0000" else
+Mux_IN_Data_32 <= IN_Data_32 				  							  when IN_Select='1' AND DQM = "0000" else
 						x"0000" & IN_Data_32(15 downto 0)           when IN_Select='1' AND DQM = "1100" else
 						IN_Data_32(31 downto 16) & x"0000"          when IN_Select='1' AND DQM = "0011" else
 						x"000000" & IN_Data_32(7 downto 0)          when IN_Select='1' AND DQM = "1110" else
@@ -227,13 +227,13 @@ Mux_IN_Data_32 <= IN_Data_32 				  							when IN_Select='1' AND DQM = "0000" el
 --Mux_IN_Data_32 <= IN_Data_32 when IN_Select='1' else
 --					   R_IN_Data_32;
 					 
-DQM <= "0000" when R_IN_Function3 = "10" else 											     -- 4 octets
-		 "1100" when R_IN_Function3 = "01" AND R_IN_Address(1) =  '0' else 			  -- 2 octets
-		 "0011" when R_IN_Function3 = "01" AND R_IN_Address(1) =  '1' else  			  -- 2 octets 
-		 "1110" when R_IN_Function3 = "00" AND R_IN_Address(1 downto 0) =  "00" else  -- 1 octet 
-		 "1101" when R_IN_Function3 = "00" AND R_IN_Address(1 downto 0) =  "01" else  -- 1 octet
-		 "1011" when R_IN_Function3 = "00" AND R_IN_Address(1 downto 0) =  "10" else  -- 1 octet
-		 "0111" when R_IN_Function3 = "00" AND R_IN_Address(1 downto 0) =  "11" else  -- 1 octet
+DQM <= "0000" when Mux_IN_Function3 = "10" else 											     -- 4 octets
+		 "1100" when Mux_IN_Function3 = "01" AND R_IN_Address(1) =  '0' else 			  -- 2 octets
+		 "0011" when Mux_IN_Function3 = "01" AND R_IN_Address(1) =  '1' else  			  -- 2 octets 
+		 "1110" when Mux_IN_Function3 = "00" AND R_IN_Address(1 downto 0) =  "00" else  -- 1 octet 
+		 "1101" when Mux_IN_Function3 = "00" AND R_IN_Address(1 downto 0) =  "01" else  -- 1 octet
+		 "1011" when Mux_IN_Function3 = "00" AND R_IN_Address(1 downto 0) =  "10" else  -- 1 octet
+		 "0111" when Mux_IN_Function3 = "00" AND R_IN_Address(1 downto 0) =  "11" else  -- 1 octet
 		 "1111";
 
 end vhdl;
