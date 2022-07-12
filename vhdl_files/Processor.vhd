@@ -81,6 +81,7 @@ ARCHITECTURE archi OF Processor IS
 			IDload 			: out std_logic;
 			IDloadP2		   : out std_logic;
 			IDstore 		   : out std_logic;
+			IDstoreP2 		: out std_logic;
 			IDlui 			: out std_logic;
 			IDauipc 		   : out std_logic;
 			IDjal 			: out std_logic;
@@ -151,7 +152,7 @@ ARCHITECTURE archi OF Processor IS
 	SIGNAL SIGimm21J              : STD_LOGIC_VECTOR (20 DOWNTO 0);
 	SIGNAL SIGload, SIGloadP2		: STD_LOGIC;
 	SIGNAL MuxHoldPC              : STD_LOGIC;
-	SIGNAL SIGstore               : STD_LOGIC;
+	SIGNAL SIGstore, SIGstoreP2   : STD_LOGIC;
 	SIGNAL SIGlui                 : STD_LOGIC;
 	SIGNAL SIGauipc               : STD_LOGIC;
 	SIGNAL SIGjal                 : STD_LOGIC;
@@ -209,6 +210,9 @@ BEGIN
 	SIGoffsetPC                <= SIGoffsetPC1 WHEN SIGauipc = '1' OR SIGjalr = '1' ELSE
 											SIGoffsetPC2 WHEN SIGjal = '1' ELSE
 											SIGoffsetPC3 WHEN SIGbranch = '1' ELSE (OTHERS => '0');
+											
+	MuxHoldPC <= '1' WHEN Hold='1' OR SIGload='1' ELSE
+				    '0';
 	-- register file
 
 	RegaddrLoad <= (OTHERS => '0') WHEN PROCreset = '1' ELSE
@@ -216,9 +220,6 @@ BEGIN
 						
 	MuxrdID <= SIGrdID WHEN Hold = '0' ELSE
 		        RegaddrLoad;
-
-	MuxHoldPC <= '1' WHEN Hold='1' OR SIGload='1' ELSE
-				    '0';
 				  
 	PROCload <= SIGload;
 
@@ -340,6 +341,7 @@ BEGIN
 		IDload        => SIGload,
 		IDloadP2 	  => SIGloadP2,
 		IDstore       => SIGstore,
+		IDstoreP2     => SIGstoreP2,
 		IDlui         => SIGlui,
 		IDauipc       => SIGauipc,
 		IDjal         => SIGjal,

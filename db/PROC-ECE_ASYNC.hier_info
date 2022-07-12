@@ -1654,10 +1654,11 @@ PC[31] <= SigPC[31].DB_MAX_OUTPUT_PORT_TYPE
 
 
 |Top|Processor:instPROC|InstructionDecoder:instID
-hold => RegIDloadP2.ENA
+hold => MuxIDloadP2.OUTPUTSELECT
 hold => RegIDstoreP2.ENA
 reset => MuxIDloadP2.OUTPUTSELECT
 reset => MuxIDstoreP2.OUTPUTSELECT
+reset => RegIDstoreP2.ACLR
 clock => RegIDstoreP2.CLK
 clock => RegIDloadP2.CLK
 IDinstruction[0] => IDopcode[0].DATAIN
@@ -1929,9 +1930,10 @@ IDimm21J[17] <= IDinstruction[17].DB_MAX_OUTPUT_PORT_TYPE
 IDimm21J[18] <= IDinstruction[18].DB_MAX_OUTPUT_PORT_TYPE
 IDimm21J[19] <= IDinstruction[19].DB_MAX_OUTPUT_PORT_TYPE
 IDimm21J[20] <= IDinstruction[31].DB_MAX_OUTPUT_PORT_TYPE
-IDload <= SIGIDload.DB_MAX_OUTPUT_PORT_TYPE
+IDload <= MuxIDloadP2.DB_MAX_OUTPUT_PORT_TYPE
 IDloadP2 <= RegIDloadP2.DB_MAX_OUTPUT_PORT_TYPE
 IDstore <= SIGIDstore.DB_MAX_OUTPUT_PORT_TYPE
+IDstoreP2 <= comb.DB_MAX_OUTPUT_PORT_TYPE
 IDlui <= Equal2.DB_MAX_OUTPUT_PORT_TYPE
 IDauipc <= Equal3.DB_MAX_OUTPUT_PORT_TYPE
 IDjal <= Equal4.DB_MAX_OUTPUT_PORT_TYPE
@@ -8287,9 +8289,7 @@ IN_Address[22] => Mux_IN_Address[22].DATAB
 IN_Address[23] => Mux_IN_Address[23].DATAB
 IN_Address[24] => Mux_IN_Address[24].DATAB
 IN_Address[25] => Mux_IN_Address[25].DATAB
-IN_Write_Select => nextState.DATAB
-IN_Write_Select => fsm.IN0
-IN_Write_Select => nextState.DATAB
+IN_Write_Select => comb.DATAIN
 IN_Data_32[0] => Mux_IN_Data_32.DATAB
 IN_Data_32[0] => Mux_IN_Data_32.DATAB
 IN_Data_32[0] => Mux_IN_Data_32.DATAB
@@ -8386,42 +8386,7 @@ IN_Data_32[30] => Mux_IN_Data_32.DATAB
 IN_Data_32[31] => Mux_IN_Data_32.DATAB
 IN_Data_32[31] => Mux_IN_Data_32.DATAB
 IN_Data_32[31] => Mux_IN_Data_32.DATAB
-IN_Select => fsm.IN0
-IN_Select => Mux_IN_Address[25].OUTPUTSELECT
-IN_Select => Mux_IN_Address[24].OUTPUTSELECT
-IN_Select => Mux_IN_Address[23].OUTPUTSELECT
-IN_Select => Mux_IN_Address[22].OUTPUTSELECT
-IN_Select => Mux_IN_Address[21].OUTPUTSELECT
-IN_Select => Mux_IN_Address[20].OUTPUTSELECT
-IN_Select => Mux_IN_Address[19].OUTPUTSELECT
-IN_Select => Mux_IN_Address[18].OUTPUTSELECT
-IN_Select => Mux_IN_Address[17].OUTPUTSELECT
-IN_Select => Mux_IN_Address[16].OUTPUTSELECT
-IN_Select => Mux_IN_Address[15].OUTPUTSELECT
-IN_Select => Mux_IN_Address[14].OUTPUTSELECT
-IN_Select => Mux_IN_Address[13].OUTPUTSELECT
-IN_Select => Mux_IN_Address[12].OUTPUTSELECT
-IN_Select => Mux_IN_Address[11].OUTPUTSELECT
-IN_Select => Mux_IN_Address[10].OUTPUTSELECT
-IN_Select => Mux_IN_Address[9].OUTPUTSELECT
-IN_Select => Mux_IN_Address[8].OUTPUTSELECT
-IN_Select => Mux_IN_Address[7].OUTPUTSELECT
-IN_Select => Mux_IN_Address[6].OUTPUTSELECT
-IN_Select => Mux_IN_Address[5].OUTPUTSELECT
-IN_Select => Mux_IN_Address[4].OUTPUTSELECT
-IN_Select => Mux_IN_Address[3].OUTPUTSELECT
-IN_Select => Mux_IN_Address[2].OUTPUTSELECT
-IN_Select => Mux_IN_Address[1].OUTPUTSELECT
-IN_Select => Mux_IN_Address[0].OUTPUTSELECT
-IN_Select => Mux_IN_Function3[1].OUTPUTSELECT
-IN_Select => Mux_IN_Function3[0].OUTPUTSELECT
-IN_Select => Mux_IN_Data_32.IN1
-IN_Select => Mux_IN_Data_32.IN1
-IN_Select => Mux_IN_Data_32.IN1
-IN_Select => Mux_IN_Data_32.IN1
-IN_Select => Mux_IN_Data_32.IN1
-IN_Select => Mux_IN_Data_32.IN1
-IN_Select => Mux_IN_Data_32.IN1
+IN_Select => comb.DATAIN
 IN_Function3[0] => Mux_IN_Function3[0].DATAB
 IN_Function3[1] => Mux_IN_Function3[1].DATAB
 OUT_Address[0] <= WideOr0.DB_MAX_OUTPUT_PORT_TYPE
@@ -8466,7 +8431,7 @@ OUT_Data_16[12] <= Selector10.DB_MAX_OUTPUT_PORT_TYPE
 OUT_Data_16[13] <= Selector9.DB_MAX_OUTPUT_PORT_TYPE
 OUT_Data_16[14] <= Selector8.DB_MAX_OUTPUT_PORT_TYPE
 OUT_Data_16[15] <= Selector7.DB_MAX_OUTPUT_PORT_TYPE
-OUT_Select <= OUT_Select.DB_MAX_OUTPUT_PORT_TYPE
+OUT_Select <= OUT_Address.DB_MAX_OUTPUT_PORT_TYPE
 OUT_DQM[0] <= Selector24.DB_MAX_OUTPUT_PORT_TYPE
 OUT_DQM[1] <= Selector23.DB_MAX_OUTPUT_PORT_TYPE
 Ready_32b <= signal_Ready_32b.DB_MAX_OUTPUT_PORT_TYPE
@@ -8591,6 +8556,8 @@ DataOut_16b[14] => S_DATA.DATAB
 DataOut_16b[14] => S_DATA.DATAB
 DataOut_16b[15] => S_DATA.DATAB
 DataOut_16b[15] => S_DATA.DATAB
+global.bp.work.simulPkg.PKG_SDRAMwrite <> comb
+global.bp.work.simulPkg.PKG_SDRAMselect <> comb
 global.bp.work.simulPkg.PKG_R_In_Addr_25_ <> R_IN_Address[25]
 global.bp.work.simulPkg.PKG_R_In_Addr_24_ <> R_IN_Address[24]
 global.bp.work.simulPkg.PKG_R_In_Addr_23_ <> R_IN_Address[23]
@@ -8647,7 +8614,6 @@ global.bp.work.simulPkg.PKG_inputData32_17_ <> global.bp.work.simulPkg.PKG_input
 global.bp.work.simulPkg.PKG_inputData32_1_ <> global.bp.work.simulPkg.PKG_inputData32_1_
 global.bp.work.simulPkg.PKG_inputData32_16_ <> global.bp.work.simulPkg.PKG_inputData32_16_
 global.bp.work.simulPkg.PKG_inputData32_0_ <> global.bp.work.simulPkg.PKG_inputData32_0_
-global.bp.work.simulPkg.PKG_SDRAMselect <> global.bp.work.simulPkg.PKG_SDRAMselect
 global.bp.work.simulPkg.PKG_R_In_Addr_1_ <> R_IN_Address[1]
 global.bp.work.simulPkg.PKG_R_In_Addr_0_ <> R_IN_Address[0]
 
@@ -9158,6 +9124,7 @@ clock => Reginstruction[30].CLK
 clock => Reginstruction[31].CLK
 clock => currentStateInit~1.DATAIN
 clock => currentState~1.DATAIN
+clock => previousState~1.DATAIN
 reset => RcptAddr[0].ACLR
 reset => RcptAddr[1].ACLR
 reset => RcptAddr[2].ACLR
@@ -9256,6 +9223,7 @@ reset => Reginstruction[30].ACLR
 reset => Reginstruction[31].ACLR
 reset => currentStateInit~3.DATAIN
 reset => currentState~3.DATAIN
+reset => previousState~3.DATAIN
 bootfinish <= bootfinish.DB_MAX_OUTPUT_PORT_TYPE
 PROCinstruction[0] <= Reginstruction[0].DB_MAX_OUTPUT_PORT_TYPE
 PROCinstruction[1] <= Reginstruction[1].DB_MAX_OUTPUT_PORT_TYPE
@@ -9357,6 +9325,7 @@ PROCprogcounter[31] => AddressDM.DATAA
 PROCstore => SDRAMmemory.IN0
 PROCload => PROChold.OUTPUTSELECT
 PROCload => SIGcsDM.OUTPUTSELECT
+PROCload => nextState.OUTPUTSELECT
 PROCload => nextState.OUTPUTSELECT
 PROCload => nextState.DATAB
 PROCfunct3[0] => funct3.DATAA
@@ -9508,13 +9477,13 @@ Ready_32b => nextState.OUTPUTSELECT
 Ready_32b => nextState.OUTPUTSELECT
 Ready_32b => nextState.OUTPUTSELECT
 Ready_32b => nextState.OUTPUTSELECT
+Ready_32b => nextState.OUTPUTSELECT
 Ready_32b => SDRAMmemory.IN0
-Ready_32b => Selector0.IN5
 Ready_32b => nextStateInit.OUTPUTSELECT
 Ready_32b => nextStateInit.OUTPUTSELECT
 Ready_32b => nextStateInit.OUTPUTSELECT
 Ready_32b => nextStateInit.OUTPUTSELECT
-Ready_32b => Selector7.IN3
+Ready_32b => Selector7.IN2
 Data_Ready_32b => SDRAMmemory.IN1
 Data_Ready_32b => Muxdata.IN0
 DataOut_32b[0] => SIGinstruction.DATAB

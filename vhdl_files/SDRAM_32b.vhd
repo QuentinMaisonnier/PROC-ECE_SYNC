@@ -56,7 +56,7 @@ signal currentState, nextState : state;
 begin
 
 PKG_R_In_Addr <= R_IN_Address;-- Test Bench
-
+PKG_SDRAMwrite <= In_write_Select;
 Ready_32b <= signal_Ready_32b;
 
 fsm : Process( Clock, Mux_IN_Data_32, Reset, currentState, Ready_16b, DataOut_16b, R_CPT, R_DATA, IN_Write_Select, IN_Address, IN_Data_32, IN_Select, Data_Ready_16b, R_IN_Address, DQM, R_IN_Data_32)
@@ -211,7 +211,7 @@ MuxData <= PKG_outputDM when PKG_simulON = '1' else
 			  R_DATA;
 			  
 PKG_inputData32 <= Mux_IN_Data_32;
-PKG_SDRAMselect <= SIG_selectOUT16;
+PKG_SDRAMselect <= IN_Select;
 
 OUT_Select <= SIG_selectOUT16;
 			  

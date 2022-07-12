@@ -198,8 +198,8 @@ architecture VHDL of TestBenchTop is
 		x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000",
 		x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000",
 		x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000",
-		x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"43554f43" , x"43554f43" , x"43554f43",
-		x"43554f43" , x"43554f43" , x"43554f43" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000"
+		x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000",
+		x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000"
 	);
 															 
 
@@ -275,14 +275,16 @@ architecture VHDL of TestBenchTop is
 		begin
 			
 			IF selectSDRAM='1' AND storeSDRAM='1' THEN
-					TabInstruction(to_integer(unsigned(R_In_Addr))) <= dataIN;
+				wait for 21 ns;
+				TabInstruction(to_integer(unsigned(R_In_Addr))) <= dataIN;
+				
 			END IF;
 			
 			IF dataReady_32b='1' THEN
 --				outputData <= TabInstruction(cpt);
 				outputData <= TabInstruction(to_integer(unsigned(R_In_Addr)));
 				CPT := CPT + 1;
-				wait for 20 ns;
+				wait for 19 ns;
 				
 			ELSE
 				outputData <= (others => 'Z');
