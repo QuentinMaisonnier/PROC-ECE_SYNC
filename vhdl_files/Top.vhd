@@ -276,7 +276,7 @@ BEGIN
 	PKG_counter       <= SIGcounter;
 --	PKG_simulON       <= SIGsimulOn;
 	SIGsimulOn			<= PKG_simulON;
-	PKG_dataReady_32b <= sigData_Ready_32b;
+--	PKG_dataReady_32b <= sigData_Ready_32b;
 	-----------------------
 
 	--SIGsimulOn        <= '0';

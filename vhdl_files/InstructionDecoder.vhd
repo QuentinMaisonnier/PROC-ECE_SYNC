@@ -98,21 +98,10 @@ begin
 	RegIDloadP2 	<= MuxIDloadP2 when rising_edge(clock);
 	
 	IDloadP2 <= RegIDloadP2;
-	IDload   <= MuxIDloadP2;
+	IDload   <= SIGIDload;
 	
 	-- Store instruction ?
-	SIGIDstore 	<= '1' when IDinstruction(6 downto 0) = "0100011" and RegIDstoreP2='0' else '0';
-	RegIDstoreP2 <=	'0' when reset='1' else
-							MuxIDstoreP2 when rising_edge(clock);
-	
-
-	IDstore <= SIGIDstore;
-	--IDstoreP2 <= RegIDstoreP2;
-	
-	MuxIDstoreP2 <= RegIDstoreP2 when hold='1' else
-						 '0' when reset='1' else
-						 SIGIDstore;
-						 
+	IDstore 	<= '1' when IDinstruction(6 downto 0) = "0100011" else '0';					 
 	-- LUI instruction ?
 	IDlui 	<= '1' when IDinstruction(6 downto 0) = "0110111" else '0';
 	-- AUIPC instruction ?

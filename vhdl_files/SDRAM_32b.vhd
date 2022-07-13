@@ -44,9 +44,9 @@ signal S_CPT, R_CPT 	: STD_LOGIC_VECTOR(3 downto 0);
 signal DQM, R_DQM, S_DQM 	: STD_LOGIC_VECTOR(3 downto 0);
 signal SIG_selectOUT16	: std_logic;
 
-signal R_DATA, S_DATA	: STD_LOGIC_VECTOR(31 downto 0);
+signal R_DATA, S_DATA, Reg_DataOut	: STD_LOGIC_VECTOR(31 downto 0);
 
-signal R_IN_Data_32, Mux_IN_Data_32, Muxdata	: STD_LOGIC_VECTOR(31 downto 0);
+signal R_IN_Data_32, Mux_IN_Data_32, Muxdata, Mux_data32	: STD_LOGIC_VECTOR(31 downto 0);
 signal R_IN_Function3, Mux_IN_Function3	: STD_LOGIC_VECTOR(1 downto 0);
 signal R_IN_Address, Mux_IN_Address	: STD_LOGIC_VECTOR(25 downto 0);
 
@@ -178,7 +178,8 @@ currentState <= WAITING when reset = '1' else
 				    nextState when rising_edge(Clock);
 			 
 R_DATA <= (others => '0') when reset = '1' else
-		    S_DATA when rising_edge(Clock);
+			 Mux_data32;
+--		    S_DATA when rising_edge(Clock);
 			 
 R_CPT <= (others => '0') when reset = '1' else
 			S_CPT when rising_edge(Clock);
@@ -193,12 +194,12 @@ R_IN_Address <= (others => '0') when reset = '1' else
 			
 					 
 Mux_IN_Address <= IN_Address when IN_Select='1' else
-					 R_IN_Address;
+					   R_IN_Address;
 					 
 Mux_IN_Function3 <= IN_Function3 when IN_Select='1' else
 					     R_IN_Function3;
 			 
-DataOut_32b <= MuxData 				 				    when  DQM="0000" else
+Reg_DataOut <= MuxData 				 				    when  DQM="0000" else
 					x"000000" & MuxData(7 downto 0)   when  DQM="1110" else
 					x"000000" & MuxData(15 downto 8)  when  DQM="1101" else
 					x"000000" & MuxData(23 downto 16) when  DQM="1011" else
@@ -206,12 +207,21 @@ DataOut_32b <= MuxData 				 				    when  DQM="0000" else
 					x"0000" 	 & MuxData(15 downto 0)  when  DQM="1100" else
 					x"0000" 	 & MuxData(31 downto 16) when  DQM="0011" else
 					(others=>'0');
+	
+DataOut_32b	<= (others=> '0') when reset='1' else
+					Reg_DataOut when rising_edge(clock);
 					
 MuxData <= PKG_outputDM when PKG_simulON = '1' else
-			  R_DATA;
-			  
+			  Mux_data32;
+--			  R_DATA;
+
+Mux_data32 <= S_DATA when R_data_Ready_32='1' else
+				  R_DATA;
+
+PKG_dataReady_32b <= R_data_Ready_32;
 PKG_inputData32 <= Mux_IN_Data_32;
 PKG_SDRAMselect <= IN_Select;
+PKG_DQM         <= DQM;
 
 OUT_Select <= SIG_selectOUT16;
 			  

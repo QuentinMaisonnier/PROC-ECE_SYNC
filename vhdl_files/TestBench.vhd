@@ -36,6 +36,7 @@ architecture VHDL of TestBenchTop is
 	end component;
 
 	signal reset, ck : std_logic;
+	signal dqm		  : std_LOGIC_vector(3 downto 0);
 	signal dataReady_32b, selectSDRAM, storeSDRAM : std_logic;
 	signal counter, progcounter, instr, dataIN: std_logic_vector(31 downto 0);
 	signal R_In_Addr: std_logic_vector(25 downto 0);
@@ -49,42 +50,21 @@ architecture VHDL of TestBenchTop is
 	signal reg00, reg01, reg02, reg03, reg04, reg05, reg06, reg07, reg08, reg09, reg0A, reg0B, reg0C, reg0D, reg0E, reg0F, reg10, reg11, reg12, reg13, reg14, reg15, reg16, reg17, reg18, reg19, reg1A, reg1B, reg1C, reg1D, reg1E, reg1F : std_logic_vector(31 downto 0);
 	signal SigTOPdisplay1, SigTOPdisplay2 : std_logic_vector (31 downto 0);
 
-	TYPE instructiontab IS ARRAY (0 TO 59) OF STD_LOGIC_vector(31 downto 0);
---	signal TabInstruction : instructiontab := (x"00001137", x"03c000ef", x"fe010113", x"01212823", x"00005937",
---															 x"00812c23", x"00912a23", x"01312623", x"00112e23", x"00100493",
---															 x"00000413", x"00a00993", x"e2090913", x"00149493", x"01341663",
---															 x"00902623", x"00090513", x"00140413", x"f89ff0ef", x"ff010113",
---															 x"00012623", x"00000793", x"00a7c863", x"00c12703", x"00000000",x"00178793"
---															 );
-
---	signal TabInstruction : instructiontab := (x"00001137", x"03c000ef", x"00100073", x"0000006f", x"ff010113",
---															 x"00012623", x"00000793", x"00a7c863", x"00012623", x"01010113",
---															 x"00008067", x"00c12703", x"00178793", x"00170713", x"00e12623",
---															 x"fe1ff06f", x"fe010113", x"01212823", x"00005937", x"00812c23",
---															 x"00912a23", x"01312623", x"00112e23", x"00100493", x"00000413",
---															 x"00a00993", x"e2090913", x"00149493", x"01341663", x"00100493",
---															 x"00000413", x"00902623", x"00090513", x"00140413", x"f89ff0ef",
---															 x"fe1ff06f", x"00000000", x"00000000", x"00000000", x"00000000",
---															 x"00000000", x"00000000", x"00000000", x"00000000", x"00000000",
---															 x"00000000", x"00000000", x"00000000", x"00000000", x"00000000",
---															 x"00000000", x"00000000", x"00000000", x"00000000", x"00000000",
---															 x"00000000", x"00000000", x"00000000", x"00000000", x"00000000"
---															 );
 	type mem is array(0 to 1023) of std_logic_vector(31 downto 0);
 	signal TabInstruction : mem :=(
 		x"00001137" , x"064000ef" , x"00100073" , x"0000006f" , x"fe050513" , x"0ff57513" , x"03f00793" , x"00a7ea63",
-		x"15400793" , x"00a787b3" , x"0007c503" , x"00008067" , x"07f00513" , x"00008067" , x"ff010113" , x"00012623",
+		x"12800793" , x"00a787b3" , x"0007c503" , x"00008067" , x"07f00513" , x"00008067" , x"ff010113" , x"00012623",
 		x"00000793" , x"00a7c863" , x"00012623" , x"01010113" , x"00008067" , x"00c12703" , x"00178793" , x"00170713",
-		x"00e12623" , x"fe1ff06f" , x"435557b7" , x"fe010113" , x"f4378793" , x"00f12023" , x"000057b7" , x"54f78793",
-		x"00812c23" , x"00912a23" , x"00f11223" , x"00112e23" , x"800007b7" , x"fff00713" , x"00e7a223" , x"00010737",
-		x"fff70713" , x"00e7a423" , x"00100713" , x"00e7a623" , x"00000413" , x"00600493" , x"008107b3" , x"0007c503",
-		x"f51ff0ef" , x"00810793" , x"008787b3" , x"00a78023" , x"00140413" , x"fe9412e3" , x"00814703" , x"800007b7",
-		x"01c12083" , x"00871713" , x"00e7a423" , x"0087a683" , x"00914703" , x"01812403" , x"01412483" , x"00d76733",
-		x"00e7a423" , x"00a14703" , x"00000513" , x"01871713" , x"00e7a223" , x"00b14703" , x"0047a683" , x"01071713",
-		x"00d76733" , x"00e7a223" , x"00c14703" , x"0047a683" , x"00871713" , x"00d76733" , x"00e7a223" , x"00d14703",
-		x"0047a683" , x"00d76733" , x"00e7a223" , x"02010113" , x"00008067" , x"7f7f7fff" , x"7f7f7f7f" , x"7f7f7f7f",
-		x"7f7fbf7f" , x"b0a4f9c0" , x"f8829299" , x"7f7f9080" , x"7f7f7f7f" , x"c683887f" , x"c28e86a1" , x"8ae1fb8b",
-		x"c0abaac7" , x"92ce988c" , x"95b5c187" , x"7fa49189" , x"f77f7f7f" , x"00000000" , x"00000000" , x"00000000",
+		x"00e12623" , x"fe1ff06f" , x"435557b7" , x"fd010113" , x"f4378793" , x"00f12023" , x"000057b7" , x"54f78793",
+		x"02812423" , x"02912223" , x"03212023" , x"00f11223" , x"02112623" , x"800007b7" , x"fff00713" , x"00e7a223",
+		x"00010737" , x"fff70713" , x"00e7a423" , x"00001737" , x"ccc70713" , x"00e7a623" , x"00810493" , x"00000413",
+		x"00600913" , x"008107b3" , x"0007c503" , x"00140413" , x"00448493" , x"f3dff0ef" , x"fea4ae23" , x"ff2414e3",
+		x"00812783" , x"00c12703" , x"800006b7" , x"00879793" , x"00e7e7b3" , x"00f6a423" , x"01012783" , x"01412703",
+		x"01879793" , x"01071713" , x"00e7e7b3" , x"01c12703" , x"00e7e7b3" , x"01812703" , x"00871713" , x"00e7e7b3",
+		x"00f6a223" , x"0000006f" , x"7f7f7fff" , x"7f7f7f7f" , x"7f7f7f7f" , x"7f7fbf7f" , x"b0a4f9c0" , x"f8829299",
+		x"7f7f9080" , x"7f7f7f7f" , x"c683887f" , x"c28e86a1" , x"8ae1fb8b" , x"c0abaac7" , x"92ce988c" , x"95b5c187",
+		x"7fa49189" , x"f77f7f7f" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000",
+		x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000",
 		x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000",
 		x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000",
 		x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000" , x"00000000",
@@ -204,7 +184,7 @@ architecture VHDL of TestBenchTop is
 															 
 
 	BEGIN
-	
+	dqm <= PKG_DQM;
 	selectSDRAM <= PKG_SDRAMselect;
 	dataIN      <= PKG_inputData32;
 	R_In_Addr <= "00" & PKG_R_In_Addr(25 downto 2);
@@ -276,7 +256,24 @@ architecture VHDL of TestBenchTop is
 			
 			IF selectSDRAM='1' AND storeSDRAM='1' THEN
 				wait for 21 ns;
-				TabInstruction(to_integer(unsigned(R_In_Addr))) <= dataIN;
+				IF dqm="0000" THEN
+					TabInstruction(to_integer(unsigned(R_In_Addr))) <= dataIN;
+				ELSIF dqm="1100" THEN
+					TabInstruction(to_integer(unsigned(R_In_Addr)))(15 downto 0) <= dataIN(15 downto 0);
+				ELSIF dqm="0011" THEN
+					TabInstruction(to_integer(unsigned(R_In_Addr)))(31 downto 16) <= dataIN(31 downto 16);
+				ELSIF dqm="1110" THEN
+					TabInstruction(to_integer(unsigned(R_In_Addr)))(7 downto 0) <= dataIN(7 downto 0);
+				ELSIF dqm="1101" THEN
+					TabInstruction(to_integer(unsigned(R_In_Addr)))(15 downto 8) <= dataIN(15 downto 8);
+				ELSIF dqm="1011" THEN
+					TabInstruction(to_integer(unsigned(R_In_Addr)))(23 downto 16) <= dataIN(23 downto 16);
+				ELSIF dqm="0111" THEN
+					TabInstruction(to_integer(unsigned(R_In_Addr)))(31 downto 24) <= dataIN(31 downto 24);
+				ELSE
+					TabInstruction(to_integer(unsigned(R_In_Addr))) <= dataIN;
+				END IF;
+				
 				
 			END IF;
 			
