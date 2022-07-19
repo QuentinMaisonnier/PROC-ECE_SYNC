@@ -35,7 +35,6 @@ entity InstructionDecoder is
 		IDload 			: out std_logic;
 		IDloadP2		   : out std_logic;
 		IDstore 		   : out std_logic;
-		IDstoreP2 		: out std_logic;
 		--IDstoreP2 		: out std_logic;
 		IDlui 			: out std_logic;
 		IDauipc 		   : out std_logic;

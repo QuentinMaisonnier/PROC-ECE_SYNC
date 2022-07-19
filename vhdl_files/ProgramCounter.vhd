@@ -59,9 +59,6 @@ BEGIN
 	-----------------------------------------------------------------
 	MuxPC <= SigPC when PChold='1' else
 				SIGPCnext;
-				
-	SigPC 	<= (others => '0') when PCreset='1' else
-				MuxPC when rising_edge(PCclock);
 --	PC 	<= x"FFFFFFFC" when PCreset='1' else
 --				MuxPC when rising_edge(PCclock);
 	-----------------------------------------------------------------
@@ -104,6 +101,9 @@ BEGIN
 					 SigPC;
 					
 	PC <= SigPC;
+	
+	SigPC 	<= (others => '0') when PCreset='1' else
+				   MuxPC when rising_edge(PCclock);
 	
 	PCnext    <= SIGPCnext;
 	

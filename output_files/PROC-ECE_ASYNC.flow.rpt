@@ -1,5 +1,5 @@
 Flow report for PROC-ECE_ASYNC
-Wed Jul 13 16:17:30 2022
+Tue Jul 19 20:02:50 2022
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -40,17 +40,17 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Wed Jul 13 16:17:30 2022       ;
+; Flow Status                        ; Successful - Tue Jul 19 20:02:50 2022       ;
 ; Quartus Prime Version              ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                      ; PROC-ECE_ASYNC                              ;
 ; Top-level Entity Name              ; Top                                         ;
 ; Family                             ; MAX 10                                      ;
 ; Device                             ; 10M50DAF484C7G                              ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 4,732 / 49,760 ( 10 % )                     ;
-;     Total combinational functions  ; 4,480 / 49,760 ( 9 % )                      ;
-;     Dedicated logic registers      ; 1,521 / 49,760 ( 3 % )                      ;
-; Total registers                    ; 1521                                        ;
+; Total logic elements               ; 4,791 / 49,760 ( 10 % )                     ;
+;     Total combinational functions  ; 4,556 / 49,760 ( 9 % )                      ;
+;     Dedicated logic registers      ; 1,616 / 49,760 ( 3 % )                      ;
+; Total registers                    ; 1616                                        ;
 ; Total pins                         ; 141 / 360 ( 39 % )                          ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 131,072 / 1,677,312 ( 8 % )                 ;
@@ -66,7 +66,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 07/13/2022 16:14:09 ;
+; Start date & time ; 07/19/2022 19:59:37 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; PROC-ECE_ASYNC      ;
 +-------------------+---------------------+
@@ -77,7 +77,7 @@ refer to the applicable agreement for further details.
 +--------------------------------------+-------------------------------------------------------------------+----------------+-------------+-----------------------------------+
 ; Assignment Name                      ; Value                                                             ; Default Value  ; Entity Name ; Section Id                        ;
 +--------------------------------------+-------------------------------------------------------------------+----------------+-------------+-----------------------------------+
-; COMPILER_SIGNATURE_ID                ; 83935994126129.165772164803568                                    ; --             ; --          ; --                                ;
+; COMPILER_SIGNATURE_ID                ; 79846616042630.165825357719764                                    ; --             ; --          ; --                                ;
 ; EDA_DESIGN_ENTRY_SYNTHESIS_TOOL      ; Synplify Pro                                                      ; <None>         ; --          ; --                                ;
 ; EDA_DESIGN_INSTANCE_NAME             ; NA                                                                ; --             ; --          ; Testbench                         ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST      ; Off                                                               ; --             ; --          ; eda_board_design_timing           ;
@@ -129,12 +129,12 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:25     ; 1.0                     ; 4840 MB             ; 00:00:35                           ;
-; Fitter               ; 00:02:39     ; 1.1                     ; 5751 MB             ; 00:03:17                           ;
-; Assembler            ; 00:00:04     ; 1.0                     ; 4698 MB             ; 00:00:03                           ;
-; Timing Analyzer      ; 00:00:07     ; 2.0                     ; 4877 MB             ; 00:00:14                           ;
-; EDA Netlist Writer   ; 00:00:02     ; 1.0                     ; 4716 MB             ; 00:00:02                           ;
-; Total                ; 00:03:17     ; --                      ; --                  ; 00:04:11                           ;
+; Analysis & Synthesis ; 00:00:26     ; 1.0                     ; 4858 MB             ; 00:00:35                           ;
+; Fitter               ; 00:02:28     ; 1.2                     ; 5764 MB             ; 00:03:02                           ;
+; Assembler            ; 00:00:04     ; 1.0                     ; 4697 MB             ; 00:00:03                           ;
+; Timing Analyzer      ; 00:00:08     ; 2.0                     ; 4880 MB             ; 00:00:15                           ;
+; EDA Netlist Writer   ; 00:00:02     ; 1.0                     ; 4715 MB             ; 00:00:02                           ;
+; Total                ; 00:03:08     ; --                      ; --                  ; 00:03:57                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

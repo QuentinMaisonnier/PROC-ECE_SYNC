@@ -81,7 +81,6 @@ ARCHITECTURE archi OF Processor IS
 			IDload 			: out std_logic;
 			IDloadP2		   : out std_logic;
 			IDstore 		   : out std_logic;
-			IDstoreP2 		: out std_logic;
 			IDlui 			: out std_logic;
 			IDauipc 		   : out std_logic;
 			IDjal 			: out std_logic;
@@ -152,7 +151,7 @@ ARCHITECTURE archi OF Processor IS
 	SIGNAL SIGimm21J              : STD_LOGIC_VECTOR (20 DOWNTO 0);
 	SIGNAL SIGload, SIGloadP2		: STD_LOGIC;
 	SIGNAL MuxHoldPC              : STD_LOGIC;
-	SIGNAL SIGstore, SIGstoreP2   : STD_LOGIC;
+	SIGNAL SIGstore				   : STD_LOGIC;
 	SIGNAL SIGlui                 : STD_LOGIC;
 	SIGNAL SIGauipc               : STD_LOGIC;
 	SIGNAL SIGjal                 : STD_LOGIC;
@@ -341,7 +340,6 @@ BEGIN
 		IDload        => SIGload,
 		IDloadP2 	  => SIGloadP2,
 		IDstore       => SIGstore,
-		IDstoreP2     => SIGstoreP2,
 		IDlui         => SIGlui,
 		IDauipc       => SIGauipc,
 		IDjal         => SIGjal,
