@@ -194,15 +194,16 @@ Mux_IN_Function3 <= IN_Function3 when IN_Select='1' else
 					Reg_IN_Function3;	
 
 Reg_IN_Data_32 <= (others => '0') when reset = '1' else
-				Mux_IN_Data_32 when rising_edge(Clock);	 
+						Mux_IN_Data_32 when rising_edge(Clock);	 
+				
 Mux_IN_Data_32 <= IN_Data_32 				  				  when IN_Select='1' AND DQM = "0000" else
-				  x"0000" & IN_Data_32(15 downto 0)           when IN_Select='1' AND DQM = "1100" else
-				  IN_Data_32(31 downto 16) & x"0000"          when IN_Select='1' AND DQM = "0011" else
-				  x"000000" & IN_Data_32(7 downto 0)          when IN_Select='1' AND DQM = "1110" else
-				  x"0000" & IN_Data_32(15 downto 8) & x"00"   when IN_Select='1' AND DQM = "1101" else
-				  x"00" & IN_Data_32(23 downto 16) & x"0000"  when IN_Select='1' AND DQM = "1011" else
-				  IN_Data_32(31 downto 24) & x"000000" 		  when IN_Select='1' AND DQM = "0111" else
-				  Reg_IN_Data_32;
+						x"0000" & IN_Data_32(15 downto 0)           when IN_Select='1' AND DQM = "1100" else
+						IN_Data_32(31 downto 16) & x"0000"          when IN_Select='1' AND DQM = "0011" else
+						x"000000" & IN_Data_32(7 downto 0)          when IN_Select='1' AND DQM = "1110" else
+						x"0000" & IN_Data_32(15 downto 8) & x"00"   when IN_Select='1' AND DQM = "1101" else
+						x"00" & IN_Data_32(23 downto 16) & x"0000"  when IN_Select='1' AND DQM = "1011" else
+						IN_Data_32(31 downto 24) & x"000000" 		  when IN_Select='1' AND DQM = "0111" else
+						Reg_IN_Data_32;
 				  
 -------------------------DQM------------------------				 
 DQM <= "0000" when Mux_IN_Function3 = "10" 										  else  -- 4 octets

@@ -93,47 +93,27 @@ begin
 PROChold <= SIGHold;
 
 ----FUNCTION3
-	funct3 <= SIGfunct3;
-	SIGfunct3 <= Muxfunct3 when SIGHold='0' else
-				    Regfunct3;
-	Regfunct3 <= (others=>'0') when reset='1' else
-				 Muxfunct3 when rising_edge(clock);
+	funct3 <= Muxfunct3;
 	Muxfunct3 <= funct3boot when currentStateInit /= STOP else
 			     "010"	    when currentState = NEXTinstGet OR nextState = NEXTinstGet else
 			     PROCfunct3;
 ----writeSelect				
-	writeSelect <= SIGwriteSelect;
-	SIGwriteSelect <= MuxwriteSelect when SIGHold='0' else
-					  RegwriteSelect;  
-	RegwriteSelect <=  '0' when reset='1' else
-				       MuxwriteSelect when rising_edge(clock);					
+	writeSelect <= MuxwriteSelect;				
 	MuxwriteSelect <= SIGstoreboot when currentStateInit /= STOP else
-				      SIGstore;
+				         SIGstore;
 ----CSDM
 
 	csDM <= MuxcsDM;
---	SIGcsDM <= MuxcsDM when SIGHold='0' else
---			     RegcsDM;	  
---	RegcsDM <=  '0' when reset='1' else
---				MuxcsDM when rising_edge(clock);	
 	MuxcsDM <= csDMboot when currentStateInit /= STOP else
 			     SIGcsDMCache;
 ----AddressDM		
 
-	AddressDM <= SIGAddressDM;
-	SIGAddressDM <= MuxAddressDM when SIGHold='0' else
-			        RegAddressDM;
-	RegAddressDM <=  (others=>'0') when reset='1' else
-				        MuxAddressDM when rising_edge(clock);
+	AddressDM <= MuxAddressDM;
 	MuxAddressDM <= RcptAddr when currentStateInit /= STOP else
 			        PROCaddrDM when nextState = STOREdataReq OR currentState = STOREdataReq OR nextState=STOREdataEnd OR nextState = LOADdataGet else
 			        PROCprogcounter;
 ---- INPUTDM
-	inputDM <= SIGinputDM;
-	SIGinputDM <= MuxinputDM when SIGHold='0' else
-			      ReginputDM;
-	ReginputDM <=  (others=>'0') when reset='1' else
-				      MuxinputDM when rising_edge(clock);
+	inputDM <= MuxinputDM;
 	MuxinputDM <= inputDMboot when currentStateInit /= STOP else
 			      PROCinputDM;
 				  
