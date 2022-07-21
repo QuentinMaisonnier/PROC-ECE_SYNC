@@ -238,24 +238,23 @@ BEGIN
 						 SIGfunct3ALU = "011" OR
 						 SIGfunct3ALU = "100" OR
 						 SIGfunct3ALU = "110" OR
-						 SIGfunct3ALU = "111") AND
-						 (SIGimmSel = '1' OR
-						 SIGload = '1' OR
+						 SIGfunct3ALU = "111") AND (SIGimmSel = '1' OR
+						 SIGloadP2 = '1' OR
 						 SIGstore = '1' OR
 						 SIGjalr = '1')) ELSE
 						 SIGfunct7;
 		
-	SIGfunct3ALU <= "000" WHEN (SIGstore = '1' OR SIGload = '1') ELSE
+	SIGfunct3ALU <= "000" WHEN (SIGstore = '1' OR SIGloadP2 = '1' OR SIGload = '1') ELSE
 						 SIGfunct3;
 						 
 	SIGinput1ALU <= SIGoutput1RF;
 
 	SIGinput2ALU(11 DOWNTO 0) <= SIGimm12S(11 DOWNTO 0) WHEN SIGstore = '1' ELSE
-										  SIGimm12I(11 DOWNTO 0) WHEN (SIGload = '1' OR SIGimmSel = '1' OR SIGjalr = '1') ELSE
+										  SIGimm12I(11 DOWNTO 0) WHEN (SIGloadP2 = '1' OR SIGimmSel = '1' OR SIGjalr = '1') ELSE
 										  SIGoutput2RF(11 DOWNTO 0);
 
-	SIGinput2ALU(31 DOWNTO 12) <= (OTHERS => '0') WHEN (SIGimmSel = '1' OR SIGload = '1' OR SIGstore = '1' OR SIGjalr = '1') AND SIGimm12I(11) = '0' ELSE
-											(OTHERS => '1') WHEN (SIGimmSel = '1' OR SIGload = '1' OR SIGstore = '1' OR SIGjalr = '1') AND SIGimm12I(11) = '1' ELSE
+	SIGinput2ALU(31 DOWNTO 12) <= (OTHERS => '0') WHEN (SIGimmSel = '1' OR SIGloadP2 = '1' OR SIGstore = '1' OR SIGjalr = '1') AND SIGimm12I(11) = '0' ELSE
+											(OTHERS => '1') WHEN (SIGimmSel = '1' OR SIGloadP2 = '1' OR SIGstore = '1' OR SIGjalr = '1') AND SIGimm12I(11) = '1' ELSE
 											SIGoutput2RF(31 DOWNTO 12);
 
 	-- data memory
@@ -349,7 +348,7 @@ BEGIN
 
 	instRF : RegisterFile
 	PORT MAP(
-		Hold    => Hold,
+		Hold    => MuxHoldPC,
 		RFclock => PROCclock,
 		RFreset => PROCreset,
 		RFin    => SIGinputRF, --complex

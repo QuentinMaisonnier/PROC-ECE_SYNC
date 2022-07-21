@@ -74,7 +74,7 @@ SIGNAL MuxcsDM, RegcsDM, SIGcsDM, SIGcsDMCache : STD_LOGIC;
 SIGNAL MuxAddressDM, RegAddressDM, SIGAddressDM : STD_LOGIC_VECTOR(31 DOWNTO 0);
 SIGNAL MuxinputDM, ReginputDM, SIGinputDM : STD_LOGIC_VECTOR(31 DOWNTO 0);
 
-SIGNAL SIGHold : STD_LOGIC;
+SIGNAL SIGHold, RegHold : STD_LOGIC;
 ----------------------SIGNALS INIT SDRAM (BOOTLOADER)----------------------------
 SIGNAL RcptAddr, SIGcptAddr : STD_LOGIC_VECTOR(31 downto 0);
 SIGNAL SIGinstructionInit : STD_LOGIC_VECTOR(31 downto 0);
@@ -90,13 +90,11 @@ SIGNAL currentStateInit, nextStateInit : stateInit;
 begin
 ------------------------MUX OUTPUT------------------------------------
 
-PROChold <= SIGHold;
-
 ----FUNCTION3
 	funct3 <= Muxfunct3;
 	Muxfunct3 <= funct3boot when currentStateInit /= STOP else
-			     "010"	    when currentState = NEXTinstGet OR nextState = NEXTinstGet else
-			     PROCfunct3;
+			       "010"	    when currentState = NEXTinstGet OR nextState = NEXTinstGet else
+			       PROCfunct3;
 ----writeSelect				
 	writeSelect <= MuxwriteSelect;				
 	MuxwriteSelect <= SIGstoreboot when currentStateInit /= STOP else
@@ -147,16 +145,14 @@ PROChold <= SIGHold;
   ------------------- IDLE -----------------------
 			WHEN IDLE =>
 				IF ready_32b = '1' THEN
+					SIGHold <='0'; 
+					
 					IF PROCload ='1' THEN
-						SIGHold <='0';
 						SIGcsDMCache     <= '1';
 						nextstate <= LOADdataGet;
 					ELSIF PROCstore ='1' AND PROCaddrDM(31)='0' THEN
-							--PROChold <='0';
 							nextstate <= STOREdataReq;
 					ELSE
-
-						SIGHold <='0'; 						-- MODIF 
 						SIGcsDMCache     <= '1';
 						nextstate <= NEXTinstGet;
 					END IF;
@@ -188,8 +184,6 @@ PROChold <= SIGHold;
 			WHEN STOREdataEnd =>
 			
 				IF ready_32b = '1' THEN
-				
-					SIGHold <= '0'; -- TEST
 					SIGstore <= '0';
 					SIGcsDMCache  <= '1';
 					nextstate <= NEXTinstGet;
@@ -197,10 +191,12 @@ PROChold <= SIGHold;
 ------------------- NEXTinstReq -----------------------
 ------------------- NEXTinstGet -----------------------	
 			WHEN NEXTinstGet =>
-				
-				IF ready_32b = '1' AND data_Ready_32b = '1' THEN
-				
+			
+				IF data_Ready_32b = '1' THEN
 					SIGinstruction <= dataOut_32b;
+				END IF;
+				
+				IF ready_32b = '1'THEN
 					nextState <= IDLE;
 				END IF;
 			
@@ -216,20 +212,24 @@ PROChold <= SIGHold;
 	PROCinstruction <= Reginstruction;	
 	
 	Reginstruction <= (others => '0') WHEN reset = '1' ELSE
-					   Muxinstruction WHEN rising_edge(Clock);
+					      Muxinstruction WHEN rising_edge(Clock);
 					   
 	Muxinstruction <= SIGinstruction when data_Ready_32b='1' AND  currentState=NEXTinstGet else
-					  Reginstruction;
+					      Reginstruction;
 --	Regdata <= (others => '0') WHEN reset = '1' ELSE
 --				  SIGdata WHEN rising_edge(Clock);
 						 
 	Regdata <= (others => '0') WHEN reset = '1' ELSE
-			   Muxdata WHEN rising_edge(Clock);
+			     Muxdata WHEN rising_edge(Clock);
 				  
 	PROCoutputDM <= Muxdata;
 	
 	Muxdata <= dataOut_32b when data_Ready_32b='1' AND currentState=LOADdataGet else
-			   regdata;
+			     Regdata;
+	RegHold <= '0' WHEN reset = '1' ELSE
+					SIGHold when rising_edge(clock);	 
+	ProChold <= SIGHold;	
+	
    ---------------------------------------------
 	
 	

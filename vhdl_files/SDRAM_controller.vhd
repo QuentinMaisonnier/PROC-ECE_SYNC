@@ -65,6 +65,25 @@ constant  T_RESET_REFRESH : std_logic_vector(21 downto 0) := B"00000000000000000
 
 begin
 
+-- TESTBENCH RISC-V --
+
+-- Controler -> SDRAM (write) -- 
+PKG_inputData_SDRAM <= SDRAM_DQ;
+PKG_DQM_SDRAM <= SDRAM_DQM;
+
+-- SDRAM -> Controler (read) -- 
+PKG_outputData_SDRAM <= Data_OUT;
+PKG_dataReady_SDRAM <= Data_Ready;
+
+-- autre --
+PKG_AddrSDRAM <= Reg_A;
+PKG_SDRAMwrite <= R_Write_IN;
+PKG_SDRAMselect <= ;
+
+-- TESTBENCH RISC-V --
+
+
+
 SDRAM_CLK <= clk;
 
 -- init --

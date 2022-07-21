@@ -90,8 +90,8 @@ begin
 	
 	-- Load instruction ?
 	MuxIDloadP2 		<= RegIDloadP2 when hold='1' else
-								'0' when reset='1' else
-								SIGIDload;
+						   '0' when reset='1' else
+						   SIGIDload;
 								
 	SIGIDload 	   <= '1' when  IDinstruction(6 downto 0) = "0000011" and RegIDloadP2='0' else '0';
 	RegIDloadP2 	<= MuxIDloadP2 when rising_edge(clock);

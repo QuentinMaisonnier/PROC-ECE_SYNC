@@ -38,7 +38,7 @@ entity SDRAM_32b is
 end SDRAM_32b;
 
 architecture vhdl of SDRAM_32b is 
-
+SIGNAL Reg_IN_Select : STD_LOGIC;
 SIGNAL Mux_IN_Write_Select, Reg_IN_Write_Select : STD_LOGIC;
 signal Reg_Data_Ready_32,	SIG_Ready_32b, SIG_data_Ready_32  : STD_LOGIC;
 signal SIG_CPT, Reg_CPT 	: STD_LOGIC_VECTOR(3 downto 0);
@@ -56,7 +56,7 @@ signal currentState, nextState : state;
 
 begin
 
-fsm : Process( Mux_IN_Data_32, Reg_IN_Address, Mux_IN_Address, Mux_IN_Write_Select, currentState, Ready_16b, DataOut_16b, Reg_CPT, R_DATA, IN_Select, Data_Ready_16b, DQM, Reg_IN_Data_32)
+fsm : Process( Reg_IN_Select, Reg_IN_Address, Mux_IN_Write_Select, currentState, Ready_16b, DataOut_16b, Reg_CPT, R_DATA, IN_Select, Data_Ready_16b, DQM, Reg_IN_Data_32, Reg_IN_Write_Select)
 begin 
 	OUT_Address <= (others=>'0');
 	OUT_Write_Select <= '0';
@@ -77,24 +77,18 @@ when WAITING =>
 		SIG_CPT <= STD_LOGIC_VECTOR(unsigned(Reg_CPT) + 1);
 	end if;
 	
-	if(Ready_16b = '1')then
+	if(Ready_16b = '1' AND Reg_IN_Write_Select = '0')then
 		SIG_Ready_32b <= '1';
 	else
-		SIG_Ready_32b <= '0';
+		if(Ready_16b = '1' AND unsigned(Reg_CPT) >= 2)then
+			SIG_Ready_32b <= '1';
+		else
+			SIG_Ready_32b <= '0';
+		end if;
 	end if;
-
---	if(Ready_16b = '1' AND Mux_IN_Write_Select = '0')then
---		SIG_Ready_32b <= '1';
---	else
---		if(Ready_16b = '1' AND unsigned(Reg_CPT) >= 2)then
---			SIG_Ready_32b <= '1';
---		else
---			SIG_Ready_32b <= '0';
---		end if;
---	end if;
 	
-	if(IN_Select = '1' AND Ready_16b = '1') then
-			if(Mux_IN_Write_Select = '1') then
+	if(Reg_IN_Select = '1' AND Ready_16b = '1') then
+			if(Reg_IN_Write_Select = '1') then
 				nextState <= WRITE_MSB;
 			else
 				nextState <= READ_MSB_SEND;
@@ -106,7 +100,7 @@ when WAITING =>
 when WRITE_MSB =>
 	OUT_Address 	  <= Reg_IN_Address(25 downto 2) & '0'; 
 	OUT_Write_Select <= '1';							
-	OUT_Data_16 	  <= Mux_IN_Data_32(31 downto 16);
+	OUT_Data_16 	  <= Reg_IN_Data_32(31 downto 16);
 	SIG_selectOUT16		  <= '1';
 	OUT_DQM			  <= DQM(3) & DQM(2);
 	
@@ -119,7 +113,7 @@ when WRITE_MSB =>
 when WRITE_LSB =>
 	OUT_Address 	  <= Reg_IN_Address(25 downto 2) & '1';
 	OUT_Write_Select <= '1';
-	OUT_Data_16 	  <= Mux_IN_Data_32(15 downto 0);
+	OUT_Data_16 	  <= Reg_IN_Data_32(15 downto 0);
 	SIG_selectOUT16		  <= '1';
 	OUT_DQM			  <= DQM(1) & DQM(0);
 	
@@ -184,10 +178,14 @@ Reg_CPT <= (others => '0') when reset = '1' else
 
 
 ----------------------------IN-----------------------------
+
+Reg_IN_Select <= '0' when reset='1' else
+					   IN_Select when rising_edge(clock);
+						
 Reg_IN_Write_Select <= '0' when reset='1' else
-					        Mux_IN_Write_Select when rising_edge(clock);
+					   Mux_IN_Write_Select when rising_edge(clock);
 Mux_IN_Write_Select <= In_write_Select when IN_Select='1' else
-					        Reg_IN_Write_Select;
+					   Reg_IN_Write_Select;
 					   
 Reg_IN_Address <= (others => '0') when reset = '1' else
 				      Mux_IN_Address when rising_edge(Clock);		 
@@ -208,7 +206,7 @@ Mux_IN_Data_32 <= IN_Data_32 				  				  when IN_Select='1' AND DQM = "0000" els
 						x"000000" & IN_Data_32(7 downto 0)          when IN_Select='1' AND DQM = "1110" else
 						x"0000" & IN_Data_32(15 downto 8) & x"00"   when IN_Select='1' AND DQM = "1101" else
 						x"00" & IN_Data_32(23 downto 16) & x"0000"  when IN_Select='1' AND DQM = "1011" else
-				      IN_Data_32(31 downto 24) & x"000000" 		  when IN_Select='1' AND DQM = "0111" else
+					   IN_Data_32(31 downto 24) & x"000000" 		  when IN_Select='1' AND DQM = "0111" else
 				      Reg_IN_Data_32;
 				  
 -------------------------DQM------------------------				 
@@ -229,7 +227,7 @@ DQM <= "0000" when Mux_IN_Function3 = "10" 										  else  -- 4 octets
 DataOut_32b <= SIGDataOut_32b;
 
 SIGDataOut_32b	<= (others=> '0') when reset='1' else
-				   Reg_DataOut when rising_edge(clock);
+				      Reg_DataOut when rising_edge(clock);
 				   
 Reg_DataOut <= Mux_data32 				 				       when  DQM="0000" else
 					x"000000" & Mux_data32(7 downto 0)      when  DQM="1110" else
@@ -245,7 +243,7 @@ Mux_data32 <= PKG_outputDM when PKG_simulON = '1' else
 			     R_DATA;
 			  
 R_DATA <= (others => '0') when reset = '1' else
-		  Mux_data32 when rising_edge(Clock); 
+		    Mux_data32 when rising_edge(Clock); 
 ----------------------------
 Data_Ready_32b <= SIG_data_Ready_32;
 
@@ -256,12 +254,12 @@ SIG_data_Ready_32 <= '0' when reset = '1' else
 --			    SIG_Ready_32b when rising_edge(clock);
 Ready_32b <= SIG_Ready_32b;
 -----------------------------SIMULATION--------------------------------------
---PKG_dataReady_32b <= Reg_Data_Ready_32;
---PKG_inputData32   <= Mux_IN_Data_32;
---PKG_SDRAMselect   <= IN_Select;
---PKG_DQM           <= DQM;
---PKG_R_In_Addr     <= Mux_IN_Address;-- Test Bench
---PKG_SDRAMwrite    <= Mux_In_write_Select;
+PKG_dataReady_32b <= Reg_Data_Ready_32;
+PKG_inputData32   <= Mux_IN_Data_32;
+PKG_SDRAMselect   <= IN_Select;
+PKG_DQM           <= DQM;
+PKG_R_In_Addr     <= Mux_IN_Address;-- Test Bench
+PKG_SDRAMwrite    <= Mux_In_write_Select;
 ------------------------------
 OUT_Select <= SIG_selectOUT16;
 
