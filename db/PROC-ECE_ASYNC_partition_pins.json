@@ -260,6 +260,134 @@
 					"strict" : false
 				},
 				{
+					"name" : "TOPleds[0]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[1]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[2]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[3]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[4]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[5]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[6]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[7]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[8]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[9]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[10]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[11]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[12]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[13]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[14]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[15]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[16]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[17]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[18]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[19]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[20]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[21]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[22]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[23]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[24]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[25]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[26]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[27]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[28]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[29]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[30]",
+					"strict" : false
+				},
+				{
+					"name" : "TOPleds[31]",
+					"strict" : false
+				},
+				{
 					"name" : "SDRAM_ADDR[0]",
 					"strict" : false
 				},

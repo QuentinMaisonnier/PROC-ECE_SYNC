@@ -69,7 +69,8 @@ begin
 -- TESTBENCH RISC-V --
 
 -- Controler -> SDRAM (write) -- 
-PKG_inputData_SDRAM <= R_Dout ;
+PKG_inputData_SDRAM <= R_Dout when R_DOE = '1'
+							  else (others => '1');
 PKG_DQM_SDRAM <= R_DQM;
 --PKG_SDRAMselect <= ;
 

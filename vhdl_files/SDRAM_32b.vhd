@@ -45,6 +45,7 @@ signal SIG_CPT, Reg_CPT 	: STD_LOGIC_VECTOR(3 downto 0);
 signal DQM              : STD_LOGIC_VECTOR(3 downto 0);
 signal SIG_selectOUT16	: std_logic;
 
+SIGNAL R_DATA_part1, S_DATA_part1, R_DATA_part2, S_DATA_part2 : STD_LOGIC_VECTOR(15 downto 0);
 signal R_DATA, S_DATA, Reg_DataOut, SIGDataOut_32b	: STD_LOGIC_VECTOR(31 downto 0);
 
 signal Reg_IN_Data_32, Mux_IN_Data_32, Mux_data32	: STD_LOGIC_VECTOR(31 downto 0);
@@ -56,7 +57,7 @@ signal currentState, nextState : state;
 
 begin
 
-fsm : Process( Mux_IN_Data_32, Reg_IN_Address, Mux_IN_Address, Mux_IN_Write_Select, currentState, Ready_16b, DataOut_16b, Reg_CPT, R_DATA, IN_Select, Data_Ready_16b, DQM, Reg_IN_Data_32)
+fsm : Process(R_DATA_part2, R_DATA_part1, Mux_IN_Data_32, Reg_IN_Address, Mux_IN_Address, Mux_IN_Write_Select, currentState, Ready_16b, DataOut_16b, Reg_CPT, R_DATA, IN_Select, Data_Ready_16b, DQM, Reg_IN_Data_32)
 begin 
 	OUT_Address <= (others=>'0');
 	OUT_Write_Select <= '0';
@@ -68,7 +69,9 @@ begin
 	Reg_Data_Ready_32 <= '0';
 	nextState <= currentState;
 	SIG_CPT <= Reg_CPT;
-
+	
+	S_DATA_part1 <= R_DATA_part1;
+	S_DATA_part2 <= R_DATA_part2;
 CASE currentState IS
 
 when WAITING =>
@@ -117,6 +120,7 @@ when WRITE_MSB =>
 
 
 when WRITE_LSB =>
+	
 	OUT_Address 	  <= Reg_IN_Address(25 downto 2) & '1';
 	OUT_Write_Select <= '1';
 	OUT_Data_16 	  <= Mux_IN_Data_32(15 downto 0);
@@ -153,7 +157,8 @@ when READ_MSB_GET =>
 	--ready_32b <= '0';
 	
 	if(Data_Ready_16b = '1') then
-		S_DATA(31 downto 16) <= DataOut_16b;
+--		S_DATA(31 downto 16) <= DataOut_16b;
+		S_DATA_part1 <= DataOut_16b;
 		nextstate <= READ_LSB_GET;
 	end if;
 
@@ -165,7 +170,8 @@ when READ_LSB_GET =>
 	OUT_DQM			  <= "00";
 	
 	if(Data_Ready_16b = '1') then
-		S_DATA(15 downto 0) <= DataOut_16b;
+--		S_DATA(15 downto 0) <= DataOut_16b;
+		S_DATA_part2 <= DataOut_16b;
 		nextstate <= WAITING;
 		Reg_Data_Ready_32 <= '1';
 		--Data_Ready_32b <= '1';
@@ -173,6 +179,12 @@ when READ_LSB_GET =>
 
 END CASE;
 END PROCESS fsm;
+
+R_DATA_part1 <= (others => '0') when reset='1' else
+					 S_DATA_part1 when rising_edge(clock);
+					 
+R_DATA_part2 <= (others => '0') when reset='1' else
+					 S_DATA_part2 when rising_edge(clock);
 
 -------------------DATA READY-----------------
 
@@ -241,11 +253,11 @@ Reg_DataOut <= Mux_data32 				 				       when  DQM="0000" else
 					(others=>'0');
 
 Mux_data32 <= --PKG_outputDM when PKG_simulON = '1' else
-			     S_DATA when Reg_Data_Ready_32='1' AND PKG_simulON = '0'  else
+			     S_DATA_part1 & S_DATA_part2 when Reg_Data_Ready_32='1'  else
 			     R_DATA;
 			  
 R_DATA <= (others => '0') when reset = '1' else
-		  Mux_data32 when rising_edge(Clock); 
+		    Mux_data32 when rising_edge(Clock); 
 ----------------------------
 Data_Ready_32b <= SIG_data_Ready_32;
 

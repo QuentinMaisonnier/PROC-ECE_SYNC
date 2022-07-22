@@ -48,7 +48,7 @@ architecture VHDL of TestBenchTop is
 	
 	-- SDRAM SIMULATION --
 	signal outputData_SDRAM, inputData_SDRAM: std_logic_vector(15 downto 0);
-	signal AddrSDRAM: std_logic_vector(24 downto 0);
+	signal AddrSDRAM, AddrSDRAM2, AddrSDRAM3, AddrSDRAM4: std_logic_vector(24 downto 0);
 	signal DQM_SDRAM		  : std_LOGIC_vector(1 downto 0);
 	signal dataReady_SDRAM, SDRAMselect, SDRAMwrite : std_logic;
 	-- SDRAM SIMULATION --
@@ -74,6 +74,10 @@ architecture VHDL of TestBenchTop is
 	SDRAMwrite <= PKG_SDRAMwrite;
 	dataReady_SDRAM <= PKG_dataReady_SDRAM;
 	-- SDRAM SIMULATION --
+	
+	AddrSDRAM2 <= AddrSDRAM when(rising_edge(ck));
+	AddrSDRAM3 <= AddrSDRAM2 when(rising_edge(ck));
+	AddrSDRAM4 <= AddrSDRAM3 when(rising_edge(ck));
 	
 	--instanciation de l'entité PROC
 	iTop : Top port map (
@@ -148,7 +152,7 @@ architecture VHDL of TestBenchTop is
 			END IF;
 			
 			IF dataReady_SDRAM='1' THEN
-				outputData_SDRAM <= TabMemory(to_integer(unsigned(AddrSDRAM)));
+				outputData_SDRAM <= TabMemory(to_integer(unsigned(AddrSDRAM4)));
 			ELSE
 				outputData_SDRAM <= (others => 'Z');
 			END IF;
