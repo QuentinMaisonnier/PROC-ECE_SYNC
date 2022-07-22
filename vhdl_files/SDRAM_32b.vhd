@@ -98,9 +98,27 @@ when WAITING =>
 	
 	if(IN_Select = '1' AND Ready_16b = '1') then
 			if(Mux_IN_Write_Select = '1') then
-				nextState <= WRITE_MSB;
+--				nextState <= WRITE_MSB;
+				
+				OUT_Address 	  <= Reg_IN_Address(25 downto 2) & '0'; 
+				OUT_Write_Select <= '1';							
+				OUT_Data_16 	  <= Mux_IN_Data_32(31 downto 16);
+				SIG_selectOUT16		  <= '1';
+				OUT_DQM			  <= DQM(3) & DQM(2);
+				
+				if(Ready_16b = '1')then
+					nextstate <= WRITE_LSB;
+				end if;
 			else
-				nextState <= READ_MSB_SEND;
+--				nextState <= READ_MSB_SEND;
+				OUT_Address 	  <= Reg_IN_Address(25 downto 2) & '0';
+				OUT_Write_Select <= '0';
+				SIG_selectOUT16		  <= '1';
+				OUT_DQM			  <= "00";
+				
+				if(Ready_16b = '1')then
+					nextstate <= READ_LSB_SEND;
+				end if;
 			end if;
 			SIG_CPT <= (others =>'0');
 	end if;

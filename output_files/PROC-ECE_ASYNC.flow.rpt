@@ -1,5 +1,5 @@
 Flow report for PROC-ECE_ASYNC
-Fri Jul 22 10:52:36 2022
+Fri Jul 22 12:03:36 2022
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -40,17 +40,17 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Fri Jul 22 10:52:36 2022       ;
+; Flow Status                        ; Successful - Fri Jul 22 12:03:36 2022       ;
 ; Quartus Prime Version              ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                      ; PROC-ECE_ASYNC                              ;
 ; Top-level Entity Name              ; Top                                         ;
 ; Family                             ; MAX 10                                      ;
 ; Device                             ; 10M50DAF484C7G                              ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 4,551                                       ;
-;     Total combinational functions  ; 4,479                                       ;
-;     Dedicated logic registers      ; 1,566                                       ;
-; Total registers                    ; 1566                                        ;
+; Total logic elements               ; 4,489                                       ;
+;     Total combinational functions  ; 4,403                                       ;
+;     Dedicated logic registers      ; 1,532                                       ;
+; Total registers                    ; 1532                                        ;
 ; Total pins                         ; 141                                         ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 131,072                                     ;
@@ -66,7 +66,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 07/22/2022 10:52:11 ;
+; Start date & time ; 07/22/2022 12:03:11 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; PROC-ECE_ASYNC      ;
 +-------------------+---------------------+
@@ -77,7 +77,7 @@ refer to the applicable agreement for further details.
 +--------------------------------------+-------------------------------------------------------------------+----------------+-------------+-----------------------------------+
 ; Assignment Name                      ; Value                                                             ; Default Value  ; Entity Name ; Section Id                        ;
 +--------------------------------------+-------------------------------------------------------------------+----------------+-------------+-----------------------------------+
-; COMPILER_SIGNATURE_ID                ; 10995770589200.165847993112324                                    ; --             ; --          ; --                                ;
+; COMPILER_SIGNATURE_ID                ; 10995770589200.165848419019780                                    ; --             ; --          ; --                                ;
 ; EDA_DESIGN_ENTRY_SYNTHESIS_TOOL      ; Synplify Pro                                                      ; <None>         ; --          ; --                                ;
 ; EDA_DESIGN_INSTANCE_NAME             ; NA                                                                ; --             ; --          ; Testbench                         ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST      ; Off                                                               ; --             ; --          ; eda_board_design_timing           ;
@@ -129,8 +129,8 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:25     ; 1.0                     ; 4843 MB             ; 00:00:36                           ;
-; Total                ; 00:00:25     ; --                      ; --                  ; 00:00:36                           ;
+; Analysis & Synthesis ; 00:00:26     ; 1.0                     ; 4857 MB             ; 00:00:36                           ;
+; Total                ; 00:00:26     ; --                      ; --                  ; 00:00:36                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

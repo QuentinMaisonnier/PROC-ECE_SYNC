@@ -308,7 +308,7 @@ WHEN S_Write_WRITE1 =>
 	S_ADDR <= "000" & Reg_A(9 downto 0); -- COLUMN
 	S_DOUT <= Reg_D;
 	
-	if(SELECT_IN = '1' AND R_CPT_REFRESH <= (STD_LOGIC_VECTOR(unsigned(T_REFRESH) - 5)) AND (Reg_A(24 downto 10) = Address_IN(24 downto 10))) then
+	if(SELECT_IN = '1' AND R_CPT_REFRESH <= (STD_LOGIC_VECTOR(unsigned(T_REFRESH) - 3)) AND (Reg_A(24 downto 10) = Address_IN(24 downto 10))) then
 		nextState <= S_Write_WRITE1;
 	else
 		reg_Ready <= '0';
@@ -336,7 +336,7 @@ WHEN S_Read_READ =>
 	S_CMD <= READ; 
 	S_ADDR <= "000" & Reg_A(9 downto 0);
 	
-	if(SELECT_IN = '1' AND R_CPT_REFRESH <= (STD_LOGIC_VECTOR(unsigned(T_REFRESH) - 5)) AND (Reg_A(24 downto 10) = Address_IN(24 downto 10))) then
+	if(SELECT_IN = '1' AND R_CPT_REFRESH <= (STD_LOGIC_VECTOR(unsigned(T_REFRESH) - 3)) AND (Reg_A(24 downto 10) = Address_IN(24 downto 10))) then
 		nextState <= S_Read_READ;
 	else
 		reg_Ready <= '0';
