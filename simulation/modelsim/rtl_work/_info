@@ -22,9 +22,9 @@ VibNmdJ0an6VzACZPKb7`Y3
 !s100 Q?0l^f8O][^W;2ejiJDWd0
 Z7 OV;C;10.5b;63
 31
-Z8 !s110 1658412595
+Z8 !s110 1658477162
 !i10b 1
-Z9 !s108 1658412595.000000
+Z9 !s108 1658477162.000000
 Z10 !s90 -reportprogress|300|-93|-work|work|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Alu.vhd|
 Z11 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Alu.vhd|
 !i113 1
@@ -62,11 +62,11 @@ VDXIOhH16mNccdXPWnZAeM2
 !s100 Ye>Gf_Qd@K01j4jmmKFHc0
 R7
 31
-Z16 !s110 1658412596
+R8
 !i10b 1
 R9
-Z17 !s90 -reportprogress|300|-93|-work|work|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/clock1M.vhd|
-Z18 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/clock1M.vhd|
+Z16 !s90 -reportprogress|300|-93|-work|work|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/clock1M.vhd|
+Z17 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/clock1M.vhd|
 !i113 1
 R12
 R13
@@ -80,16 +80,16 @@ V][:D@0_IC`<l2H3DW>b<U3
 !s100 JcVYeKLlB85Cm0Zc5VeGF0
 R7
 31
-R16
+R8
 !i10b 1
 R9
+R16
 R17
-R18
 !i113 1
 R12
 R13
 vclock1M_altpll
-R16
+R8
 !i10b 1
 !s100 FcYN=c]A526FHFPAWJkcW1
 IQc1V1j@FD1m6V@YHibXX@0
@@ -103,7 +103,7 @@ OV;L;10.5b;63
 r1
 !s85 0
 31
-Z19 !s108 1658412596.000000
+R9
 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/db/clock1M_altpll.v|
 !s90 -reportprogress|300|-vlog01compat|-work|work|+incdir+C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/db|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/db/clock1M_altpll.v|
 !i113 1
@@ -117,19 +117,19 @@ R2
 R3
 R4
 R0
-Z20 8C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Counter.vhd
-Z21 FC:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Counter.vhd
+Z18 8C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Counter.vhd
+Z19 FC:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Counter.vhd
 l0
 L11
 VM;AFf6icB8Ahi@ZRmbVHo0
 !s100 GA?fDVaAIiWmKoBN6Cf?L2
 R7
 31
-R16
+R8
 !i10b 1
-R19
-Z22 !s90 -reportprogress|300|-93|-work|work|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Counter.vhd|
-Z23 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Counter.vhd|
+R9
+Z20 !s90 -reportprogress|300|-93|-work|work|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Counter.vhd|
+Z21 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Counter.vhd|
 !i113 1
 R12
 R13
@@ -144,39 +144,39 @@ VR?KO7jE0Tgmj@LzCWa0BH3
 !s100 A4eDhod[`EOY]AmEXL]4A0
 R7
 31
-R16
+R8
 !i10b 1
-R19
-R22
-R23
+R9
+R20
+R21
 !i113 1
 R12
 R13
 Edebuger
-Z24 w1656505170
-Z25 DPx4 work 8 simulpkg 0 22 RN[bm6[CIk6o^^hN5E6]l2
+Z22 w1656505170
+Z23 DPx4 work 8 simulpkg 0 22 oWH]_LBj^j3aaOjP`B9IT2
 R2
 R3
 R4
 R0
-Z26 8C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/DEBUGER.vhd
-Z27 FC:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/DEBUGER.vhd
+Z24 8C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/DEBUGER.vhd
+Z25 FC:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/DEBUGER.vhd
 l0
 L11
 VD3A:LGT>2?nmXGkZh<@>j0
 !s100 KF=CEn>LeflOK;ZOX3AVh0
 R7
 31
-R16
+R8
 !i10b 1
-R19
-Z28 !s90 -reportprogress|300|-93|-work|work|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/DEBUGER.vhd|
-Z29 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/DEBUGER.vhd|
+R9
+Z26 !s90 -reportprogress|300|-93|-work|work|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/DEBUGER.vhd|
+Z27 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/DEBUGER.vhd|
 !i113 1
 R12
 R13
 Aarchi
-R25
+R23
 R2
 R3
 R4
@@ -187,33 +187,33 @@ VElU`JAWZnTHTGcek2nL`n2
 !s100 K`9=>aGgN1e?cBbgiCd;J1
 R7
 31
-R16
+R8
 !i10b 1
-R19
-R28
-R29
+R9
+R26
+R27
 !i113 1
 R12
 R13
 Edisplays
-Z30 w1655296276
+Z28 w1655296276
 R2
 R3
 R4
 R0
-Z31 8C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Displays.vhd
-Z32 FC:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Displays.vhd
+Z29 8C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Displays.vhd
+Z30 FC:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Displays.vhd
 l0
 L12
 Vdz30Gzb05_>9kU<5g_MR>0
 !s100 o2@Lm]JjER>ET7>aoizQN0
 R7
 31
-R16
+R8
 !i10b 1
-R19
-Z33 !s90 -reportprogress|300|-93|-work|work|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Displays.vhd|
-Z34 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Displays.vhd|
+R9
+Z31 !s90 -reportprogress|300|-93|-work|work|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Displays.vhd|
+Z32 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Displays.vhd|
 !i113 1
 R12
 R13
@@ -228,33 +228,33 @@ Ve5cHNfE_6o^7H6J^ZPHg=1
 !s100 1S]1Mz`k_IameA_kVOW8S1
 R7
 31
-R16
+R8
 !i10b 1
-R19
-R33
-R34
+R9
+R31
+R32
 !i113 1
 R12
 R13
 Einstructiondecoder
-Z35 w1658412537
+Z33 w1658477089
 R2
 R3
 R4
 R0
-Z36 8C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/InstructionDecoder.vhd
-Z37 FC:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/InstructionDecoder.vhd
+Z34 8C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/InstructionDecoder.vhd
+Z35 FC:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/InstructionDecoder.vhd
 l0
 L15
 VY;4;bkG2fjRbgCmb;d01A1
 !s100 iX?2C6L;SI`G4d<K5<EPo2
 R7
 31
-R16
+R8
 !i10b 1
-R19
-Z38 !s90 -reportprogress|300|-93|-work|work|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/InstructionDecoder.vhd|
-Z39 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/InstructionDecoder.vhd|
+R9
+Z36 !s90 -reportprogress|300|-93|-work|work|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/InstructionDecoder.vhd|
+Z37 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/InstructionDecoder.vhd|
 !i113 1
 R12
 R13
@@ -263,84 +263,84 @@ R2
 R3
 R4
 DEx4 work 18 instructiondecoder 0 22 Y;4;bkG2fjRbgCmb;d01A1
-l58
+l56
 L48
-V_:OibU:?a5Lo_RP27>nSL3
-!s100 BQVn7CL:i<hI@c=kgG>VY3
+VzWIK@D_z6f<Gna4B:Pb1X3
+!s100 kTSPFP4:aWg2jgO7c6UIN0
 R7
 31
-R16
+R8
 !i10b 1
-R19
-R38
-R39
+R9
+R36
+R37
 !i113 1
 R12
 R13
 Eminicache
-Z40 w1658411196
-Z41 DPx4 work 13 sdram_package 0 22 jX?9fHTz@a4Fc@VV]CO8b0
-R25
+Z38 w1658414867
+Z39 DPx4 work 13 sdram_package 0 22 jX?9fHTz@a4Fc@VV]CO8b0
+R23
 R2
 R3
 R4
 R0
-Z42 8C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/miniCache.vhd
-Z43 FC:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/miniCache.vhd
+Z40 8C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/miniCache.vhd
+Z41 FC:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/miniCache.vhd
 l0
 L13
 VQchO`RcJAJj;V0zUIof4^2
 !s100 D;aol^aPZ9ZE2[cn?I0]:2
 R7
 31
-R16
+R8
 !i10b 1
-R19
-Z44 !s90 -reportprogress|300|-93|-work|work|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/miniCache.vhd|
-Z45 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/miniCache.vhd|
+R9
+Z42 !s90 -reportprogress|300|-93|-work|work|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/miniCache.vhd|
+Z43 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/miniCache.vhd|
 !i113 1
 R12
 R13
 Aarchi
-R41
-R25
+R39
+R23
 R2
 R3
 R4
 DEx4 work 9 minicache 0 22 QchO`RcJAJj;V0zUIof4^2
 l90
 L44
-VXif`O;D=5`>=1eU=S_?hK1
-!s100 jCdXWDd2X9?<io^21HZAA2
+Vk7Ae`?@^f@o:inZkSkBza3
+!s100 2O>LYND@j6XJ]9P1LdXdM2
 R7
 31
-R16
+R8
 !i10b 1
-R19
-R44
-R45
+R9
+R42
+R43
 !i113 1
 R12
 R13
 Eprocessor
-Z46 w1658412534
+Z44 w1658412534
 R2
 R3
 R4
 R0
-Z47 8C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd
-Z48 FC:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd
+Z45 8C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd
+Z46 FC:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd
 l0
 L11
 Va9SRm1EhmOGUk?UVh<jN91
 !s100 DSG2B[jeFE2U:c;=ThiPW3
 R7
 31
-R16
+R8
 !i10b 1
-R19
-Z49 !s90 -reportprogress|300|-93|-work|work|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd|
-Z50 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd|
+R9
+Z47 !s90 -reportprogress|300|-93|-work|work|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd|
+Z48 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Processor.vhd|
 !i113 1
 R12
 R13
@@ -355,33 +355,33 @@ VYCnhaKSAY<bPYTj;C;1K?0
 !s100 fQFD`3583G@5b:k?@;6`63
 R7
 31
-R16
+R8
 !i10b 1
-R19
-R49
-R50
+R9
+R47
+R48
 !i113 1
 R12
 R13
 Eprogramcounter
-Z51 w1658243284
+Z49 w1658243284
 R2
 R3
 R4
 R0
-Z52 8C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/ProgramCounter.vhd
-Z53 FC:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/ProgramCounter.vhd
+Z50 8C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/ProgramCounter.vhd
+Z51 FC:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/ProgramCounter.vhd
 l0
 L11
 V;L@JBBcdS9P=Njgla@Mzn0
 !s100 Rnc[fMZgMo@7`e[F>0@Fe3
 R7
 31
-R16
+R8
 !i10b 1
-R19
-Z54 !s90 -reportprogress|300|-93|-work|work|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/ProgramCounter.vhd|
-Z55 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/ProgramCounter.vhd|
+R9
+Z52 !s90 -reportprogress|300|-93|-work|work|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/ProgramCounter.vhd|
+Z53 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/ProgramCounter.vhd|
 !i113 1
 R12
 R13
@@ -396,38 +396,38 @@ VTQh1Elf;>ZdWGP`AF94In1
 !s100 LzKJ<SGaiB`L[I5V7]oW<3
 R7
 31
-R16
+R8
 !i10b 1
-R19
-R54
-R55
+R9
+R52
+R53
 !i113 1
 R12
 R13
 Eram_2port
-Z56 w1655883619
-Z57 DPx9 altera_mf 20 altera_mf_components 0 22 7RjT1Xb9^`L[coRHZN<9k2
+Z54 w1655883619
+Z55 DPx9 altera_mf 20 altera_mf_components 0 22 7RjT1Xb9^`L[coRHZN<9k2
 R3
 R4
 R0
-Z58 8C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/RAM_2PORT.vhd
-Z59 FC:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/RAM_2PORT.vhd
+Z56 8C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/RAM_2PORT.vhd
+Z57 FC:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/RAM_2PORT.vhd
 l0
 L42
 VM]];fY=REOYnLfS@om[Z70
 !s100 ORMiE:C_1nRA_hSN9;U8@2
 R7
 31
-R16
+Z58 !s110 1658477163
 !i10b 1
-R19
+Z59 !s108 1658477163.000000
 Z60 !s90 -reportprogress|300|-93|-work|work|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/RAM_2PORT.vhd|
 Z61 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/RAM_2PORT.vhd|
 !i113 1
 R12
 R13
 Asyn
-R57
+R55
 R3
 R4
 DEx4 work 9 ram_2port 0 22 M]];fY=REOYnLfS@om[Z70
@@ -437,9 +437,9 @@ VKCAQK]6]BZ=:R>K5k<Vj00
 !s100 JASoIG8OFL_9M[K2b:I?22
 R7
 31
-R16
+R58
 !i10b 1
-R19
+R59
 R60
 R61
 !i113 1
@@ -447,7 +447,7 @@ R12
 R13
 Eregisterfile
 Z62 w1655989728
-R25
+R23
 R2
 R3
 R4
@@ -460,16 +460,16 @@ V97Ii3naiLA8PL6WU^7Y7I1
 !s100 9XFaBIE?UCY0A:FjoBJkI3
 R7
 31
-R16
+R58
 !i10b 1
-R19
+R59
 Z65 !s90 -reportprogress|300|-93|-work|work|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/RegisterFile.vhd|
 Z66 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/RegisterFile.vhd|
 !i113 1
 R12
 R13
 Aarchi
-R25
+R23
 R2
 R3
 R4
@@ -480,18 +480,18 @@ V6?7M_c_iKcF;eR^^7h_o=3
 !s100 TAA9XU2jYPG1[=9<]GCOY2
 R7
 31
-R16
+R58
 !i10b 1
-R19
+R59
 R65
 R66
 !i113 1
 R12
 R13
 Esdram_32b
-Z67 w1658391220
-R25
-R41
+Z67 w1658476665
+R23
+R39
 R2
 R3
 R4
@@ -504,75 +504,77 @@ Vd>c[00i`]D09c<A=8VTgD1
 !s100 kTZCAP<VlTX>hb;FU^C:N1
 R7
 31
-R16
+R58
 !i10b 1
-R19
+R59
 Z70 !s90 -reportprogress|300|-93|-work|work|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_32b.vhd|
 Z71 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_32b.vhd|
 !i113 1
 R12
 R13
 Avhdl
-R25
-R41
+R23
+R39
 R2
 R3
 R4
 DEx4 work 9 sdram_32b 0 22 d>c[00i`]D09c<A=8VTgD1
 l57
 L40
-VnhRC3`Y]TO8NnXhmLj>2E0
-!s100 :H71jA7Ki_Za2?=5`g8cf3
+Vdg5<dfRbMRLbEhAEazC>D3
+!s100 19i_3Co8DE`VXoXFMT]BX1
 R7
 31
-R16
+R58
 !i10b 1
-R19
+R59
 R70
 R71
 !i113 1
 R12
 R13
 Esdram_controller
-Z72 w1657523302
-R41
+R33
+R23
+R39
 R2
 R3
 R4
 R0
-Z73 8C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_controller.vhd
-Z74 FC:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_controller.vhd
+Z72 8C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_controller.vhd
+Z73 FC:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_controller.vhd
 l0
-L10
-V[l?ki6TTfOhC=gSK4@boa2
-!s100 ]`[j>`IMJjf?N@bZP1cnE2
+L11
+VR4H=ZSP6GG<Q]7nb8n96^1
+!s100 dRPI634o2]T^0Bh7B<XU52
 R7
 31
-R16
+R58
 !i10b 1
-R19
-Z75 !s90 -reportprogress|300|-93|-work|work|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_controller.vhd|
-Z76 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_controller.vhd|
+R59
+Z74 !s90 -reportprogress|300|-93|-work|work|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_controller.vhd|
+Z75 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_controller.vhd|
 !i113 1
 R12
 R13
 Avhdl
-R41
+R23
+R39
 R2
 R3
 R4
-DEx4 work 16 sdram_controller 0 22 [l?ki6TTfOhC=gSK4@boa2
-l66
-L31
-VS4jU]WVlB<WTJ;VHb?Jf_2
-!s100 @6nEj=if_W3hV4cnTXk:a0
+DEx4 work 16 sdram_controller 0 22 R4H=ZSP6GG<Q]7nb8n96^1
+l67
+L32
+VM5mYG>6<_DGP5cJ0?>T6B1
+!s100 h9iEY1iYC;DgXjTP>Y61J3
 R7
 31
-R16
+R58
 !i10b 1
-R19
+R59
+R74
 R75
-R76
 !i113 1
 R12
 R13
@@ -590,33 +592,33 @@ VjX?9fHTz@a4Fc@VV]CO8b0
 !s100 QhSA2?R8?7[[4h1maWa:E2
 R7
 31
-Z77 !s110 1658412597
+R58
 !i10b 1
-Z78 !s108 1658412597.000000
+R59
 !s90 -reportprogress|300|-93|-work|work|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_package.vhd|
 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SDRAM_package.vhd|
 !i113 1
 R12
 R13
 Esegmentdecoder
-Z79 w1657034389
+Z76 w1657034389
 R2
 R3
 R4
 R0
-Z80 8C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SegmentDecoder.vhd
-Z81 FC:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SegmentDecoder.vhd
+Z77 8C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SegmentDecoder.vhd
+Z78 FC:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SegmentDecoder.vhd
 l0
 L5
 V`IlP<baPbKgjzXLHS9O?^3
 !s100 mj:e?YB7b8=SEYf1R<2fl3
 R7
 31
-R77
+R58
 !i10b 1
-R78
-Z82 !s90 -reportprogress|300|-93|-work|work|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SegmentDecoder.vhd|
-Z83 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SegmentDecoder.vhd|
+R59
+Z79 !s90 -reportprogress|300|-93|-work|work|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SegmentDecoder.vhd|
+Z80 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/SegmentDecoder.vhd|
 !i113 1
 R12
 R13
@@ -631,11 +633,11 @@ VREEN@8g4mVRH35O6kQQcR2
 !s100 MEZPhoBP=E8BM:19LO_ne1
 R7
 31
-R77
+R58
 !i10b 1
-R78
-R82
-R83
+R59
+R79
+R80
 !i113 1
 R12
 R13
@@ -643,109 +645,111 @@ Psimulpkg
 R2
 R3
 R4
-w1658388581
+w1658475835
 R0
 8C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/custom_lib/simul_var_pkg.vhd
 FC:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/custom_lib/simul_var_pkg.vhd
 l0
 L5
-VRN[bm6[CIk6o^^hN5E6]l2
-!s100 =JYMP2Uh5<B>XdZj`Z6P@1
+VoWH]_LBj^j3aaOjP`B9IT2
+!s100 O?_cNc@]i]iRVTY=Y@@gz2
 R7
 31
-R77
+R58
 !i10b 1
-R78
+R59
 !s90 -reportprogress|300|-93|-work|work|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/custom_lib/simul_var_pkg.vhd|
 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/custom_lib/simul_var_pkg.vhd|
 !i113 1
 R12
 R13
 Etestbenchtop
-Z84 w1657700954
-R25
+Z81 w1658475751
+R39
+R23
 R2
 R3
 R4
 R0
-Z85 8C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/TestBench.vhd
-Z86 FC:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/TestBench.vhd
+Z82 8C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/TestBench.vhd
+Z83 FC:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/TestBench.vhd
 l0
-L11
-V`QDiN=;OL8?J10W_W^NIi1
-!s100 XD9`oP6UkhRK9g52KDcJf2
+L12
+VcPC<XEX[5YaRhlKJghh[31
+!s100 7z2X`VK_D3[OM2d98UhdV2
 R7
 31
-R77
+R58
 !i10b 1
-R78
-Z87 !s90 -reportprogress|300|-93|-work|work|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/TestBench.vhd|
-Z88 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/TestBench.vhd|
+R59
+Z84 !s90 -reportprogress|300|-93|-work|work|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/TestBench.vhd|
+Z85 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/TestBench.vhd|
 !i113 1
 R12
 R13
 Avhdl
-R25
+R39
+R23
 R2
 R3
 R4
-DEx4 work 12 testbenchtop 0 22 `QDiN=;OL8?J10W_W^NIi1
-l186
-L14
-VAV?z91gW9<gH[5jb9FW5o2
-!s100 TaL`U0oFAIjmElZHOV<E^3
+DEx4 work 12 testbenchtop 0 22 cPC<XEX[5YaRhlKJghh[31
+l65
+L15
+VdaPU4FL`b3n5Na9Sg_>Kz2
+!s100 6EGVc?ToNLh?>jEYY5M7=2
 R7
 31
-R77
+R58
 !i10b 1
-R78
-R87
-R88
+R59
+R84
+R85
 !i113 1
 R12
 R13
 Etop
-Z89 w1657719346
-R41
-R25
+Z86 w1658430131
+R39
+R23
 R2
 R3
 R4
 R0
-Z90 8C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd
-Z91 FC:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd
+Z87 8C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd
+Z88 FC:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd
 l0
 L13
 VI][oX@_P7GEV=V__E^1IT2
 !s100 KcYXUUd^E<@dj2lAD?FGT2
 R7
 31
-R77
+R58
 !i10b 1
-R78
-Z92 !s90 -reportprogress|300|-93|-work|work|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd|
-Z93 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd|
+R59
+Z89 !s90 -reportprogress|300|-93|-work|work|C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd|
+Z90 !s107 C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC-GALOPE-V3/vhdl_files/Top.vhd|
 !i113 1
 R12
 R13
 Aarchi
-R41
-R25
+R39
+R23
 R2
 R3
 R4
-Z94 DEx4 work 3 top 0 22 I][oX@_P7GEV=V__E^1IT2
+Z91 DEx4 work 3 top 0 22 I][oX@_P7GEV=V__E^1IT2
 l259
 L38
-Z95 VNV`bh9N:3Aa]Z584eO<PN1
-Z96 !s100 ?U@Nko31V[`IeHBa5V0LN1
+Z92 V:^`MKXFV>P;V^A>1Zj0PQ2
+Z93 !s100 bTVgBMAa_T3;0fJfaEo6g3
 R7
 31
-R77
+R58
 !i10b 1
-R78
-R92
-R93
+R59
+R89
+R90
 !i113 1
 R12
 R13

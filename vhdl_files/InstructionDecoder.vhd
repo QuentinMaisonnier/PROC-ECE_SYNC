@@ -47,9 +47,11 @@ end entity;
 -- ARCHITECTURE
 architecture archi of InstructionDecoder is
 
-SIGNAL RegIDloadP2, SIGIDload, MuxIDloadP2, MuxIDload : STD_LOGIC;
+SIGNAL SIGIDload, SIGIDloadP2 : STD_LOGIC;
+Type state is (LoadP1state, LoadP2state);
+signal currentState, nextState : state;
 
-SIGNAL RegIDstoreP2, SIGIDstore, MuxIDstoreP2, MuxIDstore : STD_LOGIC;
+SIGNAL SIGIDstore: STD_LOGIC;
 
 begin
 	--BEGIN
@@ -89,14 +91,38 @@ begin
 	IDimm21J(0) 	<= '0';
 	
 	-- Load instruction ?
-	MuxIDloadP2 		<= RegIDloadP2 when hold='1' else
-						   '0' when reset='1' else
-						   SIGIDload;
-								
-	SIGIDload 	   <= '1' when  IDinstruction(6 downto 0) = "0000011" and RegIDloadP2='0' else '0';
-	RegIDloadP2 	<= MuxIDloadP2 when rising_edge(clock);
 	
-	IDloadP2 <= RegIDloadP2;
+	
+	loadProcess : PROCESS (Hold, IDinstruction, currentState)
+	BEGIN
+	
+		nextState <= currentState;
+		SIGIDload <= '0';
+		SIGIDloadP2 <= '0';
+		
+		CASE currentState IS
+		
+			WHEN LoadP1state=> 
+			
+				IF Hold='1' AND IDinstruction(6 downto 0) = "0000011" THEN
+					nextState <= LoadP2state;
+					SIGIDload <= '1';
+				END IF;
+				
+			WHEN LoadP2state=> 
+				SIGIDloadP2 <= '1';
+				
+				IF Hold='1' THEN
+					nextState <= LoadP1state;
+				END IF;
+			
+		END CASE;
+	END PROCESS loadProcess;
+	
+	currentState <= LoadP1state when reset = '1' else
+				       nextState when rising_edge(Clock);
+	
+	IDloadP2 <= SIGIDloadP2;
 	IDload   <= SIGIDload;
 	
 	-- Store instruction ?

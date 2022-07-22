@@ -6,6 +6,7 @@ library work;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 use work.SDRAM_package.ALL;
+use work.simulPkg.all;
 
 entity SDRAM_controller is 
     Port (
@@ -68,17 +69,18 @@ begin
 -- TESTBENCH RISC-V --
 
 -- Controler -> SDRAM (write) -- 
-PKG_inputData_SDRAM <= SDRAM_DQ;
-PKG_DQM_SDRAM <= SDRAM_DQM;
+PKG_inputData_SDRAM <= R_Dout ;
+PKG_DQM_SDRAM <= R_DQM;
+--PKG_SDRAMselect <= ;
 
 -- SDRAM -> Controler (read) -- 
-PKG_outputData_SDRAM <= Data_OUT;
-PKG_dataReady_SDRAM <= Data_Ready;
+--PKG_outputData_SDRAM <= Data_OUT;
+PKG_dataReady_SDRAM <= '0' when reset = '1' else
+								reg_DataReady when rising_edge(clk);
 
 -- autre --
 PKG_AddrSDRAM <= Reg_A;
 PKG_SDRAMwrite <= R_Write_IN;
-PKG_SDRAMselect <= ;
 
 -- TESTBENCH RISC-V --
 
@@ -120,8 +122,12 @@ reg_DQM <= (others=>'0') when reset='1' else
 
 
 
-fsm : Process( reg_Ready, currentState, clk, Reset, Reg_A, Reg_D, R_Write_IN, R_CPT, R_CPT_DATA, R_DOUT, R_DOE, R_BA, R_CPT_REFRESH, Data_IN, Write_IN, Select_IN, Address_IN, reg_DQM, R_DQM)
+fsm : Process( reg_Ready, PKG_simulON, currentState, clk, Reset, Reg_A, Reg_D, R_Write_IN, R_CPT, R_CPT_DATA, R_DOUT, R_DOE, R_BA, R_CPT_REFRESH, Data_IN, Write_IN, Select_IN, Address_IN, reg_DQM, R_DQM)
 begin 
+
+	-- TESTBENCH RISC-V --
+	PKG_SDRAMselect <= '0';
+	-- TESTBENCH RISC-V --
 
 	S_DQM <= R_DQM;
 	S_BA <= R_BA;
@@ -161,7 +167,7 @@ WHEN S_Start =>
 	S_CMD <= NOP;
 	S_ADDR <= A_NOP;
 											
-	if(R_CPT = T_START) then -- (100us délai au démarrage de la SDRAM)
+	if(R_CPT = T_START OR PKG_simulON='1') then -- (100us délai au démarrage de la SDRAM)
 		nextState <= S_PRECHARGE_INIT;
 	else
 		S_CPT <= STD_LOGIC_VECTOR(unsigned(R_CPT) + 1);
@@ -285,6 +291,10 @@ WHEN S_Active =>
 -- ----- WRITE ----- --
 WHEN S_Write_WRITE1 =>
 
+	-- TESTBENCH RISC-V --
+	PKG_SDRAMselect <= '1';
+	-- TESTBENCH RISC-V --
+
 	S_CPT <= STD_LOGIC_VECTOR(unsigned(R_CPT) + 1);
 	
 	reg_Ready <= '1';
@@ -309,6 +319,10 @@ WHEN S_Write_WRITE1 =>
 
 -- ----- READ ----- --
 WHEN S_Read_READ =>
+
+	-- TESTBENCH RISC-V --
+	PKG_SDRAMselect <= '1';
+	-- TESTBENCH RISC-V --
 
 	S_CPT <= STD_LOGIC_VECTOR(unsigned(R_CPT) + 1);
 	
@@ -499,9 +513,11 @@ RegRead2 <= (others=>'0') when reset='1'
 			
 MuxRead2 <= Din when reg_DataReady = '1'
 				else RegRead2;
-Data_Ready <= reg_DataReady when rising_edge(clk);
+Data_Ready <= '0' when reset = '1' else
+					reg_DataReady when rising_edge(clk);
 
-Data_OUT <=  RegRead2;
+Data_OUT <= PKG_outputData_SDRAM when PKG_simulON = '1' else
+				RegRead2;
 -- Data INOUT --
 
 end vhdl;

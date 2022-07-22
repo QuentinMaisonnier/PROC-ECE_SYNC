@@ -73,9 +73,9 @@ CASE currentState IS
 
 when WAITING =>
 
-	if(unsigned(Reg_CPT) < 2)then
-		SIG_CPT <= STD_LOGIC_VECTOR(unsigned(Reg_CPT) + 1);
-	end if;
+--	if(unsigned(Reg_CPT) < 2)then
+--		SIG_CPT <= STD_LOGIC_VECTOR(unsigned(Reg_CPT) + 1);
+--	end if;
 	
 	if(Ready_16b = '1')then
 		SIG_Ready_32b <= '1';
@@ -240,7 +240,7 @@ Reg_DataOut <= Mux_data32 				 				       when  DQM="0000" else
 					x"0000"   & Mux_data32(31 downto 16)    when  DQM="0011" else
 					(others=>'0');
 
-Mux_data32 <= PKG_outputDM when PKG_simulON = '1' else
+Mux_data32 <= --PKG_outputDM when PKG_simulON = '1' else
 			     S_DATA when Reg_Data_Ready_32='1' AND PKG_simulON = '0'  else
 			     R_DATA;
 			  

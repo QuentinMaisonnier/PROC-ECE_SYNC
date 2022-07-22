@@ -271,15 +271,6 @@ BEGIN
 	PKG_addrDM        <= SIGPROCaddrDM;
 	PKG_inputDM       <= SIGPROCinputDM;
 	
-	
-	PKG_dataReady_SDRAM <= Reg_Data_Ready_32;
-	PKG_inputData_SDRAM <= Mux_IN_Data_32;
-	PKG_SDRAMselect     <= IN_Select;
-	PKG_DQM_SDRAM       <= DQM;
-	PKG_AddrSDRAM       <= Mux_IN_Address;-- Test Bench
-	PKG_SDRAMwrite      <= Mux_In_write_Select;
-	
-	
 	--	PKG_outputDM <= SIGoutputDM;
 	--	SIGoutputDM <= PKG_outputDM;
 	PKG_progcounter   <= SIGPROCprogcounter;
