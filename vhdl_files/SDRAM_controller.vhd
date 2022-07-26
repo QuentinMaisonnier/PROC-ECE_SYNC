@@ -126,7 +126,7 @@ Reg_DQM <= (others=>'0') when reset='1' else
 
 
 
-fsm : Process(reg_Ready, currentState, clk, Reset, Reg_A, Reg_D, R_Write_IN, R_CPT, R_CPT_DATA, R_DOUT, R_DOE, R_BA, R_CPT_REFRESH, Data_IN, Write_IN, Select_IN, Address_IN, reg_DQM, R_DQM)
+fsm : Process(reg_Ready, pkg_simulON, currentState, clk, Reset, Reg_A, Reg_D, R_Write_IN, R_CPT, R_CPT_DATA, R_DOUT, R_DOE, R_BA, R_CPT_REFRESH, Data_IN, Write_IN, Select_IN, Address_IN, reg_DQM, R_DQM)
 begin 
 
 	Refresh_Toggle <= '0'; -- don't need, only for DEBUG
@@ -258,7 +258,6 @@ WHEN S_IDLE =>
 	if( (R_CPT_REFRESH > (STD_LOGIC_VECTOR(unsigned(T_REFRESH) - 6))) OR (Select_IN = '0' AND R_CPT_REFRESH > ('0' & STD_LOGIC_VECTOR(unsigned(T_REFRESH(21 downto 1)))))) then
 		nextState <= S_Refresh;
 	elsif(Select_IN = '1') then
-		--reg_DQM <= DQM;
 		S_Write_IN <= Write_IN;
 		nextState <= S_Active;
 	else
@@ -294,7 +293,11 @@ WHEN S_Write_WRITE1 =>
 
 	S_CPT <= STD_LOGIC_VECTOR(unsigned(R_CPT) + 1);
 	
-	reg_Ready <= '1';
+	if( R_CPT_REFRESH <= (STD_LOGIC_VECTOR(unsigned(T_REFRESH) - 7))) then -- Verify REFRESH TIMING
+		reg_Ready <= '1'; -- SDRAM Ready to receive new CMD
+	else
+		reg_Ready <= '0';
+	end if;
 	S_DOE <= '1';
 	S_BA <= R_BA; --
 	S_DQM <= reg_DQM;
@@ -305,7 +308,7 @@ WHEN S_Write_WRITE1 =>
 	S_DOUT <= Reg_D;
 	
 	
-	if(SELECT_IN = '1' AND R_CPT_REFRESH <= (STD_LOGIC_VECTOR(unsigned(T_REFRESH) - 3)) AND (Reg_A(24 downto 10) = Address_IN(24 downto 10))) then
+	if(SELECT_IN = '1' AND R_CPT_REFRESH <= (STD_LOGIC_VECTOR(unsigned(T_REFRESH) - 7)) AND (Reg_A(24 downto 10) = Address_IN(24 downto 10))) then
 		nextState <= S_Write_WRITE1;
 	else
 		nextState <= S_Precharge;
@@ -319,7 +322,11 @@ WHEN S_Read_READ =>
 
 	S_CPT <= STD_LOGIC_VECTOR(unsigned(R_CPT) + 1);
 	
-	reg_Ready <= '1';
+	if( R_CPT_REFRESH <= (STD_LOGIC_VECTOR(unsigned(T_REFRESH) - 9))) then -- Verify REFRESH TIMING
+		reg_Ready <= '1'; -- SDRAM Ready to receive new CMD
+	else
+		reg_Ready <= '0';
+	end if;
 	S_DOE <= '0';
 	S_BA <= Reg_A(24 downto 23);
 	S_DQM <= reg_DQM;
@@ -328,7 +335,7 @@ WHEN S_Read_READ =>
 	S_CMD <= READ; 
 	S_ADDR <= "000" & Reg_A(9 downto 0);
 	
-	if(SELECT_IN = '1' AND R_CPT_REFRESH <= (STD_LOGIC_VECTOR(unsigned(T_REFRESH) - 3)) AND (Reg_A(24 downto 10) = Address_IN(24 downto 10))) then
+	if(SELECT_IN = '1' AND R_CPT_REFRESH <= (STD_LOGIC_VECTOR(unsigned(T_REFRESH) - 9)) AND (Reg_A(24 downto 10) = Address_IN(24 downto 10))) then
 		nextState <= S_Read_READ;
 	else
 		nextState <= S_NOP1_READ;
@@ -389,6 +396,7 @@ WHEN S_NOP2_READ =>
 -- ----- PRECHARGE ----- --
 WHEN S_Precharge =>
 	
+	S_CPT_DATA <= (others => '0');					   
 	reg_Ready <= '0';
 	
 	S_DOE <= '0';
@@ -403,14 +411,10 @@ WHEN S_Precharge =>
 	S_CMD <= PRECHARGE; 
 	S_ADDR <= A_ALL_BANK;
 	
-	if(R_CPT_REFRESH > (STD_LOGIC_VECTOR(unsigned(T_REFRESH) - 9)))then
-		nextState <= S_Refresh;
-	else
-		if(SELECT_IN = '1')then
-			nextState <= S_Active;
-		else
-			nextState <= S_IDLE;
-		end if;
+	if(SELECT_IN = '1' AND R_CPT_REFRESH <= (STD_LOGIC_VECTOR(unsigned(T_REFRESH) - 6)))then
+		nextState <= S_Active;
+	else				 
+		nextState <= S_IDLE;
 	end if;
 -- ----- --------- ----- --
 	
@@ -453,11 +457,7 @@ WHEN S_Refresh_NOP1 =>
 	S_ADDR <= A_NOP;
 	
 	if(R_CPT >= T_TRC)then
-		if(SELECT_IN = '1')then
-			nextState <= S_Active;
-		else
-			nextState <= S_IDLE;
-		end if;
+		nextState <= S_IDLE;
 	else
 		nextState <= S_Refresh_NOP1;
 	end if;
@@ -515,7 +515,7 @@ SDRAM_DQM <= R_DQM;
 
 
 -- Data INOUT --
-SDRAM_DQ <= R_Dout when R_DOE = '1'
+SDRAM_DQ <= R_DOUT when R_DOE = '1'
 				else (others => 'Z');
 Din <= SDRAM_DQ;
 

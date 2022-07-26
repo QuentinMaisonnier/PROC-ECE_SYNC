@@ -119,9 +119,8 @@ ARCHITECTURE archi OF Top IS
 			Instruction           : IN  STD_LOGIC_VECTOR(31 DOWNTO 0);
 
 			--OUTPUTS
-			TOPdisplay2           : OUT STD_LOGIC_VECTOR(31 DOWNTO 0) := (OTHERS => '1'); --0x80000004
-			TOPdisplay1           : OUT STD_LOGIC_VECTOR(31 DOWNTO 0) := (OTHERS => '1'); --0x80000004
-			TOPleds               : OUT STD_LOGIC_VECTOR(31 DOWNTO 0) := (OTHERS => '1')  --0x8000000c
+			TOPdisplay2           : OUT STD_LOGIC_VECTOR(31 DOWNTO 0) := (OTHERS => '1'); --0x80000008
+			TOPdisplay1           : OUT STD_LOGIC_VECTOR(31 DOWNTO 0) := (OTHERS => '1')  --0x80000004
 		);
 	END COMPONENT;
 
@@ -215,7 +214,7 @@ ARCHITECTURE archi OF Top IS
 
 	--SIGNAL debuger
 
-	SIGNAL debugDisplay1, debugDisplay2, debugLed        : STD_LOGIC_VECTOR(31 DOWNTO 0);
+	SIGNAL debugDisplay1, debugDisplay2			           : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL procDisplay1, procDisplay2, procLed           : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL RegcsDMProc, MuxcsDMProc                      : STD_LOGIC;
 	-- SIGNAL SDRAM_controler to SDRAM
@@ -280,23 +279,20 @@ BEGIN
 --	PKG_dataReady_32b <= sigData_Ready_32b;
 	-----------------------
 
-	--SIGsimulOn        <= '0';
-
-		SIGclock          <= TOPclock WHEN SIGsimulOn = '1' ELSE
-		buttonClock WHEN enableDebug = '1' AND SIGbootfinish='1'  ELSE
-		SIGPLLclock;
+	SIGclock          <= TOPclock WHEN SIGsimulOn = '1' ELSE
+	buttonClock WHEN enableDebug = '1' AND SIGbootfinish='1'  ELSE
+	SIGPLLclock;
 
 
 
 	TOPdisplay1 <= procDisplay1 WHEN enableDebug = '0' ELSE
-		debugDisplay1;
+		            debugDisplay1;
 
 	TOPdisplay2 <= procDisplay2 WHEN enableDebug = '0' ELSE
-		debugDisplay2;
+		            debugDisplay2;
 
 	TOPLeds <= procLed WHEN enableDebug = '0' ELSE
-		--debugLed;
-		procLed;
+				  procLed;
 		
 	-- INSTANCES
 
@@ -311,8 +307,7 @@ BEGIN
 		Instruction => SIGPROCinstruction,
 		--OUTPUTS
 		TOPdisplay2 => debugDisplay2,
-		TOPdisplay1 => debugDisplay1,
-		TOPleds     => debugLed
+		TOPdisplay1 => debugDisplay1
 	);
 
 	instPROC : Processor

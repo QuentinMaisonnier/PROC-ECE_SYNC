@@ -19,8 +19,7 @@ ENTITY debuger IS
 		
 		--OUTPUTS
 		TOPdisplay2 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0) := (others => '1'); --0x80000004
-		TOPdisplay1 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0) := (others => '1'); --0x80000004
-		TOPleds     : OUT STD_LOGIC_VECTOR(31 DOWNTO 0) := (others => '1') --0x8000000c
+		TOPdisplay1 : OUT STD_LOGIC_VECTOR(31 DOWNTO 0) := (others => '1')  --0x80000004
 
 	);
 END ENTITY;	

@@ -61,21 +61,21 @@ END COMPONENT;
 
 ----------------------SIGNALS SDRAM MEMORY/PROC RISCV----------------------------
 
-SIGNAL Reginstruction, SIGinstruction, Muxinstruction, MuxProcInstruction, RegProcInstruction  : STD_LOGIC_VECTOR(31 downto 0);
-SIGNAL Regdata, Muxdata, SIGdata					         : STD_LOGIC_VECTOR(31 downto 0);
+SIGNAL Reginstruction, SIGinstruction, Muxinstruction  : STD_LOGIC_VECTOR(31 downto 0);
+SIGNAL Regdata, Muxdata					         : STD_LOGIC_VECTOR(31 downto 0);
 
 SIGNAL SIGstore                        : STD_LOGIC;
 TYPE state IS (INIT, IDLE, LOADdataGet, STOREdataReq, STOREdataEnd, NEXTinstGet);
 SIGNAL currentState, nextState : state;	
 
 --SIGNAL SIGLoad : STD_LOGIC;
-SIGNAL Muxfunct3, Regfunct3, SIGfunct3 : STD_LOGIC_VECTOR(2 DOWNTO 0);
-SIGNAL MuxwriteSelect, RegwriteSelect, SIGwriteSelect: STD_LOGIC;
-SIGNAL MuxcsDM, RegcsDM, SIGcsDM, SIGcsDMCache : STD_LOGIC;
-SIGNAL MuxAddressDM, RegAddressDM, SIGAddressDM : STD_LOGIC_VECTOR(31 DOWNTO 0);
-SIGNAL MuxinputDM, ReginputDM, SIGinputDM : STD_LOGIC_VECTOR(31 DOWNTO 0);
+SIGNAL Muxfunct3, SIGfunct3 : STD_LOGIC_VECTOR(2 DOWNTO 0);
+SIGNAL MuxwriteSelect, SIGwriteSelect: STD_LOGIC;
+SIGNAL MuxcsDM, RegcsDM, SIGcsDMCache : STD_LOGIC;
+SIGNAL MuxAddressDM, SIGAddressDM : STD_LOGIC_VECTOR(31 DOWNTO 0);
+SIGNAL MuxinputDM, SIGinputDM : STD_LOGIC_VECTOR(31 DOWNTO 0);
 
-SIGNAL SIGHold, RegHold : STD_LOGIC;
+SIGNAL SIGHold : STD_LOGIC;
 ----------------------SIGNALS INIT SDRAM (BOOTLOADER)----------------------------
 SIGNAL RcptAddr, SIGcptAddr : STD_LOGIC_VECTOR(31 downto 0);
 SIGNAL SIGinstructionInit : STD_LOGIC_VECTOR(31 downto 0);
@@ -91,45 +91,32 @@ SIGNAL currentStateInit, nextStateInit : stateInit;
 begin
 ------------------------MUX OUTPUT------------------------------------
 
-
---SIGLoad <=  '0' when reset='0' else
---				PROCload WHEN rising_edge(clock);
 ----FUNCTION3
 	funct3 <= Muxfunct3;
 	
---	Regfunct3 <= (others =>'0') when reset='1' elsE
---					 Muxfunct3 when rising_edge(clock);
 	Muxfunct3 <= funct3boot when currentStateInit /= STOP else
 			       "010"	    when currentState = NEXTinstGet OR nextState = NEXTinstGet else
 			       PROCfunct3;
 ----writeSelect				
 	writeSelect <= MuxwriteSelect;
 
---	RegwriteSelect <= '0' when reset='1' elsE
---					      MuxwriteSelect when rising_edge(clock);	
 	MuxwriteSelect <= SIGstoreboot when currentStateInit /= STOP else
 				         SIGstore;
 ----CSDM
 
 	csDM <= MuxcsDM;
---	RegcsDM <= '0' when reset='1' elsE
---					MuxcsDM when rising_edge(clock);
+	
 	MuxcsDM <= csDMboot when currentStateInit /= STOP else
 			     SIGcsDMCache;
 ----AddressDM		
 
 	AddressDM <= MuxAddressDM;
-	
---	RegAddressDM <= (others =>'0') when reset='1' elsE
---					    MuxAddressDM when rising_edge(clock);
 						 
 	MuxAddressDM <= RcptAddr when currentStateInit /= STOP else
 			          PROCaddrDM when nextState = STOREdataReq OR currentState = STOREdataReq OR nextState=STOREdataEnd OR nextState = LOADdataGet else
 			          PROCprogcounter;
 ---- INPUTDM
 	inputDM <= MuxinputDM;
---	ReginputDM <= (others =>'0') when reset='1' elsE
---					   MuxinputDM when rising_edge(clock);
 	MuxinputDM <= inputDMboot when currentStateInit /= STOP else
 			        PROCinputDM;
 	
@@ -144,7 +131,6 @@ begin
 		SIGinstruction <= Reginstruction;
 		SIGstore 		<= '0';
 		SIGcsDMCache	<= '0';
-		SIGdata <= regdata;
 		CASE currentState IS
    ------------------- INIT -----------------------
 			WHEN INIT =>
@@ -173,10 +159,6 @@ begin
 ------------------- LOADdataReq -----------------------			
 ------------------- LOADdataGet -----------------------
 			WHEN LOADdataGet =>
-			
---				IF data_Ready_32b = '1' THEN
---					SIGdata <= dataOut_32b;
---				END IF;
 				
 				IF ready_32b = '1' THEN
 					SIGHold <='0'; -- TEST
@@ -221,22 +203,13 @@ begin
 					    nextState WHEN rising_edge(Clock);
 					
 	------------- We store the instruction ---------------	
-	PROCinstruction <= MuxProcInstruction;
+	PROCinstruction <= Muxinstruction;
 
-	MuxProcInstruction <= Muxinstruction when Ready_32b='1' AND  currentState=NEXTinstGet elsE
-								 RegProcInstruction;
-								 
-	RegProcInstruction <= (others => '0') WHEN reset = '1' ELSE
-								 MuxProcInstruction when rising_edge(clock);
-	
-	------------------ we strore the new instruction and give it to PROC when ready_32='1'-------------------------
 	Reginstruction <= (others => '0') WHEN reset = '1' ELSE
 					      Muxinstruction WHEN rising_edge(Clock);
 					   
 	Muxinstruction <= SIGinstruction when data_Ready_32b='1' AND  currentState=NEXTinstGet else
 					      Reginstruction;
---	Regdata <= (others => '0') WHEN reset = '1' ELSE
---				  SIGdata WHEN rising_edge(Clock);
 						 
 	Regdata <= (others => '0') WHEN reset = '1' ELSE
 			     Muxdata WHEN rising_edge(Clock);
@@ -245,8 +218,7 @@ begin
 	
 	Muxdata <= dataOut_32b when data_Ready_32b='1' AND currentState=LOADdataGet else
 			     Regdata;
-	RegHold <= '0' WHEN reset = '1' ELSE
-					SIGHold when rising_edge(clock);	 
+				  
 	ProChold <= SIGHold;	
 	
    ---------------------------------------------
