@@ -5,7 +5,7 @@ use ieee.numeric_std.all;
 package simulPkg is
 
 	
-	signal PKG_simulON        : std_logic 	:= '1';
+	signal PKG_simulON        : std_logic 	:= '0';
 	
 	
 	signal PKG_dataReady_SDRAM  : std_logic;

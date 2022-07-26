@@ -52,7 +52,7 @@ signal Reg_IN_Data_32, Mux_IN_Data_32, Mux_data32	: STD_LOGIC_VECTOR(31 downto 0
 signal Reg_IN_Function3, Mux_IN_Function3	: STD_LOGIC_VECTOR(1 downto 0);
 signal Reg_IN_Address, Mux_IN_Address	: STD_LOGIC_VECTOR(25 downto 0);
 
-Type state is (WAITING, READ_LSB_SEND, READ_MSB_SEND, READ_LSB_GET, READ_MSB_GET, WRITE_LSB, WRITE_MSB);
+Type state is (WAITING, READ_LSB_SEND, READ_MSB_SEND, READ_LSB_GET, READ_MSB_GET, WRITE_LSB, WRITE_MSB, END_WRITE);
 signal currentState, nextState : state;
 
 begin
@@ -98,34 +98,33 @@ when WAITING =>
 	
 	if(IN_Select = '1' AND Ready_16b = '1') then
 			if(Mux_IN_Write_Select = '1') then
---				nextState <= WRITE_MSB;
+				--nextState <= WRITE_MSB;
 				
-				OUT_Address 	  <= Reg_IN_Address(25 downto 2) & '0'; 
+				OUT_Address 	  <= Mux_IN_Address(25 downto 2) & '0'; 
 				OUT_Write_Select <= '1';							
 				OUT_Data_16 	  <= Mux_IN_Data_32(31 downto 16);
-				SIG_selectOUT16		  <= '1';
+				SIG_selectOUT16  <= '1';
 				OUT_DQM			  <= DQM(3) & DQM(2);
-				
-				if(Ready_16b = '1')then
-					nextstate <= WRITE_LSB;
-				end if;
+
+				nextstate <= WRITE_LSB;
+
 			else
---				nextState <= READ_MSB_SEND;
-				OUT_Address 	  <= Reg_IN_Address(25 downto 2) & '0';
+				--nextState <= READ_MSB_SEND;
+				
+				OUT_Address 	  <= Mux_IN_Address(25 downto 2) & '0';
 				OUT_Write_Select <= '0';
-				SIG_selectOUT16		  <= '1';
+				SIG_selectOUT16  <= '1';
 				OUT_DQM			  <= "00";
 				
-				if(Ready_16b = '1')then
-					nextstate <= READ_LSB_SEND;
-				end if;
+				nextstate <= READ_LSB_SEND;
+				
 			end if;
 			SIG_CPT <= (others =>'0');
 	end if;
 	
 	
 when WRITE_MSB =>
-	OUT_Address 	  <= Reg_IN_Address(25 downto 2) & '0'; 
+	OUT_Address 	  <= Mux_IN_Address(25 downto 2) & '0'; 
 	OUT_Write_Select <= '1';							
 	OUT_Data_16 	  <= Mux_IN_Data_32(31 downto 16);
 	SIG_selectOUT16		  <= '1';
@@ -139,19 +138,25 @@ when WRITE_MSB =>
 
 when WRITE_LSB =>
 	
-	OUT_Address 	  <= Reg_IN_Address(25 downto 2) & '1';
+	OUT_Address 	  <= Mux_IN_Address(25 downto 2) & '1';
 	OUT_Write_Select <= '1';
 	OUT_Data_16 	  <= Mux_IN_Data_32(15 downto 0);
-	SIG_selectOUT16		  <= '1';
+	SIG_selectOUT16  <= '1';
 	OUT_DQM			  <= DQM(1) & DQM(0);
 	
 	if(Ready_16b = '1')then
+		nextstate <= END_WRITE;
+	end if;
+	
+when END_WRITE =>
+
+	if(Ready_16b = '0')then
 		nextstate <= WAITING;
 	end if;
 
 when READ_MSB_SEND =>
 	--ready_32b <= '0';
-	OUT_Address 	  <= Reg_IN_Address(25 downto 2) & '0';
+	OUT_Address 	  <= Mux_IN_Address(25 downto 2) & '0';
 	OUT_Write_Select <= '0';
 	SIG_selectOUT16		  <= '1';
 	OUT_DQM			  <= "00";
@@ -162,7 +167,7 @@ when READ_MSB_SEND =>
 
 when READ_LSB_SEND =>
 	--ready_32b <= '0';
-	OUT_Address 	  <= Reg_IN_Address(25 downto 2) & '1';
+	OUT_Address 	  <= Mux_IN_Address(25 downto 2) & '1';
 	OUT_Write_Select <= '0';
 	SIG_selectOUT16		  <= '1';
 	OUT_DQM			  <= "00";
@@ -182,9 +187,9 @@ when READ_MSB_GET =>
 
 when READ_LSB_GET =>
 	--ready_32b <= '0';
-	OUT_Address 	  <= Reg_IN_Address(25 downto 2) & '1';
+	OUT_Address 	  <= Mux_IN_Address(25 downto 2) & '1';
 	OUT_Write_Select <= '0';
-	SIG_selectOUT16		<= '1';
+	--SIG_selectOUT16		<= '1';
 	OUT_DQM			  <= "00";
 	
 	if(Data_Ready_16b = '1') then

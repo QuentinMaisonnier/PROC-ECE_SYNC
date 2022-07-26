@@ -1,3 +1,4 @@
+
 -- 32M x 16 SDRAM
 -- 8M (addresses) * 4 (Banks) * 16 (16 bits Data) = 512 Mb SDRAM <=> 64 MB SDRAM
 
@@ -6,7 +7,7 @@ library work;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 use work.SDRAM_package.ALL;
-use work.simulPkg.all;
+USE work.simulPkg.ALL;
 
 entity SDRAM_controller is 
     Port (
@@ -37,8 +38,8 @@ Type state is (S_First, S_Start, S_PRECHARGE_INIT, S_Refresh_INIT, S_NOP_INIT, S
 signal currentState, nextState : state;
 
 signal Reg_D, muxRegD : STD_LOGIC_VECTOR ((DATA_WIDTH-1) downto 0);
-signal reg_A, muxRegA : STD_LOGIC_VECTOR (24 downto 0);
-signal reg_DQM, muxRegDQM : STD_LOGIC_VECTOR ((DQM_WIDTH-1) downto 0);
+signal Reg_A, muxRegA : STD_LOGIC_VECTOR (24 downto 0);
+signal Reg_DQM, muxRegDQM : STD_LOGIC_VECTOR ((DQM_WIDTH-1) downto 0);
 
 
 signal S_DQM, R_DQM : STD_LOGIC_VECTOR ((DQM_WIDTH-1) downto 0);
@@ -52,6 +53,8 @@ signal S_CPT_REFRESH, R_CPT_REFRESH : STD_LOGIC_VECTOR (21 downto 0);
 signal DIN, S_DOUT, R_DOUT : STD_LOGIC_VECTOR ((DATA_WIDTH-1) downto 0);
 signal RegRead2, MuxRead2 : STD_LOGIC_VECTOR ((DATA_WIDTH-1) downto 0);
 
+ -- DEBUG
+
 
 constant  T_REFRESH   	  : std_logic_vector(21 downto 0) := REFRESH_PERIOD;
 constant  T_START      	  : std_logic_vector(13 downto 0) := START_DELAY;
@@ -63,28 +66,32 @@ constant  T_INIT_REFRESH  : std_logic_vector(13 downto 0) := INIT_REFRESH;
 constant  T_RESET      	  : std_logic_vector(13 downto 0) := B"00000000000001";
 constant  T_RESET_REFRESH : std_logic_vector(21 downto 0) := B"0000000000000000000001";
 
+signal Refresh_Toggle : STD_LOGIC; -- don't need, only for DEBUG
+
 
 begin
+
+
+
+-- PACKAGE --
 
 -- TESTBENCH RISC-V --
 
 -- Controler -> SDRAM (write) -- 
-PKG_inputData_SDRAM <= R_Dout when R_DOE = '1'
-							  else (others => '1');
-PKG_DQM_SDRAM <= R_DQM;
---PKG_SDRAMselect <= ;
-
+PKG_inputData_SDRAM <= Data_IN;
+PKG_DQM_SDRAM <= DQM;
+PKG_SDRAMselect <= Select_IN;
 -- SDRAM -> Controler (read) -- 
---PKG_outputData_SDRAM <= Data_OUT;
 PKG_dataReady_SDRAM <= '0' when reset = '1' else
 								reg_DataReady when rising_edge(clk);
+-- PACKAGE --
 
 -- autre --
-PKG_AddrSDRAM <= Reg_A;
-PKG_SDRAMwrite <= R_Write_IN;
+PKG_AddrSDRAM <= Address_IN;
+PKG_SDRAMwrite <= Write_IN;
 
+-- PACKAGE -- 
 -- TESTBENCH RISC-V --
-
 
 
 SDRAM_CLK <= clk;
@@ -97,38 +104,32 @@ SDRAM_CAS_N <= R_CMD(1); -- CAS
 SDRAM_WE_N  <= R_CMD(0); -- WE
 -- init --
 
+
+
 muxRegA <= address_in when reg_ready = '1' else 
-			  reg_A;
+			  Reg_A;
 			  
-reg_A <= (others=>'0') when reset='1' else 
+Reg_A <= (others=>'0') when reset='1' else 
 			muxRegA when rising_edge(clk);
 		 
 muxRegD <= Data_IN when reg_ready = '1' else 
-			  reg_D;
+			  Reg_D;
 			  
-reg_D <= (others=>'0') when reset='1' else 
+Reg_D <= (others=>'0') when reset='1' else 
 			muxRegD when rising_edge(clk);
 
 muxRegDQM <= DQM when reg_Ready = '1' else
-				 reg_DQM;
+				 Reg_DQM;
 			 
-reg_DQM <= (others=>'0') when reset='1' else 
+Reg_DQM <= (others=>'0') when reset='1' else 
 				muxRegDQM when rising_edge(clk);
-		 
---reg_A <= (others=>'0') when reset='1' 
---		 else Address_IN when reg_Ready = '1' AND rising_edge(clk);
-
---reg_D <= (others=>'0') when reset='1' 
---		 else Data_IN when reg_Ready = '1' AND rising_edge(clk);
 
 
 
-fsm : Process( reg_Ready, PKG_simulON, currentState, clk, Reset, Reg_A, Reg_D, R_Write_IN, R_CPT, R_CPT_DATA, R_DOUT, R_DOE, R_BA, R_CPT_REFRESH, Data_IN, Write_IN, Select_IN, Address_IN, reg_DQM, R_DQM)
+fsm : Process(reg_Ready, currentState, clk, Reset, Reg_A, Reg_D, R_Write_IN, R_CPT, R_CPT_DATA, R_DOUT, R_DOE, R_BA, R_CPT_REFRESH, Data_IN, Write_IN, Select_IN, Address_IN, reg_DQM, R_DQM)
 begin 
 
-	-- TESTBENCH RISC-V --
-	PKG_SDRAMselect <= '0';
-	-- TESTBENCH RISC-V --
+	Refresh_Toggle <= '0'; -- don't need, only for DEBUG
 
 	S_DQM <= R_DQM;
 	S_BA <= R_BA;
@@ -144,7 +145,6 @@ begin
 	-- Sdram
 	S_CMD<=NOP;
 	S_ADDR<=A_NOP;
-	
 
 	nextState <= currentState;
 	
@@ -168,7 +168,7 @@ WHEN S_Start =>
 	S_CMD <= NOP;
 	S_ADDR <= A_NOP;
 											
-	if(R_CPT = T_START OR PKG_simulON='1') then -- (100us délai au démarrage de la SDRAM)
+	if(R_CPT = T_START OR pkg_simulON = '1') then -- (100us délai au démarrage de la SDRAM)
 		nextState <= S_PRECHARGE_INIT;
 	else
 		S_CPT <= STD_LOGIC_VECTOR(unsigned(R_CPT) + 1);
@@ -235,16 +235,16 @@ WHEN S_LoadRegister =>
 
 -- ----- END INITIALIZATION ----- --
 
-
 -- ----- IDLE ----- --
 WHEN S_IDLE =>
 	
-	reg_Ready <= '0';
 	S_CPT_DATA <= (others => '0');
 	S_CPT <= T_RESET;
 
-	if( R_CPT_REFRESH <= (STD_LOGIC_VECTOR(unsigned(T_REFRESH) - 6))) then -- Verify REFRESH TIMING
+	if( R_CPT_REFRESH <= (STD_LOGIC_VECTOR(unsigned(T_REFRESH) - 8))) then -- Verify REFRESH TIMING
 		reg_Ready <= '1'; -- SDRAM Ready to receive new CMD
+	else
+		reg_Ready <= '0';
 	end if;
 	
 	S_DOE <= '0';
@@ -292,10 +292,6 @@ WHEN S_Active =>
 -- ----- WRITE ----- --
 WHEN S_Write_WRITE1 =>
 
-	-- TESTBENCH RISC-V --
-	PKG_SDRAMselect <= '1';
-	-- TESTBENCH RISC-V --
-
 	S_CPT <= STD_LOGIC_VECTOR(unsigned(R_CPT) + 1);
 	
 	reg_Ready <= '1';
@@ -308,10 +304,10 @@ WHEN S_Write_WRITE1 =>
 	S_ADDR <= "000" & Reg_A(9 downto 0); -- COLUMN
 	S_DOUT <= Reg_D;
 	
+	
 	if(SELECT_IN = '1' AND R_CPT_REFRESH <= (STD_LOGIC_VECTOR(unsigned(T_REFRESH) - 3)) AND (Reg_A(24 downto 10) = Address_IN(24 downto 10))) then
 		nextState <= S_Write_WRITE1;
 	else
-		reg_Ready <= '0';
 		nextState <= S_Precharge;
 	end if;
 	
@@ -320,10 +316,6 @@ WHEN S_Write_WRITE1 =>
 
 -- ----- READ ----- --
 WHEN S_Read_READ =>
-
-	-- TESTBENCH RISC-V --
-	PKG_SDRAMselect <= '1';
-	-- TESTBENCH RISC-V --
 
 	S_CPT <= STD_LOGIC_VECTOR(unsigned(R_CPT) + 1);
 	
@@ -339,12 +331,11 @@ WHEN S_Read_READ =>
 	if(SELECT_IN = '1' AND R_CPT_REFRESH <= (STD_LOGIC_VECTOR(unsigned(T_REFRESH) - 3)) AND (Reg_A(24 downto 10) = Address_IN(24 downto 10))) then
 		nextState <= S_Read_READ;
 	else
-		reg_Ready <= '0';
 		nextState <= S_NOP1_READ;
 	end if;
 	
 	
-	if(unsigned(R_CPT_DATA) < "0011")then 		-- latence CAS 
+	if(unsigned(R_CPT_DATA) < "0010")then 		-- latence CAS 
 		S_CPT_DATA <= (STD_LOGIC_VECTOR(unsigned(R_CPT_DATA) + 1));
 		reg_DataReady <= '0';
 	else
@@ -374,6 +365,8 @@ WHEN S_NOP1_READ =>
 	nextState <= S_NOP2_READ;
 
 WHEN S_NOP2_READ =>
+
+	reg_Ready <= '0';
 
 	S_CPT <= STD_LOGIC_VECTOR(unsigned(R_CPT) + 1);
 	
@@ -410,14 +403,23 @@ WHEN S_Precharge =>
 	S_CMD <= PRECHARGE; 
 	S_ADDR <= A_ALL_BANK;
 	
-	nextState <= S_IDLE;
+	if(R_CPT_REFRESH > (STD_LOGIC_VECTOR(unsigned(T_REFRESH) - 9)))then
+		nextState <= S_Refresh;
+	else
+		if(SELECT_IN = '1')then
+			nextState <= S_Active;
+		else
+			nextState <= S_IDLE;
+		end if;
+	end if;
 -- ----- --------- ----- --
 	
 -- ----- REFRESH ----- --
 WHEN S_Refresh =>
 
+	Refresh_Toggle <= '1'; -- don't need, only for DEBUG
+
 	reg_Ready <= '0'; -- SDRAM Busy
-	
 
 	S_DOE <= '0';
 	S_BA <= (others => '0');
@@ -436,6 +438,10 @@ WHEN S_Refresh =>
 	
 	
 WHEN S_Refresh_NOP1 =>
+
+	Refresh_Toggle <= '1'; -- don't need, only for DEBUG
+
+	reg_Ready <= '0';
 	
 	S_DOE <= '0';
 	S_BA <= (others => '0');
@@ -447,7 +453,11 @@ WHEN S_Refresh_NOP1 =>
 	S_ADDR <= A_NOP;
 	
 	if(R_CPT >= T_TRC)then
-		nextState <= S_IDLE;
+		if(SELECT_IN = '1')then
+			nextState <= S_Active;
+		else
+			nextState <= S_IDLE;
+		end if;
 	else
 		nextState <= S_Refresh_NOP1;
 	end if;
@@ -501,6 +511,7 @@ R_Write_IN <= '0' when reset = '1'
 R_DQM <= (others => '0') when reset = '1'
 		else S_DQM when falling_edge(clk);
 SDRAM_DQM <= R_DQM;
+-- --
 
 
 -- Data INOUT --
@@ -514,6 +525,7 @@ RegRead2 <= (others=>'0') when reset='1'
 			
 MuxRead2 <= Din when reg_DataReady = '1'
 				else RegRead2;
+
 Data_Ready <= '0' when reset = '1' else
 					reg_DataReady when rising_edge(clk);
 
@@ -522,3 +534,5 @@ Data_OUT <= PKG_outputData_SDRAM when PKG_simulON = '1' else
 -- Data INOUT --
 
 end vhdl;
+
+

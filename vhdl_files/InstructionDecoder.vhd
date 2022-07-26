@@ -104,7 +104,7 @@ begin
 		
 			WHEN LoadP1state=> 
 			
-				IF Hold='1' AND IDinstruction(6 downto 0) = "0000011" THEN
+				IF Hold='0' AND IDinstruction(6 downto 0) = "0000011" THEN
 					nextState <= LoadP2state;
 					SIGIDload <= '1';
 				END IF;
@@ -112,7 +112,7 @@ begin
 			WHEN LoadP2state=> 
 				SIGIDloadP2 <= '1';
 				
-				IF Hold='1' THEN
+				IF Hold='0' THEN
 					nextState <= LoadP1state;
 				END IF;
 			
