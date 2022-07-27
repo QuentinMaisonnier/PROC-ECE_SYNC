@@ -61,24 +61,30 @@ END COMPONENT;
 
 ----------------------SIGNALS SDRAM MEMORY/PROC RISCV----------------------------
 
+--output signals to proc(riscv)
 SIGNAL Reginstruction, SIGinstruction, Muxinstruction  : STD_LOGIC_VECTOR(31 downto 0);
-SIGNAL Regdata, Muxdata					         : STD_LOGIC_VECTOR(31 downto 0);
+SIGNAL Regdata, Muxdata					                   : STD_LOGIC_VECTOR(31 downto 0);
+SIGNAL SIGHold                                         : STD_LOGIC;
 
-SIGNAL SIGstore                        : STD_LOGIC;
-TYPE state IS (INIT, IDLE, LOADdataGet, STOREdataReq, STOREdataEnd, NEXTinstGet);
+
+TYPE state IS (INIT, IDLE, LOADdataGet, STOREdataEnd, NEXTinstGet);
 SIGNAL currentState, nextState : state;	
 
---SIGNAL SIGLoad : STD_LOGIC;
-SIGNAL Muxfunct3, SIGfunct3 : STD_LOGIC_VECTOR(2 DOWNTO 0);
-SIGNAL MuxwriteSelect, SIGwriteSelect: STD_LOGIC;
-SIGNAL MuxcsDM, RegcsDM, SIGcsDMCache : STD_LOGIC;
-SIGNAL MuxAddressDM, SIGAddressDM : STD_LOGIC_VECTOR(31 DOWNTO 0);
-SIGNAL MuxinputDM, SIGinputDM : STD_LOGIC_VECTOR(31 DOWNTO 0);
 
-SIGNAL SIGHold : STD_LOGIC;
+--- output signals/mux to module 32b
+SIGNAL Muxfunct3             : STD_LOGIC_VECTOR(2 DOWNTO 0);
+SIGNAL MuxwriteSelect        : STD_LOGIC;
+SIGNAL MuxcsDM, SIGcsDMCache : STD_LOGIC;
+SIGNAL MuxAddressDM          : STD_LOGIC_VECTOR(31 DOWNTO 0);
+SIGNAL MuxinputDM            : STD_LOGIC_VECTOR(31 DOWNTO 0);
+SIGNAL SIGstore              : STD_LOGIC;
+
+
+---------------------------------------------------------------------------------
 ----------------------SIGNALS INIT SDRAM (BOOTLOADER)----------------------------
-SIGNAL RcptAddr, SIGcptAddr : STD_LOGIC_VECTOR(31 downto 0);
-SIGNAL SIGinstructionInit : STD_LOGIC_VECTOR(31 downto 0);
+---------------------------------------------------------------------------------
+SIGNAL RcptAddr, SIGcptAddr : STD_LOGIC_VECTOR(31 downto 0); -- counter that serves as an address
+SIGNAL SIGinstructionInit : STD_LOGIC_VECTOR(31 downto 0);   -- transmits instructions from SRAM to SDRAM
 SIGNAL funct3boot                                    : STD_LOGIC_VECTOR(2 DOWNTO 0);
 SIGNAL inputDMboot             : STD_LOGIC_VECTOR(31 DOWNTO 0);
 SIGNAL SIGstoreboot, csDMboot                        : STD_LOGIC;
@@ -89,8 +95,10 @@ SIGNAL currentStateInit, nextStateInit : stateInit;
 ---------------------------------------------------------------------------------
 
 begin
-------------------------MUX OUTPUT------------------------------------
 
+	------------------------------------------------------------
+	----------------------MUX OUTPUT----------------------------
+	------------------------------------------------------------
 ----FUNCTION3
 	funct3 <= Muxfunct3;
 	
@@ -113,31 +121,31 @@ begin
 	AddressDM <= MuxAddressDM;
 						 
 	MuxAddressDM <= RcptAddr when currentStateInit /= STOP else
-			          PROCaddrDM when nextState = STOREdataReq OR currentState = STOREdataReq OR nextState=STOREdataEnd OR nextState = LOADdataGet else
+			          PROCaddrDM when  nextState=STOREdataEnd OR nextState = LOADdataGet else
 			          PROCprogcounter;
 ---- INPUTDM
 	inputDM <= MuxinputDM;
 	MuxinputDM <= inputDMboot when currentStateInit /= STOP else
 			        PROCinputDM;
+------------------------------------------------
+
+	--------------------------------------------------
+	---------------- FSM SDRAM MEMORY-----------------
+	--------------------------------------------------
 	
-	---------------------------------------------
-	----------------SDRAM MEMORY-----------------
-	---------------------------------------------
-	
-	SDRAMmemory : PROCESS (ready_32b, PROCLoad, PROCstore, currentState, data_Ready_32b, dataOut_32b, currentStateInit, REGdata, Reginstruction, PROCaddrDM)
+	FSM_SDRAMmemory : PROCESS (ready_32b, PROCLoad, PROCstore, currentState, data_Ready_32b, dataOut_32b, currentStateInit, Reginstruction, PROCaddrDM)
 	BEGIN
-		SIGHold <='1';
+		SIGHold <='1'; -- hold at 1 = blocked
 		nextState <= currentState;
 		SIGinstruction <= Reginstruction;
-		SIGstore 		<= '0';
-		SIGcsDMCache	<= '0';
+		SIGstore 		<= '0';  --- store at 0 = read / store at 1 = store
+		SIGcsDMCache	<= '0';  --- csDM at 0 = memory disable
+		
 		CASE currentState IS
    ------------------- INIT -----------------------
-			WHEN INIT =>
+			WHEN INIT => --waiting for the end of the bootloader
 				IF currentStateInit=Stop AND Ready_32b = '1' THEN
-					SIGstore  <= '0';
-					SIGcsDMCache   <= '1';
-					nextstate <= NEXTinstGet;
+					nextstate <= IDLE;
 				END IF;
   ------------------- IDLE -----------------------
 			WHEN IDLE =>
@@ -148,40 +156,30 @@ begin
 					
 					IF PROCLoad ='1' THEN
 						nextstate    <= LOADdataGet;
-					ELSIF PROCstore ='1' AND PROCaddrDM(31)='0' THEN
-							--nextstate <= STOREdataReq;
+					ELSIF PROCstore ='1' AND PROCaddrDM(31)='0' THEN ---activate memory if the store is inside
 						SIGstore     <= '1';
 						nextState    <= STOREdataEnd;
 					ELSE
 						nextstate    <= NEXTinstGet;
 					END IF;
-				END IF;
-------------------- LOADdataReq -----------------------			
+				END IF;		
 ------------------- LOADdataGet -----------------------
 			WHEN LOADdataGet =>
 				
 				IF ready_32b = '1' THEN
-					SIGHold <='0'; -- TEST
-					SIGstore <= '0';
-					SIGcsDMCache     <= '1';
-					nextstate <= NEXTinstGet;
+					SIGHold      <= '0'; -- TEST
+					SIGstore     <= '0';
+					SIGcsDMCache <= '1';
+					nextstate    <= NEXTinstGet;
 				END IF;
-
-------------------- STOREdataReq -----------------------
-			WHEN STOREdataReq =>
-					IF ready_32b='1' THEN
-
-					END IF; 
 					
 ------------------- STOREdataEnd -----------------------
 			WHEN STOREdataEnd =>
-			
 				IF ready_32b = '1' THEN
-					SIGstore <= '0';
+					SIGstore      <= '0';
 					SIGcsDMCache  <= '1';
-					nextstate <= NEXTinstGet;
+					nextstate     <= NEXTinstGet;
 				END IF;
-------------------- NEXTinstReq -----------------------
 ------------------- NEXTinstGet -----------------------	
 			WHEN NEXTinstGet =>
 			
@@ -194,15 +192,19 @@ begin
 				END IF;
 			
 	   END CASE;
-	END PROCESS;
-	
-	
+	END PROCESS FSM_SDRAMmemory;
+
 	
 	
 	currentState <= INIT WHEN reset = '1' ELSE
 					    nextState WHEN rising_edge(Clock);
 					
-	------------- We store the instruction ---------------	
+					
+	--------------------------------------------------------
+	---------------- output to proc (riscv)-----------------
+	--------------------------------------------------------
+			
+	------------- We store the instruction and we give it at the same time to the proc ---------------	
 	PROCinstruction <= Muxinstruction;
 
 	Reginstruction <= (others => '0') WHEN reset = '1' ELSE
@@ -210,15 +212,19 @@ begin
 					   
 	Muxinstruction <= SIGinstruction when data_Ready_32b='1' AND  currentState=NEXTinstGet else
 					      Reginstruction;
-						 
-	Regdata <= (others => '0') WHEN reset = '1' ELSE
-			     Muxdata WHEN rising_edge(Clock);
+	--------------
+
+	------------- We store the data and we give it at the same time to the proc ---------------	
 				  
 	PROCoutputDM <= Muxdata;
+	
+	Regdata <= (others => '0') WHEN reset = '1' ELSE
+			     Muxdata WHEN rising_edge(Clock);
 	
 	Muxdata <= dataOut_32b when data_Ready_32b='1' AND currentState=LOADdataGet else
 			     Regdata;
 				  
+	--- Hold signal
 	ProChold <= SIGHold;	
 	
    ---------------------------------------------
@@ -280,8 +286,8 @@ PORT MAP(
 	address_a => RcptAddr(13 DOWNTO 2), --  Addr instruction (divided by 4 because we use 32 bits memory)
 	address_b => (OTHERS => '0'),       --  Addr memory (divided by 4 because we use 32 bits memory)
 	clock     => clock,
-	data_a => (OTHERS => '0'), -- Instruction in
-	data_b => (OTHERS => '0'), -- Data in
+	data_a    => (OTHERS => '0'), -- Instruction in
+	data_b    => (OTHERS => '0'), -- Data in
 	enable    => '1',
 	wren_a    => '0',           -- Write Instruction Select
 	wren_b    => '0',           -- Write Data Select

@@ -86,10 +86,10 @@ BEGIN
 				     PCoffset ; -- set lsb to 0
 					  
 	SigOffSum <= --STD_LOGIC_VECTOR(unsigned(SigPC) + unsigned(SigMux1Out)) when SigMux1Sel='0' else
-					 STD_LOGIC_VECTOR(unsigned(SigPC) + unsigned(SigMux1Out));
+					 STD_LOGIC_VECTOR(signed(SigPC) + signed(SigMux1Out));
 					 
-	SigOffSub <= STD_LOGIC_VECTOR(unsigned(SigPC) - unsigned(SigMux1Out)) when SigMux1Sel='0' else
-					 STD_LOGIC_VECTOR(unsigned(SIGPCnext) - unsigned(SigMux1Out));
+	SigOffSub <= STD_LOGIC_VECTOR(signed(SigPC) - signed(SigMux1Out)) when SigMux1Sel='0' else
+					 STD_LOGIC_VECTOR(signed(SIGPCnext) - signed(SigMux1Out));
 	
 	SigMux2Sel <= SigMux1Sel AND PCoffsetsign;
 	
@@ -102,7 +102,7 @@ BEGIN
 					
 	PC <= SigPC;
 	
-	SigPC 	<= (others => '0') when PCreset='1' else
+	SigPC 	<= std_logic_vector(to_signed(-4, SigPC'length)) when PCreset='1' else
 				   MuxPC when rising_edge(PCclock);
 	
 	PCnext    <= SIGPCnext;
