@@ -314,7 +314,7 @@ WHEN S_Write_WRITE1 =>
 	S_DOUT <= Reg_D;
 	
 	
-	if(SELECT_IN = '1' AND R_CPT_REFRESH <= (STD_LOGIC_VECTOR(unsigned(T_REFRESH) - 7)) AND (Reg_A(24 downto 10) = Address_IN(24 downto 10))) then
+	if(Write_IN = '1' AND SELECT_IN = '1' AND R_CPT_REFRESH <= (STD_LOGIC_VECTOR(unsigned(T_REFRESH) - 7)) AND (Reg_A(24 downto 10) = Address_IN(24 downto 10))) then
 		nextState <= S_Write_WRITE1; -- Continue to write if columns/page addresses doesn't change, and if no refresh is required
 	else
 		nextState <= S_Precharge; 	  -- Or stop write cycles
@@ -341,7 +341,7 @@ WHEN S_Read_READ =>
 	S_CMD <= READ; 
 	S_ADDR <= "000" & Reg_A(9 downto 0);
 	
-	if(SELECT_IN = '1' AND R_CPT_REFRESH <= (STD_LOGIC_VECTOR(unsigned(T_REFRESH) - 9)) AND (Reg_A(24 downto 10) = Address_IN(24 downto 10))) then
+	if(Write_IN = '0' AND SELECT_IN = '1' AND R_CPT_REFRESH <= (STD_LOGIC_VECTOR(unsigned(T_REFRESH) - 9)) AND (Reg_A(24 downto 10) = Address_IN(24 downto 10))) then
 		nextState <= S_Read_READ; -- Continue to read if columns/page addresses doesn't change, and if no refresh is required
 	else
 		nextState <= S_NOP1_READ; -- Or stop read cycles

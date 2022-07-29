@@ -1,5 +1,5 @@
 Analysis & Synthesis report for PROC-ECE_ASYNC
-Thu Jul 28 11:06:24 2022
+Fri Jul 29 11:17:28 2022
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -61,13 +61,13 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Jul 28 11:06:24 2022       ;
+; Analysis & Synthesis Status        ; Successful - Fri Jul 29 11:17:28 2022       ;
 ; Quartus Prime Version              ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                      ; PROC-ECE_ASYNC                              ;
 ; Top-level Entity Name              ; Top                                         ;
 ; Family                             ; MAX 10                                      ;
-; Total logic elements               ; 4,646                                       ;
-;     Total combinational functions  ; 4,609                                       ;
+; Total logic elements               ; 4,662                                       ;
+;     Total combinational functions  ; 4,625                                       ;
 ;     Dedicated logic registers      ; 1,565                                       ;
 ; Total registers                    ; 1565                                        ;
 ; Total pins                         ; 141                                         ;
@@ -236,16 +236,16 @@ refer to the applicable agreement for further details.
 +---------------------------------------------+----------+
 ; Resource                                    ; Usage    ;
 +---------------------------------------------+----------+
-; Estimated Total logic elements              ; 4,646    ;
+; Estimated Total logic elements              ; 4,662    ;
 ;                                             ;          ;
-; Total combinational functions               ; 4609     ;
+; Total combinational functions               ; 4625     ;
 ; Logic element usage by number of LUT inputs ;          ;
-;     -- 4 input functions                    ; 2820     ;
-;     -- 3 input functions                    ; 1438     ;
-;     -- <=2 input functions                  ; 351      ;
+;     -- 4 input functions                    ; 2846     ;
+;     -- 3 input functions                    ; 1422     ;
+;     -- <=2 input functions                  ; 357      ;
 ;                                             ;          ;
 ; Logic elements by mode                      ;          ;
-;     -- normal mode                          ; 4251     ;
+;     -- normal mode                          ; 4267     ;
 ;     -- arithmetic mode                      ; 358      ;
 ;                                             ;          ;
 ; Total registers                             ; 1565     ;
@@ -261,8 +261,8 @@ refer to the applicable agreement for further details.
 ;     -- PLLs                                 ; 1        ;
 ;                                             ;          ;
 ; Maximum fan-out node                        ; TOPreset ;
-; Maximum fan-out                             ; 1692     ;
-; Total fan-out                               ; 22023    ;
+; Maximum fan-out                             ; 1691     ;
+; Total fan-out                               ; 22091    ;
 ; Average fan-out                             ; 3.39     ;
 +---------------------------------------------+----------+
 
@@ -272,16 +272,16 @@ refer to the applicable agreement for further details.
 +----------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+--------------------------------------------------------------------------------------------------------------+--------------------+--------------+
 ; Compilation Hierarchy Node                   ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; UFM Blocks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; ADC blocks ; Full Hierarchy Name                                                                                          ; Entity Name        ; Library Name ;
 +----------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+--------------------------------------------------------------------------------------------------------------+--------------------+--------------+
-; |Top                                         ; 4609 (101)          ; 1565 (1)                  ; 131072      ; 0          ; 0            ; 0       ; 0         ; 141  ; 0            ; 0          ; |Top                                                                                                         ; Top                ; work         ;
+; |Top                                         ; 4625 (101)          ; 1565 (1)                  ; 131072      ; 0          ; 0            ; 0       ; 0         ; 141  ; 0            ; 0          ; |Top                                                                                                         ; Top                ; work         ;
 ;    |Counter:instCPT|                         ; 36 (36)             ; 32 (32)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Counter:instCPT                                                                                         ; Counter            ; work         ;
 ;    |Displays:instDISP|                       ; 75 (75)             ; 96 (96)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Displays:instDISP                                                                                       ; Displays           ; work         ;
-;    |Processor:instPROC|                      ; 3656 (311)          ; 1033 (8)                  ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC                                                                                      ; Processor          ; work         ;
-;       |Alu:instALU|                          ; 756 (756)           ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC|Alu:instALU                                                                          ; Alu                ; work         ;
+;    |Processor:instPROC|                      ; 3662 (311)          ; 1033 (8)                  ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC                                                                                      ; Processor          ; work         ;
+;       |Alu:instALU|                          ; 759 (759)           ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC|Alu:instALU                                                                          ; Alu                ; work         ;
 ;       |InstructionDecoder:instID|            ; 16 (16)             ; 1 (1)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC|InstructionDecoder:instID                                                            ; InstructionDecoder ; work         ;
-;       |ProgramCounter:instPC|                ; 197 (197)           ; 32 (32)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC|ProgramCounter:instPC                                                                ; ProgramCounter     ; work         ;
+;       |ProgramCounter:instPC|                ; 200 (200)           ; 32 (32)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC|ProgramCounter:instPC                                                                ; ProgramCounter     ; work         ;
 ;       |RegisterFile:instRF|                  ; 2376 (2376)         ; 992 (992)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|Processor:instPROC|RegisterFile:instRF                                                                  ; RegisterFile       ; work         ;
-;    |SDRAM_32b:SDRAMconverter|                ; 398 (398)           ; 148 (148)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|SDRAM_32b:SDRAMconverter                                                                                ; SDRAM_32b          ; work         ;
-;    |SDRAM_controller:SDRAMcontroller|        ; 150 (150)           ; 152 (152)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|SDRAM_controller:SDRAMcontroller                                                                        ; SDRAM_controller   ; work         ;
+;    |SDRAM_32b:SDRAMconverter|                ; 401 (401)           ; 148 (148)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|SDRAM_32b:SDRAMconverter                                                                                ; SDRAM_32b          ; work         ;
+;    |SDRAM_controller:SDRAMcontroller|        ; 156 (156)           ; 152 (152)                 ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|SDRAM_controller:SDRAMcontroller                                                                        ; SDRAM_controller   ; work         ;
 ;    |clock1M:instPLL|                         ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|clock1M:instPLL                                                                                         ; clock1M            ; work         ;
 ;       |altpll:altpll_component|              ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|clock1M:instPLL|altpll:altpll_component                                                                 ; altpll             ; work         ;
 ;          |clock1M_altpll:auto_generated|     ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|clock1M:instPLL|altpll:altpll_component|clock1M_altpll:auto_generated                                   ; clock1M_altpll     ; work         ;
@@ -292,7 +292,7 @@ refer to the applicable agreement for further details.
 ;       |SegmentDecoder:decoder4|              ; 3 (3)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|debuger:debug|SegmentDecoder:decoder4                                                                   ; SegmentDecoder     ; work         ;
 ;       |SegmentDecoder:decoder5|              ; 3 (3)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|debuger:debug|SegmentDecoder:decoder5                                                                   ; SegmentDecoder     ; work         ;
 ;       |SegmentDecoder:decoder6|              ; 3 (3)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|debuger:debug|SegmentDecoder:decoder6                                                                   ; SegmentDecoder     ; work         ;
-;    |miniCache:minicacheInst|                 ; 129 (129)           ; 103 (103)                 ; 131072      ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|miniCache:minicacheInst                                                                                 ; miniCache          ; work         ;
+;    |miniCache:minicacheInst|                 ; 130 (130)           ; 103 (103)                 ; 131072      ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|miniCache:minicacheInst                                                                                 ; miniCache          ; work         ;
 ;       |RAM_2PORT:Memory|                     ; 0 (0)               ; 0 (0)                     ; 131072      ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|miniCache:minicacheInst|RAM_2PORT:Memory                                                                ; RAM_2PORT          ; work         ;
 ;          |altsyncram:altsyncram_component|   ; 0 (0)               ; 0 (0)                     ; 131072      ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|miniCache:minicacheInst|RAM_2PORT:Memory|altsyncram:altsyncram_component                                ; altsyncram         ; work         ;
 ;             |altsyncram_gjt3:auto_generated| ; 0 (0)               ; 0 (0)                     ; 131072      ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |Top|miniCache:minicacheInst|RAM_2PORT:Memory|altsyncram:altsyncram_component|altsyncram_gjt3:auto_generated ; altsyncram_gjt3    ; work         ;
@@ -452,7 +452,7 @@ Note: All cells listed above may not be present at the end of synthesis due to v
 ; Displays:instDISP|regDisplay1[13]                  ; 1       ;
 ; Displays:instDISP|regDisplay1[14]                  ; 1       ;
 ; Displays:instDISP|regDisplay1[15]                  ; 1       ;
-; TOPreset                                           ; 1692    ;
+; TOPreset                                           ; 1691    ;
 ; Processor:instPROC|ProgramCounter:instPC|SigPC[3]  ; 4       ;
 ; Processor:instPROC|ProgramCounter:instPC|SigPC[2]  ; 4       ;
 ; Displays:instDISP|regDisplay1[16]                  ; 1       ;
@@ -1122,22 +1122,22 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     CLR SLD           ; 64                          ;
 ;     ENA CLR           ; 271                         ;
 ; cycloneiii_io_obuf    ; 16                          ;
-; cycloneiii_lcell_comb ; 4612                        ;
+; cycloneiii_lcell_comb ; 4628                        ;
 ;     arith             ; 358                         ;
 ;         1 data inputs ; 1                           ;
 ;         2 data inputs ; 120                         ;
 ;         3 data inputs ; 237                         ;
-;     normal            ; 4254                        ;
+;     normal            ; 4270                        ;
 ;         0 data inputs ; 2                           ;
 ;         1 data inputs ; 104                         ;
-;         2 data inputs ; 127                         ;
-;         3 data inputs ; 1201                        ;
-;         4 data inputs ; 2820                        ;
+;         2 data inputs ; 133                         ;
+;         3 data inputs ; 1185                        ;
+;         4 data inputs ; 2846                        ;
 ; cycloneiii_pll        ; 1                           ;
 ; cycloneiii_ram_block  ; 32                          ;
 ;                       ;                             ;
 ; Max LUT depth         ; 30.60                       ;
-; Average LUT depth     ; 20.83                       ;
+; Average LUT depth     ; 20.77                       ;
 +-----------------------+-----------------------------+
 
 
@@ -1146,7 +1146,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:12     ;
+; Top            ; 00:00:17     ;
 +----------------+--------------+
 
 
@@ -1156,7 +1156,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
-    Info: Processing started: Thu Jul 28 11:05:57 2022
+    Info: Processing started: Fri Jul 29 11:16:55 2022
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off PROC-ECE_ASYNC -c PROC-ECE_ASYNC
 Info (20032): Parallel compilation is enabled and will use up to 4 processors
 Info (12021): Found 2 design units, including 1 entities, in source file vhdl_files/minicache.vhd
@@ -1213,17 +1213,17 @@ Info (12021): Found 2 design units, including 1 entities, in source file vhdl_fi
     Info (12023): Found entity 1: debuger File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/vhdl_files/DEBUGER.vhd Line: 11
 Info (12127): Elaborating entity "Top" for the top level hierarchy
 Warning (10036): Verilog HDL or VHDL warning at Top.vhd(213): object "PLLlock" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/vhdl_files/Top.vhd Line: 213
-Info (12128): Elaborating entity "debuger" for hierarchy "debuger:debug" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/vhdl_files/Top.vhd Line: 294
+Info (12128): Elaborating entity "debuger" for hierarchy "debuger:debug" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/vhdl_files/Top.vhd Line: 284
 Info (12128): Elaborating entity "SegmentDecoder" for hierarchy "debuger:debug|SegmentDecoder:decoder1" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/vhdl_files/DEBUGER.vhd Line: 71
-Info (12128): Elaborating entity "Processor" for hierarchy "Processor:instPROC" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/vhdl_files/Top.vhd Line: 308
+Info (12128): Elaborating entity "Processor" for hierarchy "Processor:instPROC" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/vhdl_files/Top.vhd Line: 298
 Warning (10036): Verilog HDL or VHDL warning at Processor.vhd(137): object "SIGopcode" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/vhdl_files/Processor.vhd Line: 137
 Info (12128): Elaborating entity "ProgramCounter" for hierarchy "Processor:instPROC|ProgramCounter:instPC" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/vhdl_files/Processor.vhd Line: 300
 Info (12128): Elaborating entity "InstructionDecoder" for hierarchy "Processor:instPROC|InstructionDecoder:instID" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/vhdl_files/Processor.vhd Line: 323
 Info (12128): Elaborating entity "RegisterFile" for hierarchy "Processor:instPROC|RegisterFile:instRF" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/vhdl_files/Processor.vhd Line: 351
 Info (12128): Elaborating entity "Alu" for hierarchy "Processor:instPROC|Alu:instALU" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/vhdl_files/Processor.vhd Line: 364
-Info (12128): Elaborating entity "Counter" for hierarchy "Counter:instCPT" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/vhdl_files/Top.vhd Line: 324
-Info (12128): Elaborating entity "Displays" for hierarchy "Displays:instDISP" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/vhdl_files/Top.vhd Line: 334
-Info (12128): Elaborating entity "clock1M" for hierarchy "clock1M:instPLL" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/vhdl_files/Top.vhd Line: 348
+Info (12128): Elaborating entity "Counter" for hierarchy "Counter:instCPT" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/vhdl_files/Top.vhd Line: 314
+Info (12128): Elaborating entity "Displays" for hierarchy "Displays:instDISP" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/vhdl_files/Top.vhd Line: 324
+Info (12128): Elaborating entity "clock1M" for hierarchy "clock1M:instPLL" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/vhdl_files/Top.vhd Line: 338
 Info (12128): Elaborating entity "altpll" for hierarchy "clock1M:instPLL|altpll:altpll_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/clock1M.vhd Line: 140
 Info (12130): Elaborated megafunction instantiation "clock1M:instPLL|altpll:altpll_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/clock1M.vhd Line: 140
 Info (12133): Instantiated megafunction "clock1M:instPLL|altpll:altpll_component" with the following parameter: File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/clock1M.vhd Line: 140
@@ -1285,10 +1285,10 @@ Info (12133): Instantiated megafunction "clock1M:instPLL|altpll:altpll_component
 Info (12021): Found 1 design units, including 1 entities, in source file db/clock1m_altpll.v
     Info (12023): Found entity 1: clock1M_altpll File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/db/clock1m_altpll.v Line: 30
 Info (12128): Elaborating entity "clock1M_altpll" for hierarchy "clock1M:instPLL|altpll:altpll_component|clock1M_altpll:auto_generated" File: c:/intelfpga_lite/18.0/quartus/libraries/megafunctions/altpll.tdf Line: 897
-Info (12128): Elaborating entity "SDRAM_32b" for hierarchy "SDRAM_32b:SDRAMconverter" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/vhdl_files/Top.vhd Line: 356
-Info (12128): Elaborating entity "SDRAM_controller" for hierarchy "SDRAM_controller:SDRAMcontroller" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/vhdl_files/Top.vhd Line: 384
+Info (12128): Elaborating entity "SDRAM_32b" for hierarchy "SDRAM_32b:SDRAMconverter" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/vhdl_files/Top.vhd Line: 346
+Info (12128): Elaborating entity "SDRAM_controller" for hierarchy "SDRAM_controller:SDRAMcontroller" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/vhdl_files/Top.vhd Line: 374
 Warning (10036): Verilog HDL or VHDL warning at SDRAM_controller.vhd(72): object "Refresh_Toggle" assigned a value but never read File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/vhdl_files/SDRAM_controller.vhd Line: 72
-Info (12128): Elaborating entity "miniCache" for hierarchy "miniCache:minicacheInst" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/vhdl_files/Top.vhd Line: 408
+Info (12128): Elaborating entity "miniCache" for hierarchy "miniCache:minicacheInst" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/vhdl_files/Top.vhd Line: 398
 Info (12128): Elaborating entity "RAM_2PORT" for hierarchy "miniCache:minicacheInst|RAM_2PORT:Memory" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/vhdl_files/miniCache.vhd Line: 288
 Info (12128): Elaborating entity "altsyncram" for hierarchy "miniCache:minicacheInst|RAM_2PORT:Memory|altsyncram:altsyncram_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/RAM_2PORT.vhd Line: 76
 Info (12130): Elaborated megafunction instantiation "miniCache:minicacheInst|RAM_2PORT:Memory|altsyncram:altsyncram_component" File: C:/Users/quent/Desktop/RSICV code/VHDL/PROC-ECE_SYNC SDRAM/RAM_2PORT.vhd Line: 76
@@ -1407,17 +1407,17 @@ Critical Warning (35046): Net "work.simulPkg.PKG_outputData_SDRAM_9_" has a miss
 Critical Warning (35046): Net "work.simulPkg.PKG_simulON" has a missing source. The net will be connected to GND and its default value will be ignored.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 1 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 5043 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 5058 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 6 input pins
     Info (21059): Implemented 119 output pins
     Info (21060): Implemented 16 bidirectional pins
-    Info (21061): Implemented 4869 logic cells
+    Info (21061): Implemented 4884 logic cells
     Info (21064): Implemented 32 RAM segments
     Info (21065): Implemented 1 PLLs
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 58 warnings
-    Info: Peak virtual memory: 4840 megabytes
-    Info: Processing ended: Thu Jul 28 11:06:24 2022
-    Info: Elapsed time: 00:00:27
-    Info: Total CPU time (on all processors): 00:00:37
+    Info: Peak virtual memory: 4836 megabytes
+    Info: Processing ended: Fri Jul 29 11:17:28 2022
+    Info: Elapsed time: 00:00:33
+    Info: Total CPU time (on all processors): 00:00:44
 
 

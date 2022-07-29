@@ -1,5 +1,5 @@
 Flow report for PROC-ECE_ASYNC
-Thu Jul 28 11:08:58 2022
+Fri Jul 29 11:21:50 2022
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -40,15 +40,15 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Thu Jul 28 11:08:58 2022       ;
+; Flow Status                        ; Successful - Fri Jul 29 11:21:50 2022       ;
 ; Quartus Prime Version              ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                      ; PROC-ECE_ASYNC                              ;
 ; Top-level Entity Name              ; Top                                         ;
 ; Family                             ; MAX 10                                      ;
 ; Device                             ; 10M50DAF484C7G                              ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 4,848 / 49,760 ( 10 % )                     ;
-;     Total combinational functions  ; 4,611 / 49,760 ( 9 % )                      ;
+; Total logic elements               ; 4,864 / 49,760 ( 10 % )                     ;
+;     Total combinational functions  ; 4,627 / 49,760 ( 9 % )                      ;
 ;     Dedicated logic registers      ; 1,565 / 49,760 ( 3 % )                      ;
 ; Total registers                    ; 1565                                        ;
 ; Total pins                         ; 141 / 360 ( 39 % )                          ;
@@ -66,7 +66,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 07/28/2022 11:05:58 ;
+; Start date & time ; 07/29/2022 11:16:56 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; PROC-ECE_ASYNC      ;
 +-------------------+---------------------+
@@ -77,7 +77,7 @@ refer to the applicable agreement for further details.
 +--------------------------------------+-------------------------------------------------------------------+----------------+-------------+-----------------------------------+
 ; Assignment Name                      ; Value                                                             ; Default Value  ; Entity Name ; Section Id                        ;
 +--------------------------------------+-------------------------------------------------------------------+----------------+-------------+-----------------------------------+
-; COMPILER_SIGNATURE_ID                ; 10995770589200.165899915816988                                    ; --             ; --          ; --                                ;
+; COMPILER_SIGNATURE_ID                ; 10995770589200.165908621514424                                    ; --             ; --          ; --                                ;
 ; EDA_DESIGN_ENTRY_SYNTHESIS_TOOL      ; Synplify Pro                                                      ; <None>         ; --          ; --                                ;
 ; EDA_DESIGN_INSTANCE_NAME             ; NA                                                                ; --             ; --          ; Testbench                         ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST      ; Off                                                               ; --             ; --          ; eda_board_design_timing           ;
@@ -120,12 +120,12 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:26     ; 1.0                     ; 4840 MB             ; 00:00:36                           ;
-; Fitter               ; 00:02:16     ; 1.2                     ; 5764 MB             ; 00:02:56                           ;
-; Assembler            ; 00:00:03     ; 1.0                     ; 4696 MB             ; 00:00:03                           ;
-; Timing Analyzer      ; 00:00:07     ; 2.0                     ; 4878 MB             ; 00:00:14                           ;
-; EDA Netlist Writer   ; 00:00:02     ; 1.0                     ; 4717 MB             ; 00:00:02                           ;
-; Total                ; 00:02:54     ; --                      ; --                  ; 00:03:51                           ;
+; Analysis & Synthesis ; 00:00:32     ; 1.0                     ; 4836 MB             ; 00:00:43                           ;
+; Fitter               ; 00:04:04     ; 1.1                     ; 5762 MB             ; 00:04:51                           ;
+; Assembler            ; 00:00:04     ; 1.0                     ; 4699 MB             ; 00:00:03                           ;
+; Timing Analyzer      ; 00:00:08     ; 2.0                     ; 4880 MB             ; 00:00:14                           ;
+; EDA Netlist Writer   ; 00:00:02     ; 1.0                     ; 4719 MB             ; 00:00:02                           ;
+; Total                ; 00:04:50     ; --                      ; --                  ; 00:05:53                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

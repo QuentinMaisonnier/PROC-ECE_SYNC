@@ -216,16 +216,6 @@ ARCHITECTURE archi OF Top IS
 
 	SIGNAL debugDisplay1, debugDisplay2			           : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL procDisplay1, procDisplay2, procLed           : STD_LOGIC_VECTOR(31 DOWNTO 0);
-	SIGNAL RegcsDMProc, MuxcsDMProc                      : STD_LOGIC;
-	-- SIGNAL SDRAM_controler to SDRAM
-	SIGNAL SIGSDRAM_ADDR                                 : STD_LOGIC_VECTOR (12 DOWNTO 0);
-	SIGNAL SIGSDRAM_DQ                                   : STD_LOGIC_VECTOR ((DATA_WIDTH - 1) DOWNTO 0);
-	SIGNAL SIGSDRAM_BA                                   : STD_LOGIC_VECTOR (1 DOWNTO 0);
-	SIGNAL SIGSDRAM_DQM                                  : STD_LOGIC_VECTOR ((DQM_WIDTH - 1) DOWNTO 0);
-	SIGNAL SIGSDRAM_RAS_N, SIGSDRAM_CAS_N, SIGSDRAM_WE_N : STD_LOGIC;
-	SIGNAL SIGSDRAM_CKE, SIGSDRAM_CS_N                   : STD_LOGIC;
-	SIGNAL SIGSDRAM_CLK                                  : STD_LOGIC;
-	--SIGNAL SDRAM_controler to SDRAM converter 32bits
 
 	-- Outputs to SDRAM controlle(16b)
 	SIGNAL SIGOUT_Address                                : STD_LOGIC_VECTOR(24 DOWNTO 0);
