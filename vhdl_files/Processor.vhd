@@ -149,9 +149,9 @@ ARCHITECTURE archi OF Processor IS
 	SIGNAL SIGimm13B              : STD_LOGIC_VECTOR (12 DOWNTO 0);
 	SIGNAL SIGimm32U              : STD_LOGIC_VECTOR (31 DOWNTO 0);
 	SIGNAL SIGimm21J              : STD_LOGIC_VECTOR (20 DOWNTO 0);
-	SIGNAL SIGload, SIGloadP2		: STD_LOGIC;
+	SIGNAL SIGload, SIGloadP2	  : STD_LOGIC;
 	SIGNAL MuxHoldPC              : STD_LOGIC;
-	SIGNAL SIGstore				   : STD_LOGIC;
+	SIGNAL SIGstore				  : STD_LOGIC;
 	SIGNAL SIGlui                 : STD_LOGIC;
 	SIGNAL SIGauipc               : STD_LOGIC;
 	SIGNAL SIGjal                 : STD_LOGIC;
@@ -186,17 +186,17 @@ ARCHITECTURE archi OF Processor IS
 	SIGNAL PC                     : STD_LOGIC_VECTOR (31 DOWNTO 0);
 
 BEGIN
-	-- BEGIN
-
 	-- ALL
-	-- program counter
+   ---------------------				 
+	-- program counter --
+	---------------------
 	PROCprogcounter <= SIGprogcounterfetch;
 
 	SIGoffsetsignPC <= SIGimm21J(20);
 
 	SIGoffsetPC1    <= SIGimm32U WHEN SIGauipc = '1' ELSE
-							 SIGoutputALU WHEN SIGjalr = '1' ELSE
-							 (OTHERS => '0');
+					   SIGoutputALU WHEN SIGjalr = '1' ELSE
+					  (OTHERS => '0');
 
 	SIGoffsetPC2(20 DOWNTO 0)  <= SIGimm21J;
 	
@@ -207,13 +207,15 @@ BEGIN
 	SIGoffsetPC3(31 DOWNTO 13) <= (OTHERS => '1') WHEN SIGoffsetsignPC = '1' ELSE (OTHERS => '0');
 	
 	SIGoffsetPC                <= SIGoffsetPC1 WHEN SIGauipc = '1' OR SIGjalr = '1' ELSE
-											SIGoffsetPC2 WHEN SIGjal = '1' ELSE
-											SIGoffsetPC3 WHEN SIGbranch = '1' ELSE (OTHERS => '0');
+								  SIGoffsetPC2 WHEN SIGjal = '1' ELSE
+								  SIGoffsetPC3 WHEN SIGbranch = '1' ELSE (OTHERS => '0');
 											
 	MuxHoldPC <= '1' WHEN Hold='1' OR SIGload='1' ELSE
-				    '0';
-	-- register file
-
+				 '0';
+					 
+	-------------------
+	-- register file --
+	-------------------
 	RegaddrLoad <= (OTHERS => '0') WHEN PROCreset = '1' ELSE
 		            MuxrdID WHEN rising_edge(PROCclock);
 						
@@ -223,41 +225,44 @@ BEGIN
 	PROCload <= SIGload;
 
 	SIGrdRF <= RegaddrLoad WHEN SIGstore = '0' AND SIGloadP2 = '1' ELSE
-				  SIGrdID WHEN (SIGbranch = '0' AND SIGstore = '0') ELSE
-				  (OTHERS => '0');
+			   SIGrdID WHEN (SIGbranch = '0' AND SIGstore = '0') ELSE
+			   (OTHERS => '0');
 
-	SIGinputRF <= DMout WHEN SIGloadP2 = '1' ELSE --- avant il y a avait sigload (au cas ou ca pmarche plus)
+	SIGinputRF <=     DMout WHEN SIGloadP2 = '1' ELSE --- avant il y a avait sigload (au cas ou ca pmarche plus)
 					  STD_LOGIC_VECTOR(unsigned(SIGprogcounter) + 4) WHEN (SIGjal = '1' OR SIGjalr = '1') ELSE
 					  SIGimm32U WHEN SIGlui = '1' ELSE
 					  STD_LOGIC_VECTOR(unsigned(SIGimm32U) + unsigned(SIGprogcounter)) WHEN SIGauipc = '1' ELSE
 					  SIGoutputALU WHEN SIGstore = '0' ELSE
 					  (OTHERS => '0');
-	-- alu
+	---------			 
+	-- ALU --
+	---------
 	SIGfunct7ALU <= '0' WHEN ((SIGfunct3ALU = "000" OR
-						 SIGfunct3ALU = "010" OR
-						 SIGfunct3ALU = "011" OR
-						 SIGfunct3ALU = "100" OR
-						 SIGfunct3ALU = "110" OR
-						 SIGfunct3ALU = "111") AND (SIGimmSel = '1' OR
-						 SIGloadP2 = '1' OR
-						 SIGstore = '1' OR
-						 SIGjalr = '1')) ELSE
-						 SIGfunct7;
+						SIGfunct3ALU = "010" OR
+						SIGfunct3ALU = "011" OR
+						SIGfunct3ALU = "100" OR
+						SIGfunct3ALU = "110" OR
+						SIGfunct3ALU = "111") AND (SIGimmSel = '1' OR
+						SIGloadP2 = '1' OR
+						SIGstore = '1' OR
+						SIGjalr = '1')) ELSE
+						SIGfunct7;
 		
 	SIGfunct3ALU <= "000" WHEN (SIGstore = '1' OR SIGloadP2 = '1' OR SIGload = '1') ELSE
-						 SIGfunct3;
+					SIGfunct3;
 						 
 	SIGinput1ALU <= SIGoutput1RF;
 
 	SIGinput2ALU(11 DOWNTO 0) <= SIGimm12S(11 DOWNTO 0) WHEN SIGstore = '1' ELSE
-										  SIGimm12I(11 DOWNTO 0) WHEN (SIGloadP2 = '1' OR SIGimmSel = '1' OR SIGjalr = '1') ELSE
-										  SIGoutput2RF(11 DOWNTO 0);
+								 SIGimm12I(11 DOWNTO 0) WHEN (SIGloadP2 = '1' OR SIGimmSel = '1' OR SIGjalr = '1') ELSE
+								 SIGoutput2RF(11 DOWNTO 0);
 
 	SIGinput2ALU(31 DOWNTO 12) <= (OTHERS => '0') WHEN (SIGimmSel = '1' OR SIGloadP2 = '1' OR SIGstore = '1' OR SIGjalr = '1') AND SIGimm12I(11) = '0' ELSE
-											(OTHERS => '1') WHEN (SIGimmSel = '1' OR SIGloadP2 = '1' OR SIGstore = '1' OR SIGjalr = '1') AND SIGimm12I(11) = '1' ELSE
-											SIGoutput2RF(31 DOWNTO 12);
-
-	-- data memory
+								  (OTHERS => '1') WHEN (SIGimmSel = '1' OR SIGloadP2 = '1' OR SIGstore = '1' OR SIGjalr = '1') AND SIGimm12I(11) = '1' ELSE
+								  SIGoutput2RF(31 DOWNTO 12);
+	-----------------			 
+	-- data memory --
+	-----------------
 	PROCaddrDM  <= SIGoutputALU;
 	PROCinputDM <= SIGoutput2RF;
 	PROCstore   <= SIGstore;
@@ -284,8 +289,6 @@ BEGIN
 				  '0';
 	------------------------------------
 
---	DMout <= PROCoutputDM;
-
 	DMout <= (31 downto 8 => PROCoutputDM(7)) & PROCoutputDM(7 downto 0) when SIGloadP2='1' and function3 = "000" else
 				(31 downto 16 => PROCoutputDM(15)) & PROCoutputDM(15 downto 0) when SIGloadP2='1' and function3 = "001" else
 				PROCoutputDM(31 downto 0) when SIGloadP2='1' and function3 = "010" else
@@ -299,8 +302,8 @@ BEGIN
 		PChold        => MuxHoldPC,
 		PCclock       => PROCclock,
 		PCreset       => PROCreset,
-		PCoffset      => SIGoffsetPC,     --complex
-		PCoffsetsign  => SIGoffsetsignPC, --complex
+		PCoffset      => SIGoffsetPC,
+		PCoffsetsign  => SIGoffsetsignPC,
 		PCjal         => SIGjal,
 		PCjalr        => SIGjalr,
 		PCbranch      => SIGbranch,
@@ -322,8 +325,7 @@ BEGIN
 		hold			  => hold,
 		reset 		  => Procreset,
 		clock 		  => PRoCclock,
-		IDinstruction => Muxinstruction, -- ICI
---		IDinstruction    => PROCinstruction, -- ICI
+		IDinstruction => Muxinstruction,
 		IDopcode      => SIGopcode,
 		IDimmSel      => SIGimmSel,
 		IDrd          => SIGrdID,
@@ -351,21 +353,21 @@ BEGIN
 		Hold    => MuxHoldPC,
 		RFclock => PROCclock,
 		RFreset => PROCreset,
-		RFin    => SIGinputRF, --complex
+		RFin    => SIGinputRF,
 		RFrd    => SIGrdRF,
 		RFrs1   => SIGrs1,
 		RFrs2   => SIGrs2,
-		RFout1  => SIGoutput1RF, --complex
-		RFout2  => SIGoutput2RF--complex
+		RFout1  => SIGoutput1RF,
+		RFout2  => SIGoutput2RF
 	);
 
 	instALU : Alu
 	PORT MAP(
-		ALUin1    => SIGinput1ALU, --complex
-		ALUin2    => SIGinput2ALU, --complex
-		ALUfunct7 => SIGfunct7ALU, --chiant
+		ALUin1    => SIGinput1ALU,
+		ALUin2    => SIGinput2ALU,
+		ALUfunct7 => SIGfunct7ALU,
 		ALUfunct3 => SIGfunct3ALU,
-		ALUout    => SIGoutputALU, --complex
+		ALUout    => SIGoutputALU,
 		ALUeq     => SIGeqALU,
 		ALUinf    => SIGinfALU,
 		ALUsup    => SIGsupALU,

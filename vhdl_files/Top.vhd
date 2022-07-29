@@ -240,21 +240,21 @@ ARCHITECTURE archi OF Top IS
 	
 	
 	--------SIGNALS minichache
-	SIGNAL SIGPROCinstruction : STD_LOGIC_VECTOR(31 DOWNTO 0);
-	SIGNAL SIGPROCoutputDM : STD_LOGIC_VECTOR(31 DOWNTO 0);
-	SIGNAL SIGPROChold : STD_LOGIC;
-	SIGNAL SIGPROCprogcounter: STD_LOGIC_VECTOR(31 DOWNTO 0);
+	SIGNAL SIGPROCinstruction 			: STD_LOGIC_VECTOR(31 DOWNTO 0);
+	SIGNAL SIGPROCoutputDM 	  			: STD_LOGIC_VECTOR(31 DOWNTO 0);
+	SIGNAL SIGPROChold 		 			: STD_LOGIC;
+	SIGNAL SIGPROCprogcounter 			: STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL SIGPROCstore, SIGPROCload : STD_LOGIC;
-	SIGNAL SIGPROCfunct3 : STD_LOGIC_VECTOR(2 DOWNTO 0);
-	SIGNAL SIGPROCaddrDM : STD_LOGIC_VECTOR(31 DOWNTO 0);
-	SIGNAL SIGPROCinputDM : STD_LOGIC_VECTOR(31 DOWNTO 0);
-	SIGNAL SIGfunct3 : STD_LOGIC_VECTOR(2 DOWNTO 0);
-	SIGNAL SIGcsDM, SIGwriteSelect : STD_LOGIC;
-	SIGNAL SIGinputDM, SIGAddressDM : STD_LOGIC_VECTOR(31 DOWNTO 0);
+	SIGNAL SIGPROCfunct3 				: STD_LOGIC_VECTOR(2 DOWNTO 0);
+	SIGNAL SIGPROCaddrDM 			   : STD_LOGIC_VECTOR(31 DOWNTO 0);
+	SIGNAL SIGPROCinputDM 				: STD_LOGIC_VECTOR(31 DOWNTO 0);
+	SIGNAL SIGfunct3 						: STD_LOGIC_VECTOR(2 DOWNTO 0);
+	SIGNAL SIGcsDM, SIGwriteSelect   : STD_LOGIC;
+	SIGNAL SIGinputDM, SIGAddressDM  : STD_LOGIC_VECTOR(31 DOWNTO 0);
 	SIGNAL SIGReady_32b, SIGData_Ready_32b : STD_LOGIC;
-	SIGNAL SIGDataOut_32b : STD_LOGIC_VECTOR(31 DOWNTO 0);
+	SIGNAL SIGDataOut_32b 				: STD_LOGIC_VECTOR(31 DOWNTO 0);
 	
-	SIGNAL SIGbootfinish	 : std_logic;
+	SIGNAL SIGbootfinish	 				: std_logic;
 BEGIN
 
 	TOPreset <= '1' WHEN reset = '1' ELSE
@@ -269,14 +269,9 @@ BEGIN
 	PKG_funct3        <= SIGPROCfunct3;
 	PKG_addrDM        <= SIGPROCaddrDM;
 	PKG_inputDM       <= SIGPROCinputDM;
-	
-	--	PKG_outputDM <= SIGoutputDM;
-	--	SIGoutputDM <= PKG_outputDM;
 	PKG_progcounter   <= SIGPROCprogcounter;
 	PKG_counter       <= SIGcounter;
---	PKG_simulON       <= SIGsimulOn;
 	SIGsimulOn			<= PKG_simulON;
---	PKG_dataReady_32b <= sigData_Ready_32b;
 	-----------------------
 
 	SIGclock          <= TOPclock WHEN SIGsimulOn = '1' ELSE

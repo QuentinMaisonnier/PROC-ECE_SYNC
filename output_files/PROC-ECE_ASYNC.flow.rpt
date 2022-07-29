@@ -1,5 +1,5 @@
 Flow report for PROC-ECE_ASYNC
-Wed Jul 27 17:14:33 2022
+Thu Jul 28 11:08:58 2022
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -40,7 +40,7 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Wed Jul 27 17:14:33 2022       ;
+; Flow Status                        ; Successful - Thu Jul 28 11:08:58 2022       ;
 ; Quartus Prime Version              ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
 ; Revision Name                      ; PROC-ECE_ASYNC                              ;
 ; Top-level Entity Name              ; Top                                         ;
@@ -66,7 +66,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 07/27/2022 17:11:33 ;
+; Start date & time ; 07/28/2022 11:05:58 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; PROC-ECE_ASYNC      ;
 +-------------------+---------------------+
@@ -77,7 +77,7 @@ refer to the applicable agreement for further details.
 +--------------------------------------+-------------------------------------------------------------------+----------------+-------------+-----------------------------------+
 ; Assignment Name                      ; Value                                                             ; Default Value  ; Entity Name ; Section Id                        ;
 +--------------------------------------+-------------------------------------------------------------------+----------------+-------------+-----------------------------------+
-; COMPILER_SIGNATURE_ID                ; 10995770589200.165893469205604                                    ; --             ; --          ; --                                ;
+; COMPILER_SIGNATURE_ID                ; 10995770589200.165899915816988                                    ; --             ; --          ; --                                ;
 ; EDA_DESIGN_ENTRY_SYNTHESIS_TOOL      ; Synplify Pro                                                      ; <None>         ; --          ; --                                ;
 ; EDA_DESIGN_INSTANCE_NAME             ; NA                                                                ; --             ; --          ; Testbench                         ;
 ; EDA_GENERATE_FUNCTIONAL_NETLIST      ; Off                                                               ; --             ; --          ; eda_board_design_timing           ;
@@ -96,15 +96,6 @@ refer to the applicable agreement for further details.
 ; EDA_TIME_SCALE                       ; 1 ps                                                              ; --             ; --          ; eda_simulation                    ;
 ; MAX_CORE_JUNCTION_TEMP               ; 85                                                                ; --             ; --          ; --                                ;
 ; MIN_CORE_JUNCTION_TEMP               ; 0                                                                 ; --             ; --          ; --                                ;
-; MISC_FILE                            ; qip_files/IM/IM.bsf                                               ; --             ; --          ; --                                ;
-; MISC_FILE                            ; qip_files/IM/IM_inst.vhd                                          ; --             ; --          ; --                                ;
-; MISC_FILE                            ; qip_files/IM/IM.inc                                               ; --             ; --          ; --                                ;
-; MISC_FILE                            ; qip_files/IM/IM.cmp                                               ; --             ; --          ; --                                ;
-; MISC_FILE                            ; qip_files/PLL/PLL.bsf                                             ; --             ; --          ; --                                ;
-; MISC_FILE                            ; qip_files/PLL/PLL_inst.vhd                                        ; --             ; --          ; --                                ;
-; MISC_FILE                            ; qip_files/PLL/PLL.inc                                             ; --             ; --          ; --                                ;
-; MISC_FILE                            ; qip_files/PLL/PLL.cmp                                             ; --             ; --          ; --                                ;
-; MISC_FILE                            ; qip_files/PLL/PLL.ppf                                             ; --             ; --          ; --                                ;
 ; MISC_FILE                            ; RAM_2PORT.cmp                                                     ; --             ; --          ; --                                ;
 ; MISC_FILE                            ; clock1M.cmp                                                       ; --             ; --          ; --                                ;
 ; MISC_FILE                            ; clock1M.ppf                                                       ; --             ; --          ; --                                ;
@@ -129,12 +120,12 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:27     ; 1.0                     ; 4857 MB             ; 00:00:37                           ;
-; Fitter               ; 00:02:15     ; 1.2                     ; 5761 MB             ; 00:02:55                           ;
-; Assembler            ; 00:00:04     ; 1.0                     ; 4703 MB             ; 00:00:03                           ;
-; Timing Analyzer      ; 00:00:08     ; 1.9                     ; 4875 MB             ; 00:00:13                           ;
-; EDA Netlist Writer   ; 00:00:02     ; 1.0                     ; 4718 MB             ; 00:00:02                           ;
-; Total                ; 00:02:56     ; --                      ; --                  ; 00:03:50                           ;
+; Analysis & Synthesis ; 00:00:26     ; 1.0                     ; 4840 MB             ; 00:00:36                           ;
+; Fitter               ; 00:02:16     ; 1.2                     ; 5764 MB             ; 00:02:56                           ;
+; Assembler            ; 00:00:03     ; 1.0                     ; 4696 MB             ; 00:00:03                           ;
+; Timing Analyzer      ; 00:00:07     ; 2.0                     ; 4878 MB             ; 00:00:14                           ;
+; EDA Netlist Writer   ; 00:00:02     ; 1.0                     ; 4717 MB             ; 00:00:02                           ;
+; Total                ; 00:02:54     ; --                      ; --                  ; 00:03:51                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

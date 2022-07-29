@@ -199,14 +199,10 @@ set_global_assignment -name VHDL_FILE vhdl_files/Top.vhd
 set_global_assignment -name VHDL_FILE vhdl_files/RegisterFile.vhd
 set_global_assignment -name VHDL_FILE vhdl_files/ProgramCounter.vhd
 set_global_assignment -name VHDL_FILE vhdl_files/Processor.vhd
-set_global_assignment -name VHDL_FILE vhdl_files/InstructionMemory.vhd
 set_global_assignment -name VHDL_FILE vhdl_files/InstructionDecoder.vhd
 set_global_assignment -name VHDL_FILE vhdl_files/Displays.vhd
-set_global_assignment -name VHDL_FILE vhdl_files/DataMemory.vhd
 set_global_assignment -name VHDL_FILE vhdl_files/Counter.vhd
 set_global_assignment -name VHDL_FILE vhdl_files/Alu.vhd
-set_global_assignment -name QIP_FILE qip_files/IM/IM.qip
-set_global_assignment -name QIP_FILE qip_files/PLL/PLL.qip
 set_global_assignment -name QIP_FILE RAM_2PORT.qip
 set_global_assignment -name QIP_FILE clock1M.qip
 set_global_assignment -name VHDL_FILE vhdl_files/DEBUGER.vhd

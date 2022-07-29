@@ -1,6 +1,10 @@
 
--- 32M x 16 SDRAM
--- 8M (addresses) * 4 (Banks) * 16 (16 bits Data) = 512 Mb SDRAM <=> 64 MB SDRAM
+-- ------------------------------------------------------------------------------- --
+-- THIS SDRAM CONTROLLER IS USED FOR A 50 MHz CLOCK                                --
+-- AND an SDRAM Architecture as "32M x 16" :                                       --
+-- 8M (addresses) * 4 (Banks) * 16 (16 bits Data) = 512 Mb SDRAM <=> 64 MB SDRAM   --
+-- ------------------------------------------------------------------------------- --
+
 
 library IEEE;
 library work;
@@ -11,22 +15,22 @@ USE work.simulPkg.ALL;
 
 entity SDRAM_controller is 
     Port (
-        clk, Reset : in STD_LOGIC;
-        SDRAM_ADDR   	 : out STD_LOGIC_VECTOR (12 downto 0);  -- Address
-		  SDRAM_DQ   	 : inout STD_LOGIC_VECTOR ((DATA_WIDTH-1) downto 0); -- data input / output
-		  SDRAM_BA   	 : out STD_LOGIC_VECTOR (1 downto 0);  -- BA0 / BA1 ?
-		  SDRAM_DQM		: out STD_LOGIC_VECTOR ((DQM_WIDTH-1) downto 0);          -- LDQM ? UDQM ?
-		  SDRAM_RAS_N, SDRAM_CAS_N, SDRAM_WE_N : out STD_LOGIC;  -- RAS + CAS + WE = CMD
-		  SDRAM_CKE, SDRAM_CS_N : out STD_LOGIC ;             -- CKE (clock rising edge) | CS ?
-		  SDRAM_CLK : out STD_LOGIC ;
-		  Data_OUT : out STD_LOGIC_VECTOR ((DATA_WIDTH-1) downto 0);
-		  Data_IN : in STD_LOGIC_VECTOR ((DATA_WIDTH-1) downto 0);
-		  DQM : in STD_LOGIC_VECTOR ((DQM_WIDTH-1) downto 0);
-		  Address_IN : in STD_LOGIC_VECTOR (24 downto 0);
-		  Write_IN : in STD_LOGIC;
-		  Select_IN : in STD_LOGIC;
-		  Ready : out STD_LOGIC;
-		  Data_Ready : out STD_LOGIC
+        clk, Reset                           : in STD_LOGIC;
+        SDRAM_ADDR   	                     : out STD_LOGIC_VECTOR (12 downto 0);  			    -- SDRAM : Address
+		  SDRAM_DQ   	                        : inout STD_LOGIC_VECTOR ((DATA_WIDTH-1) downto 0); -- SDRAM : data input / output
+		  SDRAM_BA   	                        : out STD_LOGIC_VECTOR (1 downto 0);  				    -- SDRAM : Bank Select
+		  SDRAM_DQM		                        : out STD_LOGIC_VECTOR ((DQM_WIDTH-1) downto 0);    -- SDRAM : DQM Mask
+		  SDRAM_RAS_N, SDRAM_CAS_N, SDRAM_WE_N : out STD_LOGIC;  			                         -- SDRAM : RAS + CAS + WE = CMD
+		  SDRAM_CKE, SDRAM_CS_N                : out STD_LOGIC ;           					          -- SDRAM : CKE (clock rising edge) | CS (chip select)
+		  SDRAM_CLK                            : out STD_LOGIC ;												 -- SDRAM : Clock
+		  Data_OUT                             : out STD_LOGIC_VECTOR ((DATA_WIDTH-1) downto 0);	 -- Output : Data (read)
+		  Data_IN                              : in STD_LOGIC_VECTOR ((DATA_WIDTH-1) downto 0);	 -- Input  : Data (write)
+		  DQM                                  : in STD_LOGIC_VECTOR ((DQM_WIDTH-1) downto 0);		 -- Input  : DQM
+		  Address_IN                           : in STD_LOGIC_VECTOR (24 downto 0);					 -- Input  : Address 
+		  Write_IN                             : in STD_LOGIC;											    -- Input  : Write/Read select
+		  Select_IN                            : in STD_LOGIC;												 -- Input  : Chip Select (allow communictaion)
+		  Ready                                : out STD_LOGIC;												 -- Output : Memory Ready
+		  Data_Ready                           : out STD_LOGIC 												 -- Output : Data Ready
 	);
 end SDRAM_controller;
 
@@ -53,20 +57,19 @@ signal S_CPT_REFRESH, R_CPT_REFRESH : STD_LOGIC_VECTOR (21 downto 0);
 signal DIN, S_DOUT, R_DOUT : STD_LOGIC_VECTOR ((DATA_WIDTH-1) downto 0);
 signal RegRead2, MuxRead2 : STD_LOGIC_VECTOR ((DATA_WIDTH-1) downto 0);
 
- -- DEBUG
 
 
-constant  T_REFRESH   	  : std_logic_vector(21 downto 0) := REFRESH_PERIOD;
-constant  T_START      	  : std_logic_vector(13 downto 0) := START_DELAY;
-constant  T_TRC      	  : std_logic_vector(13 downto 0) := TRC;
-constant  T_INIT_REFRESH  : std_logic_vector(13 downto 0) := INIT_REFRESH;
+constant  T_REFRESH   	  : std_logic_vector(21 downto 0) := REFRESH_PERIOD; -- Refresh period (can be changed in the "SDRAM_package")
+constant  T_START      	  : std_logic_vector(13 downto 0) := START_DELAY;	  -- Initialization Delay (refers DataSheet) (can be changed in the "SDRAM_package")
+constant  T_TRC      	  : std_logic_vector(13 downto 0) := TRC;            -- TRC delay (number of NOP commands needed during a refresh cycle)
+constant  T_INIT_REFRESH  : std_logic_vector(13 downto 0) := INIT_REFRESH;   -- Number of refresh cycles during initialization (refers datasheet)
 
 
 -- Constant Timers --
 constant  T_RESET      	  : std_logic_vector(13 downto 0) := B"00000000000001";
 constant  T_RESET_REFRESH : std_logic_vector(21 downto 0) := B"0000000000000000000001";
 
-signal Refresh_Toggle : STD_LOGIC; -- don't need, only for DEBUG
+signal Refresh_Toggle : STD_LOGIC; -- DEBUG
 
 
 begin
@@ -86,7 +89,7 @@ PKG_dataReady_SDRAM <= '0' when reset = '1' else
 								reg_DataReady when rising_edge(clk);
 -- PACKAGE --
 
--- autre --
+-- others --
 PKG_AddrSDRAM <= Address_IN;
 PKG_SDRAMwrite <= Write_IN;
 
@@ -96,13 +99,13 @@ PKG_SDRAMwrite <= Write_IN;
 
 SDRAM_CLK <= clk;
 
--- init --
+-- COMMAND --
 SDRAM_CKE   <= R_CMD(4); -- CKE
 SDRAM_CS_N  <= R_CMD(3); -- CS
 SDRAM_RAS_N <= R_CMD(2); -- RAS
 SDRAM_CAS_N <= R_CMD(1); -- CAS
 SDRAM_WE_N  <= R_CMD(0); -- WE
--- init --
+-- COMMAND --
 
 
 
@@ -129,7 +132,7 @@ Reg_DQM <= (others=>'0') when reset='1' else
 fsm : Process(reg_Ready, pkg_simulON, currentState, clk, Reset, Reg_A, Reg_D, R_Write_IN, R_CPT, R_CPT_DATA, R_DOUT, R_DOE, R_BA, R_CPT_REFRESH, Data_IN, Write_IN, Select_IN, Address_IN, reg_DQM, R_DQM)
 begin 
 
-	Refresh_Toggle <= '0'; -- don't need, only for DEBUG
+	Refresh_Toggle <= '0'; -- DEBUG
 
 	S_DQM <= R_DQM;
 	S_BA <= R_BA;
@@ -142,7 +145,6 @@ begin
 	S_CPT_DATA <= R_CPT_DATA;
 	reg_DataReady <= '0';
 	
-	-- Sdram
 	S_CMD<=NOP;
 	S_ADDR<=A_NOP;
 
@@ -159,6 +161,9 @@ when S_First =>
 	nextState <= S_Start;
 
 -- ----- START INITIALIZATION ----- --
+-- SDRAM initialization commands, --
+-- refers datasheet before modifications --
+
 WHEN S_Start =>
 	S_DOE <= '0';
 	S_BA <= (others => '0');
@@ -167,8 +172,9 @@ WHEN S_Start =>
 	-- CMD
 	S_CMD <= NOP;
 	S_ADDR <= A_NOP;
-											
-	if(R_CPT = T_START OR pkg_simulON = '1') then -- (100us délai au démarrage de la SDRAM)
+							
+	-- (100 us delay at the SDRAM start)				
+	if(R_CPT = T_START OR pkg_simulON = '1') then
 		nextState <= S_PRECHARGE_INIT;
 	else
 		S_CPT <= STD_LOGIC_VECTOR(unsigned(R_CPT) + 1);
@@ -212,7 +218,7 @@ WHEN S_NOP_INIT =>
 	S_ADDR <= A_NOP;
 	
 	
-	if(R_CPT = T_INIT_REFRESH) then -- 2 refreshs
+	if(R_CPT = T_INIT_REFRESH) then -- 2 refreshs during the SDRAM initialization
 		nextState <= S_LoadRegister;
 	else
 		S_CPT <= STD_LOGIC_VECTOR(unsigned(R_CPT) + 1);
@@ -242,9 +248,9 @@ WHEN S_IDLE =>
 	S_CPT <= T_RESET;
 
 	if( R_CPT_REFRESH <= (STD_LOGIC_VECTOR(unsigned(T_REFRESH) - 8))) then -- Verify REFRESH TIMING
-		reg_Ready <= '1'; -- SDRAM Ready to receive new CMD
+		reg_Ready <= '1'; -- SDRAM Ready to receive new command
 	else
-		reg_Ready <= '0';
+		reg_Ready <= '0'; -- SDRAM Need to do a refresh cycle
 	end if;
 	
 	S_DOE <= '0';
@@ -256,9 +262,9 @@ WHEN S_IDLE =>
 	S_ADDR <= A_NOP;
 	
 	if( (R_CPT_REFRESH > (STD_LOGIC_VECTOR(unsigned(T_REFRESH) - 6))) OR (Select_IN = '0' AND R_CPT_REFRESH > ('0' & STD_LOGIC_VECTOR(unsigned(T_REFRESH(21 downto 1)))))) then
-		nextState <= S_Refresh;
+		nextState <= S_Refresh; -- Auto refresh
 	elsif(Select_IN = '1') then
-		S_Write_IN <= Write_IN;
+		S_Write_IN <= Write_IN; -- Save the read/write command in a register
 		nextState <= S_Active;
 	else
 		nextState <= S_IDLE;
@@ -280,9 +286,9 @@ WHEN S_Active =>
 
 	
 	if(R_Write_IN = '1') then 
-		nextState <= S_Write_WRITE1;
+		nextState <= S_Write_WRITE1; -- Write is selected 	
 	else
-		nextState <= S_Read_READ;
+		nextState <= S_Read_READ;    -- read is selected
 	end if;
 	
 -- ----- ------ ----- --
@@ -294,9 +300,9 @@ WHEN S_Write_WRITE1 =>
 	S_CPT <= STD_LOGIC_VECTOR(unsigned(R_CPT) + 1);
 	
 	if( R_CPT_REFRESH <= (STD_LOGIC_VECTOR(unsigned(T_REFRESH) - 7))) then -- Verify REFRESH TIMING
-		reg_Ready <= '1'; -- SDRAM Ready to receive new CMD
+		reg_Ready <= '1'; -- SDRAM Ready to receive new command
 	else
-		reg_Ready <= '0';
+		reg_Ready <= '0'; -- SDRAM will need to do a refresh cycle
 	end if;
 	S_DOE <= '1';
 	S_BA <= R_BA; --
@@ -309,9 +315,9 @@ WHEN S_Write_WRITE1 =>
 	
 	
 	if(SELECT_IN = '1' AND R_CPT_REFRESH <= (STD_LOGIC_VECTOR(unsigned(T_REFRESH) - 7)) AND (Reg_A(24 downto 10) = Address_IN(24 downto 10))) then
-		nextState <= S_Write_WRITE1;
+		nextState <= S_Write_WRITE1; -- Continue to write if columns/page addresses doesn't change, and if no refresh is required
 	else
-		nextState <= S_Precharge;
+		nextState <= S_Precharge; 	  -- Or stop write cycles
 	end if;
 	
 
@@ -323,9 +329,9 @@ WHEN S_Read_READ =>
 	S_CPT <= STD_LOGIC_VECTOR(unsigned(R_CPT) + 1);
 	
 	if( R_CPT_REFRESH <= (STD_LOGIC_VECTOR(unsigned(T_REFRESH) - 9))) then -- Verify REFRESH TIMING
-		reg_Ready <= '1'; -- SDRAM Ready to receive new CMD
+		reg_Ready <= '1'; -- SDRAM Ready to receive new command
 	else
-		reg_Ready <= '0';
+		reg_Ready <= '0'; -- SDRAM will need to do a refresh cycle
 	end if;
 	S_DOE <= '0';
 	S_BA <= Reg_A(24 downto 23);
@@ -336,13 +342,13 @@ WHEN S_Read_READ =>
 	S_ADDR <= "000" & Reg_A(9 downto 0);
 	
 	if(SELECT_IN = '1' AND R_CPT_REFRESH <= (STD_LOGIC_VECTOR(unsigned(T_REFRESH) - 9)) AND (Reg_A(24 downto 10) = Address_IN(24 downto 10))) then
-		nextState <= S_Read_READ;
+		nextState <= S_Read_READ; -- Continue to read if columns/page addresses doesn't change, and if no refresh is required
 	else
-		nextState <= S_NOP1_READ;
+		nextState <= S_NOP1_READ; -- Or stop read cycles
 	end if;
 	
 	
-	if(unsigned(R_CPT_DATA) < "0010")then 		-- latence CAS 
+	if(unsigned(R_CPT_DATA) < "0010")then 		-- CAS latency 
 		S_CPT_DATA <= (STD_LOGIC_VECTOR(unsigned(R_CPT_DATA) + 1));
 		reg_DataReady <= '0';
 	else
@@ -421,7 +427,7 @@ WHEN S_Precharge =>
 -- ----- REFRESH ----- --
 WHEN S_Refresh =>
 
-	Refresh_Toggle <= '1'; -- don't need, only for DEBUG
+	Refresh_Toggle <= '1'; -- DEBUG
 
 	reg_Ready <= '0'; -- SDRAM Busy
 
@@ -429,7 +435,7 @@ WHEN S_Refresh =>
 	S_BA <= (others => '0');
 	S_DQM <= (others => '0');
 	
-	S_CPT_REFRESH <= T_RESET_REFRESH;
+	S_CPT_REFRESH <= T_RESET_REFRESH; -- reset refresh counter
 	
 	-- CMD
 	S_CMD <= REFRESH; 
@@ -443,14 +449,14 @@ WHEN S_Refresh =>
 	
 WHEN S_Refresh_NOP1 =>
 
-	Refresh_Toggle <= '1'; -- don't need, only for DEBUG
+	Refresh_Toggle <= '1'; -- DEBUG
 
 	reg_Ready <= '0';
 	
 	S_DOE <= '0';
 	S_BA <= (others => '0');
 	
-	S_CPT <= STD_LOGIC_VECTOR(unsigned(R_CPT) + 1); -- Compteur Trc
+	S_CPT <= STD_LOGIC_VECTOR(unsigned(R_CPT) + 1); -- Counter for Trc delay
 	
 	-- CMD
 	S_CMD <= NOP; 

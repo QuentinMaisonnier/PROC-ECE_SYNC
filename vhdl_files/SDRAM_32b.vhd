@@ -1,10 +1,15 @@
+-- ECE Paris / ARESIA
+
+-- description of SDRAM_32b
+-- It is located between the Minicache and the SDRAM controller
+-- It converts SDRAM from a 16-bit memory to a 32-bit interface for the processor
+
 library IEEE;
 library work;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 use work.SDRAM_package.ALL;
 USE work.simulPkg.ALL;
-
 
 entity SDRAM_32b is 
     Port (
@@ -42,9 +47,8 @@ architecture vhdl of SDRAM_32b is
 
 SIGNAL Mux_IN_Write_Select, Reg_IN_Write_Select 			    : STD_LOGIC;
 signal Reg_Data_Ready_32,	SIG_Ready_32b, SIG_data_Ready_32  : STD_LOGIC;
-signal SIG_CPT, Reg_CPT 											    : STD_LOGIC_VECTOR(3 downto 0);
 
-signal DQM              : STD_LOGIC_VECTOR(3 downto 0);
+signal DQM : STD_LOGIC_VECTOR(3 downto 0);
 
 SIGNAL R_DATA_part1, S_DATA_part1, R_DATA_part2, S_DATA_part2 : STD_LOGIC_VECTOR(15 downto 0);
 signal R_DATA, Reg_DataOut, SIGDataOut_32b						  : STD_LOGIC_VECTOR(31 downto 0);
@@ -58,7 +62,7 @@ signal currentState, nextState : state;
 
 begin
 
-fsm : Process(R_DATA_part2, R_DATA_part1, Mux_IN_Data_32, Mux_IN_Address, Mux_IN_Write_Select, currentState, Ready_16b, DataOut_16b, Reg_CPT, IN_Select, Data_Ready_16b, DQM)
+fsm : Process(R_DATA_part2, R_DATA_part1, Mux_IN_Data_32, Mux_IN_Address, Mux_IN_Write_Select, currentState, Ready_16b, DataOut_16b, IN_Select, Data_Ready_16b, DQM)
 begin 
 	OUT_Address       <= (others=>'0');
 	OUT_Write_Select  <= '0';
@@ -68,12 +72,13 @@ begin
 	SIG_Ready_32b     <= '0';
 	Reg_Data_Ready_32 <= '0';
 	nextState         <= currentState;
-	SIG_CPT           <= Reg_CPT;
 	
 	S_DATA_part1      <= R_DATA_part1;
 	S_DATA_part2      <= R_DATA_part2;
 CASE currentState IS
 
+
+	-------------WAITING---------------
 when WAITING =>
 
 	if(Ready_16b = '1')then
@@ -83,47 +88,48 @@ when WAITING =>
 	end if;
 	
 	if(IN_Select = '1' AND Ready_16b = '1') then
-			if(Mux_IN_Write_Select = '1') then
+			if(Mux_IN_Write_Select = '1') then -- if minicache want to store
 			
-				OUT_Address 	  <= Mux_IN_Address(25 downto 2) & '0'; 
-				OUT_Write_Select <= '1';							
-				OUT_Data_16 	  <= Mux_IN_Data_32(31 downto 16);
-				OUT_Select  <= '1';
-				OUT_DQM			  <= DQM(3) & DQM(2);
+				OUT_Address 	  <= Mux_IN_Address(25 downto 2) & '0'; -- store in the first 16 bits address from the 32 bits word address
+				OUT_Write_Select <= '1';										 -- we activate the writing mode
+				OUT_Data_16 	  <= Mux_IN_Data_32(31 downto 16);		 -- we give the first part of the data to write ( MSB)
+				OUT_Select  	  <= '1';										 -- we activate the memory
+				OUT_DQM			  <= DQM(3) & DQM(2);						 -- we give the dqm
 
-				nextstate <= WRITE_LSB;
+				nextstate        <= WRITE_LSB;								 -- go to next state to store the next part
 
-			else
-				OUT_Address 	  <= Mux_IN_Address(25 downto 2) & '0';
-				OUT_Write_Select <= '0';
-				OUT_Select  <= '1';
-				OUT_DQM			  <= "00";
+			else										  -- if minicache want to read
+				OUT_Address 	  <= Mux_IN_Address(25 downto 2) & '0'; -- we read the first 16 bits (MSB) address from the 32 bits word address
+				OUT_Write_Select <= '0';										 -- we activate the reading mode
+				OUT_Select       <= '1';										 -- we activate the memory
+				OUT_DQM			  <= "00";										 -- we give the dqm (here the dqm selects the 16 bits)
 				
-				nextstate <= READ_LSB_SEND;
+				nextstate        <= READ_LSB_SEND;
 				
 			end if;
-			SIG_CPT <= (others =>'0');
 	end if;
-
-when WRITE_LSB =>
 	
-	OUT_Address 	  <= Mux_IN_Address(25 downto 2) & '1';
+	-------------WRITE_LSB---------------
+when WRITE_LSB =>
+	OUT_Address 	  <= Mux_IN_Address(25 downto 2) & '1'; -- store in the second 16 bits (LSB) address from the 32 bits word address
 	OUT_Write_Select <= '1';
-	OUT_Data_16 	  <= Mux_IN_Data_32(15 downto 0);
-	OUT_Select  <= '1';
+	OUT_Data_16 	  <= Mux_IN_Data_32(15 downto 0);		 -- we give the second part of the data to write (LSB)
+	OUT_Select       <= '1';
 	OUT_DQM			  <= DQM(1) & DQM(0);
 	
 	if(Ready_16b = '1')then
-		nextstate <= END_WRITE;
+		nextstate     <= END_WRITE;
 	end if;
 	
+	
+	-------------END_WRITE---------------
 when END_WRITE =>
 
 	if(Ready_16b = '0')then
 		nextstate <= WAITING;
 	end if;
 
-
+	-------------READ_LSB_SEND---------------
 when READ_LSB_SEND =>
 	OUT_Address 	  <= Mux_IN_Address(25 downto 2) & '1';
 	OUT_Write_Select <= '0';
@@ -134,6 +140,7 @@ when READ_LSB_SEND =>
 		nextstate <= READ_MSB_GET;
 	end if;
 	
+	-------------READ_MSB_GET---------------
 when READ_MSB_GET =>
 	
 	if(Data_Ready_16b = '1') then
@@ -141,6 +148,7 @@ when READ_MSB_GET =>
 		nextstate <= READ_LSB_GET;
 	end if;
 
+	-------------READ_LSB_GET---------------
 when READ_LSB_GET =>
 	OUT_Address 	  <= Mux_IN_Address(25 downto 2) & '1';
 	OUT_Write_Select <= '0';
@@ -155,19 +163,17 @@ when READ_LSB_GET =>
 END CASE;
 END PROCESS fsm;
 
+
+----registers that store the first and second part of the data that comes from the SDRAM
 R_DATA_part1 <= (others => '0') when reset='1' else
 					 S_DATA_part1 when rising_edge(clock);
 					 
 R_DATA_part2 <= (others => '0') when reset='1' else
 					 S_DATA_part2 when rising_edge(clock);
-
--------------------DATA READY-----------------
+---
 
 currentState <= WAITING when reset = '1' else
 				    nextState when rising_edge(Clock);
-			 
-Reg_CPT <= (others => '0') when reset = '1' else
-			SIG_CPT when rising_edge(Clock);
 
 
 ----------------------------INPUT from Minicache-----------------------------

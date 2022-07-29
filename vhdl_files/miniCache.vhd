@@ -2,6 +2,10 @@
 -- ECE Paris / SECAPEM
 -- miniCache entity VHDL = Processor + DataMemory + InstructionMemory
 
+-- description of Minicache
+-- It is located between the Proc and the SDRAM_32b
+-- It converts the simple bus from the SDRAM to a instruction bus and a data bus for the Proc
+
 -- LIBRARIES
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
